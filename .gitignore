@@ -1,0 +1,10 @@
+# Paczki budowane przez tools/pack.js
+dist/
+
+# Ustawienia IDE
+.idea/
+.vscode/
+
+# System
+Thumbs.db
+.DS_Store

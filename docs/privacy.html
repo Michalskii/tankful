@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tankful – Privacy Policy / Polityka prywatności</title>
+<meta name="description" content="Privacy policy of the Tankful Chrome extension. Polityka prywatności rozszerzenia Tankful.">
+<!-- Celowo bez zewnętrznych czcionek i skryptów: strona o prywatności nie łączy się z nikim trzecim. -->
+<style>
+  :root {
+    --bg: #FAF7F0; --text: #1B2430; --muted: #4A5462; --line: #E2DCCF; --card: #FFFFFF; --accent: #B26F00; --badge: #1B2430; --badge-text: #FAF7F0;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #141A22; --text: #EDEAE3; --muted: #A9B1BC; --line: #2C3644; --card: #1B2430; --accent: #F2A516; --badge: #F2A516; --badge-text: #1B2430;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #141A22; --text: #EDEAE3; --muted: #A9B1BC; --line: #2C3644; --card: #1B2430; --accent: #F2A516; --badge: #F2A516; --badge-text: #1B2430;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.6 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  main { max-width: 760px; margin: 0 auto; padding: 40px 16px 64px; }
+  header { display: flex; align-items: center; gap: 16px; margin-bottom: 8px; }
+  header svg { flex: none; }
+  h1 { margin: 0; font-size: 28px; line-height: 1.2; letter-spacing: -0.01em; }
+  nav { display: flex; gap: 8px; margin: 16px 0 32px; }
+  nav a { padding: 6px 14px; border: 1px solid var(--line); border-radius: 999px; color: var(--text); text-decoration: none; font-size: 14px; }
+  nav a:hover { border-color: var(--accent); }
+  section { padding-top: 8px; }
+  section + section { margin-top: 48px; padding-top: 40px; border-top: 1px solid var(--line); }
+  h2 { font-size: 22px; margin: 0 0 4px; }
+  h3 { font-size: 17px; margin: 28px 0 6px; }
+  p, li { color: var(--text); }
+  .meta { color: var(--muted); font-size: 14px; margin: 0 0 20px; }
+  .summary { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 16px 20px; }
+  .summary ul { margin: 0; padding-left: 20px; }
+  .summary li + li { margin-top: 6px; }
+  ol { padding-left: 22px; }
+  ol li + li { margin-top: 10px; }
+  code { font-size: 14px; background: var(--card); border: 1px solid var(--line); border-radius: 4px; padding: 0 4px; }
+  a { color: var(--accent); }
+  .badge { display: inline-block; font-size: 12px; font-weight: 600; padding: 1px 8px; border-radius: 999px; background: var(--badge); color: var(--badge-text); vertical-align: 2px; }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <svg width="48" height="48" viewBox="0 0 128 128" aria-hidden="true"><rect x="4" y="4" width="120" height="120" rx="28" fill="#1B2430"/><path d="M31.1 91 A38 38 0 1 1 96.9 91" fill="none" stroke="#F2A516" stroke-width="13" stroke-linecap="round"/><line x1="64" y1="74" x2="87" y2="51" stroke="#FAF7F0" stroke-width="9" stroke-linecap="round"/><circle cx="64" cy="74" r="10" fill="#FAF7F0"/></svg>
+    <h1>Tankful – Privacy Policy<br>Polityka prywatności</h1>
+  </header>
+  <nav aria-label="Language / Język">
+    <a href="#en" hreflang="en">English</a>
+    <a href="#pl" hreflang="pl">Polski</a>
+  </nav>
+
+  <!-- ==================== ENGLISH ==================== -->
+  <section id="en" lang="en">
+    <h2>Privacy Policy</h2>
+    <p class="meta">Effective: 25 September 2026 · Publisher: Michał Goryński · Contact: <a href="mailto:gorynski.michal@gmail.com">gorynski.michal@gmail.com</a></p>
+
+    <p>Tankful is a Chrome extension that shows the estimated fuel cost of driving routes in Google Maps. This policy explains what data the extension handles and where it goes.</p>
+
+    <div class="summary">
+      <ul>
+        <li>We have no servers, no user accounts and no analytics. We do not collect, sell or share your data.</li>
+        <li>Your settings and trip history stay in your browser.</li>
+        <li>The only route-related information that leaves your browser is the <strong>approximate</strong> (about 1 km) position of a route's start and destination, sent to OpenStreetMap to find the country and region – and only when the “Regional (Poland) and EU country prices” option is on.</li>
+      </ul>
+    </div>
+
+    <h3>What the extension handles</h3>
+    <ol>
+      <li><strong>Google Maps route data – processed on your device.</strong> On driving-route pages, the extension reads the names of the route's stops, the coordinates of the start and destination, and the distance and travel time of each route option from the page and its address. This is used only to calculate and display the cost. It is not sent anywhere, except as described in point 3.</li>
+      <li><strong>Settings.</strong> Fuel type, consumption, manual prices, currency, number of people and display options are saved with <code>chrome.storage.sync</code>. If Chrome sync is on, Google syncs them between your devices under your Google Account's terms; we have no access to them. Settings you save for “this route only” are kept in the browser tab's session storage and disappear when you close the tab.</li>
+      <li><strong>Approximate location for regional prices.</strong> When the “Regional (Poland) and EU country prices” option is on (it is on by default and can be turned off in the extension's settings), the extension sends the coordinates of a route's start and destination, <strong>rounded to 0.01° (about 1 km)</strong>, together with your browser's language, to the OpenStreetMap Nominatim service (nominatim.openstreetmap.org) to find the country and region. The result is cached on your device so the same area is not looked up again. This request is subject to the <a href="https://osmfoundation.org/wiki/Privacy_Policy">OpenStreetMap Foundation Privacy Policy</a>.</li>
+      <li><strong>Trip history – only when you ask.</strong> When you click “Save trip”, the extension stores the route (from, to, route option), distance, travel time, fuel type, consumption, number of people, cost, mileage allowance and date with <code>chrome.storage.local</code> on your device. You can delete individual trips at any time. “Export CSV” creates the file on your device.</li>
+      <li><strong>Fuel prices and exchange rates.</strong> The extension downloads public data from autocentrum.pl (average fuel prices in Poland and its regions), the European Commission's Weekly Oil Bulletin (energy.ec.europa.eu) and the National Bank of Poland (api.nbp.pl, exchange rates). These requests contain no information about you or your routes. As with any internet connection, these servers can see your IP address and basic technical information about your browser.</li>
+      <li><strong>Clipboard.</strong> Only when you click “Copy” does the extension write a route summary to the clipboard. It never reads the clipboard.</li>
+    </ol>
+
+    <h3>What we do not do</h3>
+    <ul>
+      <li>We do not run servers and do not receive any of your data.</li>
+      <li>We do not use analytics, advertising, cookies or tracking.</li>
+      <li>We do not sell or transfer your data to third parties, and do not use it for any purpose unrelated to the extension's single purpose – showing the fuel cost of routes.</li>
+      <li>We do not use or transfer your data to determine creditworthiness or for lending purposes.</li>
+    </ul>
+
+    <h3>Chrome Web Store <span class="badge">Limited Use</span></h3>
+    <p>The use of information received by Tankful adheres to the <a href="https://developer.chrome.com/docs/webstore/program-policies/policies">Chrome Web Store User Data Policy</a>, including the Limited Use requirements.</p>
+
+    <h3>Retention and deletion</h3>
+    <p>Data stays on your device until you delete it. Cached fuel prices and exchange rates are refreshed automatically. You can delete saved trips on the trip history page. Removing the extension from Chrome removes the data it stored in your browser.</p>
+
+    <h3>Your choices</h3>
+    <p>You can turn off “Regional (Poland) and EU country prices” so that no location is sent to OpenStreetMap, or turn off automatic prices entirely and use a manual price. Because we do not hold any of your data, there is nothing for us to access, correct or delete on our side; if you have a question, contact us at <a href="mailto:gorynski.michal@gmail.com">gorynski.michal@gmail.com</a>.</p>
+
+    <h3>Changes</h3>
+    <p>If this policy changes, the new version will be published on this page with a new effective date.</p>
+  </section>
+
+  <!-- ==================== POLSKI ==================== -->
+  <section id="pl" lang="pl">
+    <h2>Polityka prywatności</h2>
+    <p class="meta">Obowiązuje od: 25 września 2026 r. · Wydawca: Michał Goryński · Kontakt: <a href="mailto:gorynski.michal@gmail.com">gorynski.michal@gmail.com</a></p>
+
+    <p>Tankful to rozszerzenie przeglądarki Chrome, które pokazuje szacunkowy koszt paliwa przy trasach samochodowych w Mapach Google. Ta polityka wyjaśnia, jakie dane przetwarza rozszerzenie i dokąd trafiają.</p>
+
+    <div class="summary">
+      <ul>
+        <li>Nie mamy serwerów, kont użytkowników ani analityki. Nie zbieramy, nie sprzedajemy i nie udostępniamy Twoich danych.</li>
+        <li>Ustawienia i historia przejazdów zostają w Twojej przeglądarce.</li>
+        <li>Jedyna informacja związana z trasą, która opuszcza przeglądarkę, to <strong>przybliżone</strong> (z dokładnością do ok. 1 km) położenie startu i celu trasy, wysyłane do OpenStreetMap w celu ustalenia kraju i województwa – i tylko wtedy, gdy włączona jest opcja „Ceny z województwa i krajów UE”.</li>
+      </ul>
+    </div>
+
+    <h3>Jakie dane przetwarza rozszerzenie</h3>
+    <ol>
+      <li><strong>Dane trasy z Map Google – przetwarzane na Twoim urządzeniu.</strong> Na stronach tras samochodowych rozszerzenie odczytuje ze strony i jej adresu nazwy punktów trasy, współrzędne startu i celu oraz dystans i czas przejazdu każdego wariantu. Służą one wyłącznie do wyliczenia i wyświetlenia kosztu. Nie są nigdzie wysyłane, z wyjątkiem sytuacji opisanej w pkt 3.</li>
+      <li><strong>Ustawienia.</strong> Rodzaj paliwa, spalanie, ceny ręczne, waluta, liczba osób i opcje wyświetlania są zapisywane w <code>chrome.storage.sync</code>. Jeśli masz włączoną synchronizację Chrome, Google synchronizuje je między Twoimi urządzeniami na zasadach Twojego konta Google; my nie mamy do nich dostępu. Ustawienia zapisane „tylko dla tej trasy” są przechowywane w pamięci sesji karty przeglądarki i znikają po jej zamknięciu.</li>
+      <li><strong>Przybliżona lokalizacja do cen regionalnych.</strong> Gdy włączona jest opcja „Ceny z województwa i krajów UE” (domyślnie włączona, można ją wyłączyć w ustawieniach rozszerzenia), rozszerzenie wysyła do serwisu Nominatim projektu OpenStreetMap (nominatim.openstreetmap.org) współrzędne startu i celu trasy <strong>zaokrąglone do 0,01° (ok. 1 km)</strong> oraz język przeglądarki, aby ustalić kraj i region. Wynik jest zapisywany w pamięci podręcznej na Twoim urządzeniu, żeby nie pytać ponownie o ten sam obszar. To zapytanie podlega <a href="https://osmfoundation.org/wiki/Privacy_Policy">polityce prywatności OpenStreetMap Foundation</a>.</li>
+      <li><strong>Historia przejazdów – tylko na Twoje żądanie.</strong> Po kliknięciu „Zapisz przejazd” rozszerzenie zapisuje w <code>chrome.storage.local</code> na Twoim urządzeniu trasę (skąd, dokąd, wariant), dystans, czas przejazdu, rodzaj paliwa, spalanie, liczbę osób, koszt, kilometrówkę i datę. Pojedyncze przejazdy możesz w każdej chwili usunąć. „Eksportuj CSV” tworzy plik na Twoim urządzeniu.</li>
+      <li><strong>Ceny paliw i kursy walut.</strong> Rozszerzenie pobiera publiczne dane z autocentrum.pl (średnie ceny paliw w Polsce i województwach), z biuletynu Komisji Europejskiej Weekly Oil Bulletin (energy.ec.europa.eu) oraz z Narodowego Banku Polskiego (api.nbp.pl, kursy walut). Te zapytania nie zawierają żadnych informacji o Tobie ani o Twoich trasach. Jak przy każdym połączeniu internetowym, serwery te widzą Twój adres IP i podstawowe informacje techniczne o przeglądarce.</li>
+      <li><strong>Schowek.</strong> Rozszerzenie zapisuje podsumowanie trasy do schowka wyłącznie po kliknięciu „Kopiuj”. Nigdy nie odczytuje schowka.</li>
+    </ol>
+
+    <h3>Czego nie robimy</h3>
+    <ul>
+      <li>Nie prowadzimy serwerów i nie otrzymujemy żadnych Twoich danych.</li>
+      <li>Nie używamy analityki, reklam, plików cookie ani śledzenia.</li>
+      <li>Nie sprzedajemy ani nie przekazujemy Twoich danych stronom trzecim i nie używamy ich do celów niezwiązanych z jedynym celem rozszerzenia – pokazywaniem kosztu paliwa na trasie.</li>
+      <li>Nie wykorzystujemy ani nie przekazujemy Twoich danych do oceny zdolności kredytowej ani w celach pożyczkowych.</li>
+    </ul>
+
+    <h3>Chrome Web Store <span class="badge">Limited Use</span></h3>
+    <p>Wykorzystanie informacji otrzymywanych przez Tankful jest zgodne z <a href="https://developer.chrome.com/docs/webstore/program-policies/policies">zasadami Chrome Web Store dotyczącymi danych użytkowników</a>, w tym z wymaganiami „Limited Use”.</p>
+
+    <h3>Przechowywanie i usuwanie</h3>
+    <p>Dane pozostają na Twoim urządzeniu, dopóki ich nie usuniesz. Zapisane ceny paliw i kursy walut odświeżają się automatycznie. Zapisane przejazdy usuniesz na stronie historii przejazdów. Usunięcie rozszerzenia z Chrome usuwa dane, które zapisało ono w przeglądarce.</p>
+
+    <h3>Twoje wybory</h3>
+    <p>Możesz wyłączyć opcję „Ceny z województwa i krajów UE” – wtedy żadna lokalizacja nie jest wysyłana do OpenStreetMap – albo całkowicie wyłączyć automatyczne ceny i korzystać z ceny ręcznej. Ponieważ nie przechowujemy żadnych Twoich danych, po naszej stronie nie ma czego udostępniać, poprawiać ani usuwać; w razie pytań napisz na <a href="mailto:gorynski.michal@gmail.com">gorynski.michal@gmail.com</a>.</p>
+
+    <h3>Zmiany</h3>
+    <p>Jeśli ta polityka się zmieni, nowa wersja zostanie opublikowana na tej stronie z nową datą obowiązywania.</p>
+  </section>
+</main>
+</body>
+</html>

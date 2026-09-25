@@ -1,0 +1,343 @@
+.mapka-cost {
+  color: #188038;
+  font-weight: 500;
+  white-space: nowrap;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.mapka-cost:hover,
+.mapka-cost:focus-visible {
+  text-decoration: underline dotted;
+  outline: none;
+}
+
+.mapka-cost--block {
+  font-size: 14px;
+  line-height: 20px;
+  text-align: right;
+}
+
+.mapka-cost--inline {
+  margin-left: 6px;
+}
+
+.mapka-cost__round {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  color: #5f6368;
+}
+
+.mapka-cost--inline .mapka-cost__round::before {
+  content: "·";
+  margin: 0 6px;
+}
+
+.mapka-cost--setup {
+  color: #1a73e8;
+}
+
+.mapka-panel {
+  position: fixed;
+  z-index: 2147483647;
+  width: 240px;
+  box-sizing: border-box;
+  padding: 14px;
+  font: 13px/1.4 Roboto, Arial, sans-serif;
+  color: #202124;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(60, 64, 67, 0.3), 0 6px 20px rgba(60, 64, 67, 0.2);
+}
+
+.mapka-panel__title {
+  margin-bottom: 10px;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.mapka-panel label {
+  display: block;
+  margin-bottom: 8px;
+  color: #5f6368;
+}
+
+.mapka-panel select,
+.mapka-panel input {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 3px;
+  padding: 5px 6px;
+  font: inherit;
+  color: #202124;
+  background: #fff;
+  border: 1px solid #dadce0;
+  border-radius: 4px;
+}
+
+.mapka-panel__price {
+  margin: 2px 0 12px;
+  font-size: 12px;
+  color: #188038;
+}
+
+.mapka-panel__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.mapka-panel__actions button {
+  padding: 7px 8px;
+  font: inherit;
+  font-weight: 500;
+  color: #1a73e8;
+  background: #fff;
+  border: 1px solid #dadce0;
+  border-radius: 18px;
+  cursor: pointer;
+}
+
+.mapka-panel__actions button:hover {
+  background: #f1f6fe;
+}
+
+.mapka-panel__actions button.mapka-primary {
+  color: #fff;
+  background: #1a73e8;
+  border-color: #1a73e8;
+}
+
+.mapka-panel__actions button.mapka-primary:hover {
+  background: #1765cc;
+}
+
+.mapka-panel .mapka-link {
+  display: block;
+  margin: 10px auto 0;
+  padding: 0;
+  font: inherit;
+  font-size: 12px;
+  color: #5f6368;
+  background: none;
+  border: none;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.mapka-float {
+  position: fixed;
+  top: 72px;
+  right: 16px;
+  z-index: 2147483646;
+  width: 320px;
+  max-width: calc(100vw - 32px);
+  box-sizing: border-box;
+  font: 13px/1.4 Roboto, Arial, sans-serif;
+  color: #202124;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 2px 6px 2px rgba(60, 64, 67, 0.15);
+  overflow: hidden;
+}
+
+.mapka-float--collapsed {
+  width: auto;
+}
+
+.mapka-float__head {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 6px 6px 6px 14px;
+}
+
+.mapka-float__title {
+  flex: 1;
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.mapka-float--collapsed .mapka-float__title {
+  color: #188038;
+  padding-right: 6px;
+}
+
+.mapka-float__icon {
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  font: inherit;
+  font-size: 16px;
+  line-height: 30px;
+  color: #5f6368;
+  background: none;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.mapka-float__icon:hover {
+  background: #f1f3f4;
+}
+
+.mapka-float__list {
+  border-top: 1px solid #e8eaed;
+}
+
+.mapka-float__route {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 14px 10px 11px;
+  border-left: 3px solid transparent;
+  border-bottom: 1px solid #f1f3f4;
+}
+
+.mapka-float__route {
+  cursor: pointer;
+}
+
+.mapka-float__route:hover {
+  background: #f8f9fa;
+}
+
+.mapka-float__right[data-float]:hover .mapka-float__cost {
+  text-decoration: underline dotted;
+}
+
+.mapka-float__route.is-selected {
+  border-left-color: #1a73e8;
+  background: #f1f6fe;
+}
+
+.mapka-float__left,
+.mapka-float__right {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.mapka-float__right {
+  flex: none;
+  align-items: flex-end;
+  text-align: right;
+}
+
+.mapka-float__left {
+  flex: 1;
+}
+
+.mapka-float__name,
+.mapka-float__meta {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.mapka-float__name {
+  font-weight: 500;
+}
+
+.mapka-float__meta,
+.mapka-float__round {
+  font-size: 12px;
+  color: #5f6368;
+  white-space: nowrap;
+}
+
+.mapka-float__cost {
+  font-weight: 500;
+  color: #188038;
+  white-space: nowrap;
+}
+
+.mapka-float__actions {
+  display: flex;
+  gap: 8px;
+  padding: 10px 14px 2px;
+}
+
+.mapka-float__actions button {
+  flex: 1;
+  padding: 6px 8px;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  color: #1a73e8;
+  background: #fff;
+  border: 1px solid #dadce0;
+  border-radius: 16px;
+  cursor: pointer;
+}
+
+.mapka-float__actions button:hover:not(:disabled) {
+  background: #f1f6fe;
+}
+
+.mapka-float__actions button:disabled {
+  color: #188038;
+  cursor: default;
+}
+
+.mapka-float__foot {
+  padding: 8px 14px;
+  font-size: 11px;
+  color: #5f6368;
+}
+
+.mapka-float__setup {
+  display: block;
+  width: calc(100% - 28px);
+  margin: 4px 14px 14px;
+  padding: 8px;
+  font: inherit;
+  font-weight: 500;
+  color: #fff;
+  background: #1a73e8;
+  border: none;
+  border-radius: 18px;
+  cursor: pointer;
+}
+
+.mapka-warning {
+  position: fixed;
+  top: 72px;
+  right: 16px;
+  z-index: 2147483646;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  width: 320px;
+  max-width: calc(100vw - 32px);
+  box-sizing: border-box;
+  padding: 10px 6px 10px 14px;
+  font: 13px/1.4 Roboto, Arial, sans-serif;
+  color: #202124;
+  background: #fef7e0;
+  border-radius: 8px;
+  box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 2px 6px 2px rgba(60, 64, 67, 0.15);
+}
+
+.mapka-warning__close {
+  flex: none;
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  font: inherit;
+  font-size: 18px;
+  line-height: 26px;
+  color: #5f6368;
+  background: none;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.mapka-warning__close:hover {
+  background: rgba(0, 0, 0, 0.06);
+}

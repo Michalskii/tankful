@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <h1 data-i18n="trip_cost"></h1>
+  <form id="form">
+    <label><span data-i18n="label_fuel"></span>
+      <select id="fuelType"></select>
+    </label>
+    <label><span id="consumptionLabel"></span>
+      <input id="consumption" type="number" step="0.1" min="0.1" required>
+    </label>
+
+    <div id="fuelSection">
+      <label class="check">
+        <input id="autoPrice" type="checkbox">
+        <span data-i18n="popup_auto_price"></span>
+      </label>
+      <div id="autoInfo" class="auto-info">
+        <span id="autoText"></span>
+        <button id="refresh" type="button" data-i18n="popup_refresh"></button>
+      </div>
+      <label class="check" id="localLabel">
+        <input id="localPrices" type="checkbox">
+        <span data-i18n="popup_local_prices"></span>
+      </label>
+      <p id="localHint" class="hint" data-i18n="popup_local_hint"></p>
+      <label id="priceLabel"><span data-i18n="popup_manual_price"></span>
+        <input id="price" type="number" step="0.01" min="0" required>
+      </label>
+    </div>
+
+    <div id="evSection" class="row">
+      <label><span data-i18n="popup_ev_home"></span>
+        <input id="evHomePrice" type="number" step="0.01" min="0" required>
+      </label>
+      <label><span data-i18n="popup_ev_fast"></span>
+        <input id="evFastPrice" type="number" step="0.01" min="0" required>
+      </label>
+    </div>
+
+    <div class="row">
+      <label><span data-i18n="popup_currency"></span>
+        <select id="currency"></select>
+      </label>
+      <label><span data-i18n="label_passengers"></span>
+        <input id="passengers" type="number" step="1" min="1" required>
+      </label>
+    </div>
+
+    <label id="mileageLabel"><span data-i18n="popup_mileage"></span>
+      <select id="mileage">
+        <option value="off" data-i18n="mileage_off"></option>
+        <option value="small"></option>
+        <option value="large"></option>
+      </select>
+    </label>
+
+    <label class="check">
+      <input id="showRoundTrip" type="checkbox">
+      <span data-i18n="popup_round_trip"></span>
+    </label>
+    <label class="check">
+      <input id="showFloating" type="checkbox">
+      <span data-i18n="popup_floating"></span>
+    </label>
+
+    <p id="preview"></p>
+    <p id="status"></p>
+    <button id="history" type="button" class="link" data-i18n="popup_history"></button>
+  </form>
+  <script src="settings.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

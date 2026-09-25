@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title data-i18n="welcome_page_title">Tankful</title>
+  <link rel="stylesheet" href="welcome.css">
+</head>
+<body>
+  <main>
+    <h1 data-i18n="welcome_heading"></h1>
+    <p class="lead" data-i18n="welcome_lead"></p>
+
+    <form id="form">
+      <fieldset>
+        <legend data-i18n="label_fuel"></legend>
+        <div id="fuels" class="fuels"></div>
+      </fieldset>
+
+      <label class="field"><span data-i18n="welcome_consumption"></span>
+        <span class="with-unit">
+          <input id="consumption" type="number" step="0.1" min="0.1" required>
+          <span id="unit">l / 100 km</span>
+        </span>
+      </label>
+
+      <p id="price" class="price"></p>
+
+      <button type="submit" data-i18n="welcome_submit"></button>
+      <p class="hint" data-i18n="welcome_hint"></p>
+    </form>
+  </main>
+  <script src="settings.js"></script>
+  <script src="welcome.js"></script>
+</body>
+</html>

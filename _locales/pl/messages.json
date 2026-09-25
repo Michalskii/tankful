@@ -1,0 +1,323 @@
+{
+  "appName": {
+    "message": "Tankful – koszt paliwa na trasie"
+  },
+  "appDescription": {
+    "message": "Pokazuje szacunkowy koszt paliwa obok czasu i dystansu trasy samochodowej w Google Maps."
+  },
+  "actionTitle": {
+    "message": "Ustawienia kosztu przejazdu"
+  },
+  "fuel_pb": {
+    "message": "Benzyna 95"
+  },
+  "fuel_pbp": {
+    "message": "Benzyna 98"
+  },
+  "fuel_on": {
+    "message": "Diesel (ON)"
+  },
+  "fuel_onp": {
+    "message": "Diesel premium (ON+)"
+  },
+  "fuel_lpg": {
+    "message": "LPG"
+  },
+  "fuel_ev": {
+    "message": "Elektryczny (EV)"
+  },
+  "mileage_small_label": {
+    "message": "do 900 cm³"
+  },
+  "mileage_large_label": {
+    "message": "powyżej 900 cm³ / elektryczny"
+  },
+  "mileage_off": {
+    "message": "Nie pokazuj"
+  },
+  "mileage_small_option": {
+    "message": "Do 900 cm³ – $1/km"
+  },
+  "mileage_large_option": {
+    "message": "Powyżej 900 cm³ lub elektryczny – $1/km"
+  },
+  "price_manual": {
+    "message": "cena ręczna"
+  },
+  "price_missing": {
+    "message": "brak aktualnych cen – cena ręczna"
+  },
+  "price_no_rate": {
+    "message": "brak kursu $1 – cena ręczna"
+  },
+  "price_national": {
+    "message": "średnia PL"
+  },
+  "price_single": {
+    "message": "$1 $2/l"
+  },
+  "price_average": {
+    "message": "średnio $1 $2 i $3 $4/l"
+  },
+  "price_ev": {
+    "message": "dom $1 – ładowarka $2 za kWh"
+  },
+  "trip_cost": {
+    "message": "Koszt przejazdu"
+  },
+  "route_default": {
+    "message": "Trasa"
+  },
+  "per_person": {
+    "message": "$1/os."
+  },
+  "people_line": {
+    "message": "👥 $1 × $2"
+  },
+  "round_short": {
+    "message": "w obie"
+  },
+  "round_long": {
+    "message": "tam i z powrotem"
+  },
+  "cost_setup": {
+    "message": "⚙ Ustaw paliwo"
+  },
+  "cost_mileage": {
+    "message": "🧾 kilometrówka $1"
+  },
+  "title_setup": {
+    "message": "Kliknij, aby wybrać rodzaj paliwa i spalanie"
+  },
+  "title_round": {
+    "message": "Tam i z powrotem: ta sama trasa × 2."
+  },
+  "title_mileage": {
+    "message": "Kilometrówka: $1/km ($2)."
+  },
+  "title_override": {
+    "message": "Ustawienia tylko dla tej trasy."
+  },
+  "click_to_change": {
+    "message": "Kliknij, aby zmienić."
+  },
+  "warn_text": {
+    "message": "🚗 Tankful nie widzi dystansu tej trasy – Google mógł zmienić wygląd Map. Koszt przejazdu jest chwilowo niedostępny."
+  },
+  "warn_hide": {
+    "message": "Ukryj dla tej trasy"
+  },
+  "float_settings": {
+    "message": "Ustawienia paliwa"
+  },
+  "float_expand": {
+    "message": "Rozwiń"
+  },
+  "float_collapse": {
+    "message": "Zwiń"
+  },
+  "float_setup": {
+    "message": "⚙ Ustaw paliwo i spalanie"
+  },
+  "float_show_route": {
+    "message": "Pokaż tę trasę na mapie"
+  },
+  "float_copy": {
+    "message": "📋 Kopiuj"
+  },
+  "float_copy_title": {
+    "message": "Skopiuj podsumowanie wybranej trasy"
+  },
+  "float_save": {
+    "message": "💾 Zapisz przejazd"
+  },
+  "float_save_title": {
+    "message": "Dodaj wybraną trasę do historii przejazdów"
+  },
+  "float_override_tag": {
+    "message": "✎ tylko ta trasa"
+  },
+  "copied": {
+    "message": "✓ Skopiowano"
+  },
+  "copy_failed": {
+    "message": "Nie udało się"
+  },
+  "saved_flash": {
+    "message": "✓ Zapisano"
+  },
+  "summary_fuel": {
+    "message": "Paliwo: $1"
+  },
+  "summary_round": {
+    "message": "Tam i z powrotem: $1"
+  },
+  "summary_mileage": {
+    "message": "Kilometrówka: $1"
+  },
+  "panel_title_first": {
+    "message": "Twoje auto"
+  },
+  "label_fuel": {
+    "message": "Rodzaj paliwa"
+  },
+  "label_passengers": {
+    "message": "Liczba osób"
+  },
+  "consumption_fuel": {
+    "message": "Spalanie ($1 na 100 km)"
+  },
+  "consumption_ev": {
+    "message": "Zużycie ($1 na 100 km)"
+  },
+  "panel_price": {
+    "message": "Cena: $1"
+  },
+  "btn_route_only": {
+    "message": "Tylko ta trasa"
+  },
+  "btn_save": {
+    "message": "Zapisz"
+  },
+  "btn_save_default": {
+    "message": "Zapisz na stałe"
+  },
+  "btn_reset_route": {
+    "message": "Przywróć domyślne dla tej trasy"
+  },
+  "popup_auto_price": {
+    "message": "Pobieraj średnie ceny automatycznie"
+  },
+  "popup_refresh": {
+    "message": "Odśwież"
+  },
+  "popup_local_prices": {
+    "message": "Ceny z województwa i krajów UE"
+  },
+  "popup_local_hint": {
+    "message": "Start i cel trasy (zaokrąglone do ~1 km) są wysyłane do OpenStreetMap, żeby ustalić kraj i województwo."
+  },
+  "popup_manual_price": {
+    "message": "Cena ręczna (za litr)"
+  },
+  "popup_ev_home": {
+    "message": "Prąd w domu (kWh)"
+  },
+  "popup_ev_fast": {
+    "message": "Szybka ładowarka (kWh)"
+  },
+  "popup_currency": {
+    "message": "Waluta"
+  },
+  "popup_mileage": {
+    "message": "Kilometrówka (rozliczenie służbowe)"
+  },
+  "popup_round_trip": {
+    "message": "Pokazuj koszt tam i z powrotem"
+  },
+  "popup_floating": {
+    "message": "Panel z trasami na mapie"
+  },
+  "popup_history": {
+    "message": "📒 Historia przejazdów"
+  },
+  "popup_saved": {
+    "message": "Zapisano"
+  },
+  "popup_fetching": {
+    "message": "Pobieram…"
+  },
+  "popup_fetch_error": {
+    "message": "Błąd pobierania – używam ceny ręcznej."
+  },
+  "popup_no_response": {
+    "message": "brak odpowiedzi"
+  },
+  "popup_preview": {
+    "message": "100 km ≈ $1"
+  },
+  "welcome_page_title": {
+    "message": "Tankful – pierwsze ustawienia"
+  },
+  "welcome_heading": {
+    "message": "Witaj w Tankful"
+  },
+  "welcome_lead": {
+    "message": "Wybierz paliwo i podaj spalanie. Na tej podstawie przy każdej trasie samochodowej w Google Maps zobaczysz szacunkowy koszt przejazdu."
+  },
+  "welcome_consumption": {
+    "message": "Średnie spalanie"
+  },
+  "welcome_submit": {
+    "message": "Zapisz i przejdź do Google Maps"
+  },
+  "welcome_hint": {
+    "message": "Możesz to zmienić w każdej chwili: kliknij ikonę wtyczki albo sam koszt na mapie – wtedy wybierzesz, czy zmiana dotyczy tylko jednej trasy, czy ma być zapisana na stałe."
+  },
+  "welcome_ev": {
+    "message": "Dla auta elektrycznego pokażemy przedział: ładowanie w domu – szybka ładowarka. Ceny prądu ustawisz w ustawieniach wtyczki."
+  },
+  "welcome_price_auto": {
+    "message": "Aktualna cena: $1 – będzie aktualizowana automatycznie."
+  },
+  "welcome_price_pending": {
+    "message": "Średnie ceny paliw pobiorą się za chwilę w tle."
+  },
+  "history_title": {
+    "message": "Historia przejazdów"
+  },
+  "history_lead": {
+    "message": "Trasy zapisane przyciskiem „💾 Zapisz przejazd” w panelu na mapie."
+  },
+  "history_export": {
+    "message": "Eksportuj CSV"
+  },
+  "history_empty": {
+    "message": "Nie masz jeszcze zapisanych przejazdów. Wyznacz trasę samochodową w Google Maps i kliknij „💾 Zapisz przejazd” w panelu w prawym górnym rogu mapy."
+  },
+  "trips_one": {
+    "message": "$1 przejazd"
+  },
+  "trips_few": {
+    "message": "$1 przejazdy"
+  },
+  "trips_many": {
+    "message": "$1 przejazdów"
+  },
+  "trips_other": {
+    "message": "$1 przejazdu"
+  },
+  "history_round_on": {
+    "message": "Tam i z powrotem (kliknij, aby liczyć w jedną stronę)"
+  },
+  "history_round_off": {
+    "message": "W jedną stronę (kliknij, aby liczyć tam i z powrotem)"
+  },
+  "history_delete": {
+    "message": "Usuń przejazd"
+  },
+  "history_delete_confirm": {
+    "message": "Usunąć przejazd $1 → $2?"
+  },
+  "csv_header": {
+    "message": "Data;Skąd;Dokąd;Trasa;Km;Tam i z powrotem;Paliwo;Zużycie na 100 km;Osoby;Koszt od;Koszt do;Waluta;Kilometrówka"
+  },
+  "csv_yes": {
+    "message": "tak"
+  },
+  "csv_no": {
+    "message": "nie"
+  },
+  "csv_filename": {
+    "message": "przejazdy"
+  },
+  "error_autocentrum": {
+    "message": "Nie znaleziono cen na stronie"
+  },
+  "error_eu_file": {
+    "message": "Biuletyn UE: nieprawidłowy plik XLSX"
+  },
+  "error_eu_prices": {
+    "message": "Biuletyn UE: nie znaleziono cen"
+  }
+}

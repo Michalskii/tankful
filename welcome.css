@@ -1,0 +1,152 @@
+:root {
+  --bg: #f8f9fa;
+  --card: #fff;
+  --text: #202124;
+  --muted: #5f6368;
+  --border: #dadce0;
+  --accent: #1a73e8;
+  --accent-soft: #e8f0fe;
+  --green: #188038;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #202124;
+    --card: #292a2d;
+    --text: #e8eaed;
+    --muted: #9aa0a6;
+    --border: #5f6368;
+    --accent: #8ab4f8;
+    --accent-soft: #2d3a4f;
+    --green: #81c995;
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 48px 16px;
+  font: 15px/1.5 system-ui, "Segoe UI", Roboto, sans-serif;
+  color: var(--text);
+  background: var(--bg);
+}
+
+main {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 32px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
+h1 {
+  margin: 0 0 8px;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.lead {
+  margin: 0 0 24px;
+  color: var(--muted);
+}
+
+fieldset {
+  margin: 0 0 20px;
+  padding: 0;
+  border: none;
+}
+
+legend,
+.field {
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.fuels {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.fuel input {
+  position: absolute;
+  opacity: 0;
+}
+
+.fuel span {
+  display: block;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.fuel input:checked + span {
+  color: var(--accent);
+  background: var(--accent-soft);
+  border-color: var(--accent);
+}
+
+.fuel input:focus-visible + span {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.field {
+  display: block;
+}
+
+.with-unit {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+  font-weight: 400;
+  color: var(--muted);
+}
+
+.with-unit input {
+  width: 110px;
+  padding: 9px 10px;
+  font: inherit;
+  color: var(--text);
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.price {
+  min-height: 1.5em;
+  margin: 16px 0 24px;
+  font-size: 14px;
+  color: var(--green);
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  font: inherit;
+  font-weight: 500;
+  color: #fff;
+  background: #1a73e8;
+  border: none;
+  border-radius: 24px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #1765cc;
+}
+
+.hint {
+  margin: 16px 0 0;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+@media (max-width: 420px) {
+  main { padding: 20px; }
+  .fuels { grid-template-columns: 1fr; }
+}

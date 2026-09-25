@@ -1,0 +1,323 @@
+{
+  "appName": {
+    "message": "Tankful – fuel cost for every route"
+  },
+  "appDescription": {
+    "message": "Shows the estimated fuel cost next to the time and distance of driving routes in Google Maps."
+  },
+  "actionTitle": {
+    "message": "Trip cost settings"
+  },
+  "fuel_pb": {
+    "message": "Petrol 95"
+  },
+  "fuel_pbp": {
+    "message": "Petrol 98"
+  },
+  "fuel_on": {
+    "message": "Diesel"
+  },
+  "fuel_onp": {
+    "message": "Premium diesel"
+  },
+  "fuel_lpg": {
+    "message": "LPG"
+  },
+  "fuel_ev": {
+    "message": "Electric (EV)"
+  },
+  "mileage_small_label": {
+    "message": "up to 900 cc"
+  },
+  "mileage_large_label": {
+    "message": "over 900 cc / electric"
+  },
+  "mileage_off": {
+    "message": "Don't show"
+  },
+  "mileage_small_option": {
+    "message": "Up to 900 cc – $1/km"
+  },
+  "mileage_large_option": {
+    "message": "Over 900 cc or electric – $1/km"
+  },
+  "price_manual": {
+    "message": "manual price"
+  },
+  "price_missing": {
+    "message": "no current prices – manual price"
+  },
+  "price_no_rate": {
+    "message": "no $1 exchange rate – manual price"
+  },
+  "price_national": {
+    "message": "Poland avg."
+  },
+  "price_single": {
+    "message": "$1 $2/l"
+  },
+  "price_average": {
+    "message": "average of $1 $2 and $3 $4/l"
+  },
+  "price_ev": {
+    "message": "home $1 – fast charger $2 per kWh"
+  },
+  "trip_cost": {
+    "message": "Trip cost"
+  },
+  "route_default": {
+    "message": "Route"
+  },
+  "per_person": {
+    "message": "$1/person"
+  },
+  "people_line": {
+    "message": "👥 $1 × $2"
+  },
+  "round_short": {
+    "message": "both ways"
+  },
+  "round_long": {
+    "message": "round trip"
+  },
+  "cost_setup": {
+    "message": "⚙ Set fuel"
+  },
+  "cost_mileage": {
+    "message": "🧾 mileage allowance $1"
+  },
+  "title_setup": {
+    "message": "Click to choose fuel type and consumption"
+  },
+  "title_round": {
+    "message": "Round trip: the same route × 2."
+  },
+  "title_mileage": {
+    "message": "Mileage allowance: $1/km ($2)."
+  },
+  "title_override": {
+    "message": "Settings for this route only."
+  },
+  "click_to_change": {
+    "message": "Click to change."
+  },
+  "warn_text": {
+    "message": "🚗 Tankful can't find this route's distance – Google may have changed the Maps layout. The trip cost is temporarily unavailable."
+  },
+  "warn_hide": {
+    "message": "Hide for this route"
+  },
+  "float_settings": {
+    "message": "Fuel settings"
+  },
+  "float_expand": {
+    "message": "Expand"
+  },
+  "float_collapse": {
+    "message": "Collapse"
+  },
+  "float_setup": {
+    "message": "⚙ Set fuel and consumption"
+  },
+  "float_show_route": {
+    "message": "Show this route on the map"
+  },
+  "float_copy": {
+    "message": "📋 Copy"
+  },
+  "float_copy_title": {
+    "message": "Copy a summary of the selected route"
+  },
+  "float_save": {
+    "message": "💾 Save trip"
+  },
+  "float_save_title": {
+    "message": "Add the selected route to your trip history"
+  },
+  "float_override_tag": {
+    "message": "✎ this route only"
+  },
+  "copied": {
+    "message": "✓ Copied"
+  },
+  "copy_failed": {
+    "message": "Failed"
+  },
+  "saved_flash": {
+    "message": "✓ Saved"
+  },
+  "summary_fuel": {
+    "message": "Fuel: $1"
+  },
+  "summary_round": {
+    "message": "Round trip: $1"
+  },
+  "summary_mileage": {
+    "message": "Mileage allowance: $1"
+  },
+  "panel_title_first": {
+    "message": "Your car"
+  },
+  "label_fuel": {
+    "message": "Fuel type"
+  },
+  "label_passengers": {
+    "message": "People"
+  },
+  "consumption_fuel": {
+    "message": "Fuel consumption ($1 per 100 km)"
+  },
+  "consumption_ev": {
+    "message": "Energy use ($1 per 100 km)"
+  },
+  "panel_price": {
+    "message": "Price: $1"
+  },
+  "btn_route_only": {
+    "message": "This route only"
+  },
+  "btn_save": {
+    "message": "Save"
+  },
+  "btn_save_default": {
+    "message": "Save as default"
+  },
+  "btn_reset_route": {
+    "message": "Restore defaults for this route"
+  },
+  "popup_auto_price": {
+    "message": "Fetch average prices automatically"
+  },
+  "popup_refresh": {
+    "message": "Refresh"
+  },
+  "popup_local_prices": {
+    "message": "Regional (Poland) and EU country prices"
+  },
+  "popup_local_hint": {
+    "message": "The route's start and destination (rounded to ~1 km) are sent to OpenStreetMap to find the country and region."
+  },
+  "popup_manual_price": {
+    "message": "Manual price (per litre)"
+  },
+  "popup_ev_home": {
+    "message": "Home electricity (kWh)"
+  },
+  "popup_ev_fast": {
+    "message": "Fast charger (kWh)"
+  },
+  "popup_currency": {
+    "message": "Currency"
+  },
+  "popup_mileage": {
+    "message": "Mileage allowance (Polish business rates)"
+  },
+  "popup_round_trip": {
+    "message": "Show round-trip cost"
+  },
+  "popup_floating": {
+    "message": "Route panel on the map"
+  },
+  "popup_history": {
+    "message": "📒 Trip history"
+  },
+  "popup_saved": {
+    "message": "Saved"
+  },
+  "popup_fetching": {
+    "message": "Fetching…"
+  },
+  "popup_fetch_error": {
+    "message": "Download failed – using the manual price."
+  },
+  "popup_no_response": {
+    "message": "no response"
+  },
+  "popup_preview": {
+    "message": "100 km ≈ $1"
+  },
+  "welcome_page_title": {
+    "message": "Tankful – first setup"
+  },
+  "welcome_heading": {
+    "message": "Welcome to Tankful"
+  },
+  "welcome_lead": {
+    "message": "Choose your fuel and enter your consumption. Based on that, you'll see the estimated trip cost for every driving route in Google Maps."
+  },
+  "welcome_consumption": {
+    "message": "Average consumption"
+  },
+  "welcome_submit": {
+    "message": "Save and open Google Maps"
+  },
+  "welcome_hint": {
+    "message": "You can change this at any time: click the extension icon or the cost on the map – then you choose whether the change applies to one route only or is saved as default."
+  },
+  "welcome_ev": {
+    "message": "For an electric car we'll show a range: charging at home – fast charger. You can set electricity prices in the extension settings."
+  },
+  "welcome_price_auto": {
+    "message": "Current price: $1 – updated automatically."
+  },
+  "welcome_price_pending": {
+    "message": "Average fuel prices will be downloaded in the background in a moment."
+  },
+  "history_title": {
+    "message": "Trip history"
+  },
+  "history_lead": {
+    "message": "Routes saved with the “💾 Save trip” button in the panel on the map."
+  },
+  "history_export": {
+    "message": "Export CSV"
+  },
+  "history_empty": {
+    "message": "You have no saved trips yet. Plan a driving route in Google Maps and click “💾 Save trip” in the panel in the top right corner of the map."
+  },
+  "trips_one": {
+    "message": "$1 trip"
+  },
+  "trips_few": {
+    "message": "$1 trips"
+  },
+  "trips_many": {
+    "message": "$1 trips"
+  },
+  "trips_other": {
+    "message": "$1 trips"
+  },
+  "history_round_on": {
+    "message": "Round trip (click to count one way)"
+  },
+  "history_round_off": {
+    "message": "One way (click to count the round trip)"
+  },
+  "history_delete": {
+    "message": "Delete trip"
+  },
+  "history_delete_confirm": {
+    "message": "Delete the trip $1 → $2?"
+  },
+  "csv_header": {
+    "message": "Date;From;To;Route;Km;Round trip;Fuel;Consumption per 100 km;People;Cost from;Cost to;Currency;Mileage allowance"
+  },
+  "csv_yes": {
+    "message": "yes"
+  },
+  "csv_no": {
+    "message": "no"
+  },
+  "csv_filename": {
+    "message": "trips"
+  },
+  "error_autocentrum": {
+    "message": "No prices found on the page"
+  },
+  "error_eu_file": {
+    "message": "EU bulletin: invalid XLSX file"
+  },
+  "error_eu_prices": {
+    "message": "EU bulletin: no prices found"
+  }
+}
