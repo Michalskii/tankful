@@ -309,6 +309,14 @@ test("_locales: każdy język ma te same klucze i te same podstawienia $1…$9 c
   }
 });
 
+test("_locales: nazwa i opis mieszczą się w limitach Chrome Web Store (75 i 132 znaki)", () => {
+  for (const lang of LANGS) {
+    const msgs = catalog(lang);
+    assert.ok(msgs.appName.message.length <= 75, `${lang}: nazwa ma ${msgs.appName.message.length} znaków`);
+    assert.ok(msgs.appDescription.message.length <= 132, `${lang}: opis ma ${msgs.appDescription.message.length} znaków`);
+  }
+});
+
 test("_locales: każdy klucz użyty w kodzie i HTML istnieje we wszystkich językach", () => {
   const files = fs.readdirSync(ROOT).filter((f) => /\.(js|html|json)$/.test(f));
   const used = new Set();
