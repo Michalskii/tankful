@@ -464,6 +464,27 @@ test("store: grafiki promocyjne mają wymagany rozmiar i są 24-bitowym PNG bez 
   }
 });
 
+test("strona: język z adresu, stare ?lang= przekierowuje na /en albo stronę główną", () => {
+  const run = (href) => {
+    let redirect = null;
+    const ctx = {
+      URL,
+      MAPKA_MESSAGES: { pl: {}, en: {} },
+      location: { href, replace: (u) => (redirect = String(u)) },
+      window: {},
+    };
+    vm.runInNewContext(source("site/public/boot.js"), ctx);
+    return { lang: ctx.window.chrome.i18n.getUILanguage(), redirect };
+  };
+  const base = "https://michalskii.github.io/tankful/";
+  same(run(base), { lang: "pl", redirect: null });
+  same(run(`${base}en`), { lang: "en", redirect: null });
+  same(run(`${base}en.html?from=x`), { lang: "en", redirect: null });
+  same(run(`${base}?lang=en&from=x`).redirect, `${base}en?from=x`);
+  same(run(`${base}en?lang=pl&from=x`).redirect, `${base}?from=x`);
+  same(run(`${base}?lang=pl`).redirect, null);
+});
+
 test("strona: teksty PL i EN mają te same klucze, a każdy użyty w site/ istnieje", () => {
   const code = source("site/src/lib/strings.ts").replace(/^export /gm, "").split("\ntype Key")[0];
   const strings = vm.runInNewContext(`${code}; SITE_STRINGS`);

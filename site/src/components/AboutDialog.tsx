@@ -4,12 +4,13 @@ import { CalculatorIcon, CarIcon, CircleHelpIcon, RouteIcon } from "lucide-react
 import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import { track } from "@/lib/analytics"
+import { PRERENDER } from "@/lib/prerender"
 import { T } from "@/lib/strings"
 
 const SEEN_KEY = "tankful-intro-seen"
 
 function firstVisit() {
-  if (new URLSearchParams(location.search).has("from")) return false
+  if (PRERENDER || new URLSearchParams(location.search).has("from")) return false
   try {
     return !localStorage.getItem(SEEN_KEY)
   } catch {

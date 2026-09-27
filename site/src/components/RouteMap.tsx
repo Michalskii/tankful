@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react"
 import L from "leaflet"
 import "leaflet/dist/leaflet.css"
 
+import { PRERENDER } from "@/lib/prerender"
 import type { Route } from "@/lib/trip"
 
 const ROUTE_COLOR = "#f2a516"
@@ -22,7 +23,7 @@ export function RouteMap({ routes, selected, onSelect, stops }: Props) {
   select.current = onSelect
 
   useEffect(() => {
-    if (!container.current) return
+    if (!container.current || PRERENDER) return
     const m = L.map(container.current, { zoomControl: true }).setView([50.5, 12], 4)
     L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
       maxZoom: 18,

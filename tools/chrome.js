@@ -1,4 +1,4 @@
-const { execFileSync } = require("child_process");
+const { execFile, execFileSync } = require("child_process");
 const fs = require("fs");
 const os = require("os");
 const path = require("path");
@@ -31,6 +31,28 @@ function screenshot(htmlFile, width, height, out, { transparent = false, waitMs 
   } finally {
     fs.rmSync(profile, { recursive: true, force: true });
   }
+}
+
+function dumpDom(url, { waitMs = 5000, timeZone } = {}) {
+  if (!CHROME) return Promise.reject(new Error("Nie znaleziono Chrome – ustaw zmienną CHROME"));
+  const profile = fs.mkdtempSync(path.join(os.tmpdir(), "tankful-chrome-"));
+  const args = [
+    "--headless=new",
+    "--disable-gpu",
+    ...(process.platform === "linux" ? ["--no-sandbox"] : []),
+    `--user-data-dir=${profile}`,
+    `--virtual-time-budget=${waitMs}`,
+    "--dump-dom",
+    url,
+  ];
+  const env = timeZone ? { ...process.env, TZ: timeZone } : process.env;
+  return new Promise((resolve, reject) => {
+    execFile(CHROME, args, { env, maxBuffer: 32 * 1024 * 1024 }, (err, stdout) => {
+      fs.rmSync(profile, { recursive: true, force: true });
+      if (err) reject(err);
+      else resolve(stdout);
+    });
+  });
 }
 
 const CRC_TABLE = Array.from({ length: 256 }, (_, n) => {
@@ -119,4 +141,4 @@ function flattenPng(file, background = [255, 255, 255]) {
   ]));
 }
 
-module.exports = { screenshot, flattenPng, crc32 };
+module.exports = { screenshot, dumpDom, flattenPng, crc32 };

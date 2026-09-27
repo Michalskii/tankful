@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react"
-import { CopyIcon, Loader2Icon, RouteIcon, TriangleAlertIcon } from "lucide-react"
+import { ChevronDownIcon, CopyIcon, Loader2Icon, RouteIcon, TriangleAlertIcon } from "lucide-react"
 import { toast } from "sonner"
 
 import { AboutDialog } from "@/components/AboutDialog"
@@ -27,6 +27,14 @@ import { fetchRoutes, formatDuration, sparsePoints, tripCost, type Options, type
 const STORE_URL = "https://chromewebstore.google.com/detail/fiogjemolijaleckapbcngibelfbpfgp"
 const PREFS_KEY = "tankful-calculator"
 const TYPICAL_CONSUMPTION: Record<string, number> = { pb: 7.0, pbp: 7.0, on: 6.0, onp: 6.0, lpg: 9.0, ev: 17.0 }
+const FAQ = [
+  ["faq1q", "faq1a"],
+  ["faq2q", "faq2a"],
+  ["faq3q", "faq3a"],
+  ["faq4q", "faq4a"],
+  ["faq5q", "faq5a"],
+  ["faq6q", "faq6a"],
+] as const
 const COUNTRY_COLORS = ["bg-country-1", "bg-country-2", "bg-country-3", "bg-country-4", "bg-country-5"]
 
 const params = new URLSearchParams(location.search)
@@ -57,8 +65,10 @@ function initialOptions(): Options {
 
 function langHref(lang: string) {
   const p = new URLSearchParams(location.search)
-  p.set("lang", lang)
-  return `?${p}`
+  p.delete("lang")
+  p.delete("prerender")
+  const q = p.toString()
+  return `${lang === "en" ? "en" : "./"}${q ? `?${q}` : ""}`
 }
 
 function formatDate(iso: string) {
@@ -148,9 +158,7 @@ export default function App() {
     if (options.roundTrip) p.set("rt", "1")
     p.set("cur", options.currency)
     if (selected > 0) p.set("alt", String(selected))
-    const lang = params.get("lang")
-    if (lang) p.set("lang", lang)
-    history.replaceState(null, "", `?${p}`)
+    history.replaceState(null, "", `${location.pathname}?${p}`)
   }, [trip, options, selected])
 
   function changeFuel(fuelType: string) {
@@ -179,7 +187,7 @@ export default function App() {
     <div className="flex min-h-svh flex-col lg:h-svh">
       <header className="shrink-0 border-b">
         <div className="flex h-14 items-center justify-between px-4 sm:px-6">
-          <a href="./" className="flex items-center gap-2 font-semibold tracking-tight">
+          <a href={MAPKA_LOCALE === "en" ? "en" : "./"} className="flex items-center gap-2 font-semibold tracking-tight">
             <img src="icon.svg" alt="" className="size-7" />
             Tankful
           </a>
@@ -451,6 +459,23 @@ export default function App() {
                 </Button>
               </CardContent>
             </Card>
+
+            <section aria-labelledby="faq-heading" className="flex flex-col gap-3">
+              <h2 id="faq-heading" className="text-base font-semibold">
+                {T("faqHeading")}
+              </h2>
+              <div className="divide-y rounded-xl border">
+                {FAQ.map(([q, a]) => (
+                  <details key={q} className="group px-4 py-3">
+                    <summary className="flex cursor-pointer list-none items-center justify-between gap-3 text-sm font-medium [&::-webkit-details-marker]:hidden">
+                      <h3>{T(q)}</h3>
+                      <ChevronDownIcon className="size-4 shrink-0 text-muted-foreground transition-transform group-open:rotate-180" />
+                    </summary>
+                    <p className="mt-2 text-sm text-muted-foreground">{T(a)}</p>
+                  </details>
+                ))}
+              </div>
+            </section>
 
             <footer className="flex flex-col gap-2 text-xs text-muted-foreground">
           <p>

@@ -1,7 +1,14 @@
 (() => {
-  const param = new URLSearchParams(location.search).get("lang");
-  const browserPl = (navigator.language || "").toLowerCase().startsWith("pl");
-  const lang = param === "pl" || param === "en" ? param : browserPl ? "pl" : "en";
+  const url = new URL(location.href);
+  const pathEn = /\/en(\.html)?$/.test(url.pathname);
+  const param = url.searchParams.get("lang");
+  if ((param === "en" && !pathEn) || (param === "pl" && pathEn)) {
+    url.searchParams.delete("lang");
+    const dir = url.pathname.replace(/[^/]*$/, "");
+    url.pathname = param === "en" ? `${dir}en` : dir;
+    location.replace(url);
+  }
+  const lang = pathEn ? "en" : "pl";
   const messages = MAPKA_MESSAGES[lang];
   const i18n = {
     getUILanguage: () => lang,
