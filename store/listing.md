@@ -26,7 +26,7 @@ English (domyślny) + Polski – dla każdego wklej opis i zrzuty z `store/en/` 
 ### Adresy
 | Pole | Wartość |
 |---|---|
-| Homepage URL | https://github.com/Michalskii/tankful |
+| Homepage URL | https://michalskii.github.io/tankful/ (kalkulator online) |
 | Support URL | https://github.com/Michalskii/tankful/issues |
 
 ### Krótki opis (z manifestu – tylko do wglądu)
@@ -48,7 +48,7 @@ WHAT YOU GET
 LIVE FUEL PRICES
 • Poland: average prices for the region (voivodeship) where the route starts, from autocentrum.pl, refreshed every few hours.
 • Other EU countries: national averages from the European Commission's Weekly Oil Bulletin.
-• Cross-border trips use the average of the start and destination countries.
+• Trips through several EU countries: the price is weighted by the kilometres driven in each country.
 • Petrol 95 and 98, diesel, premium diesel and LPG – or set your own price.
 • Electric cars: a range from charging at home to fast chargers.
 • Prices in PLN, EUR, CZK, HUF, RON, SEK, DKK, GBP, CHF, NOK, ISK or USD, converted at National Bank of Poland rates.
@@ -83,7 +83,7 @@ CO DOSTAJESZ
 AKTUALNE CENY PALIW
 • Polska: średnie ceny z województwa, w którym zaczyna się trasa (autocentrum.pl), odświeżane co kilka godzin.
 • Inne kraje UE: średnie krajowe z cotygodniowego biuletynu Komisji Europejskiej (Weekly Oil Bulletin).
-• Trasy przez granicę liczone są po średniej z kraju startu i celu.
+• Trasy przez kilka krajów UE: cena ważona kilometrami przejechanymi w każdym kraju.
 • Benzyna 95 i 98, diesel, diesel premium i LPG – albo Twoja własna cena.
 • Auta elektryczne: przedział od ładowania w domu po szybkie ładowarki.
 • Ceny w PLN, EUR, CZK, HUF, RON, SEK, DKK, GBP, CHF, NOK, ISK lub USD, przeliczane po kursach NBP.
