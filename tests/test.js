@@ -450,7 +450,9 @@ test("manifest: każda ikona istnieje i ma deklarowany rozmiar (PNG z przezroczy
 
 test("store: grafiki promocyjne mają wymagany rozmiar i są 24-bitowym PNG bez alfa", () => {
   const graphics = [["store/promo-tile-440x280.png", "440x280"]];
-  for (const lang of fs.readdirSync(path.join(ROOT, "store/raw"))) {
+  const langs = fs.readdirSync(path.join(ROOT, "store"), { withFileTypes: true }).filter((e) => e.isDirectory() && /^[a-z]{2}$/.test(e.name));
+  assert.ok(langs.length >= 1, "brak katalogów ze zrzutami w store/<język>");
+  for (const { name: lang } of langs) {
     const shots = fs.readdirSync(path.join(ROOT, "store", lang)).filter((f) => /^screenshot-.*\.png$/.test(f));
     assert.ok(shots.length >= 1 && shots.length <= 5, `${lang}: sklep przyjmuje 1–5 zrzutów, jest ${shots.length}`);
     graphics.push(...shots.map((f) => [`store/${lang}/${f}`, "1280x800"]));
