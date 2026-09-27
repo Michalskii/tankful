@@ -1,6 +1,3 @@
-// Renderuje icons/icon.svg do PNG przez Chrome w trybie headless: node tools/render-icons.js
-// 16/32/48 – grafika prawie na całe pole (czytelność w pasku przeglądarki);
-// 128 – grafika 96×96 z 16 px przezroczystego marginesu, zgodnie z wytycznymi Chrome Web Store.
 const fs = require("fs");
 const os = require("os");
 const path = require("path");

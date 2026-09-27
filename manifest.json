@@ -102,6 +102,7 @@
       ],
       "js": [
         "settings.js",
+        "borders.js",
         "dom.js",
         "content.js"
       ],

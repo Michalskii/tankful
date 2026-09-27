@@ -1,5 +1,3 @@
-// Buduje paczkę do Chrome Web Store: node tools/pack.js → dist/tankful-<wersja>.zip
-// Pliki z białej listy (nie przez wykluczanie), żeby do sklepu nie trafiły testy, narzędzia ani grafiki sklepu.
 const fs = require("fs");
 const path = require("path");
 const zlib = require("zlib");
@@ -7,7 +5,6 @@ const { crc32 } = require("./chrome");
 
 const ROOT = path.join(__dirname, "..");
 
-// Pliki rozszerzenia: skrypty, strony i style w katalogu głównym, manifest, tłumaczenia i ikony PNG.
 function packageFiles() {
   const files = fs
     .readdirSync(ROOT)
@@ -18,7 +15,6 @@ function packageFiles() {
   return files.sort();
 }
 
-// Czas DOS dla nagłówków ZIP.
 function dosTime(date) {
   return {
     time: (date.getHours() << 11) | (date.getMinutes() << 5) | (date.getSeconds() >> 1),
@@ -39,9 +35,9 @@ function zip(files) {
 
     const local = Buffer.alloc(30);
     local.writeUInt32LE(0x04034b50, 0);
-    local.writeUInt16LE(20, 4); // wersja potrzebna do rozpakowania
-    local.writeUInt16LE(0x0800, 6); // nazwy w UTF-8
-    local.writeUInt16LE(8, 8); // deflate
+    local.writeUInt16LE(20, 4);
+    local.writeUInt16LE(0x0800, 6);
+    local.writeUInt16LE(8, 8);
     local.writeUInt16LE(time, 10);
     local.writeUInt16LE(date, 12);
     local.writeUInt32LE(crc, 14);

@@ -1,10 +1,19 @@
-# Paczki budowane przez tools/pack.js
 dist/
 
-# Ustawienia IDE
 .idea/
 .vscode/
 
-# System
 Thumbs.db
 .DS_Store
+
+_site/
+site/public/settings.js
+site/public/borders.js
+site/public/messages.js
+site/public/prices.json
+site/public/privacy.html
+site/public/icon.svg
+site/node_modules/
+
+STATUS.md
+store/raw/

@@ -1,4 +1,3 @@
-// Wspólne dla skryptów w tools/: zrzut strony przez Chrome w trybie headless i spłaszczanie PNG do RGB.
 const { execFileSync } = require("child_process");
 const fs = require("fs");
 const os = require("os");
@@ -13,13 +12,8 @@ const CHROME = [
   "/usr/bin/google-chrome",
 ].find((p) => p && fs.existsSync(p));
 
-/**
- * Zrzut pliku HTML do PNG w dokładnym rozmiarze.
- * transparent – przezroczyste tło (ikony); waitMs – czas na doładowanie np. fontów z Google Fonts.
- */
 function screenshot(htmlFile, width, height, out, { transparent = false, waitMs = 0 } = {}) {
   if (!CHROME) throw new Error("Nie znaleziono Chrome – ustaw zmienną CHROME");
-  // Osobny profil, żeby nie kolidować z otwartym Chrome użytkownika.
   const profile = fs.mkdtempSync(path.join(os.tmpdir(), "tankful-chrome-"));
   try {
     execFileSync(CHROME, [
@@ -38,8 +32,6 @@ function screenshot(htmlFile, width, height, out, { transparent = false, waitMs 
     fs.rmSync(profile, { recursive: true, force: true });
   }
 }
-
-// ---------- PNG: RGBA → RGB (Chrome Web Store chce grafik promocyjnych bez kanału alfa) ----------
 
 const CRC_TABLE = Array.from({ length: 256 }, (_, n) => {
   let c = n;
@@ -62,7 +54,6 @@ function chunk(type, data) {
   return out;
 }
 
-// Odwraca filtry PNG (typy 0–4) dla 8-bitowego RGBA i zwraca surowe piksele.
 function unfilter(raw, width, height, bpp) {
   const stride = width * bpp;
   const pixels = Buffer.alloc(stride * height);
@@ -88,7 +79,6 @@ function unfilter(raw, width, height, bpp) {
   return pixels;
 }
 
-// Zapisuje PNG jako 24-bitowe RGB, nakładając ewentualną przezroczystość na podane tło.
 function flattenPng(file, background = [255, 255, 255]) {
   const png = fs.readFileSync(file);
   let p = 8;
@@ -105,13 +95,13 @@ function flattenPng(file, background = [255, 255, 255]) {
   const height = ihdr.readUInt32BE(4);
   if (ihdr[8] !== 8 || ihdr[12] !== 0) throw new Error(`${file}: obsługiwany tylko 8-bitowy PNG bez przeplotu`);
   const colorType = ihdr[9];
-  if (colorType === 2) return; // już RGB
+  if (colorType === 2) return;
   if (colorType !== 6) throw new Error(`${file}: nieobsługiwany typ koloru ${colorType}`);
 
   const rgba = unfilter(zlib.inflateSync(Buffer.concat(idat)), width, height, 4);
   const rows = Buffer.alloc((width * 3 + 1) * height);
   for (let y = 0; y < height; y++) {
-    rows[y * (width * 3 + 1)] = 0; // bez filtra
+    rows[y * (width * 3 + 1)] = 0;
     for (let x = 0; x < width; x++) {
       const i = (y * width + x) * 4;
       const o = y * (width * 3 + 1) + 1 + x * 3;

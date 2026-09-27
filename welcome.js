@@ -2,7 +2,6 @@ const form = document.getElementById("form");
 const fuels = document.getElementById("fuels");
 const priceInfo = document.getElementById("price");
 
-// Typowe spalanie jako podpowiedź przy zmianie rodzaju paliwa.
 const TYPICAL_CONSUMPTION = { pb: 7.0, pbp: 7.0, on: 6.0, onp: 6.0, lpg: 9.0, ev: 17.0 };
 
 let settings = MAPKA_DEFAULTS;

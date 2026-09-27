@@ -1,5 +1,4 @@
 (() => {
-  // Selektory i heurystyki wyszukiwania w DOM Google Maps są w dom.js.
   const COST_CLASS = "mapka-cost";
   const FLOAT_CLASS = "mapka-float";
   const OVERRIDES_KEY = "mapka-route-overrides";
@@ -10,17 +9,13 @@
   let panel = null;
   let floatEl = null;
   let floatCollapsed = false;
-  // Ostatnio widziane warianty – w widoku szczegółów lista tras znika z DOM.
   let routeCache = { key: null, routes: [] };
-  // Kraj i województwo startu i celu (z Nominatim przez background.js).
-  let geo = { key: null, origin: null, dest: null };
+  let geo = { key: null, origin: null, dest: null, shares: null };
 
-  // Tylko trasy samochodowe: tryb podróży zakodowany w URL jako !3e0.
   function isDrivingMode() {
     return /!3e0(?!\d)/.test(location.href);
   }
 
-  // /maps/dir/Gdańsk/Warszawa/@54.1,18.2,10z/data=... → ["Gdańsk", "Warszawa"]
   function routeStops() {
     const parts = location.pathname.split("/");
     const i = parts.indexOf("dir");
@@ -38,7 +33,6 @@
     return stops.length ? stops.join("|").toLowerCase() : null;
   }
 
-  // Współrzędne punktów trasy są w URL jako !1d<długość>!2d<szerokość>, w kolejności przystanków.
   function routeCoords() {
     return [...location.href.matchAll(/!1d(-?\d+\.\d+)!2d(-?\d+\.\d+)/g)].map((m) => ({
       lng: parseFloat(m[1]),
@@ -53,7 +47,7 @@
           resolve(chrome.runtime.lastError || !res?.ok ? null : res.geo);
         });
       } catch {
-        resolve(null); // wtyczka została przeładowana – ta karta ma nieaktualny skrypt
+        resolve(null);
       }
     });
   }
@@ -64,17 +58,17 @@
     if (coords.length < 2) return;
     const origin = coords[0];
     const dest = coords[coords.length - 1];
-    const key = [origin, dest].map((c) => `${c.lat.toFixed(2)},${c.lng.toFixed(2)}`).join(";");
+    const key = coords.map((c) => `${c.lat.toFixed(2)},${c.lng.toFixed(2)}`).join(";");
     if (key === geo.key) return;
-    geo = { key, origin: null, dest: null };
+    const shares = mapkaRouteShares(coords);
+    geo = { key, origin: null, dest: null, shares };
     Promise.all([locate(origin), locate(dest)]).then(([o, d]) => {
       if (geo.key !== key) return;
-      geo = { key, origin: o, dest: d };
+      geo = { key, origin: o, dest: d, shares };
       schedule();
     });
   }
 
-  // Ustawienia „tylko dla tej trasy” żyją w sessionStorage karty – znikają po jej zamknięciu.
   function readOverrides() {
     try {
       return JSON.parse(sessionStorage.getItem(OVERRIDES_KEY)) || {};
@@ -107,20 +101,16 @@
     return { ...settings, ...routeOverride() };
   }
 
-  // ---------- Wyliczanie i formatowanie kosztu ----------
-
   function priceFor(s) {
     return mapkaResolvePrice(s, data, geo.key ? geo : null);
   }
 
-  // Koszt w wybranej walucie; dla EV przedział dom–ładowarka.
   function tripCost(km, s) {
     const price = priceFor(s);
     const units = km * s.consumption / 100;
     return { low: units * price.low, high: units * price.high, price };
   }
 
-  // Zaokrąglamy tak, jak pokazujemy – żeby 195 zł × 2 dawało 390, a nie 389.
   const roundShown = (v) => (v < 10 ? v : Math.round(v));
 
   function formatRange(low, high, currency) {
@@ -129,12 +119,10 @@
     return `${lowNum}–${mapkaFormatMoney(high, currency)}`;
   }
 
-  // "≈ 195 zł" albo dla EV "≈ 45–110 zł"
   function formatCost(low, high, s) {
     return `≈ ${formatRange(low, high, s.currency)}`;
   }
 
-  // "65 zł/os." albo null dla jednej osoby
   function formatPerPerson(low, high, s) {
     const people = Math.max(1, Math.floor(s.passengers));
     return people > 1 ? mapkaT("per_person", formatRange(low / people, high / people, s.currency)) : null;
@@ -144,8 +132,6 @@
     if (!s.configured) return { main: mapkaT("cost_setup"), people: null, round: null, mileage: null };
     const { low, high } = tripCost(km, s);
     const main = formatCost(low, high, s) + (routeOverride() ? " ✎" : "");
-    // Koszt na osobę w osobnej, drobnej linii – doklejony do kwot nie mieścił się w wąskiej liście tras.
-    // "👥 2 × 174 zł" – widać i liczbę osób, i kwotę na osobę.
     const count = Math.max(1, Math.floor(s.passengers));
     const people = count > 1 ? mapkaT("people_line", count, formatRange(low / count, high / count, s.currency)) : null;
     const label = mapkaT(mode === "inline" ? "round_long" : "round_short");
@@ -174,8 +160,6 @@
     if (routeOverride()) lines.push(mapkaT("title_override"));
     return lines.join("\n");
   }
-
-  // ---------- Koszt w panelu Google Maps ----------
 
   function removeAll() {
     document.querySelectorAll(`.${COST_CLASS}`).forEach((el) => el.remove());
@@ -209,11 +193,10 @@
       }
       found++;
       const { main, people, round, mileage } = costLines(km, s, mode);
-      // W wąskiej liście tras kilometrówka się nie mieści – jest w nagłówku szczegółów i w panelu na mapie.
       const lines = [main, people, round, mode === "inline" ? mileage : null].filter(Boolean);
       const title = `${costTitle(km, s)}\n${mapkaT("click_to_change")}`;
       const key = `${lines.join("|")}|${title}`;
-      if (costEl && costEl.dataset.key === key) continue; // bez zmian – nie dotykamy DOM
+      if (costEl && costEl.dataset.key === key) continue;
       if (!costEl) {
         costEl = document.createElement(mode === "inline" ? "span" : "div");
         costEl.className = `${COST_CLASS} ${COST_CLASS}--${mode}`;
@@ -233,9 +216,6 @@
     checkLayout(found > 0 || readRoutes().length > 0);
   }
 
-  // ---------- Wykrywanie zmian w układzie Google Maps ----------
-
-  // Trasa jest wyznaczona, a przez ten czas nie znaleźliśmy żadnego dystansu → selektory przestały pasować.
   const LAYOUT_GRACE_MS = 8000;
   let layoutMissingSince = null;
   let layoutTimer = null;
@@ -296,8 +276,6 @@
     return e;
   }
 
-  // ---------- Pływający panel na mapie ----------
-
   function readRoutes() {
     const key = routeKey();
     const rows = [...document.querySelectorAll(MAPKA_DOM.row)];
@@ -340,7 +318,6 @@
     const key = JSON.stringify([routes, s, price, floatCollapsed, !!override]);
     if (floatEl?.dataset.key === key && floatEl.isConnected) return;
 
-    // Panel mógł zostać odpięty z zewnątrz – wtedy tworzymy nowy, zamiast aktualizować niewidoczny.
     if (!floatEl?.isConnected) {
       floatEl = el("div", FLOAT_CLASS);
       document.body.append(floatEl);
@@ -376,7 +353,6 @@
       item.title = mapkaT("float_show_route");
       const left = el("span", `${FLOAT_CLASS}__left`);
       left.append(el("span", `${FLOAT_CLASS}__name`, r.name), el("span", `${FLOAT_CLASS}__meta`, `${r.time} · ${r.distText}`));
-      // Koszt działa jak w liście Google: kliknięcie otwiera edycję paliwa i spalania.
       const right = el("span", `${FLOAT_CLASS}__right`);
       right.dataset.float = "settings";
       right.title = `${costTitle(r.km, s)}\n${mapkaT("click_to_change")}`;
@@ -462,7 +438,6 @@
     });
   }
 
-  // Google Maps reaguje na pełną sekwencję zdarzeń myszy na nazwie trasy, samo .click() nie wystarcza.
   function selectRoute(index) {
     const rows = [...document.querySelectorAll(MAPKA_DOM.row)];
     const row = rows.find((r) => r.dataset.tripIndex === String(index));
@@ -508,8 +483,6 @@
     }
   }
 
-  // ---------- Panel edycji ----------
-
   function closePanel() {
     panel?.remove();
     panel = null;
@@ -523,7 +496,6 @@
 
     panel = document.createElement("div");
     panel.className = "mapka-panel";
-    // Teksty z tłumaczeń wstawia mapkaLocalizePage (textContent) – w HTML są tylko klucze.
     panel.innerHTML = `
       <div class="mapka-panel__title" data-i18n="${firstRun ? "panel_title_first" : "trip_cost"}"></div>
       <label><span data-i18n="label_fuel"></span><select name="fuelType"></select></label>
@@ -580,11 +552,10 @@
       } else if (action === "save") {
         setRouteOverride(null);
         closePanel();
-        chrome.storage.sync.set({ ...values, configured: true }); // onChanged odświeży widok
+        chrome.storage.sync.set({ ...values, configured: true });
       }
     });
 
-    // Google Maps ma własne skróty klawiszowe – nie przepuszczamy do niego wpisywanych znaków.
     panel.addEventListener("keydown", (e) => {
       e.stopPropagation();
       if (e.key === "Escape") closePanel();
@@ -599,7 +570,6 @@
     panel.querySelector("[name=consumption]").focus();
   }
 
-  // Przechwytujemy w fazie capture, żeby kliknięcie kosztu nie wybierało wariantu trasy w Google Maps.
   function onClick(e) {
     if (!alive()) return;
     const floatTarget = e.target.closest?.(`.${FLOAT_CLASS} [data-float]`);
@@ -630,7 +600,6 @@
   document.addEventListener("click", onClick, true);
   document.addEventListener("keydown", onKeydown, true);
 
-  // Zmiana trasy (SPA) → panel dotyczyłby już innej trasy.
   let lastKey = routeKey();
   const routeTimer = setInterval(() => {
     if (!alive()) return;
@@ -638,7 +607,7 @@
     if (key !== lastKey) {
       lastKey = key;
       closePanel();
-      resetLayoutCheck(); // nowa trasa dostaje świeży czas na załadowanie
+      resetLayoutCheck();
       schedule();
     }
   }, 500);
@@ -650,9 +619,6 @@
     characterData: true,
   });
 
-  // Po aktualizacji lub przeładowaniu wtyczki ta kopia skryptu zostaje w otwartych kartach bez dostępu
-  // do API chrome (każde wywołanie rzuca „Extension context invalidated”). Wtedy sprzątamy po sobie
-  // i przestajemy reagować – nowa kopia skryptu zadziała po odświeżeniu strony.
   let dead = false;
 
   function alive() {

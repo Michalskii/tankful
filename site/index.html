@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kalkulator kosztu przejazdu – Tankful</title>
+    <meta name="description" content="Policz koszt paliwa na trasę po aktualnych cenach w Polsce i krajach UE – także przez kilka krajów, dla auta elektrycznego i na osobę." />
+    <link rel="icon" type="image/svg+xml" href="icon.svg" />
+    <link rel="alternate" hreflang="pl" href="https://michalskii.github.io/tankful/?lang=pl" />
+    <link rel="alternate" hreflang="en" href="https://michalskii.github.io/tankful/?lang=en" />
+    <script>
+      let theme = null
+      try { theme = localStorage.getItem("tankful-theme") } catch {}
+      const dark = theme ? theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches
+      document.documentElement.classList.toggle("dark", dark)
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="messages.js"></script>
+    <script src="boot.js"></script>
+    <script src="settings.js"></script>
+    <script src="borders.js"></script>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

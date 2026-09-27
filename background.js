@@ -1,8 +1,6 @@
 importScripts("settings.js");
 
-// Źródła danych, wszystkie publiczne i bez klucza API.
 const AUTOCENTRUM_URL = "https://www.autocentrum.pl/paliwa/ceny-paliw/";
-// Stały link do najnowszego „Weekly Oil Bulletin – prices with taxes” Komisji Europejskiej.
 const EU_BULLETIN_URL = "https://energy.ec.europa.eu/document/download/264c2d0f-f161-4ea3-a777-78faae59bea0_en";
 const NBP_URL = "https://api.nbp.pl/api/exchangerates/tables/a/?format=json";
 const NOMINATIM_URL = "https://nominatim.openstreetmap.org/reverse";
@@ -10,7 +8,6 @@ const NOMINATIM_URL = "https://nominatim.openstreetmap.org/reverse";
 const HOUR = 60 * 60 * 1000;
 const MAX_AGE = { national: 6 * HOUR, regional: 6 * HOUR, eu: 24 * HOUR, nbp: 12 * HOUR };
 
-// Kolumny arkusza biuletynu: B = Euro-super 95, C = diesel, G = LPG (EUR / 1000 l).
 const EU_COLUMNS = { B: "pb", C: "on", G: "lpg" };
 const EU_NAMES = {
   Austria: "AT", Belgium: "BE", Bulgaria: "BG", Croatia: "HR", Cyprus: "CY", Czechia: "CZ",
@@ -22,10 +19,6 @@ const EU_NAMES = {
 
 const isStale = (entry, maxAge) => !entry?.fetchedAt || Date.now() - entry.fetchedAt > maxAge;
 
-// ---------- autocentrum.pl (średnia krajowa i województwa) ----------
-
-// <a href="/paliwa/ceny-paliw/pb/" class="station-detail-wrapper pb ..."> ... <div class="price"> 7,87 <span>zł</span></a>
-// Brak danych to "-" zamiast ceny, dlatego szukamy ceny tylko wewnątrz tego samego <a>.
 function parseAutocentrum(html) {
   const prices = {};
   for (const m of html.matchAll(/class="station-detail-wrapper\s+(\w+)[^"]*"([\s\S]*?)<\/a>/g)) {
@@ -57,9 +50,6 @@ async function ensureRegion(slug, force = false) {
   await chrome.storage.local.set({ regionalPrices });
 }
 
-// ---------- Biuletyn UE (XLSX) ----------
-
-// Minimalny czytnik ZIP: wyciąga wskazane pliki z archiwum XLSX.
 async function unzip(buffer, names) {
   const dv = new DataView(buffer);
   let eocd = -1;
@@ -120,7 +110,6 @@ function parseEuBulletin(files) {
       if (v == null) continue;
       cells[c[1]] = /t="s"/.test(c[2]) ? strings[+v] : parseFloat(v);
     }
-    // A2 zawiera datę biuletynu jako numer seryjny Excela.
     if (typeof cells.A === "number" && !date) {
       date = new Date(Date.UTC(1899, 11, 30) + cells.A * 86400000).toISOString().slice(0, 10);
       continue;
@@ -129,7 +118,7 @@ function parseEuBulletin(files) {
     if (!cc) continue;
     prices[cc] = {};
     for (const [col, fuel] of Object.entries(EU_COLUMNS)) {
-      if (typeof cells[col] === "number" && cells[col] > 0) prices[cc][fuel] = cells[col] / 1000; // EUR/l
+      if (typeof cells[col] === "number" && cells[col] > 0) prices[cc][fuel] = cells[col] / 1000;
     }
   }
   if (!Object.keys(prices).length) throw new Error(mapkaT("error_eu_prices"));
@@ -144,8 +133,6 @@ async function refreshEu() {
   await chrome.storage.local.set({ euPrices });
 }
 
-// ---------- Kursy NBP ----------
-
 async function refreshNbp() {
   const res = await fetch(NBP_URL, { cache: "no-store" });
   if (!res.ok) throw new Error(`NBP: HTTP ${res.status}`);
@@ -153,8 +140,6 @@ async function refreshNbp() {
   const rates = Object.fromEntries(table.rates.map((r) => [r.code, r.mid]));
   await chrome.storage.local.set({ nbpRates: { rates, date: table.effectiveDate, fetchedAt: Date.now() } });
 }
-
-// ---------- Odświeżanie ----------
 
 async function refreshAll(force = false) {
   const data = await chrome.storage.local.get(["fuelPrices", "euPrices", "nbpRates"]);
@@ -168,15 +153,10 @@ async function refreshAll(force = false) {
   return { ok: !errors.length, errors };
 }
 
-// ---------- Geokodowanie (kraj i województwo) ----------
-
-// Nominatim dopuszcza najwyżej 1 zapytanie na sekundę – kolejkujemy.
 let geocodeQueue = Promise.resolve();
 
 function geocode(lat, lng) {
-  // Do ustalenia kraju i województwa wystarczy ~1 km dokładności – dokładnego punktu nie wysyłamy.
   const [rLat, rLng] = [lat.toFixed(2), lng.toFixed(2)];
-  // Nazwa regionu przychodzi w języku przeglądarki – po zmianie języka pytamy ponownie.
   const key = `${MAPKA_LOCALE}:${rLat},${rLng}`;
   const task = geocodeQueue.then(async () => {
     const { geoCache = {} } = await chrome.storage.local.get("geoCache");
@@ -201,8 +181,6 @@ async function locate(lat, lng) {
   if (geo.cc === "pl" && slug) await ensureRegion(slug).catch(() => {});
   return geo;
 }
-
-// ---------- Zdarzenia ----------
 
 chrome.runtime.onInstalled.addListener(({ reason }) => {
   chrome.alarms.create("refreshPrices", { periodInMinutes: 60 });

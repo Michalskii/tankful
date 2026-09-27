@@ -16,7 +16,6 @@ function range(low, high, currency) {
   return `${lowNum}–${money(high, currency)}`;
 }
 
-// Sumy per waluta: { PLN: { low, high, mileage } }
 function totals(items) {
   const sums = {};
   for (const t of items) {
@@ -129,7 +128,6 @@ list.addEventListener("click", (e) => {
 
 document.getElementById("export").addEventListener("click", () => {
   const header = mapkaT("csv_header").split(";");
-  // Excel oczekuje separatorów zgodnych z językiem: przecinek dziesiętny → kolumny rozdzielane średnikiem.
   const decimal = (1.5).toLocaleString(MAPKA_LOCALE).charAt(1);
   const separator = decimal === "," ? ";" : ",";
   const num = (v) => (v == null ? "" : String(Math.round(v * 100) / 100).replace(".", decimal));
@@ -151,7 +149,6 @@ document.getElementById("export").addEventListener("click", () => {
       num(t.mileage == null ? null : t.mileage * f),
     ];
   });
-  // BOM – żeby Excel rozpoznał UTF-8 (polskie i inne znaki narodowe).
   const csv = [header, ...rows].map((r) => r.map((v) => `"${String(v).replace(/"/g, '""')}"`).join(separator)).join("\r\n");
   const url = URL.createObjectURL(new Blob(["﻿" + csv], { type: "text/csv;charset=utf-8" }));
   const a = Object.assign(document.createElement("a"), { href: url, download: `${mapkaT("csv_filename")}-${new Date().toISOString().slice(0, 10)}.csv` });

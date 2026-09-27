@@ -1,31 +1,20 @@
-// Wspólne ustawienia i wyliczanie ceny – używane przez content script, popup, stronę powitalną i historię.
-
-// ---------- Tłumaczenia (_locales/<język>/messages.json) ----------
-
-// Tekst w języku przeglądarki; $1…$9 w komunikacie zastępują kolejne argumenty.
 function mapkaT(key, ...subs) {
   return chrome.i18n.getMessage(key, subs.map(String)) || key;
 }
 
-// Odmiana przez liczbę: klucze <base>_one / _few / _many / _other (zasady z Intl.PluralRules).
 function mapkaPlural(base, n) {
   const form = new Intl.PluralRules(MAPKA_LOCALE).select(n);
   return chrome.i18n.getMessage(`${base}_${form}`, [String(n)]) || mapkaT(`${base}_other`, n);
 }
 
-// Strony HTML: <el data-i18n="klucz"> dostaje tekst, <el data-i18n-title="klucz"> podpowiedź.
 function mapkaLocalizePage(root = document) {
   for (const el of root.querySelectorAll("[data-i18n]")) el.textContent = mapkaT(el.dataset.i18n);
   for (const el of root.querySelectorAll("[data-i18n-title]")) el.title = mapkaT(el.dataset.i18nTitle);
   if (root === document) document.documentElement.lang = MAPKA_LOCALE;
 }
 
-// Język interfejsu przeglądarki – do formatowania liczb, dat i walut.
 const MAPKA_LOCALE = chrome.i18n.getUILanguage();
 
-// ---------- Kraj użytkownika i waluta ----------
-
-// Strefa czasowa systemu → kraj. Pewniejsza niż język: przeglądarka po angielsku w Polsce to wciąż Polska.
 const MAPKA_TIMEZONES = {
   "Europe/Warsaw": "PL", "Europe/Berlin": "DE", "Europe/Busingen": "DE", "Europe/Paris": "FR",
   "Europe/Madrid": "ES", "Atlantic/Canary": "ES", "Africa/Ceuta": "ES", "Europe/Rome": "IT",
@@ -39,16 +28,13 @@ const MAPKA_TIMEZONES = {
   "Atlantic/Reykjavik": "IS",
 };
 
-// Kraje spoza strefy euro; pozostałe kraje UE (od 2026 r. także Bułgaria) płacą w EUR.
 const MAPKA_COUNTRY_CURRENCY = {
   PL: "PLN", CZ: "CZK", HU: "HUF", RO: "RON", SE: "SEK", DK: "DKK",
   GB: "GBP", CH: "CHF", NO: "NOK", IS: "ISK", US: "USD",
 };
 
-// Waluty do wyboru – wszystkie są w tabeli A kursów NBP, przez którą przeliczamy ceny.
 const MAPKA_CURRENCIES = ["PLN", "EUR", "CZK", "HUF", "RON", "SEK", "DKK", "GBP", "CHF", "NOK", "ISK", "USD"];
 
-// "PL", "DE"… albo null. Najpierw strefa czasowa, potem region z języka ("de" → "DE", "en-GB" → "GB").
 function mapkaUserCountry(timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone, locale = MAPKA_LOCALE) {
   if (MAPKA_TIMEZONES[timeZone]) return MAPKA_TIMEZONES[timeZone];
   try {
@@ -65,8 +51,6 @@ function mapkaCountryCurrency(country) {
 const MAPKA_COUNTRY = mapkaUserCountry();
 const MAPKA_CURRENCY = mapkaCountryCurrency(MAPKA_COUNTRY);
 
-// Orientacyjne kursy (ile jednostek waluty za 1 zł) – tylko do startowych cen ręcznych, żeby w Niemczech
-// nie startować od „6,20 €/l”. Właściwe przeliczenia cen idą po bieżących kursach NBP.
 const MAPKA_ROUGH_PER_PLN = {
   PLN: 1, EUR: 0.23, CZK: 5.8, HUF: 90, RON: 1.15, SEK: 2.6, DKK: 1.7, GBP: 0.2, CHF: 0.21, NOK: 2.7, ISK: 34, USD: 0.26,
 };
@@ -94,16 +78,13 @@ const MAPKA_DEFAULTS = {
 
 const MAPKA_FUELS = Object.fromEntries(["pb", "pbp", "on", "onp", "lpg", "ev"].map((f) => [f, mapkaT(`fuel_${f}`)]));
 
-// Polska kilometrówka: stawki za 1 km w PLN z rozporządzenia MI z 25.03.2002 (w brzmieniu od 2023 r.).
 const MAPKA_MILEAGE = {
   small: { rate: 0.89, label: mapkaT("mileage_small_label") },
   large: { rate: 1.15, label: mapkaT("mileage_large_label") },
 };
 
-// Biuletyn UE ma tylko benzynę 95, diesel i LPG.
 const MAPKA_EU_FUEL = { pb: "pb", pbp: "pb", on: "on", onp: "on", lpg: "lpg" };
 
-// Nazwa kraju w języku przeglądarki ("DE" → "Niemcy" / "Germany").
 function mapkaCountryName(cc) {
   try {
     return new Intl.DisplayNames(MAPKA_LOCALE, { type: "region" }).of(cc);
@@ -112,7 +93,6 @@ function mapkaCountryName(cc) {
   }
 }
 
-// Kody ISO 3166-2 województw (OSM podaje stare numeryczne, nowsze źródła literowe) → adresy na autocentrum.pl.
 const MAPKA_REGIONS = {
   "02": "dolnoslaskie", DS: "dolnoslaskie",
   "04": "kujawsko-pomorskie", KP: "kujawsko-pomorskie",
@@ -159,7 +139,6 @@ function mapkaFormatMoney(value, currency) {
   }
 }
 
-// Cena za litr / kWh – zawsze z groszami.
 function mapkaFormatUnitPrice(value, currency) {
   try {
     return new Intl.NumberFormat(MAPKA_LOCALE, { style: "currency", currency, minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(value);
@@ -168,14 +147,12 @@ function mapkaFormatUnitPrice(value, currency) {
   }
 }
 
-// PLN → wybrana waluta po kursie średnim NBP; null, gdy brak kursu.
 function mapkaFromPln(pln, currency, data) {
   if (currency === "PLN") return pln;
   const rate = data?.nbpRates?.rates?.[currency];
   return rate ? pln / rate : null;
 }
 
-// Cena paliwa w PLN za litr dla danego miejsca: województwo → średnia krajowa → kraj UE.
 function mapkaLocalPricePln(s, data, geo) {
   const cc = geo?.cc?.toUpperCase();
   if (!cc || cc === "PL" || !s.localPrices) {
@@ -190,11 +167,87 @@ function mapkaLocalPricePln(s, data, geo) {
   return eur && rate ? { price: eur * rate, label: mapkaCountryName(cc) } : null;
 }
 
-/**
- * Cena za jednostkę paliwa w wybranej walucie.
- * Zwraca { low, high, unit, auto, source } – low/high różnią się tylko dla EV (dom vs szybka ładowarka).
- * geo = { origin, dest } z content scriptu albo null (popup, strona powitalna).
- */
+let mapkaBorderIndex = null;
+
+function mapkaBorderRings(borders) {
+  if (mapkaBorderIndex?.borders === borders) return mapkaBorderIndex.rings;
+  const rings = [];
+  for (const [cc, list] of Object.entries(borders)) {
+    for (const r of list) {
+      let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
+      for (let i = 0; i < r.length; i += 2) {
+        minX = Math.min(minX, r[i]), maxX = Math.max(maxX, r[i]);
+        minY = Math.min(minY, r[i + 1]), maxY = Math.max(maxY, r[i + 1]);
+      }
+      rings.push({ cc, r, minX, maxX, minY, maxY });
+    }
+  }
+  mapkaBorderIndex = { borders, rings };
+  return rings;
+}
+
+function mapkaCountryAt(point, borders = MAPKA_BORDERS) {
+  const x = point.lng * 100;
+  const y = point.lat * 100;
+  const inside = {};
+  for (const { cc, r, minX, maxX, minY, maxY } of mapkaBorderRings(borders)) {
+    if (x < minX || x > maxX || y < minY || y > maxY) continue;
+    for (let i = 0, j = r.length - 2; i < r.length; j = i, i += 2) {
+      if (r[i + 1] > y !== r[j + 1] > y && x < ((r[j] - r[i]) * (y - r[i + 1])) / (r[j + 1] - r[i + 1]) + r[i]) {
+        inside[cc] = !inside[cc];
+      }
+    }
+  }
+  return Object.keys(inside).find((cc) => inside[cc]) || null;
+}
+
+function mapkaRouteShares(points, borders = MAPKA_BORDERS) {
+  const stops = new Set(points.map((p) => mapkaCountryAt(p, borders)).filter(Boolean));
+  if (stops.size < 2) return null;
+  const km = {};
+  for (let i = 1; i < points.length; i++) {
+    const a = points[i - 1];
+    const b = points[i];
+    const kx = 111.32 * Math.cos((((a.lat + b.lat) / 2) * Math.PI) / 180);
+    const dist = Math.hypot((b.lng - a.lng) * kx, (b.lat - a.lat) * 110.57);
+    const n = Math.max(1, Math.ceil(dist / 5));
+    for (let k = 0; k < n; k++) {
+      const t = (k + 0.5) / n;
+      const cc = mapkaCountryAt({ lng: a.lng + (b.lng - a.lng) * t, lat: a.lat + (b.lat - a.lat) * t }, borders);
+      if (cc) km[cc] = (km[cc] || 0) + dist / n;
+    }
+  }
+  const total = Object.values(km).reduce((sum, v) => sum + v, 0);
+  const kept = Object.entries(km).filter(([, v]) => v / total >= 0.02);
+  const keptTotal = kept.reduce((sum, [, v]) => sum + v, 0);
+  if (kept.length < 2) return null;
+  return Object.fromEntries(kept.sort((x, y) => y[1] - x[1]).map(([cc, v]) => [cc, v / keptTotal]));
+}
+
+function mapkaRoutePricePln(s, data, geo) {
+  const parts = [];
+  for (const [cc, share] of Object.entries(geo.shares)) {
+    const place = [geo.origin, geo.dest].find((g) => g?.cc?.toUpperCase() === cc) || { cc };
+    const local = mapkaLocalPricePln(s, data, place);
+    if (local) parts.push({ ...local, share });
+  }
+  if (parts.length < 2) return null;
+  const total = parts.reduce((sum, p) => sum + p.share, 0);
+  return {
+    price: parts.reduce((sum, p) => sum + (p.price * p.share) / total, 0),
+    source: mapkaT(
+      "price_route",
+      parts
+        .map((p) => {
+          const local = mapkaFromPln(p.price, s.currency, data);
+          const shown = local == null ? mapkaFormatUnitPrice(p.price, "PLN") : mapkaFormatUnitPrice(local, s.currency);
+          return `${p.label} ${Math.round((p.share / total) * 100)}% ${shown}`;
+        })
+        .join(" · ")
+    ),
+  };
+}
+
 function mapkaResolvePrice(s, data, geo) {
   const cur = s.currency;
   if (s.fuelType === "ev") {
@@ -210,14 +263,17 @@ function mapkaResolvePrice(s, data, geo) {
   if (!s.autoPrice) return manual;
 
   const origin = mapkaLocalPricePln(s, data, geo?.origin);
-  // Widoczny sygnał, że pobieranie cen przestało działać (np. zmieniła się strona autocentrum.pl).
   if (!origin) return { ...manual, source: mapkaT("price_missing") };
   let pln = origin.price;
   let source = mapkaT("price_single", origin.label, mapkaFormatUnitPrice(origin.price, "PLN"));
 
   const originCc = (geo?.origin?.cc || "pl").toUpperCase();
   const destCc = geo?.dest?.cc?.toUpperCase();
-  if (s.localPrices && destCc && destCc !== originCc) {
+  const route = s.localPrices && geo?.shares ? mapkaRoutePricePln(s, data, geo) : null;
+  if (route) {
+    pln = route.price;
+    source = route.source;
+  } else if (s.localPrices && destCc && destCc !== originCc) {
     const dest = mapkaLocalPricePln(s, data, geo.dest);
     if (dest) {
       pln = (origin.price + dest.price) / 2;
@@ -236,14 +292,12 @@ function mapkaResolvePrice(s, data, geo) {
   return { low: price, high: price, unit: "l", auto: true, source };
 }
 
-// Kwota kilometrówki w wybranej walucie albo null.
 function mapkaMileage(km, s, data) {
   const m = MAPKA_MILEAGE[s.mileage];
   if (!m) return null;
   return mapkaFromPln(km * m.rate, s.currency, data);
 }
 
-// "339 km", "1,234 km", "1 234 km", "4,6 km", "4.6 km", "800 m", "12 mi", "(339 km)" → km albo null
 function mapkaParseKm(text) {
   const m = text.replace(/[()]/g, "").trim().match(/^([\d\s  .,]+)\s*(km|m|mi|ft)$/i);
   if (!m) return null;
@@ -254,7 +308,6 @@ function mapkaParseKm(text) {
     const dec = lastComma > lastDot ? "," : ".";
     num = num.split(dec === "," ? "." : ",").join("").replace(",", ".");
   } else if (lastComma > -1) {
-    // "1,234" = tysiące, "4,6" = ułamek dziesiętny
     num = /^\d{1,3}(,\d{3})+$/.test(num) ? num.replace(/,/g, "") : num.replace(",", ".");
   } else if (/^\d{1,3}(\.\d{3})+$/.test(num) && num.split(".").length > 2) {
     num = num.replace(/\./g, "");
@@ -273,12 +326,10 @@ function mapkaUnit(fuelType) {
   return fuelType === "ev" ? "kWh" : "l";
 }
 
-// "Spalanie (l na 100 km)" albo dla EV "Zużycie (kWh na 100 km)"
 function mapkaConsumptionLabel(fuelType) {
   return mapkaT(fuelType === "ev" ? "consumption_ev" : "consumption_fuel", mapkaUnit(fuelType));
 }
 
-// Liczba w formacie języka przeglądarki: 7.5 → "7,5" po polsku, "7.5" po angielsku.
 function mapkaFormatNumber(value, maxDigits = 1) {
   return new Intl.NumberFormat(MAPKA_LOCALE, { maximumFractionDigits: maxDigits }).format(value);
 }

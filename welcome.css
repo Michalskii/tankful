@@ -41,10 +41,37 @@ main {
   border-radius: 12px;
 }
 
+main {
+  overflow: hidden;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: -32px -32px 24px;
+  padding: 24px 32px;
+  background: #1b2430;
+}
+
+.brand svg {
+  flex-shrink: 0;
+}
+
 h1 {
-  margin: 0 0 8px;
-  font-size: 24px;
-  font-weight: 600;
+  margin: 0;
+  font-size: 34px;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #faf7f0;
+}
+
+.tagline {
+  margin: 6px 0 0;
+  font-weight: 500;
+  color: #f2a516;
 }
 
 .lead {
@@ -148,5 +175,6 @@ button:hover {
 
 @media (max-width: 420px) {
   main { padding: 20px; }
+  .brand { margin: -20px -20px 20px; padding: 20px; }
   .fuels { grid-template-columns: 1fr; }
 }

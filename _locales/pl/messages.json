@@ -59,6 +59,9 @@
   "price_average": {
     "message": "średnio $1 $2 i $3 $4/l"
   },
+  "price_route": {
+    "message": "średnio na trasie: $1/l"
+  },
   "price_ev": {
     "message": "dom $1 – ładowarka $2 za kWh"
   },
@@ -239,8 +242,8 @@
   "welcome_page_title": {
     "message": "Tankful – pierwsze ustawienia"
   },
-  "welcome_heading": {
-    "message": "Witaj w Tankful"
+  "welcome_tagline": {
+    "message": "Koszt paliwa przy każdej trasie"
   },
   "welcome_lead": {
     "message": "Wybierz paliwo i podaj spalanie. Na tej podstawie przy każdej trasie samochodowej w Google Maps zobaczysz szacunkowy koszt przejazdu."

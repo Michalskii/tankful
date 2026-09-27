@@ -59,6 +59,9 @@
   "price_average": {
     "message": "average of $1 $2 and $3 $4/l"
   },
+  "price_route": {
+    "message": "route average: $1/l"
+  },
   "price_ev": {
     "message": "home $1 – fast charger $2 per kWh"
   },
@@ -239,8 +242,8 @@
   "welcome_page_title": {
     "message": "Tankful – first setup"
   },
-  "welcome_heading": {
-    "message": "Welcome to Tankful"
+  "welcome_tagline": {
+    "message": "Fuel cost for every route"
   },
   "welcome_lead": {
     "message": "Choose your fuel and enter your consumption. Based on that, you'll see the estimated trip cost for every driving route in Google Maps."

@@ -1,5 +1,3 @@
-// Testy czystych funkcji wtyczki. Uruchomienie: node tests/test.js (bez zależności, Node 14+).
-// settings.js i background.js ładujemy tak jak Chrome – jako skrypty w jednym kontekście, z atrapą API chrome.
 const assert = require("assert");
 const fs = require("fs");
 const path = require("path");
@@ -9,7 +7,6 @@ const zlib = require("zlib");
 const ROOT = path.join(__dirname, "..");
 const source = (file) => fs.readFileSync(path.join(ROOT, file), "utf8");
 
-// chrome.i18n tak jak w Chrome: komunikat z _locales/<język>, $1…$9 → kolejne podstawienia, brak klucza → "".
 function i18n(lang) {
   const messages = JSON.parse(source(`_locales/${lang}/messages.json`));
   return {
@@ -51,12 +48,10 @@ function loadExtension({ fetch, lang = "pl" } = {}) {
 const ext = loadExtension();
 const DEFAULTS = vm.runInContext("MAPKA_DEFAULTS", ext);
 
-// Obiekty z innego kontekstu vm mają inny Object.prototype – porównujemy po serializacji.
 const same = (actual, expected) => assert.deepStrictEqual(JSON.parse(JSON.stringify(actual)), expected);
 const close = (actual, expected) =>
   assert.ok(Math.abs(actual - expected) < 1e-9, `oczekiwano ${expected}, jest ${actual}`);
 
-// Minimalne archiwum ZIP (tak jak XLSX); deflate = true kompresuje wpisy.
 function zip(files, deflate = false) {
   const locals = [];
   const centrals = [];
@@ -98,8 +93,6 @@ function zip(files, deflate = false) {
 const tests = [];
 const test = (name, fn) => tests.push({ name, fn });
 
-// ---------- mapkaParseKm ----------
-
 test("mapkaParseKm: formaty dystansu z Google Maps", () => {
   const cases = {
     "339 km": 339,
@@ -123,8 +116,6 @@ test("mapkaParseKm: tekst, który nie jest dystansem", () => {
   for (const text of ["3 hr 43 min", "", "km", "via S7"]) assert.strictEqual(ext.mapkaParseKm(text), null, text);
 });
 
-// ---------- autocentrum.pl ----------
-
 test("parseAutocentrum: ceny z kafelków, bez pustych i duplikatów", () => {
   const html = `
     <a href="/paliwa/ceny-paliw/pb/" class="station-detail-wrapper pb active">
@@ -139,8 +130,6 @@ test("parseAutocentrum: ceny z kafelków, bez pustych i duplikatów", () => {
 test("parseAutocentrum: zmieniona strona to błąd, a nie puste ceny", () => {
   assert.throws(() => ext.parseAutocentrum("<html><body>Nowy wygląd</body></html>"), /Nie znaleziono cen/);
 });
-
-// ---------- Biuletyn UE (XLSX) ----------
 
 const SHARED_STRINGS = `<?xml version="1.0"?><sst>
   <si><t>Poland</t></si>
@@ -193,15 +182,12 @@ test("unzip: plik, który nie jest ZIP-em", async () => {
   await assert.rejects(ext.unzip(new ArrayBuffer(100), ["a"]), /nieprawidłowy plik XLSX/);
 });
 
-// ---------- Wyliczanie ceny ----------
-
 const DATA = {
   fuelPrices: { prices: { pb: 6.0, on: 6.3 } },
   regionalPrices: { mazowieckie: { prices: { pb: 6.2 } } },
   euPrices: { prices: { DE: { pb: 1.8, on: 1.7 } } },
   nbpRates: { rates: { EUR: 4.3, GBP: 5.0 } },
 };
-// Domyślna waluta zależy od strefy czasowej komputera – testy cen liczą w PLN.
 const settings = (over) => ({ ...DEFAULTS, currency: "PLN", configured: true, ...over });
 const WARSAW = { cc: "pl", region: "PL-14", regionName: "województwo mazowieckie" };
 const BERLIN = { cc: "de", region: "DE-BE", regionName: "Berlin" };
@@ -249,6 +235,63 @@ test("mapkaResolvePrice: bez cen lokalnych cel za granicą jest pomijany", () =>
   assert.strictEqual(p.low, 6.0);
 });
 
+vm.runInContext(source("borders.js"), ext, { filename: "borders.js" });
+const PLACES = {
+  warszawa: { lng: 21.01, lat: 52.23 },
+  paryz: { lng: 2.35, lat: 48.86 },
+  berlin: { lng: 13.4, lat: 52.52 },
+  szczecin: { lng: 14.55, lat: 53.43 },
+  rzeszow: { lng: 22.0, lat: 50.04 },
+  zakopane: { lng: 19.95, lat: 49.3 },
+  zurych: { lng: 8.54, lat: 47.37 },
+  mediolan: { lng: 9.19, lat: 45.46 },
+};
+
+test("borders.js: granice mają dokładnie kraje z biuletynu KE", () => {
+  const eu = vm.runInContext("Object.values(EU_NAMES)", ext);
+  same(vm.runInContext("Object.keys(MAPKA_BORDERS)", ext).sort(), [...eu].sort());
+});
+
+test("mapkaCountryAt: miasta w UE, poza UE i na morzu", () => {
+  assert.strictEqual(ext.mapkaCountryAt(PLACES.warszawa), "PL");
+  assert.strictEqual(ext.mapkaCountryAt(PLACES.paryz), "FR");
+  assert.strictEqual(ext.mapkaCountryAt(PLACES.zurych), null);
+  assert.strictEqual(ext.mapkaCountryAt({ lng: 18.0, lat: 55.0 }), null);
+});
+
+test("mapkaRouteShares: Warszawa → Paryż przez Niemcy", () => {
+  const shares = ext.mapkaRouteShares([PLACES.warszawa, PLACES.paryz]);
+  close(Object.values(shares).reduce((a, b) => a + b, 0), 1);
+  assert.ok(shares.PL > 0.3 && shares.PL < 0.45, JSON.stringify(shares));
+  assert.ok(shares.DE > 0.35 && shares.DE < 0.55, JSON.stringify(shares));
+  assert.ok(shares.FR > 0.1 && shares.FR < 0.3, JSON.stringify(shares));
+});
+
+test("mapkaRouteShares: przystanek za granicą w trasie tam i z powrotem", () => {
+  const shares = ext.mapkaRouteShares([PLACES.szczecin, PLACES.berlin, PLACES.szczecin]);
+  same(Object.keys(shares).sort(), ["DE", "PL"]);
+});
+
+test("mapkaRouteShares: trasa w jednym kraju i trasa z przystankami poza UE → null", () => {
+  assert.strictEqual(ext.mapkaRouteShares([PLACES.rzeszow, PLACES.zakopane]), null);
+  assert.strictEqual(ext.mapkaRouteShares([PLACES.zurych, PLACES.mediolan]), null);
+});
+
+test("mapkaResolvePrice: cena ważona krajami na trasie, start z ceną województwa", () => {
+  const data = { ...DATA, euPrices: { prices: { DE: { pb: 1.8 }, FR: { pb: 1.9 } } } };
+  const shares = { DE: 0.5, PL: 0.3, FR: 0.2 };
+  const p = ext.mapkaResolvePrice(settings(), data, { origin: WARSAW, dest: { cc: "fr" }, shares });
+  close(p.low, 0.5 * 1.8 * 4.3 + 0.3 * 6.2 + 0.2 * 1.9 * 4.3);
+  assert.ok(p.source.startsWith("średnio na trasie: Niemcy 50%"), p.source);
+  assert.ok(p.source.includes("woj. mazowieckie 30%"), p.source);
+});
+
+test("mapkaResolvePrice: kraj bez ceny wypada z wagi, reszta się przeskalowuje", () => {
+  const shares = { DE: 0.5, PL: 0.25, FR: 0.25 };
+  const p = ext.mapkaResolvePrice(settings(), DATA, { origin: WARSAW, dest: { cc: "fr" }, shares });
+  close(p.low, (0.5 * 1.8 * 4.3 + 0.25 * 6.2) / 0.75);
+});
+
 test("mapkaResolvePrice: przeliczenie waluty po kursie NBP", () => {
   close(ext.mapkaResolvePrice(settings({ currency: "EUR" }), DATA, null).low, 6.0 / 4.3);
   const p = ext.mapkaResolvePrice(settings({ currency: "CZK", price: 150 }), DATA, null);
@@ -270,8 +313,6 @@ test("mapkaMileage: stawki kilometrówki i waluta", () => {
   assert.strictEqual(ext.mapkaMileage(100, settings({ mileage: "off" }), DATA), null);
 });
 
-// ---------- Geokodowanie ----------
-
 test("geocode: do Nominatim idą współrzędne zaokrąglone do ~1 km, wynik trafia do cache", async () => {
   const urls = [];
   const fetch = async (url) => {
@@ -288,11 +329,9 @@ test("geocode: do Nominatim idą współrzędne zaokrąglone do ~1 km, wynik tra
   const params = new URL(urls[0]).searchParams;
   assert.strictEqual(params.get("lat"), "52.23");
   assert.strictEqual(params.get("lon"), "21.01");
-  await bg.geocode(52.231, 21.009); // ten sam kwadrat ~1 km → z cache
+  await bg.geocode(52.231, 21.009);
   assert.strictEqual(urls.length, 1);
 });
-
-// ---------- Tłumaczenia ----------
 
 const LANGS = fs.readdirSync(path.join(ROOT, "_locales"));
 const catalog = (lang) => JSON.parse(source(`_locales/${lang}/messages.json`));
@@ -354,13 +393,10 @@ test("wersja angielska: opisy ceny i nazwy krajów", () => {
   assert.strictEqual(vm.runInContext("MAPKA_FUELS.on", en), "Diesel");
 });
 
-// ---------- Kraj, waluta i domeny ----------
-
 test("mapkaUserCountry: strefa czasowa ma pierwszeństwo przed językiem", () => {
   assert.strictEqual(ext.mapkaUserCountry("Europe/Warsaw", "en-US"), "PL");
   assert.strictEqual(ext.mapkaUserCountry("Europe/Berlin", "pl"), "DE");
   assert.strictEqual(ext.mapkaUserCountry("Atlantic/Canary", "en"), "ES");
-  // Nieznana strefa → region z języka
   assert.strictEqual(ext.mapkaUserCountry("America/Chicago", "de"), "DE");
   assert.strictEqual(ext.mapkaUserCountry("UTC", "en-GB"), "GB");
 });
@@ -414,7 +450,6 @@ test("manifest: każda ikona istnieje i ma deklarowany rozmiar (PNG z przezroczy
 
 test("store: grafiki promocyjne mają wymagany rozmiar i są 24-bitowym PNG bez alfa", () => {
   const graphics = [["store/promo-tile-440x280.png", "440x280"]];
-  // Zrzuty per język karty w sklepie: store/<język>/screenshot-*.png, 1–5 na język.
   for (const lang of fs.readdirSync(path.join(ROOT, "store/raw"))) {
     const shots = fs.readdirSync(path.join(ROOT, "store", lang)).filter((f) => /^screenshot-.*\.png$/.test(f));
     assert.ok(shots.length >= 1 && shots.length <= 5, `${lang}: sklep przyjmuje 1–5 zrzutów, jest ${shots.length}`);
@@ -425,6 +460,27 @@ test("store: grafiki promocyjne mają wymagany rozmiar i są 24-bitowym PNG bez 
     assert.strictEqual(`${png.readUInt32BE(16)}x${png.readUInt32BE(20)}`, size, file);
     assert.strictEqual(png[25], 2, `${file}: powinien być RGB bez kanału alfa`);
   }
+});
+
+test("strona: teksty PL i EN mają te same klucze, a każdy użyty w site/ istnieje", () => {
+  const code = source("site/src/lib/strings.ts").replace(/^export /gm, "").split("\ntype Key")[0];
+  const strings = vm.runInNewContext(`${code}; SITE_STRINGS`);
+  same(Object.keys(strings.en).sort(), Object.keys(strings.pl).sort());
+  const walk = (dir) =>
+    fs.readdirSync(dir, { withFileTypes: true }).flatMap((e) =>
+      e.isDirectory() ? (e.name === "ui" ? [] : walk(path.join(dir, e.name))) : [path.join(dir, e.name)]
+    );
+  const files = walk(path.join(ROOT, "site/src")).filter((f) => /\.tsx?$/.test(f));
+  const used = new Set();
+  for (const f of files) {
+    const text = fs.readFileSync(f, "utf8");
+    for (const m of text.matchAll(/\bT\("(\w+)"/g)) used.add(m[1]);
+    for (const m of text.matchAll(/mapkaT\("(\w+)"/g)) {
+      for (const lang of LANGS) assert.ok(catalog(lang)[m[1]], `${lang}: brak ${m[1]}`);
+    }
+  }
+  assert.ok(used.size > 20, `znaleziono tylko ${used.size} kluczy`);
+  same([...used].filter((k) => !strings.pl[k]), []);
 });
 
 test("paczka: zawiera każdy plik, do którego odwołuje się rozszerzenie, i nic spoza niego", () => {
@@ -452,24 +508,20 @@ test("paczka: zawiera każdy plik, do którego odwołuje się rozszerzenie, i ni
 test("polityka prywatności: wymienia każdą domenę z uprawnień i używa nazw z interfejsu", () => {
   const policy = source("docs/privacy.html");
   const m = JSON.parse(source("manifest.json"));
-  same(policy.match(/\[[A-ZĄĆĘŁŃÓŚŹŻ][A-ZĄĆĘŁŃÓŚŹŻ -]+\]/g) || [], []); // niewypełnione znaczniki, np. [ADRES E-MAIL]
-  // Każda usługa, z którą rozszerzenie się łączy, musi być opisana w polityce.
+  same(policy.match(/\[[A-ZĄĆĘŁŃÓŚŹŻ][A-ZĄĆĘŁŃÓŚŹŻ -]+\]/g) || [], []);
   for (const host of m.host_permissions.map((h) => new URL(h.replace("*", "")).host)) {
     const name = host.replace(/^www\./, "").replace(/^nominatim\./, "");
     assert.ok(policy.includes(name), `polityka nie wspomina o ${host}`);
   }
   assert.deepStrictEqual(m.permissions.slice().sort(), ["alarms", "storage"], "nowe uprawnienie – zaktualizuj politykę prywatności");
-  // Nazwy opcji i przycisków, na które powołuje się polityka, muszą istnieć w interfejsie.
   for (const [lang, keys] of [["en", ["popup_local_prices", "float_copy", "float_save", "history_export"]], ["pl", ["popup_local_prices", "float_copy", "float_save", "history_export"]]]) {
     const msgs = catalog(lang);
     for (const key of keys) {
-      const label = msgs[key].message.replace(/^[^\p{L}]+/u, ""); // bez emoji na początku („📋 Copy” → „Copy”)
+      const label = msgs[key].message.replace(/^[^\p{L}]+/u, "");
       assert.ok(policy.includes(label), `${lang}: polityka nie używa etykiety „${label}” (${key})`);
     }
   }
 });
-
-// ---------- Uruchomienie ----------
 
 (async () => {
   let failed = 0;

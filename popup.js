@@ -12,7 +12,6 @@ for (const [key, name] of Object.entries(MAPKA_FUELS)) {
   form.fuelType.add(new Option(name, key));
 }
 for (const code of MAPKA_CURRENCIES) form.currency.add(new Option(code, code));
-// Stawki kilometrówki są w PLN – formatujemy je z MAPKA_MILEAGE, żeby nie powielać liczb w tłumaczeniach.
 for (const [key, { rate }] of Object.entries(MAPKA_MILEAGE)) {
   form.mileage.querySelector(`[value=${key}]`).textContent = mapkaT(`mileage_${key}_option`, mapkaFormatUnitPrice(rate, "PLN"));
 }
@@ -41,9 +40,7 @@ function updateView(s) {
   $("localLabel").hidden = !s.autoPrice;
   $("localHint").hidden = !s.autoPrice || !s.localPrices;
   $("priceLabel").hidden = price.auto;
-  // Kilometrówka ma polskie stawki – poza Polską ją chowamy, chyba że ktoś już ją włączył.
   $("mileageLabel").hidden = MAPKA_COUNTRY !== "PL" && s.mileage === "off";
-  // Ukryte pola nie mogą blokować zapisu formularza.
   form.price.required = !price.auto && !ev;
   form.evHomePrice.required = form.evFastPrice.required = ev;
 
