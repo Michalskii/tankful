@@ -38,7 +38,7 @@ async function previous() {
 }
 
 (async () => {
-  const { errors } = await context.refreshAll(true);
+  const { errors } = await context.refreshSources(true);
   const slugs = [...new Set(Object.values(vm.runInContext("MAPKA_REGIONS", context)))];
   for (const slug of slugs) {
     await context.ensureRegion(slug, true).catch((e) => errors.push(`${slug}: ${e.message}`));

@@ -131,9 +131,10 @@ Refreshes the cached fuel prices and exchange rates once an hour in the backgrou
 ```text
 Google Maps (www.google.<country>/maps*, maps.google.<country>/*, for EU countries, the UK, Switzerland, Norway and Iceland): the content script reads the distance and travel time of each driving route and shows the fuel cost next to it. It runs only on Google Maps pages.
 
-www.autocentrum.pl: downloads average fuel prices for Poland and its regions (public price page).
-energy.ec.europa.eu: downloads the European Commission's Weekly Oil Bulletin with national fuel prices in EU countries.
-api.nbp.pl: downloads exchange rates from the National Bank of Poland to convert prices between currencies.
+Fuel prices and exchange rates normally come from one public file on the extension's own website (michalskii.github.io/tankful/prices.json, readable without a host permission), which is built every few hours from the sources below. The extension contacts these sources directly only when that file is unavailable or out of date:
+www.autocentrum.pl: average fuel prices for Poland and its regions (public price page).
+energy.ec.europa.eu: the European Commission's Weekly Oil Bulletin with national fuel prices in EU countries.
+api.nbp.pl: exchange rates from the National Bank of Poland to convert prices between currencies.
 nominatim.openstreetmap.org: finds the country and region of a route's start and destination to choose local fuel prices; coordinates are rounded to about 1 km, and this can be turned off in the settings.
 
 None of these requests send any user data other than the rounded coordinates described for OpenStreetMap.

@@ -34,7 +34,7 @@ function loadExtension({ fetch, lang = "pl" } = {}) {
       alarms: { onAlarm: listener, create() {} },
       storage: {
         local: {
-          get: async (key) => (key in store ? { [key]: store[key] } : {}),
+          get: async (keys) => Object.fromEntries([].concat(keys).filter((k) => k in store).map((k) => [k, store[k]])),
           set: async (items) => Object.assign(store, items),
         },
       },
@@ -331,6 +331,81 @@ test("geocode: do Nominatim idą współrzędne zaokrąglone do ~1 km, wynik tra
   assert.strictEqual(params.get("lon"), "21.01");
   await bg.geocode(52.231, 21.009);
   assert.strictEqual(urls.length, 1);
+});
+
+const SITE_URL = "https://michalskii.github.io/tankful/prices.json";
+const AUTOCENTRUM_HTML = `<a class="station-detail-wrapper pb"><div class="price">6,99</div></a>`;
+
+function sitePrices(age) {
+  const at = Date.now() - age;
+  return {
+    updatedAt: new Date(at).toISOString(),
+    fuelPrices: { prices: { pb: 6.5, on: 6.8 }, fetchedAt: at, source: "https://www.autocentrum.pl/paliwa/ceny-paliw/" },
+    euPrices: { prices: { DE: { pb: 1.8 } }, date: "2026-09-22", fetchedAt: at },
+    nbpRates: { rates: { EUR: 4.3 }, date: "2026-09-26", fetchedAt: at },
+    regionalPrices: {
+      mazowieckie: { prices: { pb: 6.6 }, fetchedAt: at, source: "x" },
+      nieznane: { prices: { pb: 1 }, fetchedAt: at },
+    },
+  };
+}
+
+function priceServer(site) {
+  const urls = [];
+  const fetch = async (url) => {
+    urls.push(url);
+    if (url === SITE_URL) {
+      if (!site) return { ok: false, status: 503 };
+      return { ok: true, json: async () => JSON.parse(JSON.stringify(site)) };
+    }
+    if (url.startsWith("https://www.autocentrum.pl/")) return { ok: true, text: async () => AUTOCENTRUM_HTML };
+    if (url.startsWith("https://api.nbp.pl/")) {
+      return { ok: true, json: async () => [{ effectiveDate: "2026-09-28", rates: [{ code: "EUR", mid: 4.25 }] }] };
+    }
+    return { ok: false, status: 404 };
+  };
+  return { urls, bg: loadExtension({ fetch }) };
+}
+
+const stored = (bg, keys) => bg.chrome.storage.local.get(keys);
+
+test("refreshAll: świeże ceny z prices.json, bez zapytań do źródeł", async () => {
+  const { urls, bg } = priceServer(sitePrices(2 * 60 * 60 * 1000));
+  const result = await bg.refreshAll(true);
+  same(urls, [SITE_URL]);
+  assert.strictEqual(result.ok, true);
+  const data = await stored(bg, ["fuelPrices", "euPrices", "nbpRates", "regionalPrices"]);
+  same(data.fuelPrices.prices, { pb: 6.5, on: 6.8 });
+  same(data.euPrices.prices, { DE: { pb: 1.8 } });
+  same(data.nbpRates.rates, { EUR: 4.3 });
+  same(Object.keys(data.regionalPrices), ["mazowieckie"]);
+});
+
+test("refreshAll: prices.json najwyżej co 3 h, chyba że wymuszone", async () => {
+  const { urls, bg } = priceServer(sitePrices(60 * 60 * 1000));
+  await bg.refreshAll();
+  await bg.refreshAll();
+  assert.strictEqual(urls.length, 1);
+  await bg.refreshAll(true);
+  assert.strictEqual(urls.length, 2);
+});
+
+test("refreshAll: strona nie działa → ceny prosto ze źródeł", async () => {
+  const { urls, bg } = priceServer(null);
+  await bg.refreshAll(true);
+  assert.ok(urls.includes("https://www.autocentrum.pl/paliwa/ceny-paliw/"));
+  assert.ok(urls.some((u) => u.startsWith("https://api.nbp.pl/")));
+  same((await stored(bg, "fuelPrices")).fuelPrices.prices, { pb: 6.99 });
+});
+
+test("refreshAll: za stare dane w prices.json → źródło, a starsze dane ze strony nie nadpisują nowszych", async () => {
+  const { urls, bg } = priceServer(sitePrices(30 * 60 * 60 * 1000));
+  await bg.refreshAll(true);
+  assert.ok(urls.includes("https://www.autocentrum.pl/paliwa/ceny-paliw/"));
+  same((await stored(bg, "fuelPrices")).fuelPrices.prices, { pb: 6.99 });
+  same((await stored(bg, "euPrices")).euPrices.prices, { DE: { pb: 1.8 } });
+  await bg.refreshAll(true);
+  same((await stored(bg, "fuelPrices")).fuelPrices.prices, { pb: 6.99 });
 });
 
 const LANGS = fs.readdirSync(path.join(ROOT, "_locales"));

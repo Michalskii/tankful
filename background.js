@@ -4,9 +4,11 @@ const AUTOCENTRUM_URL = "https://www.autocentrum.pl/paliwa/ceny-paliw/";
 const EU_BULLETIN_URL = "https://energy.ec.europa.eu/document/download/264c2d0f-f161-4ea3-a777-78faae59bea0_en";
 const NBP_URL = "https://api.nbp.pl/api/exchangerates/tables/a/?format=json";
 const NOMINATIM_URL = "https://nominatim.openstreetmap.org/reverse";
+const SITE_PRICES_URL = "https://michalskii.github.io/tankful/prices.json";
 
 const HOUR = 60 * 60 * 1000;
-const MAX_AGE = { national: 6 * HOUR, regional: 6 * HOUR, eu: 24 * HOUR, nbp: 12 * HOUR };
+const SITE_INTERVAL = 3 * HOUR;
+const MAX_AGE = { national: 24 * HOUR, regional: 24 * HOUR, eu: 72 * HOUR, nbp: 48 * HOUR };
 
 const EU_COLUMNS = { B: "pb", C: "on", G: "lpg" };
 const EU_NAMES = {
@@ -141,7 +143,7 @@ async function refreshNbp() {
   await chrome.storage.local.set({ nbpRates: { rates, date: table.effectiveDate, fetchedAt: Date.now() } });
 }
 
-async function refreshAll(force = false) {
+async function refreshSources(force = false) {
   const data = await chrome.storage.local.get(["fuelPrices", "euPrices", "nbpRates"]);
   const jobs = [];
   if (force || isStale(data.fuelPrices, MAX_AGE.national)) jobs.push(refreshNational());
@@ -151,6 +153,37 @@ async function refreshAll(force = false) {
   const errors = results.filter((r) => r.status === "rejected").map((r) => String(r.reason?.message || r.reason));
   await chrome.storage.local.set({ fuelPricesError: errors.length ? errors.join("; ") : null });
   return { ok: !errors.length, errors };
+}
+
+const isEntry = (e) => typeof e?.fetchedAt === "number" && typeof (e.prices || e.rates) === "object";
+const isNewer = (entry, local) => isEntry(entry) && !(local?.fetchedAt >= entry.fetchedAt);
+
+async function refreshFromSite() {
+  const res = await fetch(SITE_PRICES_URL, { cache: "no-cache" });
+  if (!res.ok) throw new Error(`prices.json: HTTP ${res.status}`);
+  const site = await res.json();
+  const local = await chrome.storage.local.get(["fuelPrices", "euPrices", "nbpRates", "regionalPrices"]);
+  const update = { sitePricesCheckedAt: Date.now() };
+  for (const key of ["fuelPrices", "euPrices", "nbpRates"]) {
+    if (isNewer(site[key], local[key])) update[key] = site[key];
+  }
+  const regionalPrices = { ...local.regionalPrices };
+  for (const slug of new Set(Object.values(MAPKA_REGIONS))) {
+    if (isNewer(site.regionalPrices?.[slug], regionalPrices[slug])) regionalPrices[slug] = site.regionalPrices[slug];
+  }
+  update.regionalPrices = regionalPrices;
+  await chrome.storage.local.set(update);
+}
+
+let refreshing = Promise.resolve();
+
+function refreshAll(force = false) {
+  refreshing = (async () => {
+    const { sitePricesCheckedAt = 0 } = await chrome.storage.local.get("sitePricesCheckedAt");
+    if (force || Date.now() - sitePricesCheckedAt > SITE_INTERVAL) await refreshFromSite().catch(() => {});
+    return refreshSources();
+  })();
+  return refreshing;
 }
 
 let geocodeQueue = Promise.resolve();
@@ -178,7 +211,10 @@ function geocode(lat, lng) {
 async function locate(lat, lng) {
   const geo = await geocode(lat, lng);
   const slug = mapkaRegionSlug(geo);
-  if (geo.cc === "pl" && slug) await ensureRegion(slug).catch(() => {});
+  if (geo.cc === "pl" && slug) {
+    await refreshing.catch(() => {});
+    await ensureRegion(slug).catch(() => {});
+  }
   return geo;
 }
 
