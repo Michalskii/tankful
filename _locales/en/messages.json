@@ -3,7 +3,7 @@
     "message": "Tankful – fuel cost for every route"
   },
   "appDescription": {
-    "message": "See the fuel cost of every Google Maps driving route – live prices for Poland and the EU, EVs, cost per person."
+    "message": "See the fuel cost of every Google Maps driving route – live prices for Poland, the EU and the UK, EVs, cost per person."
   },
   "actionTitle": {
     "message": "Trip cost settings"
@@ -198,7 +198,7 @@
     "message": "Refresh"
   },
   "popup_local_prices": {
-    "message": "EU country prices along the route"
+    "message": "Country prices along the route (EU and UK)"
   },
   "popup_local_hint": {
     "message": "The route's start and destination (rounded to ~1 km) are sent to OpenStreetMap to find the country."

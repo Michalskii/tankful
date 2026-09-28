@@ -30,8 +30,8 @@ English (domyślny) + Polski – dla każdego wklej opis i zrzuty z `store/en/` 
 | Support URL | https://github.com/Michalskii/tankful/issues |
 
 ### Krótki opis (z manifestu – tylko do wglądu)
-- EN: See the fuel cost of every Google Maps driving route – live prices for Poland and the EU, EVs, cost per person.
-- PL: Koszt paliwa przy każdej trasie w Mapach Google – aktualne ceny w Polsce i UE, auta elektryczne, koszt na osobę.
+- EN: See the fuel cost of every Google Maps driving route – live prices for Poland, the EU and the UK, EVs, cost per person.
+- PL: Koszt paliwa przy każdej trasie w Mapach Google – aktualne ceny w Polsce, UE i Wielkiej Brytanii, auta elektryczne, koszt na osobę.
 
 ### Opis – English
 
@@ -47,7 +47,8 @@ WHAT YOU GET
 
 LIVE FUEL PRICES
 • Poland and other EU countries: national averages from the European Commission's Weekly Oil Bulletin; in Poland adjusted when Orlen wholesale prices move significantly.
-• Trips through several EU countries: the price is weighted by the kilometres driven in each country.
+• UK: the UK government's weekly road fuel prices.
+• Trips through several countries: the price is weighted by the kilometres driven in each country.
 • Petrol 95 and 98, diesel, premium diesel and LPG – or set your own price.
 • Electric cars: a range from charging at home to fast chargers.
 • Prices in PLN, EUR, CZK, HUF, RON, SEK, DKK, GBP, CHF, NOK, ISK or USD, converted at National Bank of Poland rates.
@@ -60,7 +61,7 @@ TRIP HISTORY AND BUSINESS TRIPS
 PRIVACY
 No account, no ads, no analytics, no servers. Your settings and trip history stay in your browser. To find the country for local prices, only the route's start and destination – rounded to about 1 km – are sent to OpenStreetMap, and you can turn that off. Full policy: https://michalskii.github.io/tankful/privacy.html
 
-Works on Google Maps in all EU countries, the UK, Switzerland, Norway and Iceland – with automatic prices in the EU and your own price elsewhere. Available in English and Polish.
+Works on Google Maps in all EU countries, the UK, Switzerland, Norway and Iceland – with automatic prices in the EU and the UK, and your own price in Switzerland, Norway and Iceland. Available in English and Polish.
 
 Costs are estimates based on average fuel prices and the consumption you enter; actual prices at the pump vary.
 
@@ -81,7 +82,8 @@ CO DOSTAJESZ
 
 AKTUALNE CENY PALIW
 • Polska i inne kraje UE: średnie krajowe z cotygodniowego biuletynu Komisji Europejskiej (Weekly Oil Bulletin); w Polsce korygowane przy dużych zmianach cen hurtowych Orlenu.
-• Trasy przez kilka krajów UE: cena ważona kilometrami przejechanymi w każdym kraju.
+• Wielka Brytania: cotygodniowe ceny paliw rządu brytyjskiego.
+• Trasy przez kilka krajów: cena ważona kilometrami przejechanymi w każdym kraju.
 • Benzyna 95 i 98, diesel, diesel premium i LPG – albo Twoja własna cena.
 • Auta elektryczne: przedział od ładowania w domu po szybkie ładowarki.
 • Ceny w PLN, EUR, CZK, HUF, RON, SEK, DKK, GBP, CHF, NOK, ISK lub USD, przeliczane po kursach NBP.
@@ -94,7 +96,7 @@ HISTORIA PRZEJAZDÓW I KILOMETRÓWKA
 PRYWATNOŚĆ
 Bez konta, reklam, analityki i serwerów. Ustawienia i historia przejazdów zostają w Twojej przeglądarce. Żeby ustalić kraj dla cen lokalnych, do OpenStreetMap wysyłane jest tylko położenie startu i celu trasy – zaokrąglone do ok. 1 km – i możesz to wyłączyć. Pełna polityka: https://michalskii.github.io/tankful/privacy.html
 
-Działa w Mapach Google we wszystkich krajach UE, w Wielkiej Brytanii, Szwajcarii, Norwegii i Islandii – z automatycznymi cenami w UE, a poza nią z Twoją własną ceną. Po polsku i po angielsku.
+Działa w Mapach Google we wszystkich krajach UE, w Wielkiej Brytanii, Szwajcarii, Norwegii i Islandii – z automatycznymi cenami w UE i Wielkiej Brytanii, a w Szwajcarii, Norwegii i Islandii z Twoją własną ceną. Po polsku i po angielsku.
 
 Koszty są szacunkowe – opierają się na średnich cenach paliw i podanym przez Ciebie spalaniu; ceny na stacjach mogą się różnić.
 
@@ -129,7 +131,7 @@ Refreshes the cached fuel prices and exchange rates once an hour in the backgrou
 ```text
 Google Maps (www.google.<country>/maps*, maps.google.<country>/*, for EU countries, the UK, Switzerland, Norway and Iceland): the content script reads the distance and travel time of each driving route and shows the fuel cost next to it. It runs only on Google Maps pages.
 
-Fuel prices and exchange rates normally come from one public file on the extension's own website (michalskii.github.io/tankful/prices.json, readable without a host permission), which is built every few hours from the sources below (plus Orlen's public wholesale price list, used only by the website's build server). The extension contacts these sources directly only when that file is unavailable or out of date:
+Fuel prices and exchange rates normally come from one public file on the extension's own website (michalskii.github.io/tankful/prices.json, readable without a host permission), which is built every few hours from the sources below (plus Orlen's public wholesale price list and the UK government's weekly road fuel prices, used only by the website's build server). The extension contacts these sources directly only when that file is unavailable or out of date:
 energy.ec.europa.eu: the European Commission's Weekly Oil Bulletin with national fuel prices in EU countries.
 api.nbp.pl: exchange rates from the National Bank of Poland to convert prices between currencies.
 nominatim.openstreetmap.org: finds the country of a route's start and destination to choose local fuel prices; coordinates are rounded to about 1 km, and this can be turned off in the settings.
@@ -168,7 +170,7 @@ https://michalskii.github.io/tankful/privacy.html
 
 ## Karta „Distribution”
 - **Visibility:** Public
-- **Regions:** All regions (wtyczka działa najlepiej w UE; poza nią przełącza się na cenę ręczną)
+- **Regions:** All regions (wtyczka działa najlepiej w UE i Wielkiej Brytanii; poza nimi przełącza się na cenę ręczną)
 - **Pricing:** Free
 
 ---

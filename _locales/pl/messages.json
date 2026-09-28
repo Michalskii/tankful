@@ -3,7 +3,7 @@
     "message": "Tankful – koszt paliwa na trasie"
   },
   "appDescription": {
-    "message": "Koszt paliwa przy każdej trasie w Mapach Google – aktualne ceny w Polsce i UE, auta elektryczne, koszt na osobę."
+    "message": "Koszt paliwa przy każdej trasie w Mapach Google – aktualne ceny w Polsce, UE i Wielkiej Brytanii, auta elektryczne, koszt na osobę."
   },
   "actionTitle": {
     "message": "Ustawienia kosztu przejazdu"
@@ -198,7 +198,7 @@
     "message": "Odśwież"
   },
   "popup_local_prices": {
-    "message": "Ceny krajów UE na trasie"
+    "message": "Ceny krajów na trasie (UE i Wielka Brytania)"
   },
   "popup_local_hint": {
     "message": "Start i cel trasy (zaokrąglone do ~1 km) są wysyłane do OpenStreetMap, żeby ustalić kraj."

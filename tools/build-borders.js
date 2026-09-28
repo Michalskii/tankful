@@ -2,7 +2,8 @@ const fs = require("fs");
 const path = require("path");
 
 const ROOT = path.join(__dirname, "..");
-const COUNTRIES = new Set(fs.readFileSync(path.join(ROOT, "background.js"), "utf8").match(/const EU_NAMES = {([^}]*)}/)[1].match(/"[A-Z]{2}"/g).map((c) => c.slice(1, 3)));
+const EU_COUNTRIES = fs.readFileSync(path.join(ROOT, "background.js"), "utf8").match(/const EU_NAMES = {([^}]*)}/)[1].match(/"[A-Z]{2}"/g).map((c) => c.slice(1, 3));
+const COUNTRIES = new Set([...EU_COUNTRIES, "GB"]);
 const BBOX = { minLng: -25, maxLng: 45, minLat: 34, maxLat: 72 };
 const MIN_EXTENT = 15;
 const SCALE = 100;

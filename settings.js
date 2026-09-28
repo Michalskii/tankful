@@ -115,7 +115,7 @@ const MAPKA_REGIONS = {
   "32": "zachodniopomorskie", ZP: "zachodniopomorskie",
 };
 
-const MAPKA_DATA_KEYS = { fuelPrices: null, euPrices: null, nbpRates: null };
+const MAPKA_DATA_KEYS = { fuelPrices: null, euPrices: null, nbpRates: null, ukPrices: null };
 
 function mapkaLoadSettings() {
   return new Promise((resolve) => chrome.storage.sync.get(MAPKA_DEFAULTS, resolve));
@@ -157,6 +157,11 @@ function mapkaLocalPricePln(s, data, geo) {
     const prices = data.fuelPrices?.prices;
     const national = prices?.[s.fuelType] ?? prices?.[MAPKA_EU_FUEL[s.fuelType]];
     return national ? { price: national, label: mapkaT("price_national") } : null;
+  }
+  if (cc === "GB") {
+    const gbp = data.ukPrices?.prices?.[MAPKA_EU_FUEL[s.fuelType]];
+    const gbpRate = data.nbpRates?.rates?.GBP;
+    return gbp && gbpRate ? { price: gbp * gbpRate, label: mapkaCountryName(cc) } : null;
   }
   const eur = data.euPrices?.prices?.[cc]?.[MAPKA_EU_FUEL[s.fuelType]];
   const rate = data.nbpRates?.rates?.EUR;

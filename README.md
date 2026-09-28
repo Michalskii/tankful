@@ -26,7 +26,7 @@
 Tankful is a Chrome extension that adds the estimated fuel cost next to the time and distance of every driving route in Google Maps – no copying numbers into a calculator.
 
 - **Every route option** gets its cost in the route list and in the route details, and a small panel on the map compares them side by side.
-- **Live fuel prices.** National averages from the European Commission's Weekly Oil Bulletin for Poland and other EU countries; in Poland adjusted when Orlen wholesale prices move significantly.
+- **Live fuel prices.** National averages from the European Commission's Weekly Oil Bulletin for Poland and other EU countries (in Poland adjusted when Orlen wholesale prices move significantly), and the UK government's weekly road fuel prices for the UK.
 - **Trips through several countries** – the price is weighted by the kilometres driven in each EU country.
 - **Petrol 95 and 98, diesel, premium diesel, LPG** – or your own price. **Electric cars** get a range from charging at home to fast chargers.
 - **Round trip and cost per person**, e.g. "4 × PLN 51" when four people share the ride.
@@ -78,7 +78,7 @@ The website is deployed to GitHub Pages by `.github/workflows/site.yml` on every
 
 ## Po polsku
 
-Tankful to darmowa wtyczka do Chrome, która pokazuje koszt paliwa przy każdej trasie samochodowej w Mapach Google: po aktualnych średnich cenach z biuletynu Komisji Europejskiej (Polska i kraje UE), także na trasach przez kilka krajów, dla aut elektrycznych, tam i z powrotem i na osobę. Do tego historia przejazdów, eksport do CSV i kilometrówka.
+Tankful to darmowa wtyczka do Chrome, która pokazuje koszt paliwa przy każdej trasie samochodowej w Mapach Google: po aktualnych średnich cenach z biuletynu Komisji Europejskiej (Polska i kraje UE) i rządu Wielkiej Brytanii, także na trasach przez kilka krajów, dla aut elektrycznych, tam i z powrotem i na osobę. Do tego historia przejazdów, eksport do CSV i kilometrówka.
 
 [Dodaj do Chrome](https://chromewebstore.google.com/detail/fiogjemolijaleckapbcngibelfbpfgp) · [Kalkulator online](https://michalskii.github.io/tankful/?ref=github) · [Popularne trasy, np. Warszawa – Kraków](https://michalskii.github.io/tankful/trasa/warszawa-krakow)
 

@@ -246,14 +246,15 @@ const PLACES = {
   mediolan: { lng: 9.19, lat: 45.46 },
 };
 
-test("borders.js: borders cover exactly the countries in the EC bulletin", () => {
+test("borders.js: borders cover exactly the EC bulletin countries and the UK", () => {
   const eu = vm.runInContext("Object.values(EU_NAMES)", ext);
-  same(vm.runInContext("Object.keys(MAPKA_BORDERS)", ext).sort(), [...eu].sort());
+  same(vm.runInContext("Object.keys(MAPKA_BORDERS)", ext).sort(), [...eu, "GB"].sort());
 });
 
 test("mapkaCountryAt: cities in the EU, outside it and at sea", () => {
   assert.strictEqual(ext.mapkaCountryAt(PLACES.warszawa), "PL");
   assert.strictEqual(ext.mapkaCountryAt(PLACES.paryz), "FR");
+  assert.strictEqual(ext.mapkaCountryAt({ lng: -0.13, lat: 51.51 }), "GB");
   assert.strictEqual(ext.mapkaCountryAt(PLACES.zurych), null);
   assert.strictEqual(ext.mapkaCountryAt({ lng: 18.0, lat: 55.0 }), null);
 });
@@ -305,6 +306,23 @@ test("mapkaResolvePrice: the price source is shown in the chosen currency", () =
   assert.ok(!single.source.includes("PLN"), single.source);
   const abroad = en.mapkaResolvePrice(settings({ currency: "EUR", localPrices: true }), DATA, { origin: WARSAW, dest: BERLIN, shares: null });
   assert.ok(abroad.source.includes("€1.44") && abroad.source.includes("€1.80"), abroad.source);
+});
+
+const UK_CSV = "\uFEFFDate,ULSP Pump price in pence/litre,ULSD Pump price in pence/litre,ULSP Duty,ULSD Duty,ULSP VAT,ULSD VAT\r\n" +
+  "14/09/2026,168.14,190.72,52.95,52.95,20,20\r\n21/09/2026,172.01,195.53,52.95,52.95,20,20\r\n";
+
+test("parseUkFuelCsv: the latest weekly UK pump prices in GBP per litre", () => {
+  same(ext.parseUkFuelCsv(UK_CSV), { prices: { pb: 1.7201, on: 1.9553 }, date: "2026-09-21" });
+  assert.throws(() => ext.parseUkFuelCsv("Date,ULSP,ULSD\n"), /no data/);
+});
+
+test("mapkaResolvePrice: UK prices converted at the NBP GBP rate, premium fuels at the regular price", () => {
+  const data = { ...DATA, ukPrices: { prices: { pb: 1.72, on: 1.96 }, date: "2026-09-21" } };
+  const LONDON = { cc: "gb", region: null, regionName: null };
+  close(ext.mapkaResolvePrice(settings(), data, { origin: LONDON, dest: LONDON }).low, 1.72 * 5.0);
+  close(ext.mapkaResolvePrice(settings({ fuelType: "onp", currency: "GBP" }), data, { origin: LONDON, dest: LONDON }).low, 1.96);
+  const noUk = ext.mapkaResolvePrice(settings({ price: 7 }), DATA, { origin: LONDON, dest: LONDON });
+  assert.strictEqual(noUk.auto, false);
 });
 
 test("mapkaResolvePrice: EV – home-to-charger range", () => {

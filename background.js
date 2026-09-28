@@ -4,13 +4,14 @@ const EU_BULLETIN_URL = "https://energy.ec.europa.eu/document/download/264c2d0f-
 const NBP_URL = "https://api.nbp.pl/api/exchangerates/tables/a/?format=json";
 const NBP_EUR_URL = "https://api.nbp.pl/api/exchangerates/rates/a/eur/";
 const ORLEN_URL = "https://tool.orlen.pl/api/wholesalefuelprices/ByProduct";
+const UK_FUEL_PAGE = "https://www.gov.uk/api/content/government/statistics/weekly-road-fuel-prices";
 const NOMINATIM_URL = "https://nominatim.openstreetmap.org/reverse";
 const SITE_PRICES_URL = `${MAPKA_SITE_URL}prices.json`;
 
 const HOUR = 60 * 60 * 1000;
 const DAY = 24 * HOUR;
 const SITE_INTERVAL = 3 * HOUR;
-const MAX_AGE = { national: 24 * HOUR, eu: 72 * HOUR, nbp: 48 * HOUR };
+const MAX_AGE = { national: 24 * HOUR, eu: 72 * HOUR, nbp: 48 * HOUR, uk: 72 * HOUR };
 
 const ORLEN_PRODUCTS = { pb: 41, pbp: 42, on: 43 };
 const FUEL_VAT = 1.23;
@@ -188,6 +189,28 @@ async function refreshEu() {
   await chrome.storage.local.set({ euPrices });
 }
 
+function parseUkFuelCsv(csv) {
+  const rows = csv.replace(/^\uFEFF/, "").trim().split(/\r?\n/).slice(1).map((line) => line.split(","));
+  const last = rows.filter((r) => /^\d{2}\/\d{2}\/\d{4}$/.test(r[0]) && parseFloat(r[1]) > 0).pop();
+  if (!last) throw new Error("UK road fuel prices: no data");
+  const [day, month, year] = last[0].split("/");
+  const prices = { pb: parseFloat(last[1]) / 100 };
+  if (parseFloat(last[2]) > 0) prices.on = parseFloat(last[2]) / 100;
+  return { prices, date: `${year}-${month}-${day}` };
+}
+
+async function refreshUk() {
+  const page = await fetch(UK_FUEL_PAGE, { cache: "no-store" });
+  if (!page.ok) throw new Error(`GOV.UK: HTTP ${page.status}`);
+  const { details } = await page.json();
+  const csv = details?.attachments?.find((a) => a.content_type === "text/csv" && /2018/.test(a.title));
+  if (!csv) throw new Error("GOV.UK: no CSV with weekly road fuel prices");
+  const res = await fetch(csv.url, { cache: "no-store" });
+  if (!res.ok) throw new Error(`GOV.UK: HTTP ${res.status}`);
+  const ukPrices = { ...parseUkFuelCsv(await res.text()), fetchedAt: Date.now() };
+  await chrome.storage.local.set({ ukPrices });
+}
+
 async function refreshNbp() {
   const res = await fetch(NBP_URL, { cache: "no-store" });
   if (!res.ok) throw new Error(`NBP: HTTP ${res.status}`);
@@ -197,13 +220,14 @@ async function refreshNbp() {
 }
 
 async function refreshSources(force = false, options = {}) {
-  const data = await chrome.storage.local.get(["fuelPrices", "euPrices", "nbpRates"]);
+  const data = await chrome.storage.local.get(["fuelPrices", "euPrices", "nbpRates", "ukPrices"]);
   const errors = [];
   const run = (job) => job().catch((e) => errors.push(String(e?.message || e)));
   const euStale = force || isStale(data.euPrices, MAX_AGE.eu);
   await Promise.all([
     euStale ? run(refreshEu) : null,
     force || isStale(data.nbpRates, MAX_AGE.nbp) ? run(refreshNbp) : null,
+    options.uk && (force || isStale(data.ukPrices, MAX_AGE.uk)) ? run(refreshUk) : null,
   ]);
   if (euStale || isStale(data.fuelPrices, MAX_AGE.national)) await run(() => refreshNational(options));
   await chrome.storage.local.set({ fuelPricesError: errors.length ? errors.join("; ") : null });
@@ -217,9 +241,9 @@ async function refreshFromSite() {
   const res = await fetch(SITE_PRICES_URL, { cache: "no-cache" });
   if (!res.ok) throw new Error(`prices.json: HTTP ${res.status}`);
   const site = await res.json();
-  const local = await chrome.storage.local.get(["fuelPrices", "euPrices", "nbpRates"]);
+  const local = await chrome.storage.local.get(["fuelPrices", "euPrices", "nbpRates", "ukPrices"]);
   const update = { sitePricesCheckedAt: Date.now() };
-  for (const key of ["fuelPrices", "euPrices", "nbpRates"]) {
+  for (const key of ["fuelPrices", "euPrices", "nbpRates", "ukPrices"]) {
     if (isNewer(site[key], local[key])) update[key] = site[key];
   }
   await chrome.storage.local.set(update);
