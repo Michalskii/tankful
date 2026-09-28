@@ -375,6 +375,7 @@ export default function App() {
                   <p className="text-sm text-muted-foreground tabular-nums">
                     {mapkaFormatNumber(trip.route.km, 0)} km · {formatDuration(trip.route.minutes)} ·{" "}
                     {mapkaFormatNumber(cost.units)} {unit}
+                    {trip.route.ferryKm >= 1 && ` · ${T("ferry", mapkaFormatNumber(trip.route.ferryKm, 0))}`}
                   </p>
                   {(cost.perPerson || cost.roundTrip) && (
                     <div className="flex flex-wrap gap-2 pt-1">
@@ -390,10 +391,11 @@ export default function App() {
                     <div role="radiogroup" aria-label={T("variants")} className="flex flex-col gap-1.5">
                       {trips.map((t, i) => {
                         const fastest = trips[0].route
+                        const kmDiff = Math.round(t.route.km + t.route.ferryKm - fastest.km - fastest.ferryKm)
                         const extra =
                           i === 0
                             ? T("fastest")
-                            : `+${mapkaFormatNumber(Math.max(0, t.route.km - fastest.km), 0)} km, +${formatDuration(Math.max(0, t.route.minutes - fastest.minutes))}`
+                            : `${kmDiff < 0 ? "−" : "+"}${mapkaFormatNumber(Math.abs(kmDiff), 0)} km, +${formatDuration(Math.max(0, t.route.minutes - fastest.minutes))}`
                         const active = t === trip
                         return (
                           <button
@@ -413,6 +415,7 @@ export default function App() {
                             <span className="font-semibold tabular-nums">{costs[i]?.total}</span>
                             <span className="text-xs text-muted-foreground tabular-nums">
                               {mapkaFormatNumber(t.route.km, 0)} km · {formatDuration(t.route.minutes)}
+                              {t.route.ferryKm >= 1 && ` · ${T("ferry", mapkaFormatNumber(t.route.ferryKm, 0))}`}
                             </span>
                           </button>
                         )

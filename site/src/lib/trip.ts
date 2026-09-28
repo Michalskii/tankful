@@ -3,7 +3,14 @@ import { T } from "@/lib/strings"
 
 const OSRM_URL = "https://router.project-osrm.org/route/v1/driving/"
 
-export type Route = { km: number; minutes: number; points: { lat: number; lng: number }[] }
+export type Route = { km: number; ferryKm: number; minutes: number; points: { lat: number; lng: number }[] }
+
+type OsrmRoute = {
+  distance: number
+  duration: number
+  geometry: string
+  legs: { steps: { mode: string; distance: number }[] }[]
+}
 export type Trip = { stops: Place[]; from: Place; to: Place; route: Route; shares: Record<string, number> | null }
 
 export type Options = {
@@ -18,7 +25,7 @@ export type Options = {
 export async function fetchRoutes(stops: Place[]): Promise<Route[]> {
   const coords = stops.map((p) => `${p.lng},${p.lat}`).join(";")
   const alternatives = stops.length === 2 ? "&alternatives=3" : ""
-  const url = `${OSRM_URL}${coords}?overview=full&geometries=polyline6${alternatives}`
+  const url = `${OSRM_URL}${coords}?overview=full&geometries=polyline6&steps=true${alternatives}`
   let res: Response
   try {
     res = await fetch(url)
@@ -28,11 +35,18 @@ export async function fetchRoutes(stops: Place[]): Promise<Route[]> {
   if (!res.ok && res.status !== 400) throw new Error(T("errorNetwork"))
   const body = await res.json()
   if (body.code !== "Ok" || !body.routes?.length) throw new Error(T("errorRoute"))
-  return body.routes.map((route: { distance: number; duration: number; geometry: string }) => ({
-    km: route.distance / 1000,
-    minutes: route.duration / 60,
-    points: decodePolyline(route.geometry, 1e6),
-  }))
+  return (body.routes as OsrmRoute[])
+    .map((route) => {
+      const ferry = route.legs.flatMap((leg) => leg.steps).filter((step) => step.mode === "ferry")
+      const ferryKm = ferry.reduce((sum, step) => sum + step.distance, 0) / 1000
+      return {
+        km: route.distance / 1000 - ferryKm,
+        ferryKm,
+        minutes: route.duration / 60,
+        points: decodePolyline(route.geometry, 1e6),
+      }
+    })
+    .sort((a, b) => a.minutes - b.minutes)
 }
 
 function decodePolyline(encoded: string, factor: number) {

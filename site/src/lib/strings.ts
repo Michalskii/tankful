@@ -91,6 +91,7 @@ export const SITE_STRINGS = {
     routeAssumption: "Wyliczenie dla najszybszej trasy i typowego spalania. Swoje spalanie, liczbę osób i warianty trasy ustawisz w kalkulatorze.",
     popularRoutes: "Popularne trasy",
     language: "Język",
+    ferry: "prom lub pociąg $1 km, bez paliwa",
   },
   en: {
     title: "Trip fuel cost calculator – Tankful",
@@ -184,6 +185,7 @@ export const SITE_STRINGS = {
     routeAssumption: "Costed for the fastest route and typical consumption. Set your own consumption, passengers and route options in the calculator.",
     popularRoutes: "Popular routes",
     language: "Language",
+    ferry: "ferry or train $1 km, no fuel",
   },
 };
 

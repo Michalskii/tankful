@@ -21,7 +21,7 @@ export function cityPlace(key: string): Place {
 export function routeTrip(route: RoutePage): Trip {
   const from = cityPlace(route.from)
   const to = cityPlace(route.to)
-  return { stops: [from, to], from, to, route: { km: route.km, minutes: route.minutes, points: [] }, shares: route.shares }
+  return { stops: [from, to], from, to, route: { km: route.km, ferryKm: 0, minutes: route.minutes, points: [] }, shares: route.shares }
 }
 
 export function routeHref(route: RoutePage, lang = MAPKA_LOCALE) {
