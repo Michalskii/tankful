@@ -129,7 +129,7 @@ function parseEuBulletin(files) {
 
 async function refreshEu() {
   const res = await fetch(EU_BULLETIN_URL, { cache: "no-store" });
-  if (!res.ok) throw new Error(`Biuletyn UE: HTTP ${res.status}`);
+  if (!res.ok) throw new Error(`EU Weekly Oil Bulletin: HTTP ${res.status}`);
   const files = await unzip(await res.arrayBuffer(), ["xl/sharedStrings.xml", "xl/worksheets/sheet1.xml"]);
   const euPrices = { ...parseEuBulletin(files), fetchedAt: Date.now() };
   await chrome.storage.local.set({ euPrices });

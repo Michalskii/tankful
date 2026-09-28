@@ -119,9 +119,9 @@ function pageHtml(template, page, strings) {
     .replace("</head>", `${headTags(page, s)}\n  </head>`);
   if (page.route) html = html.replace('<meta charset="UTF-8" />', '<meta charset="UTF-8" />\n    <base href="../" />');
   if (!html.includes(`<title>${esc(s.title)}</title>`) || !html.includes(esc(s.description))) {
-    throw new Error(`${page.file}: nie udało się podmienić tytułu lub opisu w index.html`);
+    throw new Error(`${page.file}: could not replace the title or description in index.html`);
   }
-  if (page.route && !html.includes('<base href="../" />')) throw new Error(`${page.file}: brak <base>`);
+  if (page.route && !html.includes('<base href="../" />')) throw new Error(`${page.file}: missing <base>`);
   return html;
 }
 
@@ -160,17 +160,17 @@ async function prerender(pages, strings) {
       const dom = await dumpDom(`http://127.0.0.1:${port}${page.path}?prerender=1`, { timeZone: page.timeZone });
       const match = dom.match(/<div id="root">([\s\S]*?)<\/div>\s*<script src="messages\.js">/);
       const heading = esc(pageStrings(page, strings).heading);
-      if (!match || !match[1].includes(heading)) throw new Error(`${page.file}: w wyrenderowanej stronie brak nagłówka „${heading}”`);
-      if (page.route && !match[1].includes("<table")) throw new Error(`${page.file}: w wyrenderowanej stronie brak tabeli kosztów`);
+      if (!match || !match[1].includes(heading)) throw new Error(`${page.file}: the rendered page has no heading "${heading}"`);
+      if (page.route && !match[1].includes("<table")) throw new Error(`${page.file}: the rendered page has no cost table`);
       const file = path.join(SITE, page.file);
       const html = fs.readFileSync(file, "utf8").replace('<div id="root"></div>', `<div id="root">${match[1]}</div>`);
       fs.writeFileSync(file, html);
-      if (!page.route) console.log(`${page.file}: gotowy HTML (${Math.round(match[1].length / 1024)} KB treści)`);
+      if (!page.route) console.log(`${page.file}: prerendered (${Math.round(match[1].length / 1024)} KB of content)`);
     }
   };
   try {
     await Promise.all(Array.from({ length: 4 }, worker));
-    console.log(`Strony tras: ${pages.filter((p) => p.route).length} z gotowym HTML`);
+    console.log(`Route pages: ${pages.filter((p) => p.route).length} prerendered`);
   } finally {
     server.close();
   }
@@ -196,16 +196,16 @@ async function main() {
   fs.writeFileSync(path.join(SITE, "sitemap.xml"), sitemap());
 
   if (args.includes("--no-prerender")) {
-    console.log("Bez prerenderingu (--no-prerender)");
+    console.log("Prerendering skipped (--no-prerender)");
   } else {
     try {
       await prerender(PAGES, strings);
     } catch (e) {
       if (process.env.CI) throw e;
-      console.warn(`Prerendering pominięty: ${e.message}`);
+      console.warn(`Prerendering skipped: ${e.message}`);
     }
   }
-  console.log(`_site/: ${PAGES.length} stron`);
+  console.log(`_site/: ${PAGES.length} pages`);
 }
 
 main().catch((e) => {

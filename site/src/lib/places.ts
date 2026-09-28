@@ -75,9 +75,13 @@ const REGION_CODES = Object.fromEntries(
 )
 
 const REGION_NAMES = Object.fromEntries(
-  ["dolnośląskie", "kujawsko-pomorskie", "lubelskie", "lubuskie", "łódzkie", "małopolskie", "mazowieckie", "opolskie",
-   "podkarpackie", "podlaskie", "pomorskie", "śląskie", "świętokrzyskie", "warmińsko-mazurskie", "wielkopolskie",
-   "zachodniopomorskie"].map((name) => [slugOf(name), `województwo ${name}`])
+  [
+    ["dolnośląskie", "Lower Silesian"], ["kujawsko-pomorskie", "Kuyavian-Pomeranian"], ["lubelskie", "Lublin"],
+    ["lubuskie", "Lubusz"], ["łódzkie", "Łódź"], ["małopolskie", "Lesser Poland"], ["mazowieckie", "Masovian"],
+    ["opolskie", "Opole"], ["podkarpackie", "Subcarpathian"], ["podlaskie", "Podlaskie"], ["pomorskie", "Pomeranian"],
+    ["śląskie", "Silesian"], ["świętokrzyskie", "Holy Cross"], ["warmińsko-mazurskie", "Warmian-Masurian"],
+    ["wielkopolskie", "Greater Poland"], ["zachodniopomorskie", "West Pomeranian"],
+  ].map(([pl, en]) => [slugOf(pl), MAPKA_LOCALE === "pl" ? `województwo ${pl}` : `${en} Voivodeship`])
 )
 
 export function placeGeo(place: Place): MapkaPlace {

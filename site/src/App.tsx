@@ -212,7 +212,7 @@ export default function App() {
             Tankful
           </a>
           <div className="flex items-center gap-1">
-          <nav className="flex gap-1" aria-label="Język / Language">
+          <nav className="flex gap-1" aria-label={T("language")}>
             {["pl", "en"].map((lang) => (
               <Button key={lang} asChild size="sm" variant={MAPKA_LOCALE === lang ? "secondary" : "ghost"}>
                 <a

@@ -113,5 +113,5 @@ for (const f of ["settings.js", "borders.js"]) vm.runInContext(fs.readFileSync(p
     await new Promise((r) => setTimeout(r, 1000));
   }
   fs.writeFileSync(OUT, `${JSON.stringify({ cities: CITIES, routes }, null, 2)}\n`);
-  console.log(`${path.relative(ROOT, OUT)}: ${routes.length} tras`);
+  console.log(`${path.relative(ROOT, OUT)}: ${routes.length} routes`);
 })();

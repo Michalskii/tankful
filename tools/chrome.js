@@ -13,7 +13,7 @@ const CHROME = [
 ].find((p) => p && fs.existsSync(p));
 
 function screenshot(htmlFile, width, height, out, { transparent = false, waitMs = 0 } = {}) {
-  if (!CHROME) throw new Error("Nie znaleziono Chrome – ustaw zmienną CHROME");
+  if (!CHROME) throw new Error("Chrome not found – set the CHROME environment variable");
   const profile = fs.mkdtempSync(path.join(os.tmpdir(), "tankful-chrome-"));
   try {
     execFileSync(CHROME, [
@@ -34,7 +34,7 @@ function screenshot(htmlFile, width, height, out, { transparent = false, waitMs 
 }
 
 function dumpDom(url, { waitMs = 5000, timeZone } = {}) {
-  if (!CHROME) return Promise.reject(new Error("Nie znaleziono Chrome – ustaw zmienną CHROME"));
+  if (!CHROME) return Promise.reject(new Error("Chrome not found – set the CHROME environment variable"));
   const profile = fs.mkdtempSync(path.join(os.tmpdir(), "tankful-chrome-"));
   const args = [
     "--headless=new",
@@ -115,10 +115,10 @@ function flattenPng(file, background = [255, 255, 255]) {
   }
   const width = ihdr.readUInt32BE(0);
   const height = ihdr.readUInt32BE(4);
-  if (ihdr[8] !== 8 || ihdr[12] !== 0) throw new Error(`${file}: obsługiwany tylko 8-bitowy PNG bez przeplotu`);
+  if (ihdr[8] !== 8 || ihdr[12] !== 0) throw new Error(`${file}: only 8-bit non-interlaced PNG is supported`);
   const colorType = ihdr[9];
   if (colorType === 2) return;
-  if (colorType !== 6) throw new Error(`${file}: nieobsługiwany typ koloru ${colorType}`);
+  if (colorType !== 6) throw new Error(`${file}: unsupported colour type ${colorType}`);
 
   const rgba = unfilter(zlib.inflateSync(Buffer.concat(idat)), width, height, 4);
   const rows = Buffer.alloc((width * 3 + 1) * height);

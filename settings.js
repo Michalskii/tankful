@@ -227,6 +227,11 @@ function mapkaRouteShares(points, borders = MAPKA_BORDERS) {
   return Object.fromEntries(kept.sort((x, y) => y[1] - x[1]).map(([cc, v]) => [cc, v / keptTotal]));
 }
 
+function mapkaShownUnitPrice(pln, currency, data) {
+  const local = mapkaFromPln(pln, currency, data);
+  return local == null ? mapkaFormatUnitPrice(pln, "PLN") : mapkaFormatUnitPrice(local, currency);
+}
+
 function mapkaRoutePricePln(s, data, geo) {
   const parts = [];
   for (const [cc, share] of Object.entries(geo.shares)) {
@@ -241,11 +246,7 @@ function mapkaRoutePricePln(s, data, geo) {
     source: mapkaT(
       "price_route",
       parts
-        .map((p) => {
-          const local = mapkaFromPln(p.price, s.currency, data);
-          const shown = local == null ? mapkaFormatUnitPrice(p.price, "PLN") : mapkaFormatUnitPrice(local, s.currency);
-          return `${p.label} ${Math.round((p.share / total) * 100)}% ${shown}`;
-        })
+        .map((p) => `${p.label} ${Math.round((p.share / total) * 100)}% ${mapkaShownUnitPrice(p.price, s.currency, data)}`)
         .join(" · ")
     ),
   };
@@ -268,7 +269,7 @@ function mapkaResolvePrice(s, data, geo) {
   const origin = mapkaLocalPricePln(s, data, geo?.origin);
   if (!origin) return { ...manual, source: mapkaT("price_missing") };
   let pln = origin.price;
-  let source = mapkaT("price_single", origin.label, mapkaFormatUnitPrice(origin.price, "PLN"));
+  let source = mapkaT("price_single", origin.label, mapkaShownUnitPrice(origin.price, cur, data));
 
   const originCc = (geo?.origin?.cc || "pl").toUpperCase();
   const destCc = geo?.dest?.cc?.toUpperCase();
@@ -283,9 +284,9 @@ function mapkaResolvePrice(s, data, geo) {
       source = mapkaT(
         "price_average",
         origin.label,
-        mapkaFormatUnitPrice(origin.price, "PLN"),
+        mapkaShownUnitPrice(origin.price, cur, data),
         dest.label,
-        mapkaFormatUnitPrice(dest.price, "PLN")
+        mapkaShownUnitPrice(dest.price, cur, data)
       );
     }
   }

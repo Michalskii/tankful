@@ -4,7 +4,7 @@ const vm = require("vm");
 
 const ROOT = path.join(__dirname, "..");
 const [out, previousUrl] = process.argv.slice(2);
-if (!out) throw new Error("Podaj ścieżkę pliku wyjściowego");
+if (!out) throw new Error("Pass the output file path");
 
 const messages = JSON.parse(fs.readFileSync(path.join(ROOT, "_locales/pl/messages.json"), "utf8"));
 const store = {};
@@ -53,10 +53,10 @@ async function previous() {
   const missing = ["fuelPrices", "euPrices", "nbpRates"].filter((k) => !result[k]);
   fs.mkdirSync(path.dirname(path.resolve(out)), { recursive: true });
   fs.writeFileSync(out, JSON.stringify(result));
-  for (const e of errors) console.warn(`uwaga: ${e}`);
-  console.log(`${out}: ${Object.keys(result.regionalPrices).length} województw, kraje UE: ${Object.keys(result.euPrices?.prices || {}).length}`);
+  for (const e of errors) console.warn(`warning: ${e}`);
+  console.log(`${out}: ${Object.keys(result.regionalPrices).length} regions, EU countries: ${Object.keys(result.euPrices?.prices || {}).length}`);
   if (missing.length) {
-    console.error(`brak danych: ${missing.join(", ")}`);
+    console.error(`missing data: ${missing.join(", ")}`);
     process.exit(1);
   }
 })();

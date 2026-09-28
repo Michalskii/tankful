@@ -181,7 +181,7 @@
     const { targets, fallback } = mapkaDistanceTargets();
     if (fallback && !fallbackLogged) {
       fallbackLogged = true;
-      console.info("[Tankful] Znane klasy Google Maps nie pasują – używam wyszukiwania awaryjnego. Warto poprawić MAPKA_DOM w dom.js.");
+      console.info("[Tankful] Known Google Maps classes no longer match – using the fallback search. MAPKA_DOM in dom.js needs updating.");
     }
     for (const { el: distEl, mode } of targets) {
       const km = mapkaParseKm(distEl.textContent);
@@ -247,7 +247,7 @@
       return;
     }
     if (warnEl || warnDismissedKey === routeKey()) return;
-    console.warn("[Tankful] Nie znaleziono dystansu trasy (także awaryjnie) – selektory w dom.js wymagają poprawki:", MAPKA_DOM);
+    console.warn("[Tankful] Route distance not found (fallback included) – the selectors in dom.js need updating:", MAPKA_DOM);
     warnEl = el("div", "mapka-warning");
     const close = el("button", "mapka-warning__close", "×");
     close.title = mapkaT("warn_hide");

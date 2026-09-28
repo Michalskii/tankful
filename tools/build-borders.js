@@ -55,7 +55,7 @@ function inBbox(coords) {
 }
 
 const src = process.argv[2];
-if (!src) throw new Error("Podaj ścieżkę do ne_50m_admin_0_countries.geojson");
+if (!src) throw new Error("Pass the path to ne_50m_admin_0_countries.geojson");
 const { features } = JSON.parse(fs.readFileSync(src, "utf8"));
 const borders = {};
 for (const f of features) {
@@ -77,4 +77,4 @@ fs.writeFileSync(
   path.join(ROOT, "borders.js"),
   `const MAPKA_BORDERS = {\n${body}\n};\n`
 );
-console.log(`borders.js: ${Object.keys(borders).length} krajów, ${fs.statSync(path.join(ROOT, "borders.js")).size} B`);
+console.log(`borders.js: ${Object.keys(borders).length} countries, ${fs.statSync(path.join(ROOT, "borders.js")).size} B`);

@@ -90,6 +90,7 @@ export const SITE_STRINGS = {
     routePerPerson: "Na osobę (4 os.)",
     routeAssumption: "Wyliczenie dla najszybszej trasy i typowego spalania. Swoje spalanie, liczbę osób i warianty trasy ustawisz w kalkulatorze.",
     popularRoutes: "Popularne trasy",
+    language: "Język",
   },
   en: {
     title: "Trip fuel cost calculator – Tankful",
@@ -182,6 +183,7 @@ export const SITE_STRINGS = {
     routePerPerson: "Per person (4 people)",
     routeAssumption: "Costed for the fastest route and typical consumption. Set your own consumption, passengers and route options in the calculator.",
     popularRoutes: "Popular routes",
+    language: "Language",
   },
 };
 

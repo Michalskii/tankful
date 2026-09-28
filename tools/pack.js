@@ -79,7 +79,7 @@ if (require.main === module) {
   const out = path.join(ROOT, "dist", `tankful-${version}.zip`);
   fs.mkdirSync(path.dirname(out), { recursive: true });
   fs.writeFileSync(out, zip(files));
-  console.log(`${path.relative(ROOT, out)} – ${files.length} plików, ${Math.round(fs.statSync(out).size / 1024)} KB`);
+  console.log(`${path.relative(ROOT, out)} – ${files.length} files, ${Math.round(fs.statSync(out).size / 1024)} KB`);
   for (const f of files) console.log("  " + f);
 }
 
