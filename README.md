@@ -26,7 +26,7 @@
 Tankful is a Chrome extension that adds the estimated fuel cost next to the time and distance of every driving route in Google Maps – no copying numbers into a calculator.
 
 - **Every route option** gets its cost in the route list and in the route details, and a small panel on the map compares them side by side.
-- **Live fuel prices.** Poland: average prices for the region (voivodeship) where the route starts. Other EU countries: national averages from the European Commission's Weekly Oil Bulletin.
+- **Live fuel prices.** National averages from the European Commission's Weekly Oil Bulletin for Poland and other EU countries; in Poland adjusted when Orlen wholesale prices move significantly.
 - **Trips through several countries** – the price is weighted by the kilometres driven in each EU country.
 - **Petrol 95 and 98, diesel, premium diesel, LPG** – or your own price. **Electric cars** get a range from charging at home to fast chargers.
 - **Round trip and cost per person**, e.g. "4 × PLN 51" when four people share the ride.
@@ -45,7 +45,7 @@ No Chrome, or on your phone? The same calculation works on the website: pick a s
 
 ## Privacy
 
-No account, no ads and no analytics in the extension. Settings and trip history stay in your browser. To pick regional prices, only the start and destination of a route – rounded to about 1 km – are sent to OpenStreetMap Nominatim, and you can turn that off. Fuel prices come from a public price file on the website, built every few hours from the sources above. Details: [privacy policy](https://michalskii.github.io/tankful/privacy.html).
+No account, no ads and no analytics in the extension. Settings and trip history stay in your browser. To pick country prices, only the start and destination of a route – rounded to about 1 km – are sent to OpenStreetMap Nominatim, and you can turn that off. Fuel prices come from a public price file on the website, built every few hours from the sources above. Details: [privacy policy](https://michalskii.github.io/tankful/privacy.html).
 
 Costs are estimates based on average prices and the consumption you enter – prices at the pump vary.
 
@@ -65,7 +65,7 @@ To try the extension from source, open `chrome://extensions`, turn on *Developer
 
 | Path | What's there |
 |---|---|
-| `manifest.json`, `background.js` | extension manifest; service worker with price downloads and region lookup |
+| `manifest.json`, `background.js` | extension manifest; service worker with price downloads and country lookup |
 | `content.js`, `dom.js`, `content.css` | Google Maps integration: reading routes and showing costs |
 | `settings.js`, `borders.js` | settings, price logic and currencies; EU borders for costing trips by country |
 | `popup.*`, `history.*`, `welcome.*` | toolbar popup, trip history, welcome page |
@@ -78,7 +78,7 @@ The website is deployed to GitHub Pages by `.github/workflows/site.yml` on every
 
 ## Po polsku
 
-Tankful to darmowa wtyczka do Chrome, która pokazuje koszt paliwa przy każdej trasie samochodowej w Mapach Google: po aktualnych średnich cenach z województwa startu (autocentrum.pl) i krajów UE (biuletyn Komisji Europejskiej), także na trasach przez kilka krajów, dla aut elektrycznych, tam i z powrotem i na osobę. Do tego historia przejazdów, eksport do CSV i kilometrówka.
+Tankful to darmowa wtyczka do Chrome, która pokazuje koszt paliwa przy każdej trasie samochodowej w Mapach Google: po aktualnych średnich cenach z biuletynu Komisji Europejskiej (Polska i kraje UE), także na trasach przez kilka krajów, dla aut elektrycznych, tam i z powrotem i na osobę. Do tego historia przejazdów, eksport do CSV i kilometrówka.
 
 [Dodaj do Chrome](https://chromewebstore.google.com/detail/fiogjemolijaleckapbcngibelfbpfgp) · [Kalkulator online](https://michalskii.github.io/tankful/?ref=github) · [Popularne trasy, np. Warszawa – Kraków](https://michalskii.github.io/tankful/trasa/warszawa-krakow)
 

@@ -198,10 +198,10 @@
     "message": "Odśwież"
   },
   "popup_local_prices": {
-    "message": "Ceny z województwa i krajów UE"
+    "message": "Ceny krajów UE na trasie"
   },
   "popup_local_hint": {
-    "message": "Start i cel trasy (zaokrąglone do ~1 km) są wysyłane do OpenStreetMap, żeby ustalić kraj i województwo."
+    "message": "Start i cel trasy (zaokrąglone do ~1 km) są wysyłane do OpenStreetMap, żeby ustalić kraj."
   },
   "popup_manual_price": {
     "message": "Cena ręczna (za litr)"
@@ -320,8 +320,8 @@
   "csv_filename": {
     "message": "przejazdy"
   },
-  "error_autocentrum": {
-    "message": "Nie znaleziono cen na stronie"
+  "error_poland_prices": {
+    "message": "Biuletyn UE: brak cen dla Polski"
   },
   "error_eu_file": {
     "message": "Biuletyn UE: nieprawidłowy plik XLSX"

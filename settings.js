@@ -115,7 +115,7 @@ const MAPKA_REGIONS = {
   "32": "zachodniopomorskie", ZP: "zachodniopomorskie",
 };
 
-const MAPKA_DATA_KEYS = { fuelPrices: null, regionalPrices: {}, euPrices: null, nbpRates: null };
+const MAPKA_DATA_KEYS = { fuelPrices: null, euPrices: null, nbpRates: null };
 
 function mapkaLoadSettings() {
   return new Promise((resolve) => chrome.storage.sync.get(MAPKA_DEFAULTS, resolve));
@@ -123,11 +123,6 @@ function mapkaLoadSettings() {
 
 function mapkaLoadData() {
   return new Promise((resolve) => chrome.storage.local.get(MAPKA_DATA_KEYS, resolve));
-}
-
-function mapkaRegionSlug(geo) {
-  const code = geo?.region?.split("-")[1];
-  return code ? MAPKA_REGIONS[code] || null : null;
 }
 
 function mapkaFormatMoney(value, currency) {
@@ -159,10 +154,8 @@ function mapkaFromPln(pln, currency, data) {
 function mapkaLocalPricePln(s, data, geo) {
   const cc = geo?.cc?.toUpperCase();
   if (!cc || cc === "PL" || !s.localPrices) {
-    const slug = s.localPrices ? mapkaRegionSlug(geo) : null;
-    const regional = slug && data.regionalPrices?.[slug]?.prices?.[s.fuelType];
-    if (regional) return { price: regional, label: (geo.regionName || slug).replace(/^województwo /, "woj. ") };
-    const national = data.fuelPrices?.prices?.[s.fuelType];
+    const prices = data.fuelPrices?.prices;
+    const national = prices?.[s.fuelType] ?? prices?.[MAPKA_EU_FUEL[s.fuelType]];
     return national ? { price: national, label: mapkaT("price_national") } : null;
   }
   const eur = data.euPrices?.prices?.[cc]?.[MAPKA_EU_FUEL[s.fuelType]];

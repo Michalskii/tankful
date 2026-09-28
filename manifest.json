@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "__MSG_appName__",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "default_locale": "en",
   "description": "__MSG_appDescription__",
   "icons": {
@@ -15,7 +15,6 @@
     "alarms"
   ],
   "host_permissions": [
-    "https://www.autocentrum.pl/*",
     "https://energy.ec.europa.eu/*",
     "https://api.nbp.pl/*",
     "https://nominatim.openstreetmap.org/*"

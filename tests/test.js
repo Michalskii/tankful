@@ -116,19 +116,25 @@ test("mapkaParseKm: text that is not a distance", () => {
   for (const text of ["3 hr 43 min", "", "km", "via S7"]) assert.strictEqual(ext.mapkaParseKm(text), null, text);
 });
 
-test("parseAutocentrum: prices from tiles, skipping empty ones and duplicates", () => {
-  const html = `
-    <a href="/paliwa/ceny-paliw/pb/" class="station-detail-wrapper pb active">
-      <div class="name">95</div><div class="price"> 6,49 <span>zł</span></div></a>
-    <a href="/paliwa/ceny-paliw/on/" class="station-detail-wrapper on"><div class="price">6,79 <span>zł</span></div></a>
-    <a href="/paliwa/ceny-paliw/lpg/" class="station-detail-wrapper lpg"><div class="price">-</div></a>
-    <div class="price">3,33</div>
-    <a href="/x/" class="station-detail-wrapper pb"><div class="price">9,99</div></a>`;
-  same(ext.parseAutocentrum(html), { pb: 6.49, on: 6.79 });
+const BULLETIN = { prices: { PL: { pb: 1.82, on: 2.04, lpg: 0.72 } }, date: "2026-09-21" };
+const wholesale = (values, start = "2026-09-15") =>
+  values.map((value, i) => ({ date: new Date(Date.parse(start) + i * 86400000).toISOString().slice(0, 10), value }));
+
+test("polandPrices: the EU bulletin in PLN at the NBP rate of the bulletin date", () => {
+  same(ext.polandPrices(BULLETIN, 4.35), { pb: 7.92, on: 8.87, lpg: 3.13, onp: 8.87 });
+  assert.throws(() => ext.polandPrices({ prices: { DE: { pb: 1.8 } } }, 4.35), /brak cen dla Polski/);
 });
 
-test("parseAutocentrum: a changed page is an error, not empty prices", () => {
-  assert.throws(() => ext.parseAutocentrum("<html><body>New layout</body></html>"), /Nie znaleziono cen/);
+test("polandPrices: Orlen wholesale shifts the price and gives Pb98", () => {
+  same(ext.polandPrices(BULLETIN, 4.35, { pb: 0.3, on: 0, pbpSpread: 0.81 }), { pb: 8.22, on: 8.87, lpg: 3.13, pbp: 9.03, onp: 8.87 });
+});
+
+test("orlenShift: only lasting moves above the threshold count, with VAT", () => {
+  const flat = wholesale([6300, 6400, 6250, 6350, 6300, 6400, 6250, 6350, 6300, 6280]);
+  assert.strictEqual(ext.orlenShift(flat, "2026-09-19"), 0);
+  const rising = wholesale([6000, 6000, 6000, 6000, 6000, 6000, 6300, 6300, 6300, 6300, 6300]);
+  close(ext.orlenShift(rising, "2026-09-19"), 0.37);
+  assert.strictEqual(ext.orlenShift(rising.slice(0, 5), "2026-09-19"), 0);
 });
 
 const SHARED_STRINGS = `<?xml version="1.0"?><sst>
@@ -183,8 +189,7 @@ test("unzip: a file that is not a ZIP", async () => {
 });
 
 const DATA = {
-  fuelPrices: { prices: { pb: 6.0, on: 6.3 } },
-  regionalPrices: { mazowieckie: { prices: { pb: 6.2 } } },
+  fuelPrices: { prices: { pb: 6.2, on: 6.3 } },
   euPrices: { prices: { DE: { pb: 1.8, on: 1.7 } } },
   nbpRates: { rates: { EUR: 4.3, GBP: 5.0 } },
 };
@@ -198,30 +203,24 @@ test("mapkaResolvePrice: manual price when automatic prices are off", () => {
 });
 
 test("mapkaResolvePrice: missing price data shows in the description", () => {
-  const p = ext.mapkaResolvePrice(settings({ price: 5.55 }), { regionalPrices: {} }, null);
+  const p = ext.mapkaResolvePrice(settings({ price: 5.55 }), {}, null);
   assert.strictEqual(p.auto, false);
   assert.strictEqual(p.low, 5.55);
   assert.strictEqual(p.source, "brak aktualnych cen – cena ręczna");
 });
 
-test("mapkaResolvePrice: national average without a location", () => {
-  const p = ext.mapkaResolvePrice(settings(), DATA, null);
-  assert.strictEqual(p.low, 6.0);
-  assert.strictEqual(p.auto, true);
-  assert.ok(p.source.startsWith("średnia PL"), p.source);
-});
-
-test("mapkaResolvePrice: start region (numeric and letter code)", () => {
-  for (const region of ["PL-14", "PL-MZ"]) {
-    const p = ext.mapkaResolvePrice(settings(), DATA, { origin: { ...WARSAW, region }, dest: WARSAW });
-    assert.strictEqual(p.low, 6.2, region);
-    assert.ok(p.source.startsWith("woj. mazowieckie"), p.source);
+test("mapkaResolvePrice: national average, with or without a location", () => {
+  for (const geo of [null, { origin: WARSAW, dest: WARSAW }]) {
+    const p = ext.mapkaResolvePrice(settings(), DATA, geo);
+    assert.strictEqual(p.low, 6.2);
+    assert.strictEqual(p.auto, true);
+    assert.ok(p.source.startsWith("średnia PL"), p.source);
   }
 });
 
-test("mapkaResolvePrice: no regional price → national average", () => {
-  const p = ext.mapkaResolvePrice(settings({ fuelType: "on" }), DATA, { origin: WARSAW, dest: WARSAW });
-  assert.strictEqual(p.low, 6.3);
+test("mapkaResolvePrice: premium fuels fall back to the regular price", () => {
+  assert.strictEqual(ext.mapkaResolvePrice(settings({ fuelType: "onp" }), DATA, null).low, 6.3);
+  assert.strictEqual(ext.mapkaResolvePrice(settings({ fuelType: "pbp" }), DATA, null).low, 6.2);
 });
 
 test("mapkaResolvePrice: trip abroad – average of start and destination", () => {
@@ -232,7 +231,7 @@ test("mapkaResolvePrice: trip abroad – average of start and destination", () =
 
 test("mapkaResolvePrice: without local prices a destination abroad is ignored", () => {
   const p = ext.mapkaResolvePrice(settings({ localPrices: false }), DATA, { origin: WARSAW, dest: BERLIN });
-  assert.strictEqual(p.low, 6.0);
+  assert.strictEqual(p.low, 6.2);
 });
 
 vm.runInContext(source("borders.js"), ext, { filename: "borders.js" });
@@ -277,13 +276,13 @@ test("mapkaRouteShares: a single-country trip and stops outside the EU → null"
   assert.strictEqual(ext.mapkaRouteShares([PLACES.zurych, PLACES.mediolan]), null);
 });
 
-test("mapkaResolvePrice: price weighted by countries on the route, start at the regional price", () => {
+test("mapkaResolvePrice: price weighted by countries on the route", () => {
   const data = { ...DATA, euPrices: { prices: { DE: { pb: 1.8 }, FR: { pb: 1.9 } } } };
   const shares = { DE: 0.5, PL: 0.3, FR: 0.2 };
   const p = ext.mapkaResolvePrice(settings(), data, { origin: WARSAW, dest: { cc: "fr" }, shares });
   close(p.low, 0.5 * 1.8 * 4.3 + 0.3 * 6.2 + 0.2 * 1.9 * 4.3);
   assert.ok(p.source.startsWith("średnio na trasie: Niemcy 50%"), p.source);
-  assert.ok(p.source.includes("woj. mazowieckie 30%"), p.source);
+  assert.ok(p.source.includes("średnia PL 30%"), p.source);
 });
 
 test("mapkaResolvePrice: a country without a price drops out, the rest is rescaled", () => {
@@ -293,7 +292,7 @@ test("mapkaResolvePrice: a country without a price drops out, the rest is rescal
 });
 
 test("mapkaResolvePrice: currency conversion at the NBP rate", () => {
-  close(ext.mapkaResolvePrice(settings({ currency: "EUR" }), DATA, null).low, 6.0 / 4.3);
+  close(ext.mapkaResolvePrice(settings({ currency: "EUR" }), DATA, null).low, 6.2 / 4.3);
   const p = ext.mapkaResolvePrice(settings({ currency: "CZK", price: 150 }), DATA, null);
   assert.strictEqual(p.low, 150);
   assert.ok(p.source.startsWith("brak kursu CZK"), p.source);
@@ -343,19 +342,15 @@ test("geocode: Nominatim gets coordinates rounded to ~1 km, the result is cached
 });
 
 const SITE_URL = "https://michalskii.github.io/tankful/prices.json";
-const AUTOCENTRUM_HTML = `<a class="station-detail-wrapper pb"><div class="price">6,99</div></a>`;
+const BULLETIN_URL = "https://energy.ec.europa.eu/document/download/264c2d0f-f161-4ea3-a777-78faae59bea0_en";
 
 function sitePrices(age) {
   const at = Date.now() - age;
   return {
     updatedAt: new Date(at).toISOString(),
-    fuelPrices: { prices: { pb: 6.5, on: 6.8 }, fetchedAt: at, source: "https://www.autocentrum.pl/paliwa/ceny-paliw/" },
-    euPrices: { prices: { DE: { pb: 1.8 } }, date: "2026-09-22", fetchedAt: at },
+    fuelPrices: { prices: { pb: 6.5, on: 6.8 }, date: "2026-09-22", fetchedAt: at },
+    euPrices: { prices: { PL: { pb: 1.5, on: 1.6 }, DE: { pb: 1.8 } }, date: "2026-09-22", fetchedAt: at },
     nbpRates: { rates: { EUR: 4.3 }, date: "2026-09-26", fetchedAt: at },
-    regionalPrices: {
-      mazowieckie: { prices: { pb: 6.6 }, fetchedAt: at, source: "x" },
-      nieznane: { prices: { pb: 1 }, fetchedAt: at },
-    },
   };
 }
 
@@ -367,7 +362,12 @@ function priceServer(site) {
       if (!site) return { ok: false, status: 503 };
       return { ok: true, json: async () => JSON.parse(JSON.stringify(site)) };
     }
-    if (url.startsWith("https://www.autocentrum.pl/")) return { ok: true, text: async () => AUTOCENTRUM_HTML };
+    if (url === BULLETIN_URL) {
+      return { ok: true, arrayBuffer: async () => zip({ "xl/sharedStrings.xml": SHARED_STRINGS, "xl/worksheets/sheet1.xml": SHEET }) };
+    }
+    if (url.startsWith("https://api.nbp.pl/api/exchangerates/rates/a/eur/")) {
+      return { ok: true, json: async () => ({ rates: [{ effectiveDate: "2026-09-21", mid: 4.1 }, { effectiveDate: "2026-09-22", mid: 4.2 }] }) };
+    }
     if (url.startsWith("https://api.nbp.pl/")) {
       return { ok: true, json: async () => [{ effectiveDate: "2026-09-28", rates: [{ code: "EUR", mid: 4.25 }] }] };
     }
@@ -383,11 +383,10 @@ test("refreshAll: fresh prices from prices.json, no requests to the sources", as
   const result = await bg.refreshAll(true);
   same(urls, [SITE_URL]);
   assert.strictEqual(result.ok, true);
-  const data = await stored(bg, ["fuelPrices", "euPrices", "nbpRates", "regionalPrices"]);
+  const data = await stored(bg, ["fuelPrices", "euPrices", "nbpRates"]);
   same(data.fuelPrices.prices, { pb: 6.5, on: 6.8 });
-  same(data.euPrices.prices, { DE: { pb: 1.8 } });
+  same(data.euPrices.prices.DE, { pb: 1.8 });
   same(data.nbpRates.rates, { EUR: 4.3 });
-  same(Object.keys(data.regionalPrices), ["mazowieckie"]);
 });
 
 test("refreshAll: prices.json at most every 3 h unless forced", async () => {
@@ -399,22 +398,25 @@ test("refreshAll: prices.json at most every 3 h unless forced", async () => {
   assert.strictEqual(urls.length, 2);
 });
 
-test("refreshAll: site down → prices straight from the sources", async () => {
+test("refreshAll: site down → Polish prices from the EU bulletin at the NBP rate of its date, never Orlen", async () => {
   const { urls, bg } = priceServer(null);
-  await bg.refreshAll(true);
-  assert.ok(urls.includes("https://www.autocentrum.pl/paliwa/ceny-paliw/"));
-  assert.ok(urls.some((u) => u.startsWith("https://api.nbp.pl/")));
-  same((await stored(bg, "fuelPrices")).fuelPrices.prices, { pb: 6.99 });
+  const result = await bg.refreshAll(true);
+  assert.strictEqual(result.ok, true, result.errors.join("; "));
+  assert.ok(urls.includes(BULLETIN_URL));
+  assert.ok(urls.some((u) => u.includes("/rates/a/eur/2024-12-25/2025-01-01/")), urls.join("\n"));
+  assert.ok(!urls.some((u) => u.includes("orlen")));
+  const { fuelPrices } = await stored(bg, "fuelPrices");
+  same(fuelPrices.prices, { pb: 6.09, on: 6.3, lpg: 2.94, onp: 6.3 });
+  assert.strictEqual(fuelPrices.date, "2025-01-01");
 });
 
-test("refreshAll: stale data in prices.json → source, and older site data never overwrites newer", async () => {
+test("refreshAll: stale Polish prices in prices.json are recomputed, and older site data never overwrites newer", async () => {
   const { urls, bg } = priceServer(sitePrices(30 * 60 * 60 * 1000));
   await bg.refreshAll(true);
-  assert.ok(urls.includes("https://www.autocentrum.pl/paliwa/ceny-paliw/"));
-  same((await stored(bg, "fuelPrices")).fuelPrices.prices, { pb: 6.99 });
-  same((await stored(bg, "euPrices")).euPrices.prices, { DE: { pb: 1.8 } });
+  assert.ok(!urls.includes(BULLETIN_URL));
+  same((await stored(bg, "fuelPrices")).fuelPrices.prices, { pb: 6.3, on: 6.72, onp: 6.72 });
   await bg.refreshAll(true);
-  same((await stored(bg, "fuelPrices")).fuelPrices.prices, { pb: 6.99 });
+  same((await stored(bg, "fuelPrices")).fuelPrices.prices, { pb: 6.3, on: 6.72, onp: 6.72 });
 });
 
 const LANGS = fs.readdirSync(path.join(ROOT, "_locales"));

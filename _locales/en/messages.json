@@ -198,10 +198,10 @@
     "message": "Refresh"
   },
   "popup_local_prices": {
-    "message": "Regional (Poland) and EU country prices"
+    "message": "EU country prices along the route"
   },
   "popup_local_hint": {
-    "message": "The route's start and destination (rounded to ~1 km) are sent to OpenStreetMap to find the country and region."
+    "message": "The route's start and destination (rounded to ~1 km) are sent to OpenStreetMap to find the country."
   },
   "popup_manual_price": {
     "message": "Manual price (per litre)"
@@ -320,8 +320,8 @@
   "csv_filename": {
     "message": "trips"
   },
-  "error_autocentrum": {
-    "message": "No prices found on the page"
+  "error_poland_prices": {
+    "message": "EU bulletin: no prices for Poland"
   },
   "error_eu_file": {
     "message": "EU bulletin: invalid XLSX file"

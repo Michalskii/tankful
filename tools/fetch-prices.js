@@ -38,23 +38,18 @@ async function previous() {
 }
 
 (async () => {
-  const { errors } = await context.refreshSources(true);
-  const slugs = [...new Set(Object.values(vm.runInContext("MAPKA_REGIONS", context)))];
-  for (const slug of slugs) {
-    await context.ensureRegion(slug, true).catch((e) => errors.push(`${slug}: ${e.message}`));
-    await new Promise((r) => setTimeout(r, 1000));
-  }
+  const { errors } = await context.refreshSources(true, { orlen: true });
 
   const old = await previous();
   const result = { updatedAt: new Date().toISOString() };
   for (const key of ["fuelPrices", "euPrices", "nbpRates"]) result[key] = store[key] || old[key] || null;
-  result.regionalPrices = { ...old.regionalPrices, ...store.regionalPrices };
 
   const missing = ["fuelPrices", "euPrices", "nbpRates"].filter((k) => !result[k]);
   fs.mkdirSync(path.dirname(path.resolve(out)), { recursive: true });
   fs.writeFileSync(out, JSON.stringify(result));
   for (const e of errors) console.warn(`warning: ${e}`);
-  console.log(`${out}: ${Object.keys(result.regionalPrices).length} regions, EU countries: ${Object.keys(result.euPrices?.prices || {}).length}`);
+  const pl = result.fuelPrices;
+  console.log(`${out}: Poland ${JSON.stringify(pl?.prices)} (bulletin ${pl?.date}, Orlen shift ${JSON.stringify(pl?.orlen)}), EU countries: ${Object.keys(result.euPrices?.prices || {}).length}`);
   if (missing.length) {
     console.error(`missing data: ${missing.join(", ")}`);
     process.exit(1);
