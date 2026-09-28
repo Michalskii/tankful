@@ -1,6 +1,6 @@
 (() => {
   const url = new URL(location.href);
-  const pathEn = /\/en(\.html)?$/.test(url.pathname);
+  const pathEn = /\/en(\.html)?$/.test(url.pathname) || /\/route\/[^/]+$/.test(url.pathname);
   const param = url.searchParams.get("lang");
   if ((param === "en" && !pathEn) || (param === "pl" && pathEn)) {
     url.searchParams.delete("lang");

@@ -406,6 +406,7 @@
     const m = mapkaMileage(route.km, s, data);
     if (m != null) lines.push(mapkaT("summary_mileage", mapkaFormatMoney(m, s.currency)));
     lines.push(`(${MAPKA_FUELS[s.fuelType]}, ${mapkaFormatNumber(s.consumption)} ${mapkaUnit(s.fuelType)}/100 km)`);
+    if (s.summaryLink) lines.push(mapkaT("summary_link", `${MAPKA_SITE_URL}${MAPKA_LOCALE === "pl" ? "" : "en"}?ref=kopia`));
     return lines.join("\n");
   }
 

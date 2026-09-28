@@ -155,6 +155,9 @@
   "summary_round": {
     "message": "Round trip: $1"
   },
+  "summary_link": {
+    "message": "— worked out with Tankful: $1"
+  },
   "summary_mileage": {
     "message": "Mileage allowance: $1"
   },
@@ -214,6 +217,9 @@
   },
   "popup_mileage": {
     "message": "Mileage allowance (Polish business rates)"
+  },
+  "popup_summary_link": {
+    "message": "Add a Tankful link to copied summaries"
   },
   "popup_round_trip": {
     "message": "Show round-trip cost"

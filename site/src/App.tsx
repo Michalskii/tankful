@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react"
+import { useEffect, useMemo, useRef, useState } from "react"
 import { ChevronDownIcon, CopyIcon, Loader2Icon, RouteIcon, TriangleAlertIcon } from "lucide-react"
 import { toast } from "sonner"
 
@@ -6,6 +6,7 @@ import { AboutDialog } from "@/components/AboutDialog"
 import { StopList } from "@/components/StopList"
 import { ThemeMenu } from "@/components/ThemeMenu"
 import { RouteMap } from "@/components/RouteMap"
+import { PopularRoutes, RouteCosts } from "@/components/RoutePages"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -19,6 +20,8 @@ import { Toaster } from "@/components/ui/sonner"
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 import { decodePlace, encodePlace, type Place } from "@/lib/places"
 import { track } from "@/lib/analytics"
+import { PRERENDER } from "@/lib/prerender"
+import { cityName, cityPlace, CURRENT_ROUTE, routeHref, routeTrip } from "@/lib/routes"
 import { stopItem, type StopItem } from "@/lib/stops"
 import { T } from "@/lib/strings"
 import { cn } from "@/lib/utils"
@@ -68,7 +71,15 @@ function langHref(lang: string) {
   p.delete("lang")
   p.delete("prerender")
   const q = p.toString()
-  return `${lang === "en" ? "en" : "./"}${q ? `?${q}` : ""}`
+  const page = CURRENT_ROUTE ? routeHref(CURRENT_ROUTE, lang) : lang === "en" ? "en" : "./"
+  return `${page}${q ? `?${q}` : ""}`
+}
+
+const routeNames = CURRENT_ROUTE ? [cityName(CURRENT_ROUTE.from), cityName(CURRENT_ROUTE.to)] : null
+
+function initialStops() {
+  if (CURRENT_ROUTE && !params.has("from")) return [cityPlace(CURRENT_ROUTE.from), cityPlace(CURRENT_ROUTE.to)]
+  return [decodePlace(params.get("from")), ...params.getAll("via").map(decodePlace).filter(Boolean), decodePlace(params.get("to"))]
 }
 
 function formatDate(iso: string) {
@@ -76,9 +87,7 @@ function formatDate(iso: string) {
 }
 
 export default function App() {
-  const [items, setItems] = useState<StopItem[]>(() =>
-    [decodePlace(params.get("from")), ...params.getAll("via").map(decodePlace).filter(Boolean), decodePlace(params.get("to"))].map(stopItem),
-  )
+  const [items, setItems] = useState<StopItem[]>(() => initialStops().map(stopItem))
   const stops = useMemo(() => items.map((s) => s.place), [items])
   const [options, setOptions] = useState<Options>(initialOptions)
   const [consumptionText, setConsumptionText] = useState(String(options.consumption))
@@ -94,8 +103,9 @@ export default function App() {
 
   useEffect(() => {
     document.documentElement.lang = MAPKA_LOCALE
-    document.title = T("title")
-    document.querySelector('meta[name="description"]')?.setAttribute("content", T("description"))
+    document.title = routeNames ? T("routeTitle", ...routeNames) : T("title")
+    const description = routeNames ? T("routeDescription", ...routeNames, mapkaFormatNumber(CURRENT_ROUTE!.km, 0)) : T("description")
+    document.querySelector('meta[name="description"]')?.setAttribute("content", description)
     fetch("prices.json", { cache: "no-cache" })
       .then((res) => (res.ok ? res.json() : Promise.reject()))
       .then((prices) => setData((d) => ({ ...d, ...prices })))
@@ -112,6 +122,11 @@ export default function App() {
   useEffect(() => {
     if (stops.some((s) => !s)) return
     const chosen = stops as Place[]
+    if (PRERENDER && CURRENT_ROUTE) {
+      const { route, shares } = routeTrip(CURRENT_ROUTE)
+      setPlan({ stops: chosen, variants: [{ route, shares }] })
+      return
+    }
     let cancelled = false
     setLoading(true)
     setError(null)
@@ -145,9 +160,10 @@ export default function App() {
     [trips, options, data]
   )
   const cost = costs[trips.indexOf(trip!)] ?? null
+  const pristineQuery = useRef<string | null>(null)
 
   useEffect(() => {
-    if (!trip) return
+    if (!trip || PRERENDER) return
     const p = new URLSearchParams()
     p.set("from", encodePlace(trip.from))
     for (const via of trip.stops.slice(1, -1)) p.append("via", encodePlace(via))
@@ -158,6 +174,10 @@ export default function App() {
     if (options.roundTrip) p.set("rt", "1")
     p.set("cur", options.currency)
     if (selected > 0) p.set("alt", String(selected))
+    if (CURRENT_ROUTE && !params.has("from")) {
+      pristineQuery.current ??= p.toString()
+      if (p.toString() === pristineQuery.current) return
+    }
     history.replaceState(null, "", `${location.pathname}?${p}`)
   }, [trip, options, selected])
 
@@ -218,8 +238,10 @@ export default function App() {
         <aside className="contents lg:flex lg:w-[440px] lg:shrink-0 lg:flex-col lg:overflow-y-auto lg:border-r xl:w-[480px]">
           <div className="order-1 flex min-w-0 flex-col gap-6 p-4 sm:p-6">
             <div>
-              <h1 className="text-2xl font-semibold tracking-tight text-balance">{T("heading")}</h1>
-              <p className="mt-2 text-sm text-muted-foreground">{T("lead")}</p>
+              <h1 className="text-2xl font-semibold tracking-tight text-balance">
+                {routeNames ? T("routeHeading", ...routeNames) : T("heading")}
+              </h1>
+              <p className="mt-2 text-sm text-muted-foreground">{routeNames ? T("routeLead", ...routeNames) : T("lead")}</p>
             </div>
             <Card>
               <CardContent className="flex flex-col gap-5">
@@ -443,6 +465,8 @@ export default function App() {
           </div>
 
           <div className="order-3 flex flex-col gap-6 p-4 sm:p-6 lg:mt-auto lg:pt-0">
+            {CURRENT_ROUTE && <RouteCosts route={CURRENT_ROUTE} data={data} currency={options.currency} />}
+
             <Card size="sm">
               <CardContent className="flex flex-col items-start gap-3">
                 <div className="flex items-start gap-3">
@@ -476,6 +500,8 @@ export default function App() {
                 ))}
               </div>
             </section>
+
+            <PopularRoutes />
 
             <footer className="flex flex-col gap-2 text-xs text-muted-foreground">
           <p>

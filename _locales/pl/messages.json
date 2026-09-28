@@ -155,6 +155,9 @@
   "summary_round": {
     "message": "Tam i z powrotem: $1"
   },
+  "summary_link": {
+    "message": "— policzone w Tankful: $1"
+  },
   "summary_mileage": {
     "message": "Kilometrówka: $1"
   },
@@ -214,6 +217,9 @@
   },
   "popup_mileage": {
     "message": "Kilometrówka (rozliczenie służbowe)"
+  },
+  "popup_summary_link": {
+    "message": "Dopisuj link do Tankful w kopiowanym podsumowaniu"
   },
   "popup_round_trip": {
     "message": "Pokazuj koszt tam i z powrotem"

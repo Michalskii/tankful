@@ -61,20 +61,23 @@ function mapkaStartPrice(pln, currency) {
 }
 
 const MAPKA_DEFAULTS = {
-  consumption: 7.0,    // spalanie [l lub kWh / 100 km]
-  price: mapkaStartPrice(6.2, MAPKA_CURRENCY), // cena ręczna (w wybranej walucie) – gdy autoPrice = false lub brak danych
-  autoPrice: true,     // pobieraj średnie ceny paliw
-  localPrices: true,   // ceny z województwa startu i krajów UE (wysyła współrzędne do OpenStreetMap)
-  fuelType: "pb",      // pb, pbp, on, onp, lpg, ev
-  evHomePrice: mapkaStartPrice(1.1, MAPKA_CURRENCY), // cena kWh w domu (w wybranej walucie)
-  evFastPrice: mapkaStartPrice(2.8, MAPKA_CURRENCY), // cena kWh na szybkiej ładowarce
-  currency: MAPKA_CURRENCY, // domyślnie waluta kraju użytkownika
-  passengers: 1,       // > 1 pokazuje też koszt na osobę
-  mileage: "off",      // kilometrówka: off, small (≤ 900 cm³), large (> 900 cm³ i elektryczne)
-  showRoundTrip: true, // druga linia z kosztem tam i z powrotem
-  showFloating: true,  // pływający panel w prawym górnym rogu mapy
-  configured: false,   // true po pierwszym wyborze paliwa i spalania
+  consumption: 7.0,
+  price: mapkaStartPrice(6.2, MAPKA_CURRENCY),
+  autoPrice: true,
+  localPrices: true,
+  fuelType: "pb",
+  evHomePrice: mapkaStartPrice(1.1, MAPKA_CURRENCY),
+  evFastPrice: mapkaStartPrice(2.8, MAPKA_CURRENCY),
+  currency: MAPKA_CURRENCY,
+  passengers: 1,
+  mileage: "off",
+  showRoundTrip: true,
+  showFloating: true,
+  summaryLink: true,
+  configured: false,
 };
+
+const MAPKA_SITE_URL = "https://michalskii.github.io/tankful/";
 
 const MAPKA_FUELS = Object.fromEntries(["pb", "pbp", "on", "onp", "lpg", "ev"].map((f) => [f, mapkaT(`fuel_${f}`)]));
 

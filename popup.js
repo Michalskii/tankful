@@ -1,7 +1,7 @@
 const form = document.getElementById("form");
 const $ = (id) => document.getElementById(id);
 
-const BOOL_FIELDS = ["autoPrice", "localPrices", "showRoundTrip", "showFloating"];
+const BOOL_FIELDS = ["autoPrice", "localPrices", "showRoundTrip", "showFloating", "summaryLink"];
 const NUMBER_FIELDS = ["consumption", "price", "evHomePrice", "evFastPrice"];
 
 let data = { ...MAPKA_DATA_KEYS };

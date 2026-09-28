@@ -26,7 +26,7 @@ function loadExtension({ fetch, lang = "pl" } = {}) {
     Blob: global.Blob,
     Response: global.Response,
     DecompressionStream: global.DecompressionStream,
-    setTimeout: (fn) => fn(), // bez czekania na limit Nominatim
+    setTimeout: (fn) => fn(),
     fetch,
     chrome: {
       i18n: i18n(lang),
@@ -558,6 +558,27 @@ test("strona: język z adresu, stare ?lang= przekierowuje na /en albo stronę g�
   same(run(`${base}?lang=en&from=x`).redirect, `${base}en?from=x`);
   same(run(`${base}en?lang=pl&from=x`).redirect, `${base}?from=x`);
   same(run(`${base}?lang=pl`).redirect, null);
+  same(run(`${base}route/warsaw-krakow`), { lang: "en", redirect: null });
+  same(run(`${base}trasa/warszawa-krakow?from=x`), { lang: "pl", redirect: null });
+});
+
+test("strona: trasy mają znane miasta, unikalne adresy i dane z OSRM", () => {
+  const { cities, routes } = JSON.parse(source("site/src/lib/routes.json"));
+  const regions = vm.runInContext("MAPKA_REGIONS", ext);
+  for (const [key, c] of Object.entries(cities)) {
+    assert.ok(c.pl && c.en && Math.abs(c.lat) <= 90 && Math.abs(c.lng) <= 180, key);
+    if (c.cc === "pl") assert.ok(regions[c.region], `${key}: nieznane województwo ${c.region}`);
+  }
+  for (const lang of ["pl", "en"]) {
+    const slugs = routes.map((r) => r[lang]);
+    same(slugs.filter((x, i) => slugs.indexOf(x) !== i), []);
+    for (const slug of slugs) assert.match(slug, /^[a-z0-9]+(-[a-z0-9]+)+$/);
+  }
+  for (const r of routes) {
+    assert.ok(cities[r.from] && cities[r.to], r.pl);
+    assert.ok(r.km > 10 && r.minutes > 10, r.pl);
+    if (r.shares) assert.ok(Math.abs(Object.values(r.shares).reduce((a, b) => a + b, 0) - 1) < 0.01, `${r.pl}: udziały krajów nie sumują się do 100%`);
+  }
 });
 
 test("strona: teksty PL i EN mają te same klucze, a każdy użyty w site/ istnieje", () => {

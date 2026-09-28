@@ -9,11 +9,22 @@ const ROOT = path.join(__dirname, "..");
 const PUBLIC = path.join(ROOT, "site/public");
 const SITE = path.join(ROOT, "_site");
 const SITE_URL = "https://michalskii.github.io/tankful/";
-const PAGES = [
-  { lang: "pl", file: "index.html", url: SITE_URL, path: "/", locale: "pl_PL", timeZone: "Europe/Warsaw" },
-  { lang: "en", file: "en.html", url: `${SITE_URL}en`, path: "/en", locale: "en_GB", timeZone: "Europe/Berlin" },
+const LANGS = {
+  pl: { locale: "pl_PL", timeZone: "Europe/Warsaw" },
+  en: { locale: "en_GB", timeZone: "Europe/Berlin" },
+};
+const { cities: CITIES, routes: ROUTES } = JSON.parse(fs.readFileSync(path.join(ROOT, "site/src/lib/routes.json"), "utf8"));
+
+function page(lang, rel, file, route = null) {
+  return { lang, ...LANGS[lang], file, url: `${SITE_URL}${rel}`, path: `/${rel}`, route };
+}
+
+const GROUPS = [
+  [page("pl", "", "index.html"), page("en", "en", "en.html")],
+  ...ROUTES.map((r) => [page("pl", `trasa/${r.pl}`, `trasa/${r.pl}.html`, r), page("en", `route/${r.en}`, `route/${r.en}.html`, r)]),
 ];
-const DEFAULT_PAGE = PAGES[1];
+for (const group of GROUPS) for (const p of group) p.group = group;
+const PAGES = GROUPS.flat();
 const args = process.argv.slice(2);
 const prices = args.find((a) => !a.startsWith("--"));
 
@@ -37,7 +48,29 @@ function siteStrings() {
   return vm.runInNewContext(`${code}; SITE_STRINGS`);
 }
 
+const fill = (text, ...subs) => text.replace(/\$(\d)/g, (_, n) => String(subs[n - 1] ?? ""));
+
+function pageStrings(page, strings) {
+  const s = strings[page.lang];
+  if (!page.route) return s;
+  const names = [CITIES[page.route.from][page.lang], CITIES[page.route.to][page.lang]];
+  const km = new Intl.NumberFormat(page.lang, { maximumFractionDigits: 0 }).format(page.route.km);
+  return {
+    title: fill(s.routeTitle, ...names),
+    description: fill(s.routeDescription, ...names, km),
+    heading: fill(s.routeHeading, ...names),
+  };
+}
+
 const esc = (s) => s.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+
+function alternates(group, tag = "link") {
+  const fallback = group.find((p) => p.lang === "en");
+  return [
+    ...group.map((p) => `<${tag} rel="alternate" hreflang="${p.lang}" href="${p.url}" />`),
+    `<${tag} rel="alternate" hreflang="x-default" href="${fallback.url}" />`,
+  ];
+}
 
 function headTags(page, s) {
   const image = `${SITE_URL}og-${page.lang}.png`;
@@ -58,8 +91,7 @@ function headTags(page, s) {
   };
   return [
     `<link rel="canonical" href="${page.url}" />`,
-    ...PAGES.map((p) => `<link rel="alternate" hreflang="${p.lang}" href="${p.url}" />`),
-    `<link rel="alternate" hreflang="x-default" href="${DEFAULT_PAGE.url}" />`,
+    ...alternates(page.group),
     `<meta property="og:type" content="website" />`,
     `<meta property="og:site_name" content="Tankful" />`,
     `<meta property="og:title" content="${esc(s.title)}" />`,
@@ -70,7 +102,7 @@ function headTags(page, s) {
     `<meta property="og:image:height" content="630" />`,
     `<meta property="og:image:alt" content="${esc(s.heading)}" />`,
     `<meta property="og:locale" content="${page.locale}" />`,
-    ...PAGES.filter((p) => p !== page).map((p) => `<meta property="og:locale:alternate" content="${p.locale}" />`),
+    ...page.group.filter((p) => p !== page).map((p) => `<meta property="og:locale:alternate" content="${p.locale}" />`),
     `<meta name="twitter:card" content="summary_large_image" />`,
     `<script type="application/ld+json">${JSON.stringify(schema).replace(/</g, "\\u003c")}</script>`,
   ]
@@ -79,15 +111,17 @@ function headTags(page, s) {
 }
 
 function pageHtml(template, page, strings) {
-  const s = strings[page.lang];
-  const html = template
+  const s = pageStrings(page, strings);
+  let html = template
     .replace(/<html lang="[^"]*">/, `<html lang="${page.lang}">`)
     .replace(/<title>[^<]*<\/title>/, `<title>${esc(s.title)}</title>`)
     .replace(/<meta name="description" content="[^"]*" \/>/, `<meta name="description" content="${esc(s.description)}" />`)
     .replace("</head>", `${headTags(page, s)}\n  </head>`);
-  if (!html.includes(`<title>${esc(s.title)}</title>`) || !html.includes(s.description.slice(0, 20))) {
+  if (page.route) html = html.replace('<meta charset="UTF-8" />', '<meta charset="UTF-8" />\n    <base href="../" />');
+  if (!html.includes(`<title>${esc(s.title)}</title>`) || !html.includes(esc(s.description))) {
     throw new Error(`${page.file}: nie udało się podmienić tytułu lub opisu w index.html`);
   }
+  if (page.route && !html.includes('<base href="../" />')) throw new Error(`${page.file}: brak <base>`);
   return html;
 }
 
@@ -120,17 +154,23 @@ function serve(dir) {
 async function prerender(pages, strings) {
   const server = await serve(SITE);
   const { port } = server.address();
-  try {
-    for (const page of pages) {
+  const queue = [...pages];
+  const worker = async () => {
+    for (let page = queue.shift(); page; page = queue.shift()) {
       const dom = await dumpDom(`http://127.0.0.1:${port}${page.path}?prerender=1`, { timeZone: page.timeZone });
       const match = dom.match(/<div id="root">([\s\S]*?)<\/div>\s*<script src="messages\.js">/);
-      const heading = esc(strings[page.lang].heading);
+      const heading = esc(pageStrings(page, strings).heading);
       if (!match || !match[1].includes(heading)) throw new Error(`${page.file}: w wyrenderowanej stronie brak nagłówka „${heading}”`);
+      if (page.route && !match[1].includes("<table")) throw new Error(`${page.file}: w wyrenderowanej stronie brak tabeli kosztów`);
       const file = path.join(SITE, page.file);
       const html = fs.readFileSync(file, "utf8").replace('<div id="root"></div>', `<div id="root">${match[1]}</div>`);
       fs.writeFileSync(file, html);
-      console.log(`${page.file}: gotowy HTML (${Math.round(match[1].length / 1024)} KB treści)`);
+      if (!page.route) console.log(`${page.file}: gotowy HTML (${Math.round(match[1].length / 1024)} KB treści)`);
     }
+  };
+  try {
+    await Promise.all(Array.from({ length: 4 }, worker));
+    console.log(`Strony tras: ${pages.filter((p) => p.route).length} z gotowym HTML`);
   } finally {
     server.close();
   }
@@ -138,11 +178,10 @@ async function prerender(pages, strings) {
 
 function sitemap() {
   const date = new Date().toISOString().slice(0, 10);
-  const links = [
-    ...PAGES.map((p) => `    <xhtml:link rel="alternate" hreflang="${p.lang}" href="${p.url}" />`),
-    `    <xhtml:link rel="alternate" hreflang="x-default" href="${DEFAULT_PAGE.url}" />`,
-  ].join("\n");
-  const urls = PAGES.map((p) => `  <url>\n    <loc>${p.url}</loc>\n    <lastmod>${date}</lastmod>\n${links}\n  </url>`).join("\n");
+  const urls = PAGES.map((p) => {
+    const links = alternates(p.group, "xhtml:link").map((line) => `    ${line}`).join("\n");
+    return `  <url>\n    <loc>${p.url}</loc>\n    <lastmod>${date}</lastmod>\n${links}\n  </url>`;
+  }).join("\n");
   return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n${urls}\n</urlset>\n`;
 }
 
@@ -152,6 +191,7 @@ async function main() {
 
   const strings = siteStrings();
   const template = fs.readFileSync(path.join(SITE, "index.html"), "utf8");
+  for (const dir of ["trasa", "route"]) fs.mkdirSync(path.join(SITE, dir), { recursive: true });
   for (const page of PAGES) fs.writeFileSync(path.join(SITE, page.file), pageHtml(template, page, strings));
   fs.writeFileSync(path.join(SITE, "sitemap.xml"), sitemap());
 
@@ -165,7 +205,7 @@ async function main() {
       console.warn(`Prerendering pominięty: ${e.message}`);
     }
   }
-  console.log(`_site/: ${fs.readdirSync(SITE).length} plików`);
+  console.log(`_site/: ${PAGES.length} stron`);
 }
 
 main().catch((e) => {

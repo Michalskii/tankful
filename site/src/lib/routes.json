@@ -1,0 +1,594 @@
+{
+  "cities": {
+    "warszawa": {
+      "pl": "Warszawa",
+      "en": "Warsaw",
+      "lat": 52.2297,
+      "lng": 21.0122,
+      "cc": "pl",
+      "region": "MZ"
+    },
+    "krakow": {
+      "pl": "Kraków",
+      "en": "Kraków",
+      "lat": 50.0614,
+      "lng": 19.9372,
+      "cc": "pl",
+      "region": "MA"
+    },
+    "gdansk": {
+      "pl": "Gdańsk",
+      "en": "Gdańsk",
+      "lat": 54.352,
+      "lng": 18.6466,
+      "cc": "pl",
+      "region": "PM"
+    },
+    "wroclaw": {
+      "pl": "Wrocław",
+      "en": "Wrocław",
+      "lat": 51.1079,
+      "lng": 17.0385,
+      "cc": "pl",
+      "region": "DS"
+    },
+    "poznan": {
+      "pl": "Poznań",
+      "en": "Poznań",
+      "lat": 52.4064,
+      "lng": 16.9252,
+      "cc": "pl",
+      "region": "WP"
+    },
+    "lodz": {
+      "pl": "Łódź",
+      "en": "Łódź",
+      "lat": 51.7592,
+      "lng": 19.456,
+      "cc": "pl",
+      "region": "LD"
+    },
+    "katowice": {
+      "pl": "Katowice",
+      "en": "Katowice",
+      "lat": 50.2649,
+      "lng": 19.0238,
+      "cc": "pl",
+      "region": "SL"
+    },
+    "lublin": {
+      "pl": "Lublin",
+      "en": "Lublin",
+      "lat": 51.2465,
+      "lng": 22.5684,
+      "cc": "pl",
+      "region": "LU"
+    },
+    "bialystok": {
+      "pl": "Białystok",
+      "en": "Białystok",
+      "lat": 53.1325,
+      "lng": 23.1688,
+      "cc": "pl",
+      "region": "PD"
+    },
+    "szczecin": {
+      "pl": "Szczecin",
+      "en": "Szczecin",
+      "lat": 53.4285,
+      "lng": 14.5528,
+      "cc": "pl",
+      "region": "ZP"
+    },
+    "rzeszow": {
+      "pl": "Rzeszów",
+      "en": "Rzeszów",
+      "lat": 50.0412,
+      "lng": 21.9991,
+      "cc": "pl",
+      "region": "PK"
+    },
+    "zakopane": {
+      "pl": "Zakopane",
+      "en": "Zakopane",
+      "lat": 49.2992,
+      "lng": 19.9496,
+      "cc": "pl",
+      "region": "MA"
+    },
+    "berlin": {
+      "pl": "Berlin",
+      "en": "Berlin",
+      "lat": 52.52,
+      "lng": 13.405,
+      "cc": "de"
+    },
+    "monachium": {
+      "pl": "Monachium",
+      "en": "Munich",
+      "lat": 48.1351,
+      "lng": 11.582,
+      "cc": "de"
+    },
+    "praga": {
+      "pl": "Praga",
+      "en": "Prague",
+      "lat": 50.0755,
+      "lng": 14.4378,
+      "cc": "cz"
+    },
+    "wieden": {
+      "pl": "Wiedeń",
+      "en": "Vienna",
+      "lat": 48.2082,
+      "lng": 16.3738,
+      "cc": "at"
+    },
+    "budapeszt": {
+      "pl": "Budapeszt",
+      "en": "Budapest",
+      "lat": 47.4979,
+      "lng": 19.0402,
+      "cc": "hu"
+    },
+    "wilno": {
+      "pl": "Wilno",
+      "en": "Vilnius",
+      "lat": 54.6872,
+      "lng": 25.2797,
+      "cc": "lt"
+    },
+    "split": {
+      "pl": "Split",
+      "en": "Split",
+      "lat": 43.5081,
+      "lng": 16.4402,
+      "cc": "hr"
+    },
+    "paryz": {
+      "pl": "Paryż",
+      "en": "Paris",
+      "lat": 48.8566,
+      "lng": 2.3522,
+      "cc": "fr"
+    },
+    "amsterdam": {
+      "pl": "Amsterdam",
+      "en": "Amsterdam",
+      "lat": 52.3676,
+      "lng": 4.9041,
+      "cc": "nl"
+    }
+  },
+  "routes": [
+    {
+      "pl": "warszawa-krakow",
+      "en": "warsaw-krakow",
+      "from": "warszawa",
+      "to": "krakow",
+      "km": 297,
+      "minutes": 204,
+      "shares": null
+    },
+    {
+      "pl": "warszawa-gdansk",
+      "en": "warsaw-gdansk",
+      "from": "warszawa",
+      "to": "gdansk",
+      "km": 338.4,
+      "minutes": 232,
+      "shares": null
+    },
+    {
+      "pl": "warszawa-wroclaw",
+      "en": "warsaw-wroclaw",
+      "from": "warszawa",
+      "to": "wroclaw",
+      "km": 356,
+      "minutes": 231,
+      "shares": null
+    },
+    {
+      "pl": "warszawa-poznan",
+      "en": "warsaw-poznan",
+      "from": "warszawa",
+      "to": "poznan",
+      "km": 310.2,
+      "minutes": 188,
+      "shares": null
+    },
+    {
+      "pl": "warszawa-lodz",
+      "en": "warsaw-lodz",
+      "from": "warszawa",
+      "to": "lodz",
+      "km": 136,
+      "minutes": 91,
+      "shares": null
+    },
+    {
+      "pl": "warszawa-katowice",
+      "en": "warsaw-katowice",
+      "from": "warszawa",
+      "to": "katowice",
+      "km": 327.7,
+      "minutes": 196,
+      "shares": null
+    },
+    {
+      "pl": "warszawa-lublin",
+      "en": "warsaw-lublin",
+      "from": "warszawa",
+      "to": "lublin",
+      "km": 173.3,
+      "minutes": 125,
+      "shares": null
+    },
+    {
+      "pl": "warszawa-bialystok",
+      "en": "warsaw-bialystok",
+      "from": "warszawa",
+      "to": "bialystok",
+      "km": 197.4,
+      "minutes": 137,
+      "shares": null
+    },
+    {
+      "pl": "warszawa-szczecin",
+      "en": "warsaw-szczecin",
+      "from": "warszawa",
+      "to": "szczecin",
+      "km": 566.6,
+      "minutes": 345,
+      "shares": null
+    },
+    {
+      "pl": "warszawa-rzeszow",
+      "en": "warsaw-rzeszow",
+      "from": "warszawa",
+      "to": "rzeszow",
+      "km": 330.2,
+      "minutes": 228,
+      "shares": null
+    },
+    {
+      "pl": "warszawa-zakopane",
+      "en": "warsaw-zakopane",
+      "from": "warszawa",
+      "to": "zakopane",
+      "km": 400.5,
+      "minutes": 295,
+      "shares": null
+    },
+    {
+      "pl": "krakow-gdansk",
+      "en": "krakow-gdansk",
+      "from": "krakow",
+      "to": "gdansk",
+      "km": 598.9,
+      "minutes": 351,
+      "shares": null
+    },
+    {
+      "pl": "krakow-wroclaw",
+      "en": "krakow-wroclaw",
+      "from": "krakow",
+      "to": "wroclaw",
+      "km": 274.8,
+      "minutes": 174,
+      "shares": null
+    },
+    {
+      "pl": "krakow-katowice",
+      "en": "krakow-katowice",
+      "from": "krakow",
+      "to": "katowice",
+      "km": 83.1,
+      "minutes": 59,
+      "shares": null
+    },
+    {
+      "pl": "krakow-poznan",
+      "en": "krakow-poznan",
+      "from": "krakow",
+      "to": "poznan",
+      "km": 462.4,
+      "minutes": 294,
+      "shares": null
+    },
+    {
+      "pl": "krakow-zakopane",
+      "en": "krakow-zakopane",
+      "from": "krakow",
+      "to": "zakopane",
+      "km": 105.7,
+      "minutes": 100,
+      "shares": null
+    },
+    {
+      "pl": "wroclaw-poznan",
+      "en": "wroclaw-poznan",
+      "from": "wroclaw",
+      "to": "poznan",
+      "km": 183.4,
+      "minutes": 133,
+      "shares": null
+    },
+    {
+      "pl": "wroclaw-gdansk",
+      "en": "wroclaw-gdansk",
+      "from": "wroclaw",
+      "to": "gdansk",
+      "km": 483,
+      "minutes": 316,
+      "shares": null
+    },
+    {
+      "pl": "poznan-gdansk",
+      "en": "poznan-gdansk",
+      "from": "poznan",
+      "to": "gdansk",
+      "km": 303.1,
+      "minutes": 207,
+      "shares": null
+    },
+    {
+      "pl": "katowice-gdansk",
+      "en": "katowice-gdansk",
+      "from": "katowice",
+      "to": "gdansk",
+      "km": 529.1,
+      "minutes": 306,
+      "shares": null
+    },
+    {
+      "pl": "lodz-gdansk",
+      "en": "lodz-gdansk",
+      "from": "lodz",
+      "to": "gdansk",
+      "km": 338.7,
+      "minutes": 205,
+      "shares": null
+    },
+    {
+      "pl": "szczecin-gdansk",
+      "en": "szczecin-gdansk",
+      "from": "szczecin",
+      "to": "gdansk",
+      "km": 370.3,
+      "minutes": 250,
+      "shares": null
+    },
+    {
+      "pl": "warszawa-berlin",
+      "en": "warsaw-berlin",
+      "from": "warszawa",
+      "to": "berlin",
+      "km": 570.6,
+      "minutes": 342,
+      "shares": {
+        "PL": 0.83,
+        "DE": 0.17
+      }
+    },
+    {
+      "pl": "warszawa-praga",
+      "en": "warsaw-prague",
+      "from": "warszawa",
+      "to": "praga",
+      "km": 638.3,
+      "minutes": 444,
+      "shares": {
+        "PL": 0.735,
+        "CZ": 0.265
+      }
+    },
+    {
+      "pl": "warszawa-wieden",
+      "en": "warsaw-vienna",
+      "from": "warszawa",
+      "to": "wieden",
+      "km": 693.7,
+      "minutes": 429,
+      "shares": {
+        "PL": 0.556,
+        "CZ": 0.329,
+        "AT": 0.115
+      }
+    },
+    {
+      "pl": "warszawa-budapeszt",
+      "en": "warsaw-budapest",
+      "from": "warszawa",
+      "to": "budapeszt",
+      "km": 882.2,
+      "minutes": 523,
+      "shares": {
+        "PL": 0.435,
+        "CZ": 0.272,
+        "HU": 0.204,
+        "SK": 0.089
+      }
+    },
+    {
+      "pl": "warszawa-wilno",
+      "en": "warsaw-vilnius",
+      "from": "warszawa",
+      "to": "wilno",
+      "km": 510.8,
+      "minutes": 335,
+      "shares": {
+        "PL": 0.607,
+        "LT": 0.393
+      }
+    },
+    {
+      "pl": "warszawa-split",
+      "en": "warsaw-split",
+      "from": "warszawa",
+      "to": "split",
+      "km": 1449.2,
+      "minutes": 912,
+      "shares": {
+        "HR": 0.317,
+        "PL": 0.268,
+        "AT": 0.214,
+        "CZ": 0.159,
+        "SI": 0.042
+      }
+    },
+    {
+      "pl": "warszawa-paryz",
+      "en": "warsaw-paris",
+      "from": "warszawa",
+      "to": "paryz",
+      "km": 1590.7,
+      "minutes": 939,
+      "shares": {
+        "DE": 0.446,
+        "PL": 0.299,
+        "FR": 0.136,
+        "BE": 0.119
+      }
+    },
+    {
+      "pl": "warszawa-amsterdam",
+      "en": "warsaw-amsterdam",
+      "from": "warszawa",
+      "to": "amsterdam",
+      "km": 1195.3,
+      "minutes": 713,
+      "shares": {
+        "DE": 0.467,
+        "PL": 0.397,
+        "NL": 0.137
+      }
+    },
+    {
+      "pl": "krakow-wieden",
+      "en": "krakow-vienna",
+      "from": "krakow",
+      "to": "wieden",
+      "km": 465.1,
+      "minutes": 305,
+      "shares": {
+        "CZ": 0.495,
+        "PL": 0.333,
+        "AT": 0.172
+      }
+    },
+    {
+      "pl": "krakow-budapeszt",
+      "en": "krakow-budapest",
+      "from": "krakow",
+      "to": "budapeszt",
+      "km": 523.4,
+      "minutes": 376,
+      "shares": {
+        "HU": 0.467,
+        "SK": 0.337,
+        "PL": 0.196
+      }
+    },
+    {
+      "pl": "krakow-praga",
+      "en": "krakow-prague",
+      "from": "krakow",
+      "to": "praga",
+      "km": 536.4,
+      "minutes": 327,
+      "shares": {
+        "CZ": 0.714,
+        "PL": 0.286
+      }
+    },
+    {
+      "pl": "krakow-split",
+      "en": "krakow-split",
+      "from": "krakow",
+      "to": "split",
+      "km": 1220.6,
+      "minutes": 788,
+      "shares": {
+        "HR": 0.378,
+        "AT": 0.255,
+        "CZ": 0.189,
+        "PL": 0.127,
+        "SI": 0.051
+      }
+    },
+    {
+      "pl": "wroclaw-berlin",
+      "en": "wroclaw-berlin",
+      "from": "wroclaw",
+      "to": "berlin",
+      "km": 343.6,
+      "minutes": 231,
+      "shares": {
+        "PL": 0.56,
+        "DE": 0.44
+      }
+    },
+    {
+      "pl": "wroclaw-praga",
+      "en": "wroclaw-prague",
+      "from": "wroclaw",
+      "to": "praga",
+      "km": 287.3,
+      "minutes": 235,
+      "shares": {
+        "CZ": 0.607,
+        "PL": 0.393
+      }
+    },
+    {
+      "pl": "wroclaw-monachium",
+      "en": "wroclaw-munich",
+      "from": "wroclaw",
+      "to": "monachium",
+      "km": 723.1,
+      "minutes": 438,
+      "shares": {
+        "DE": 0.769,
+        "PL": 0.231
+      }
+    },
+    {
+      "pl": "poznan-berlin",
+      "en": "poznan-berlin",
+      "from": "poznan",
+      "to": "berlin",
+      "km": 268.5,
+      "minutes": 176,
+      "shares": {
+        "PL": 0.636,
+        "DE": 0.364
+      }
+    },
+    {
+      "pl": "szczecin-berlin",
+      "en": "szczecin-berlin",
+      "from": "szczecin",
+      "to": "berlin",
+      "km": 150.1,
+      "minutes": 105,
+      "shares": {
+        "DE": 0.884,
+        "PL": 0.116
+      }
+    },
+    {
+      "pl": "katowice-wieden",
+      "en": "katowice-vienna",
+      "from": "katowice",
+      "to": "wieden",
+      "km": 385.8,
+      "minutes": 254,
+      "shares": {
+        "CZ": 0.597,
+        "AT": 0.208,
+        "PL": 0.195
+      }
+    }
+  ]
+}

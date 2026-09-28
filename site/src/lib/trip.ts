@@ -95,19 +95,22 @@ export type Cost = {
   countries: CountryRow[]
 }
 
-function formatRange(low: number, high: number, currency: string) {
+export function formatRange(low: number, high: number, currency: string) {
   if (Math.abs(high - low) < 0.005 * Math.max(high, 0.01)) return mapkaFormatMoney(low, currency)
   const lowNum = new Intl.NumberFormat(MAPKA_LOCALE, { maximumFractionDigits: low < 10 ? 2 : 0 }).format(low)
   return `${lowNum}–${mapkaFormatMoney(high, currency)}`
 }
 
-export function tripCost(trip: Trip, o: Options, data: MapkaData): Cost {
+export function tripAmount(trip: Trip, o: Options, data: MapkaData) {
   const s = settingsFor(o)
   const geo: MapkaGeo = { origin: placeGeo(trip.from), dest: placeGeo(trip.to), shares: trip.shares }
   const price = mapkaResolvePrice(s, data, geo)
   const units = (trip.route.km * o.consumption) / 100
-  const low = units * price.low
-  const high = units * price.high
+  return { s, geo, price, units, low: units * price.low, high: units * price.high }
+}
+
+export function tripCost(trip: Trip, o: Options, data: MapkaData): Cost {
+  const { s, geo, price, units, low, high } = tripAmount(trip, o, data)
 
   const countries = Object.entries(trip.shares || {}).map(([cc, share]) => {
     const place = [geo.origin, geo.dest].find((g) => g?.cc?.toUpperCase() === cc) || { cc }

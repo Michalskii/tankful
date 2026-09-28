@@ -5,12 +5,13 @@ import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import { track } from "@/lib/analytics"
 import { PRERENDER } from "@/lib/prerender"
+import { CURRENT_ROUTE } from "@/lib/routes"
 import { T } from "@/lib/strings"
 
 const SEEN_KEY = "tankful-intro-seen"
 
 function firstVisit() {
-  if (PRERENDER || new URLSearchParams(location.search).has("from")) return false
+  if (PRERENDER || CURRENT_ROUTE || new URLSearchParams(location.search).has("from")) return false
   try {
     return !localStorage.getItem(SEEN_KEY)
   } catch {
