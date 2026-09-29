@@ -17,3 +17,5 @@ site/node_modules/
 
 STATUS.md
 store/raw/
+site/public/app-*.png
+site/public/apple-touch-icon.png

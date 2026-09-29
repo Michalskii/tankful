@@ -9,6 +9,8 @@ const ROOT = path.join(__dirname, "..");
 const PUBLIC = path.join(ROOT, "site/public");
 const SITE = path.join(ROOT, "_site");
 const SITE_URL = "https://michalskii.github.io/tankful/";
+const BRAND_COLOR = "#1B2430";
+const APP_ICONS = ["app-192.png", "app-512.png", "app-maskable-512.png", "apple-touch-icon.png"];
 const LANGS = {
   pl: { locale: "pl_PL", timeZone: "Europe/Warsaw" },
   en: { locale: "en_GB", timeZone: "Europe/Berlin" },
@@ -30,7 +32,7 @@ const prices = args.find((a) => !a.startsWith("--"));
 
 fs.mkdirSync(PUBLIC, { recursive: true });
 for (const f of ["settings.js", "borders.js"]) fs.copyFileSync(path.join(ROOT, f), path.join(PUBLIC, f));
-fs.copyFileSync(path.join(ROOT, "icons/icon.svg"), path.join(PUBLIC, "icon.svg"));
+for (const f of ["icon.svg", ...APP_ICONS]) fs.copyFileSync(path.join(ROOT, "icons", f), path.join(PUBLIC, f));
 fs.copyFileSync(path.join(ROOT, "docs/privacy.html"), path.join(PUBLIC, "privacy.html"));
 if (prices) fs.copyFileSync(prices, path.join(PUBLIC, "prices.json"));
 
@@ -49,6 +51,28 @@ function siteStrings() {
 }
 
 const fill = (text, ...subs) => text.replace(/\$(\d)/g, (_, n) => String(subs[n - 1] ?? ""));
+
+function manifest(lang, strings) {
+  const s = strings[lang];
+  return {
+    id: "./",
+    name: "Tankful",
+    short_name: "Tankful",
+    description: s.description,
+    lang,
+    start_url: lang === "en" ? "./en" : "./",
+    scope: "./",
+    display: "standalone",
+    background_color: BRAND_COLOR,
+    theme_color: BRAND_COLOR,
+    categories: ["travel", "navigation", "utilities"],
+    icons: [
+      { src: "app-192.png", sizes: "192x192", type: "image/png", purpose: "any" },
+      { src: "app-512.png", sizes: "512x512", type: "image/png", purpose: "any" },
+      { src: "app-maskable-512.png", sizes: "512x512", type: "image/png", purpose: "maskable" },
+    ],
+  };
+}
 
 function pageStrings(page, strings) {
   const s = strings[page.lang];
@@ -90,6 +114,7 @@ function headTags(page, s) {
     offers: { "@type": "Offer", price: "0", priceCurrency: "EUR" },
   };
   return [
+    `<link rel="manifest" href="manifest-${page.lang}.webmanifest" />`,
     `<link rel="canonical" href="${page.url}" />`,
     ...alternates(page.group),
     `<meta property="og:type" content="website" />`,
@@ -131,6 +156,7 @@ function serve(dir) {
     ".js": "text/javascript; charset=utf-8",
     ".css": "text/css; charset=utf-8",
     ".json": "application/json",
+    ".webmanifest": "application/manifest+json",
     ".svg": "image/svg+xml",
     ".png": "image/png",
     ".woff2": "font/woff2",
@@ -194,6 +220,9 @@ async function main() {
   for (const dir of ["trasa", "route"]) fs.mkdirSync(path.join(SITE, dir), { recursive: true });
   for (const page of PAGES) fs.writeFileSync(path.join(SITE, page.file), pageHtml(template, page, strings));
   fs.writeFileSync(path.join(SITE, "sitemap.xml"), sitemap());
+  for (const lang of Object.keys(LANGS)) {
+    fs.writeFileSync(path.join(SITE, `manifest-${lang}.webmanifest`), JSON.stringify(manifest(lang, strings), null, 2) + "\n");
+  }
 
   if (args.includes("--no-prerender")) {
     console.log("Prerendering skipped (--no-prerender)");

@@ -3,6 +3,7 @@ import { ChevronDownIcon, CopyIcon, Loader2Icon, RouteIcon, TriangleAlertIcon } 
 import { toast } from "sonner"
 
 import { AboutDialog } from "@/components/AboutDialog"
+import { InstallCard } from "@/components/InstallCard"
 import { StopList } from "@/components/StopList"
 import { ThemeMenu } from "@/components/ThemeMenu"
 import { RouteMap } from "@/components/RouteMap"
@@ -27,7 +28,6 @@ import { T } from "@/lib/strings"
 import { cn } from "@/lib/utils"
 import { fetchRoutes, formatDuration, sparsePoints, tripCost, type Options, type Route, type Trip } from "@/lib/trip"
 
-const STORE_URL = "https://chromewebstore.google.com/detail/fiogjemolijaleckapbcngibelfbpfgp"
 const PREFS_KEY = "tankful-calculator"
 const TYPICAL_CONSUMPTION: Record<string, number> = { pb: 7.0, pbp: 7.0, on: 6.0, onp: 6.0, lpg: 9.0, ev: 17.0 }
 const FAQ = [
@@ -470,22 +470,7 @@ export default function App() {
           <div className="order-3 flex flex-col gap-6 p-4 sm:p-6 lg:mt-auto lg:pt-0">
             {CURRENT_ROUTE && <RouteCosts route={CURRENT_ROUTE} data={data} currency={options.currency} />}
 
-            <Card size="sm">
-              <CardContent className="flex flex-col items-start gap-3">
-                <div className="flex items-start gap-3">
-                  <img src="icon.svg" alt="" className="size-10 shrink-0" />
-                  <div>
-                    <h2 className="text-sm font-semibold">{T("ctaHeading")}</h2>
-                    <p className="mt-1 text-sm text-muted-foreground">{T("ctaText")}</p>
-                  </div>
-                </div>
-                <Button asChild size="sm">
-                  <a href={STORE_URL} rel="noopener" onClick={() => track("dodaj-do-chrome")}>
-                    {T("ctaButton")}
-                  </a>
-                </Button>
-              </CardContent>
-            </Card>
+            <InstallCard />
 
             <section aria-labelledby="faq-heading" className="flex flex-col gap-3">
               <h2 id="faq-heading" className="text-base font-semibold">
