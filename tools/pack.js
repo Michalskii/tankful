@@ -11,7 +11,7 @@ function packageFiles() {
     .filter((f) => /\.(js|html|css)$/.test(f) || f === "manifest.json")
     .filter((f) => fs.statSync(path.join(ROOT, f)).isFile());
   for (const lang of fs.readdirSync(path.join(ROOT, "_locales"))) files.push(`_locales/${lang}/messages.json`);
-  for (const icon of fs.readdirSync(path.join(ROOT, "icons")).filter((f) => f.endsWith(".png"))) files.push(`icons/${icon}`);
+  for (const icon of fs.readdirSync(path.join(ROOT, "icons")).filter((f) => /^icon-\d+\.png$/.test(f))) files.push(`icons/${icon}`);
   return files.sort();
 }
 

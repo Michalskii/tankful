@@ -728,6 +728,7 @@ test("package: contains every file the extension references and nothing else", (
     for (const r of text.matchAll(/url: "([\w-]+\.html)"/g)) needed.add(r[1]);
   }
   same([...needed].filter((f) => !files.has(f)), []);
+  same([...files].filter((f) => f.startsWith("icons/") && !needed.has(f)), []);
   same([...files].filter((f) => /^(tests|tools|store|dist|\.idea)\//.test(f) || f.endsWith(".svg")), []);
 });
 
