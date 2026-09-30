@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<?xml-stylesheet href="/rss/rss.xsl" type="text/xsl" media="screen"?>
+<rss version="2.0">
+   <channel>
+      <title>EIA: Gasoline and Diesel Fuel Update</title>
+      <link>http://www.eia.gov/petroleum/gasdiesel/</link>
+      <description>U.S. Gasoline and Diesel Fuel Retail Prices Nationally and by Region.</description>
+      <language>en-us</language>
+      <image>
+         <title>EIA logo</title>
+         <url>http://www.eia.gov/global/images/logos/eia_logo_250.png</url>
+         <link>http://www.eia.gov/</link>
+         <description>US Energy Information Administration</description>
+      </image>
+      <item>
+         <title>Data For 09/28/26</title>
+         <link>http://www.eia.gov/petroleum/gasdiesel/</link>
+         <pubDate>Tue, 29 Sep 2026 08:55:05 EST</pubDate>
+         <description><![CDATA[<br/>		
+		Summary Excerpt:			 	<br/>
+		 	 							<br/>
+		Regular Gasoline Retail Price	<br/>
+		(Dollars per Gallon)	 			<br/>
+		4.465  .. U.S.  				<br/>
+		4.290  ... East Coast  		<br/>
+		4.369  .... New England  	<br/>
+		4.411  .... Central Atlantic	<br/>
+		4.195  .... Lower Atlantic	<br/>
+		4.291 ... Midwest			<br/>
+		3.924 ... Gulf Coast		<br/>
+		4.486 ... Rocky Mountain	<br/>
+		5.724 ... West Coast		<br/>
+		5.153 ... West Coast less California<br/>
+		 <br/>
+
+		States<br/>
+		6.189 .... California		<br/>
+		4.094 .... Colorado		<br/>
+		4.282 .... Florida		<br/>
+		4.316 .... Massachusetts<br/>
+		4.315 .... Minnesota<br/>
+		4.405 .... New York<br/>
+		4.263 .... Ohio<br/>
+		3.841 .... Texas<br/>
+		5.453 .... Washington<br/>
+		 <br/>
+    
+		Cities<br/>
+		4.341 .... Boston<br/>
+		4.759 .... Chicago<br/>
+		4.326 .... Cleveland<br/>
+		4.033 .... Denver<br/>
+		3.847 .... Houston<br/>
+		6.165 .... Los Angeles<br/>
+		4.301 .... Miami<br/>
+		4.378 .... New York City<br/>
+		6.267 .... San Francisco<br/>	
+		5.677 .... Seattle<br/>	
+		
+		 <br/>
+		 <br/>
+		On-Highway Diesel Fuel Retail Price  <br/>
+		 (Dollars  per Gallon) 			<br/>
+		6.382  .. U.S.  				<br/>
+		6.137  ... East Coast  		<br/>
+		6.510  ....  New England  	<br/>
+		6.531  ....  Central Atlantic	<br/>
+		5.953 ....  Lower Atlantic	<br/>
+		6.526 ... Midwest			<br/>
+		5.955 ... Gulf Coast		<br/>
+		6.407 ... Rocky Mountain	<br/>
+		7.357 ... West Coast		<br/>
+		6.643 ... West Coast less California<br/>
+		8.181 .... California		]]></description>
+      </item>
+   </channel>
+</rss>

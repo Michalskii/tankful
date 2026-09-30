@@ -60,9 +60,16 @@ function mapkaStartPrice(pln, currency) {
   return value >= 10 ? Math.round(value) : Math.round(value * 100) / 100;
 }
 
+const MAPKA_UNITS = MAPKA_COUNTRY === "US" ? "us" : "metric";
+
+function mapkaFallbackPrice(currency) {
+  return currency === "USD" ? 0.9 : mapkaStartPrice(6.2, currency);
+}
+
 const MAPKA_DEFAULTS = {
+  units: MAPKA_UNITS,
   consumption: 7.0,
-  price: mapkaStartPrice(6.2, MAPKA_CURRENCY),
+  price: mapkaFallbackPrice(MAPKA_CURRENCY),
   autoPrice: true,
   localPrices: true,
   fuelType: "pb",
@@ -115,7 +122,27 @@ const MAPKA_REGIONS = {
   "32": "zachodniopomorskie", ZP: "zachodniopomorskie",
 };
 
-const MAPKA_DATA_KEYS = { fuelPrices: null, euPrices: null, nbpRates: null, ukPrices: null };
+const MAPKA_OWN_SOURCES = { GB: { key: "ukPrices", currency: "GBP" }, US: { key: "usPrices", currency: "USD" } };
+
+const MAPKA_US_STATES = {
+  CT: ["Connecticut", "1A"], ME: ["Maine", "1A"], MA: ["Massachusetts", "1A"], NH: ["New Hampshire", "1A"],
+  RI: ["Rhode Island", "1A"], VT: ["Vermont", "1A"],
+  DE: ["Delaware", "1B"], DC: ["District of Columbia", "1B"], MD: ["Maryland", "1B"], NJ: ["New Jersey", "1B"],
+  NY: ["New York", "1B"], PA: ["Pennsylvania", "1B"],
+  FL: ["Florida", "1C"], GA: ["Georgia", "1C"], NC: ["North Carolina", "1C"], SC: ["South Carolina", "1C"],
+  VA: ["Virginia", "1C"], WV: ["West Virginia", "1C"],
+  IL: ["Illinois", "2"], IN: ["Indiana", "2"], IA: ["Iowa", "2"], KS: ["Kansas", "2"], KY: ["Kentucky", "2"],
+  MI: ["Michigan", "2"], MN: ["Minnesota", "2"], MO: ["Missouri", "2"], NE: ["Nebraska", "2"],
+  ND: ["North Dakota", "2"], SD: ["South Dakota", "2"], OH: ["Ohio", "2"], OK: ["Oklahoma", "2"],
+  TN: ["Tennessee", "2"], WI: ["Wisconsin", "2"],
+  AL: ["Alabama", "3"], AR: ["Arkansas", "3"], LA: ["Louisiana", "3"], MS: ["Mississippi", "3"],
+  NM: ["New Mexico", "3"], TX: ["Texas", "3"],
+  CO: ["Colorado", "4"], ID: ["Idaho", "4"], MT: ["Montana", "4"], UT: ["Utah", "4"], WY: ["Wyoming", "4"],
+  AK: ["Alaska", "5"], AZ: ["Arizona", "5"], CA: ["California", "5"], HI: ["Hawaii", "5"], NV: ["Nevada", "5"],
+  OR: ["Oregon", "5"], WA: ["Washington", "5"],
+};
+
+const MAPKA_DATA_KEYS ={ fuelPrices: null, euPrices: null, nbpRates: null, ukPrices: null, usPrices: null };
 
 function mapkaLoadSettings() {
   return new Promise((resolve) => chrome.storage.sync.get(MAPKA_DEFAULTS, resolve));
@@ -151,18 +178,34 @@ function mapkaFromPln(pln, currency, data) {
   return rate ? pln / rate : null;
 }
 
+function mapkaUsAreas(region) {
+  const state = /^US-[A-Z]{2}$/.test(region || "") ? region.slice(3) : null;
+  const padd = MAPKA_US_STATES[state]?.[1];
+  if (!padd) return [];
+  return [state, padd === "5" && state !== "CA" ? "5XCA" : padd];
+}
+
+function mapkaOwnPricePln(s, data, cc, geo) {
+  const own = MAPKA_OWN_SOURCES[cc];
+  const entry = data[own.key];
+  const fuel = MAPKA_EU_FUEL[s.fuelType];
+  const rate = data.nbpRates?.rates?.[own.currency];
+  const area = cc === "US" ? mapkaUsAreas(geo?.region).find((a) => entry?.areas?.[a]?.[fuel]) : null;
+  const value = area ? entry.areas[area][fuel] : entry?.prices?.[fuel];
+  if (!value || !rate) return null;
+  const state = geo?.regionName || MAPKA_US_STATES[geo?.region?.slice(3)]?.[0];
+  return { price: value * rate, label: area && state ? `${state} (${mapkaCountryName(cc)})` : mapkaCountryName(cc) };
+}
+
 function mapkaLocalPricePln(s, data, geo) {
   const cc = geo?.cc?.toUpperCase();
+  if ((!cc || !s.localPrices) && MAPKA_OWN_SOURCES[MAPKA_COUNTRY]) return mapkaOwnPricePln(s, data, MAPKA_COUNTRY, null);
   if (!cc || cc === "PL" || !s.localPrices) {
     const prices = data.fuelPrices?.prices;
     const national = prices?.[s.fuelType] ?? prices?.[MAPKA_EU_FUEL[s.fuelType]];
     return national ? { price: national, label: mapkaT("price_national") } : null;
   }
-  if (cc === "GB") {
-    const gbp = data.ukPrices?.prices?.[MAPKA_EU_FUEL[s.fuelType]];
-    const gbpRate = data.nbpRates?.rates?.GBP;
-    return gbp && gbpRate ? { price: gbp * gbpRate, label: mapkaCountryName(cc) } : null;
-  }
+  if (MAPKA_OWN_SOURCES[cc]) return mapkaOwnPricePln(s, data, cc, geo);
   const eur = data.euPrices?.prices?.[cc]?.[MAPKA_EU_FUEL[s.fuelType]];
   const rate = data.nbpRates?.rates?.EUR;
   return eur && rate ? { price: eur * rate, label: mapkaCountryName(cc) } : null;
@@ -225,9 +268,11 @@ function mapkaRouteShares(points, borders = MAPKA_BORDERS) {
   return Object.fromEntries(kept.sort((x, y) => y[1] - x[1]).map(([cc, v]) => [cc, v / keptTotal]));
 }
 
-function mapkaShownUnitPrice(pln, currency, data) {
-  const local = mapkaFromPln(pln, currency, data);
-  return local == null ? mapkaFormatUnitPrice(pln, "PLN") : mapkaFormatUnitPrice(local, currency);
+function mapkaShownUnitPrice(pln, s, data) {
+  const local = mapkaFromPln(pln, s.currency, data);
+  const value = local == null ? pln : local;
+  const unit = mapkaUnit(s.fuelType, s.units);
+  return `${mapkaFormatUnitPrice(mapkaToUnitPrice(value, s.fuelType, s.units), local == null ? "PLN" : s.currency)}/${unit}`;
 }
 
 function mapkaRoutePricePln(s, data, geo) {
@@ -244,7 +289,7 @@ function mapkaRoutePricePln(s, data, geo) {
     source: mapkaT(
       "price_route",
       parts
-        .map((p) => `${p.label} ${Math.round((p.share / total) * 100)}% ${mapkaShownUnitPrice(p.price, s.currency, data)}`)
+        .map((p) => `${p.label} ${Math.round((p.share / total) * 100)}% ${mapkaShownUnitPrice(p.price, s, data)}`)
         .join(" · ")
     ),
   };
@@ -267,7 +312,7 @@ function mapkaResolvePrice(s, data, geo) {
   const origin = mapkaLocalPricePln(s, data, geo?.origin);
   if (!origin) return { ...manual, source: mapkaT("price_missing") };
   let pln = origin.price;
-  let source = mapkaT("price_single", origin.label, mapkaShownUnitPrice(origin.price, cur, data));
+  let source = mapkaT("price_single", origin.label, mapkaShownUnitPrice(origin.price, s, data));
 
   const originCc = (geo?.origin?.cc || "pl").toUpperCase();
   const destCc = geo?.dest?.cc?.toUpperCase();
@@ -275,16 +320,16 @@ function mapkaResolvePrice(s, data, geo) {
   if (route) {
     pln = route.price;
     source = route.source;
-  } else if (s.localPrices && destCc && destCc !== originCc) {
+  } else if (s.localPrices && destCc && (destCc !== originCc || geo.dest.region !== geo.origin?.region)) {
     const dest = mapkaLocalPricePln(s, data, geo.dest);
-    if (dest) {
+    if (dest && dest.label !== origin.label) {
       pln = (origin.price + dest.price) / 2;
       source = mapkaT(
         "price_average",
         origin.label,
-        mapkaShownUnitPrice(origin.price, cur, data),
+        mapkaShownUnitPrice(origin.price, s, data),
         dest.label,
-        mapkaShownUnitPrice(dest.price, cur, data)
+        mapkaShownUnitPrice(dest.price, s, data)
       );
     }
   }
@@ -324,12 +369,80 @@ function mapkaParseKm(text) {
   return null;
 }
 
-function mapkaUnit(fuelType) {
-  return fuelType === "ev" ? "kWh" : "l";
+const MAPKA_KM_PER_MI = 1.609344;
+const MAPKA_L_PER_GAL = 3.785411784;
+const MAPKA_MPG = (100 * MAPKA_L_PER_GAL) / MAPKA_KM_PER_MI;
+
+const mapkaUsFuel = (fuelType, units) => units === "us" && fuelType !== "ev";
+
+function mapkaUnit(fuelType, units = "metric") {
+  if (fuelType === "ev") return "kWh";
+  return units === "us" ? "gal" : "l";
 }
 
-function mapkaConsumptionLabel(fuelType) {
+function mapkaDistanceUnit(units = "metric") {
+  return units === "us" ? "mi" : "km";
+}
+
+function mapkaToDistance(km, units = "metric") {
+  return units === "us" ? km / MAPKA_KM_PER_MI : km;
+}
+
+function mapkaFormatDistance(km, units = "metric", maxDigits = 1) {
+  return `${mapkaFormatNumber(mapkaToDistance(km, units), maxDigits)} ${mapkaDistanceUnit(units)}`;
+}
+
+function mapkaToVolume(amount, fuelType, units = "metric") {
+  return mapkaUsFuel(fuelType, units) ? amount / MAPKA_L_PER_GAL : amount;
+}
+
+function mapkaToUnitPrice(perUnit, fuelType, units = "metric") {
+  return mapkaUsFuel(fuelType, units) ? perUnit * MAPKA_L_PER_GAL : perUnit;
+}
+
+function mapkaFromUnitPrice(shown, fuelType, units = "metric") {
+  return mapkaUsFuel(fuelType, units) ? shown / MAPKA_L_PER_GAL : shown;
+}
+
+function mapkaToConsumption(metric, fuelType, units = "metric") {
+  if (units !== "us") return metric;
+  if (fuelType === "ev") return metric * MAPKA_KM_PER_MI;
+  return metric > 0 ? MAPKA_MPG / metric : 0;
+}
+
+function mapkaFromConsumption(shown, fuelType, units = "metric") {
+  if (units !== "us") return shown;
+  if (fuelType === "ev") return shown / MAPKA_KM_PER_MI;
+  return shown > 0 ? MAPKA_MPG / shown : 0;
+}
+
+function mapkaRoundConsumption(metric, fuelType, units = "metric") {
+  return Math.round(mapkaToConsumption(metric, fuelType, units) * 10) / 10;
+}
+
+function mapkaConsumptionUnit(fuelType, units = "metric") {
+  if (units === "us") return fuelType === "ev" ? "kWh/100 mi" : "mpg";
+  return `${mapkaUnit(fuelType)}/100 km`;
+}
+
+function mapkaFormatConsumption(metric, fuelType, units = "metric") {
+  return `${mapkaFormatNumber(mapkaToConsumption(metric, fuelType, units))} ${mapkaConsumptionUnit(fuelType, units)}`;
+}
+
+function mapkaConsumptionLabel(fuelType, units = "metric") {
+  if (units === "us") return mapkaT(fuelType === "ev" ? "consumption_ev_us" : "consumption_fuel_us");
   return mapkaT(fuelType === "ev" ? "consumption_ev" : "consumption_fuel", mapkaUnit(fuelType));
+}
+
+function mapkaFuelFormula(km, s) {
+  const fuel = mapkaToVolume((km * s.consumption) / 100, s.fuelType, s.units);
+  const op = mapkaUsFuel(s.fuelType, s.units) ? "÷" : "×";
+  return `${mapkaFormatDistance(km, s.units)} ${op} ${mapkaFormatConsumption(s.consumption, s.fuelType, s.units)} = ${mapkaFormatNumber(fuel)} ${mapkaUnit(s.fuelType, s.units)}`;
+}
+
+function mapkaCostPer100(s, pricePerUnit) {
+  const km = s.units === "us" ? 100 * MAPKA_KM_PER_MI : 100;
+  return ((km * s.consumption) / 100) * pricePerUnit;
 }
 
 function mapkaFormatNumber(value, maxDigits = 1) {

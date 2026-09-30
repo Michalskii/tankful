@@ -1,6 +1,7 @@
 const list = document.getElementById("list");
 const empty = document.getElementById("empty");
 let trips = [];
+let units = MAPKA_DEFAULTS.units;
 
 mapkaLocalizePage();
 
@@ -60,7 +61,7 @@ function render() {
     const summary = el("div", "month__summary");
     summary.append(
       el("span", null, mapkaPlural("trips", items.length)),
-      el("span", null, `${Math.round(km).toLocaleString(MAPKA_LOCALE)} km`),
+      el("span", null, mapkaFormatDistance(km, units, 0)),
       el("strong", null, `≈ ${cost}`)
     );
     if (mileage) summary.append(el("span", "mileage", `🧾 ${mileage}`));
@@ -78,7 +79,7 @@ function render() {
         el(
           "div",
           "trip__meta",
-          `${date} · ${t.via} · ${mapkaFormatNumber(t.km * f)} km · ${MAPKA_FUELS[t.fuelType] || t.fuelType}, ${mapkaFormatNumber(t.consumption)} ${mapkaUnit(t.fuelType)}/100 km`
+          `${date} · ${t.via} · ${mapkaFormatDistance(t.km * f, units)} · ${MAPKA_FUELS[t.fuelType] || t.fuelType}, ${mapkaFormatConsumption(t.consumption, t.fuelType, units)}`
         )
       );
 
@@ -127,7 +128,7 @@ list.addEventListener("click", (e) => {
 });
 
 document.getElementById("export").addEventListener("click", () => {
-  const header = mapkaT("csv_header").split(";");
+  const header = mapkaT("csv_header", mapkaDistanceUnit(units), mapkaT(units === "us" ? "csv_consumption_us" : "csv_consumption_metric")).split(";");
   const decimal = (1.5).toLocaleString(MAPKA_LOCALE).charAt(1);
   const separator = decimal === "," ? ";" : ",";
   const num = (v) => (v == null ? "" : String(Math.round(v * 100) / 100).replace(".", decimal));
@@ -138,10 +139,10 @@ document.getElementById("export").addEventListener("click", () => {
       t.from,
       t.to,
       t.via,
-      num(t.km * f),
+      num(mapkaToDistance(t.km * f, units)),
       mapkaT(t.roundTrip ? "csv_yes" : "csv_no"),
       MAPKA_FUELS[t.fuelType] || t.fuelType,
-      num(t.consumption),
+      num(mapkaToConsumption(t.consumption, t.fuelType, units)),
       t.passengers,
       num(t.costLow * f),
       num(t.costHigh * f),
@@ -163,7 +164,8 @@ chrome.storage.onChanged.addListener((changes, area) => {
   }
 });
 
-chrome.storage.local.get({ trips: [] }, (r) => {
+Promise.all([mapkaLoadSettings(), new Promise((r) => chrome.storage.local.get({ trips: [] }, r))]).then(([s, r]) => {
+  units = s.units;
   trips = r.trips;
   render();
 });

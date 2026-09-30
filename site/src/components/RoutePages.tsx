@@ -11,7 +11,7 @@ export function RouteCosts({ route, data, currency }: { route: RoutePage; data: 
   const from = cityName(route.from)
   const to = cityName(route.to)
   const rows = TABLE_FUELS.map(([fuelType, consumption]) => {
-    const a = tripAmount(trip, { fuelType, consumption, passengers: 1, currency, ownPrice: null, roundTrip: false }, data)
+    const a = tripAmount(trip, { units: "metric", fuelType, consumption, passengers: 1, currency, ownPrice: null, roundTrip: false }, data)
     return { fuelType, consumption, ...a }
   })
   const countries = Object.entries(route.shares || {})

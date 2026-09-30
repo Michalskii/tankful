@@ -7,6 +7,7 @@ const TYPICAL_CONSUMPTION = { pb: 7.0, pbp: 7.0, on: 6.0, onp: 6.0, lpg: 9.0, ev
 let settings = MAPKA_DEFAULTS;
 let data = { ...MAPKA_DATA_KEYS };
 let consumptionTouched = false;
+let shownUnits = MAPKA_DEFAULTS.units;
 
 mapkaLocalizePage();
 
@@ -18,9 +19,16 @@ for (const [key, name] of Object.entries(MAPKA_FUELS)) {
   fuels.append(label);
 }
 
+const readConsumption = () => mapkaFromConsumption(parseFloat(form.consumption.value), form.fuelType.value, shownUnits);
+
+function showConsumption(metric) {
+  shownUnits = form.units.value;
+  form.consumption.value = mapkaRoundConsumption(metric, form.fuelType.value, shownUnits);
+}
+
 function updatePrice() {
-  const s = { ...settings, fuelType: form.fuelType.value };
-  document.getElementById("unit").textContent = `${mapkaUnit(s.fuelType)} / 100 km`;
+  const s = { ...settings, fuelType: form.fuelType.value, units: form.units.value };
+  document.getElementById("unit").textContent = mapkaConsumptionUnit(s.fuelType, s.units);
   if (s.fuelType === "ev") {
     priceInfo.textContent = mapkaT("welcome_ev");
     return;
@@ -32,8 +40,12 @@ function updatePrice() {
 form.consumption.addEventListener("input", () => (consumptionTouched = true));
 fuels.addEventListener("change", () => {
   if (!consumptionTouched && !settings.configured) {
-    form.consumption.value = TYPICAL_CONSUMPTION[form.fuelType.value];
+    showConsumption(TYPICAL_CONSUMPTION[form.fuelType.value]);
   }
+  updatePrice();
+});
+form.units.addEventListener("change", () => {
+  showConsumption(readConsumption());
   updatePrice();
 });
 
@@ -42,7 +54,8 @@ form.addEventListener("submit", (e) => {
   chrome.storage.sync.set(
     {
       fuelType: form.fuelType.value,
-      consumption: parseFloat(form.consumption.value),
+      units: form.units.value,
+      consumption: readConsumption(),
       configured: true,
     },
     () => (location.href = "https://www.google.com/maps")
@@ -60,6 +73,7 @@ Promise.all([mapkaLoadSettings(), mapkaLoadData()]).then(([s, d]) => {
   settings = s;
   data = d;
   form.fuelType.value = s.fuelType;
-  form.consumption.value = s.consumption;
+  form.units.value = s.units;
+  showConsumption(s.consumption);
   updatePrice();
 });

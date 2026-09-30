@@ -5,13 +5,14 @@ const NBP_URL = "https://api.nbp.pl/api/exchangerates/tables/a/?format=json";
 const NBP_EUR_URL = "https://api.nbp.pl/api/exchangerates/rates/a/eur/";
 const ORLEN_URL = "https://tool.orlen.pl/api/wholesalefuelprices/ByProduct";
 const UK_FUEL_PAGE = "https://www.gov.uk/api/content/government/statistics/weekly-road-fuel-prices";
+const EIA_FUEL_RSS = "https://www.eia.gov/petroleum/gasdiesel/includes/gas_diesel_rss.xml";
 const NOMINATIM_URL = "https://nominatim.openstreetmap.org/reverse";
 const SITE_PRICES_URL = `${MAPKA_SITE_URL}prices.json`;
 
 const HOUR = 60 * 60 * 1000;
 const DAY = 24 * HOUR;
 const SITE_INTERVAL = 3 * HOUR;
-const MAX_AGE = { national: 24 * HOUR, eu: 72 * HOUR, nbp: 48 * HOUR, uk: 72 * HOUR };
+const MAX_AGE = { national: 24 * HOUR, eu: 72 * HOUR, nbp: 48 * HOUR, uk: 72 * HOUR, us: 72 * HOUR };
 
 const ORLEN_PRODUCTS = { pb: 41, pbp: 42, on: 43 };
 const FUEL_VAT = 1.23;
@@ -211,6 +212,47 @@ async function refreshUk() {
   await chrome.storage.local.set({ ukPrices });
 }
 
+const EIA_AREAS = {
+  "U.S.": "US", "New England": "1A", "Central Atlantic": "1B", "Lower Atlantic": "1C", Midwest: "2",
+  "Gulf Coast": "3", "Rocky Mountain": "4", "West Coast": "5", "West Coast less California": "5XCA",
+  ...Object.fromEntries(Object.entries(MAPKA_US_STATES).map(([code, [name]]) => [name, code])),
+};
+
+function parseEiaSection(text) {
+  const areas = {};
+  for (const line of text.split(/<br\s*\/?>/i)) {
+    if (/^\s*Cities\s*$/.test(line)) break;
+    const m = line.match(/^\s*(\d+\.\d+)\s*\.+\s*(.+?)\s*$/);
+    const key = m && EIA_AREAS[m[2]];
+    if (key && !(key in areas)) areas[key] = parseFloat(m[1]) / MAPKA_L_PER_GAL;
+  }
+  return areas;
+}
+
+function parseEiaRss(xml) {
+  const date = xml.match(/Data For (\d{2})\/(\d{2})\/(\d{2})/);
+  const [gasoline = "", diesel = ""] = xml.split(/On-Highway Diesel Fuel Retail Price/);
+  const fuels = { pb: parseEiaSection(gasoline.split(/Regular Gasoline Retail Price/)[1] || ""), on: parseEiaSection(diesel.split("]]>")[0]) };
+  if (!date || !(fuels.pb.US > 0)) throw new Error("EIA gasoline and diesel prices: no data");
+  const prices = {};
+  const areas = {};
+  for (const [fuel, values] of Object.entries(fuels)) {
+    for (const [key, value] of Object.entries(values)) {
+      if (!(value > 0)) continue;
+      if (key === "US") prices[fuel] = value;
+      else (areas[key] ||= {})[fuel] = value;
+    }
+  }
+  return { prices, areas, date: `20${date[3]}-${date[1]}-${date[2]}` };
+}
+
+async function refreshUs() {
+  const res = await fetch(EIA_FUEL_RSS, { cache: "no-store" });
+  if (!res.ok) throw new Error(`EIA: HTTP ${res.status}`);
+  const usPrices = { ...parseEiaRss(await res.text()), fetchedAt: Date.now() };
+  await chrome.storage.local.set({ usPrices });
+}
+
 async function refreshNbp() {
   const res = await fetch(NBP_URL, { cache: "no-store" });
   if (!res.ok) throw new Error(`NBP: HTTP ${res.status}`);
@@ -220,7 +262,7 @@ async function refreshNbp() {
 }
 
 async function refreshSources(force = false, options = {}) {
-  const data = await chrome.storage.local.get(["fuelPrices", "euPrices", "nbpRates", "ukPrices"]);
+  const data = await chrome.storage.local.get(["fuelPrices", "euPrices", "nbpRates", "ukPrices", "usPrices"]);
   const errors = [];
   const run = (job) => job().catch((e) => errors.push(String(e?.message || e)));
   const euStale = force || isStale(data.euPrices, MAX_AGE.eu);
@@ -228,6 +270,7 @@ async function refreshSources(force = false, options = {}) {
     euStale ? run(refreshEu) : null,
     force || isStale(data.nbpRates, MAX_AGE.nbp) ? run(refreshNbp) : null,
     options.uk && (force || isStale(data.ukPrices, MAX_AGE.uk)) ? run(refreshUk) : null,
+    options.us && (force || isStale(data.usPrices, MAX_AGE.us)) ? run(refreshUs) : null,
   ]);
   if (euStale || isStale(data.fuelPrices, MAX_AGE.national)) await run(() => refreshNational(options));
   await chrome.storage.local.set({ fuelPricesError: errors.length ? errors.join("; ") : null });
@@ -241,9 +284,9 @@ async function refreshFromSite() {
   const res = await fetch(SITE_PRICES_URL, { cache: "no-cache" });
   if (!res.ok) throw new Error(`prices.json: HTTP ${res.status}`);
   const site = await res.json();
-  const local = await chrome.storage.local.get(["fuelPrices", "euPrices", "nbpRates", "ukPrices"]);
+  const local = await chrome.storage.local.get(["fuelPrices", "euPrices", "nbpRates", "ukPrices", "usPrices"]);
   const update = { sitePricesCheckedAt: Date.now() };
-  for (const key of ["fuelPrices", "euPrices", "nbpRates", "ukPrices"]) {
+  for (const key of ["fuelPrices", "euPrices", "nbpRates", "ukPrices", "usPrices"]) {
     if (isNewer(site[key], local[key])) update[key] = site[key];
   }
   await chrome.storage.local.set(update);

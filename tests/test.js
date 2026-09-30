@@ -325,6 +325,54 @@ test("mapkaResolvePrice: UK prices converted at the NBP GBP rate, premium fuels 
   assert.strictEqual(noUk.auto, false);
 });
 
+const EIA_RSS = fs.readFileSync(path.join(__dirname, "eia-rss.xml"), "latin1");
+
+test("parseEiaRss: US national, regional and state gasoline and diesel in USD per litre", () => {
+  const { prices, areas, date } = ext.parseEiaRss(EIA_RSS);
+  const gal = (v) => Math.round(v * 3.785411784 * 1000) / 1000;
+  assert.strictEqual(date, "2026-09-28");
+  same({ pb: gal(prices.pb), on: gal(prices.on) }, { pb: 4.465, on: 6.382 });
+  same({ pb: gal(areas.CA.pb), on: gal(areas.CA.on) }, { pb: 6.189, on: 8.181 });
+  same({ pb: gal(areas["5XCA"].pb), on: gal(areas["5XCA"].on) }, { pb: 5.153, on: 6.643 });
+  same({ pb: gal(areas["3"].pb), on: gal(areas["3"].on) }, { pb: 3.924, on: 5.955 });
+  assert.strictEqual(gal(areas.TX.pb), 3.841);
+  assert.strictEqual(areas.TX.on, undefined);
+  same(Object.keys(areas).sort(), ["1A", "1B", "1C", "2", "3", "4", "5", "5XCA", "CA", "CO", "FL", "MA", "MN", "NY", "OH", "TX", "WA"]);
+  assert.throws(() => ext.parseEiaRss("<rss><channel></channel></rss>"), /no data/);
+});
+
+test("mapkaResolvePrice: US state price, else the state's EIA region, else the national average", () => {
+  const data = {
+    ...DATA,
+    nbpRates: { rates: { ...DATA.nbpRates.rates, USD: 4.0 } },
+    usPrices: { prices: { pb: 1.2, on: 1.6 }, areas: { CA: { pb: 1.6, on: 2.1 }, "5XCA": { pb: 1.4, on: 1.8 }, "3": { pb: 1.0, on: 1.5 }, TX: { pb: 0.98 } } },
+  };
+  const at = (region, regionName = null) => ({ cc: "us", region, regionName });
+  const usd = (fuelType, origin, dest = origin) => ext.mapkaResolvePrice(settings({ fuelType, currency: "USD" }), data, { origin, dest });
+  close(usd("pb", at("US-CA", "California")).low, 1.6);
+  const oregon = usd("pb", at("US-OR", "Oregon"));
+  close(oregon.low, 1.4);
+  assert.ok(oregon.source.includes("Oregon"), oregon.source);
+  close(usd("pb", at("US-TX")).low, 0.98);
+  close(usd("on", at("US-TX")).low, 1.5);
+  close(usd("pb", at(null)).low, 1.2);
+  close(usd("pb", at("US-NY")).low, 1.2);
+  const cross = usd("pb", at("US-TX", "Texas"), at("US-CA", "California"));
+  close(cross.low, (0.98 + 1.6) / 2);
+  assert.ok(cross.source.includes("Texas") && cross.source.includes("California"), cross.source);
+  close(usd("pb", at("US-CA", "California"), at("US-CA", "California")).low, 1.6);
+});
+
+test("mapkaResolvePrice: US prices converted at the NBP USD rate and shown per gallon", () => {
+  const data = { ...DATA, nbpRates: { rates: { ...DATA.nbpRates.rates, USD: 4.0 } }, usPrices: { prices: { pb: 1.2, on: 1.6 }, date: "2026-09-28" } };
+  const DENVER = { cc: "us", region: null, regionName: null };
+  close(ext.mapkaResolvePrice(settings(), data, { origin: DENVER, dest: DENVER }).low, 1.2 * 4.0);
+  const usd = ext.mapkaResolvePrice(settings({ fuelType: "onp", currency: "USD", units: "us" }), data, { origin: DENVER, dest: DENVER });
+  close(usd.low, 1.6);
+  assert.ok(usd.source.includes("/gal"), usd.source);
+  assert.strictEqual(ext.mapkaResolvePrice(settings({ price: 7 }), DATA, { origin: DENVER, dest: DENVER }).auto, false);
+});
+
 test("mapkaResolvePrice: EV – home-to-charger range", () => {
   const p = ext.mapkaResolvePrice(settings({ fuelType: "ev", evHomePrice: 1, evFastPrice: 3 }), DATA, null);
   assert.strictEqual(p.low, 1);
@@ -503,6 +551,36 @@ test("mapkaUserCountry: time zone takes precedence over language", () => {
   assert.strictEqual(ext.mapkaUserCountry("Atlantic/Canary", "en"), "ES");
   assert.strictEqual(ext.mapkaUserCountry("America/Chicago", "de"), "DE");
   assert.strictEqual(ext.mapkaUserCountry("UTC", "en-GB"), "GB");
+});
+
+test("units: US display converts to and from the metric values that are stored", () => {
+  close(ext.mapkaToConsumption(7, "pb", "us"), 378.5411784 / 1.609344 / 7);
+  close(ext.mapkaFromConsumption(ext.mapkaToConsumption(6.4, "on", "us"), "on", "us"), 6.4);
+  close(ext.mapkaToConsumption(17, "ev", "us"), 17 * 1.609344);
+  close(ext.mapkaFromConsumption(27.358848, "ev", "us"), 17);
+  assert.strictEqual(ext.mapkaToConsumption(7, "pb", "metric"), 7);
+  assert.strictEqual(ext.mapkaFromConsumption(0, "pb", "us"), 0);
+  close(ext.mapkaToDistance(160.9344, "us"), 100);
+  close(ext.mapkaToVolume(3.785411784, "pb", "us"), 1);
+  assert.strictEqual(ext.mapkaToVolume(20, "ev", "us"), 20);
+  close(ext.mapkaFromUnitPrice(ext.mapkaToUnitPrice(1.5, "pb", "us"), "pb", "us"), 1.5);
+  assert.strictEqual(ext.mapkaToUnitPrice(0.3, "ev", "us"), 0.3);
+  assert.strictEqual(ext.mapkaRoundConsumption(8.4, "pb", "us"), 28);
+});
+
+test("units: labels, the fuel formula and the price description in US units", () => {
+  assert.strictEqual(ext.mapkaConsumptionUnit("pb", "us"), "mpg");
+  assert.strictEqual(ext.mapkaConsumptionUnit("ev", "us"), "kWh/100 mi");
+  assert.strictEqual(ext.mapkaConsumptionUnit("pb"), "l/100 km");
+  assert.strictEqual(ext.mapkaFormatDistance(160.9344, "us", 0), "100 mi");
+  const us = settings({ units: "us" });
+  assert.strictEqual(ext.mapkaFuelFormula(160.9344, us), "100 mi ÷ 33,6 mpg = 3 gal");
+  assert.strictEqual(ext.mapkaFuelFormula(100, settings()), "100 km × 7 l/100 km = 7 l");
+  close(ext.mapkaCostPer100(us, 1), 7 * 1.609344);
+  const p = ext.mapkaResolvePrice(us, DATA, null);
+  assert.strictEqual(p.low, 6.2);
+  assert.ok(/23,47\s*zł\/gal$/.test(p.source), p.source);
+  assert.ok(/6,20\s*zł\/l$/.test(ext.mapkaResolvePrice(settings(), DATA, null).source));
 });
 
 test("mapkaCountryCurrency: the country's currency, euro for the eurozone", () => {

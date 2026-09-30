@@ -145,11 +145,9 @@
 
   function costTitle(km, s) {
     if (!s.configured) return mapkaT("title_setup");
-    const unit = mapkaUnit(s.fuelType);
-    const fuel = km * s.consumption / 100;
     const { price } = tripCost(km, s);
     const lines = [
-      `${mapkaFormatNumber(km)} km × ${mapkaFormatNumber(s.consumption)} ${unit}/100 km = ${mapkaFormatNumber(fuel)} ${unit}`,
+      mapkaFuelFormula(km, s),
       `${MAPKA_FUELS[s.fuelType]}: ${price.source}`,
     ];
     if (s.showRoundTrip) lines.push(mapkaT("title_round"));
@@ -373,11 +371,10 @@
     save.title = mapkaT("float_save_title");
     actions.append(copy, save);
 
-    const unit = mapkaUnit(s.fuelType);
     const foot = el(
       "div",
       `${FLOAT_CLASS}__foot`,
-      `${MAPKA_FUELS[s.fuelType]} · ${mapkaFormatNumber(s.consumption)} ${unit}/100 km · ${price.source}` +
+      `${MAPKA_FUELS[s.fuelType]} · ${mapkaFormatConsumption(s.consumption, s.fuelType, s.units)} · ${price.source}` +
         (override ? ` · ${mapkaT("float_override_tag")}` : "")
     );
     floatEl.append(list, actions, foot);
@@ -405,7 +402,7 @@
     if (s.showRoundTrip) lines.push(mapkaT("summary_round", formatCost(roundShown(low) * 2, roundShown(high) * 2, s)));
     const m = mapkaMileage(route.km, s, data);
     if (m != null) lines.push(mapkaT("summary_mileage", mapkaFormatMoney(m, s.currency)));
-    lines.push(`(${MAPKA_FUELS[s.fuelType]}, ${mapkaFormatNumber(s.consumption)} ${mapkaUnit(s.fuelType)}/100 km)`);
+    lines.push(`(${MAPKA_FUELS[s.fuelType]}, ${mapkaFormatConsumption(s.consumption, s.fuelType, s.units)})`);
     if (s.summaryLink) lines.push(mapkaT("summary_link", `${MAPKA_SITE_URL}${MAPKA_LOCALE === "pl" ? "" : "en"}?ref=kopia`));
     return lines.join("\n");
   }
@@ -514,19 +511,19 @@
     const fuelSelect = panel.querySelector("[name=fuelType]");
     for (const [key, name] of Object.entries(MAPKA_FUELS)) fuelSelect.add(new Option(name, key));
     fuelSelect.value = s.fuelType;
-    panel.querySelector("[name=consumption]").value = s.consumption;
+    panel.querySelector("[name=consumption]").value = mapkaRoundConsumption(s.consumption, s.fuelType, s.units);
     panel.querySelector("[name=passengers]").value = s.passengers;
 
     const priceInfo = panel.querySelector(".mapka-panel__price");
     const consumptionLabel = panel.querySelector(".mapka-consumption-label");
     const readPanel = () => ({
       fuelType: fuelSelect.value,
-      consumption: parseFloat(panel.querySelector("[name=consumption]").value),
+      consumption: mapkaFromConsumption(parseFloat(panel.querySelector("[name=consumption]").value), fuelSelect.value, s.units),
       passengers: Math.max(1, parseInt(panel.querySelector("[name=passengers]").value, 10) || 1),
     });
     const update = () => {
       const values = readPanel();
-      consumptionLabel.textContent = mapkaConsumptionLabel(values.fuelType);
+      consumptionLabel.textContent = mapkaConsumptionLabel(values.fuelType, s.units);
       priceInfo.textContent = mapkaT("panel_price", priceFor({ ...s, ...values }).source);
     };
     update();

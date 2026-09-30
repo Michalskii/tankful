@@ -3,7 +3,7 @@
     "message": "Tankful – fuel cost for every route"
   },
   "appDescription": {
-    "message": "See the fuel cost of every Google Maps driving route – live prices for Poland, the EU and the UK, EVs, cost per person."
+    "message": "See the fuel cost of every Google Maps driving route – live prices for Poland, the EU, the UK and the US, EVs, cost per person."
   },
   "actionTitle": {
     "message": "Trip cost settings"
@@ -54,13 +54,13 @@
     "message": "Poland avg."
   },
   "price_single": {
-    "message": "$1 $2/l"
+    "message": "$1 $2"
   },
   "price_average": {
-    "message": "average of $1 $2 and $3 $4/l"
+    "message": "average of $1 $2 and $3 $4"
   },
   "price_route": {
-    "message": "route average: $1/l"
+    "message": "route average: $1"
   },
   "price_ev": {
     "message": "home $1 – fast charger $2 per kWh"
@@ -198,7 +198,7 @@
     "message": "Refresh"
   },
   "popup_local_prices": {
-    "message": "Country prices along the route (EU and UK)"
+    "message": "Country prices along the route (EU, UK and US)"
   },
   "popup_local_hint": {
     "message": "The route's start and destination (rounded to ~1 km) are sent to OpenStreetMap to find the country."
@@ -243,7 +243,7 @@
     "message": "no response"
   },
   "popup_preview": {
-    "message": "100 km ≈ $1"
+    "message": "$1 ≈ $2"
   },
   "welcome_page_title": {
     "message": "Tankful – first setup"
@@ -309,7 +309,7 @@
     "message": "Delete the trip $1 → $2?"
   },
   "csv_header": {
-    "message": "Date;From;To;Route;Km;Round trip;Fuel;Consumption per 100 km;People;Cost from;Cost to;Currency;Mileage allowance"
+    "message": "Date;From;To;Route;Distance ($1);Round trip;Fuel;Consumption ($2);People;Cost from;Cost to;Currency;Mileage allowance"
   },
   "csv_yes": {
     "message": "yes"
@@ -328,5 +328,29 @@
   },
   "error_eu_prices": {
     "message": "EU bulletin: no prices found"
+  },
+  "consumption_fuel_us": {
+    "message": "Fuel economy (mpg)"
+  },
+  "consumption_ev_us": {
+    "message": "Energy use (kWh per 100 mi)"
+  },
+  "popup_manual_price_us": {
+    "message": "Manual price (per gallon)"
+  },
+  "label_units": {
+    "message": "Units"
+  },
+  "units_metric": {
+    "message": "Kilometres and litres"
+  },
+  "units_us": {
+    "message": "Miles and US gallons (mpg)"
+  },
+  "csv_consumption_metric": {
+    "message": "per 100 km"
+  },
+  "csv_consumption_us": {
+    "message": "mpg or kWh per 100 mi"
   }
 }

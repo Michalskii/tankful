@@ -13,9 +13,10 @@ type Props = {
   selected: number
   onSelect: (i: number) => void
   stops: { lat: number; lng: number }[]
+  units: string
 }
 
-export function RouteMap({ routes, selected, onSelect, stops }: Props) {
+export function RouteMap({ routes, selected, onSelect, stops, units }: Props) {
   const container = useRef<HTMLDivElement>(null)
   const map = useRef<L.Map | null>(null)
   const layer = useRef<L.LayerGroup | null>(null)
@@ -60,7 +61,7 @@ export function RouteMap({ routes, selected, onSelect, stops }: Props) {
         : [
             L.polyline(line(r), { color: ALT_COLOR, weight: 5, opacity: 0.8 })
               .on("click", () => select.current(i))
-              .bindTooltip(`${Math.round(r.km)} km`, { sticky: true }),
+              .bindTooltip(mapkaFormatDistance(r.km, units, 0), { sticky: true }),
           ]
     )
     const main = line(active)
@@ -71,7 +72,7 @@ export function RouteMap({ routes, selected, onSelect, stops }: Props) {
       stop(main[main.length - 1]),
       ...stops.map((p) => stop([p.lat, p.lng], 5)),
     ]).addTo(m)
-  }, [routes, selected, stops])
+  }, [routes, selected, stops, units])
 
   return <div ref={container} className="size-full min-h-80" />
 }

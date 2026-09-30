@@ -3,7 +3,7 @@
     "message": "Tankful – koszt paliwa na trasie"
   },
   "appDescription": {
-    "message": "Koszt paliwa przy każdej trasie w Mapach Google – aktualne ceny w Polsce, UE i Wielkiej Brytanii, auta elektryczne, koszt na osobę."
+    "message": "Koszt paliwa przy każdej trasie w Mapach Google – aktualne ceny w UE, Wielkiej Brytanii i USA, auta elektryczne, koszt na osobę."
   },
   "actionTitle": {
     "message": "Ustawienia kosztu przejazdu"
@@ -54,13 +54,13 @@
     "message": "średnia PL"
   },
   "price_single": {
-    "message": "$1 $2/l"
+    "message": "$1 $2"
   },
   "price_average": {
-    "message": "średnio $1 $2 i $3 $4/l"
+    "message": "średnio $1 $2 i $3 $4"
   },
   "price_route": {
-    "message": "średnio na trasie: $1/l"
+    "message": "średnio na trasie: $1"
   },
   "price_ev": {
     "message": "dom $1 – ładowarka $2 za kWh"
@@ -198,7 +198,7 @@
     "message": "Odśwież"
   },
   "popup_local_prices": {
-    "message": "Ceny krajów na trasie (UE i Wielka Brytania)"
+    "message": "Ceny krajów na trasie (UE, Wielka Brytania, USA)"
   },
   "popup_local_hint": {
     "message": "Start i cel trasy (zaokrąglone do ~1 km) są wysyłane do OpenStreetMap, żeby ustalić kraj."
@@ -243,7 +243,7 @@
     "message": "brak odpowiedzi"
   },
   "popup_preview": {
-    "message": "100 km ≈ $1"
+    "message": "$1 ≈ $2"
   },
   "welcome_page_title": {
     "message": "Tankful – pierwsze ustawienia"
@@ -309,7 +309,7 @@
     "message": "Usunąć przejazd $1 → $2?"
   },
   "csv_header": {
-    "message": "Data;Skąd;Dokąd;Trasa;Km;Tam i z powrotem;Paliwo;Zużycie na 100 km;Osoby;Koszt od;Koszt do;Waluta;Kilometrówka"
+    "message": "Data;Skąd;Dokąd;Trasa;Dystans ($1);Tam i z powrotem;Paliwo;Zużycie ($2);Osoby;Koszt od;Koszt do;Waluta;Kilometrówka"
   },
   "csv_yes": {
     "message": "tak"
@@ -328,5 +328,29 @@
   },
   "error_eu_prices": {
     "message": "Biuletyn UE: nie znaleziono cen"
+  },
+  "consumption_fuel_us": {
+    "message": "Spalanie (mpg, mile na galon)"
+  },
+  "consumption_ev_us": {
+    "message": "Zużycie (kWh na 100 mil)"
+  },
+  "popup_manual_price_us": {
+    "message": "Cena ręczna (za galon)"
+  },
+  "label_units": {
+    "message": "Jednostki"
+  },
+  "units_metric": {
+    "message": "Kilometry i litry"
+  },
+  "units_us": {
+    "message": "Mile i galony USA (mpg)"
+  },
+  "csv_consumption_metric": {
+    "message": "na 100 km"
+  },
+  "csv_consumption_us": {
+    "message": "mpg lub kWh na 100 mil"
   }
 }

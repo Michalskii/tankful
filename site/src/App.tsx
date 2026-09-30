@@ -56,7 +56,9 @@ function initialOptions(): Options {
   const fuel = params.get("fuel") || prefs.fuelType || MAPKA_DEFAULTS.fuelType
   const fuelType = MAPKA_FUELS[fuel] ? fuel : MAPKA_DEFAULTS.fuelType
   const currency = params.get("cur") || prefs.currency || MAPKA_CURRENCY
+  const units = readPrefs().units || MAPKA_DEFAULTS.units
   return {
+    units: units === "us" ? "us" : "metric",
     fuelType,
     consumption: parseFloat(params.get("c") || "") || prefs.consumption || TYPICAL_CONSUMPTION[fuelType],
     passengers: parseInt(params.get("p") || "", 10) || prefs.passengers || 1,
@@ -90,8 +92,11 @@ export default function App() {
   const [items, setItems] = useState<StopItem[]>(() => initialStops().map(stopItem))
   const stops = useMemo(() => items.map((s) => s.place), [items])
   const [options, setOptions] = useState<Options>(initialOptions)
-  const [consumptionText, setConsumptionText] = useState(String(options.consumption))
+  const [consumptionText, setConsumptionText] = useState(() =>
+    String(mapkaRoundConsumption(options.consumption, options.fuelType, options.units))
+  )
   const [consumptionTouched, setConsumptionTouched] = useState(false)
+  const [ownPriceText, setOwnPriceText] = useState("")
   const [data, setData] = useState<MapkaData>({ ...MAPKA_DATA_KEYS })
   const [pricesError, setPricesError] = useState(false)
   const [plan, setPlan] = useState<{ stops: Place[]; variants: { route: Route; shares: Record<string, number> | null }[] } | null>(null)
@@ -169,7 +174,7 @@ export default function App() {
     for (const via of trip.stops.slice(1, -1)) p.append("via", encodePlace(via))
     p.set("to", encodePlace(trip.to))
     p.set("fuel", options.fuelType)
-    p.set("c", String(options.consumption))
+    p.set("c", String(Math.round(options.consumption * 1000) / 1000))
     if (options.passengers > 1) p.set("p", String(options.passengers))
     if (options.roundTrip) p.set("rt", "1")
     p.set("cur", options.currency)
@@ -186,9 +191,21 @@ export default function App() {
     const patch: Partial<Options> = { fuelType }
     if (!consumptionTouched) {
       patch.consumption = TYPICAL_CONSUMPTION[fuelType]
-      setConsumptionText(String(TYPICAL_CONSUMPTION[fuelType]))
+      setConsumptionText(String(mapkaRoundConsumption(TYPICAL_CONSUMPTION[fuelType], fuelType, options.units)))
+    } else {
+      patch.consumption = mapkaFromConsumption(parseFloat(consumptionText) || 0, fuelType, options.units)
     }
     set(patch)
+  }
+
+  function changeUnits(units: string) {
+    if (!units || units === options.units) return
+    setConsumptionText(String(mapkaRoundConsumption(options.consumption, options.fuelType, units)))
+    if (options.ownPrice) {
+      const scale = units === "us" ? 1000 : 100
+      setOwnPriceText(String(Math.round(mapkaToUnitPrice(options.ownPrice, "pb", units) * scale) / scale))
+    }
+    set({ units })
   }
 
   async function copyLink() {
@@ -201,7 +218,8 @@ export default function App() {
     }
   }
 
-  const unit = mapkaUnit(options.fuelType)
+  const unit = mapkaUnit(options.fuelType, options.units)
+  const distance = (km: number) => mapkaFormatDistance(km, options.units, 0)
 
   return (
     <div className="flex min-h-svh flex-col lg:h-svh">
@@ -273,7 +291,7 @@ export default function App() {
                 <div className="grid grid-cols-2 gap-3">
                   <div className="flex min-w-0 flex-col gap-2">
                     <Label htmlFor="consumption" className="truncate">
-                      {mapkaConsumptionLabel(options.fuelType)}
+                      {mapkaConsumptionLabel(options.fuelType, options.units)}
                     </Label>
                     <InputGroup>
                       <InputGroupInput
@@ -286,11 +304,11 @@ export default function App() {
                         onChange={(e) => {
                           setConsumptionText(e.target.value)
                           setConsumptionTouched(true)
-                          set({ consumption: parseFloat(e.target.value) || 0 })
+                          set({ consumption: mapkaFromConsumption(parseFloat(e.target.value) || 0, options.fuelType, options.units) })
                         }}
                       />
                       <InputGroupAddon align="inline-end">
-                        <InputGroupText>{unit}/100 km</InputGroupText>
+                        <InputGroupText>{mapkaConsumptionUnit(options.fuelType, options.units)}</InputGroupText>
                       </InputGroupAddon>
                     </InputGroup>
                   </div>
@@ -312,24 +330,43 @@ export default function App() {
                   {options.fuelType !== "ev" && (
                     <div className="flex min-w-0 flex-col gap-2">
                       <Label htmlFor="own-price" className="truncate">
-                        {T("ownPrice")}
+                        {T(options.units === "us" ? "ownPriceUs" : "ownPrice")}
                       </Label>
                       <InputGroup>
                         <InputGroupInput
                           id="own-price"
                           type="number"
                           inputMode="decimal"
-                          step="0.01"
+                          step={options.units === "us" ? "0.001" : "0.01"}
                           min="0"
                           placeholder={T("ownPriceHint")}
-                          onChange={(e) => set({ ownPrice: parseFloat(e.target.value) || null })}
+                          value={ownPriceText}
+                          onChange={(e) => {
+                            setOwnPriceText(e.target.value)
+                            const shown = parseFloat(e.target.value)
+                            set({ ownPrice: shown ? mapkaFromUnitPrice(shown, "pb", options.units) : null })
+                          }}
                         />
                         <InputGroupAddon align="inline-end">
-                          <InputGroupText>{options.currency}/l</InputGroupText>
+                          <InputGroupText>
+                            {options.currency}/{unit}
+                          </InputGroupText>
                         </InputGroupAddon>
                       </InputGroup>
                     </div>
                   )}
+                  <div className="flex min-w-0 flex-col gap-2">
+                    <Label htmlFor="units">{mapkaT("label_units")}</Label>
+                    <Select value={options.units} onValueChange={changeUnits}>
+                      <SelectTrigger id="units" className="w-full">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="metric">km · l</SelectItem>
+                        <SelectItem value="us">mi · gal (US)</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
                   <div className="flex min-w-0 flex-col gap-2">
                     <Label htmlFor="currency">{T("currency")}</Label>
                     <Select value={options.currency} onValueChange={(currency) => set({ currency })}>
@@ -373,9 +410,9 @@ export default function App() {
                   <CardDescription>{T("resultLabel")}</CardDescription>
                   <CardTitle className="text-5xl font-semibold tracking-tight tabular-nums">≈ {cost.total}</CardTitle>
                   <p className="text-sm text-muted-foreground tabular-nums">
-                    {mapkaFormatNumber(trip.route.km, 0)} km · {formatDuration(trip.route.minutes)} ·{" "}
-                    {mapkaFormatNumber(cost.units)} {unit}
-                    {trip.route.ferryKm >= 1 && ` · ${T("ferry", mapkaFormatNumber(trip.route.ferryKm, 0))}`}
+                    {distance(trip.route.km)} · {formatDuration(trip.route.minutes)} ·{" "}
+                    {mapkaFormatNumber(mapkaToVolume(cost.units, options.fuelType, options.units))} {unit}
+                    {trip.route.ferryKm >= 1 && ` · ${T("ferry", distance(trip.route.ferryKm))}`}
                   </p>
                   {(cost.perPerson || cost.roundTrip) && (
                     <div className="flex flex-wrap gap-2 pt-1">
@@ -391,11 +428,11 @@ export default function App() {
                     <div role="radiogroup" aria-label={T("variants")} className="flex flex-col gap-1.5">
                       {trips.map((t, i) => {
                         const fastest = trips[0].route
-                        const kmDiff = Math.round(t.route.km + t.route.ferryKm - fastest.km - fastest.ferryKm)
+                        const kmDiff = t.route.km + t.route.ferryKm - fastest.km - fastest.ferryKm
                         const extra =
                           i === 0
                             ? T("fastest")
-                            : `${kmDiff < 0 ? "−" : "+"}${mapkaFormatNumber(Math.abs(kmDiff), 0)} km, +${formatDuration(Math.max(0, t.route.minutes - fastest.minutes))}`
+                            : `${kmDiff < 0 ? "−" : "+"}${distance(Math.abs(kmDiff))}, +${formatDuration(Math.max(0, t.route.minutes - fastest.minutes))}`
                         const active = t === trip
                         return (
                           <button
@@ -414,8 +451,8 @@ export default function App() {
                             </span>
                             <span className="font-semibold tabular-nums">{costs[i]?.total}</span>
                             <span className="text-xs text-muted-foreground tabular-nums">
-                              {mapkaFormatNumber(t.route.km, 0)} km · {formatDuration(t.route.minutes)}
-                              {t.route.ferryKm >= 1 && ` · ${T("ferry", mapkaFormatNumber(t.route.ferryKm, 0))}`}
+                              {distance(t.route.km)} · {formatDuration(t.route.minutes)}
+                              {t.route.ferryKm >= 1 && ` · ${T("ferry", distance(t.route.ferryKm))}`}
                             </span>
                           </button>
                         )
@@ -509,7 +546,7 @@ export default function App() {
         </aside>
 
         <section className="isolate order-2 mx-4 h-80 overflow-hidden rounded-xl border sm:mx-6 lg:m-0 lg:h-auto lg:flex-1 lg:rounded-none lg:border-0">
-          <RouteMap routes={routes} selected={trips.indexOf(trip!)} onSelect={setSelected} stops={viaStops} />
+          <RouteMap routes={routes} selected={trips.indexOf(trip!)} onSelect={setSelected} stops={viaStops} units={options.units} />
         </section>
       </main>
       <Toaster position="bottom-center" />

@@ -14,6 +14,7 @@ declare global {
   const MAPKA_DEFAULTS: MapkaSettings
   const MAPKA_DATA_KEYS: MapkaData
   const MAPKA_REGIONS: Record<string, string>
+  const MAPKA_US_STATES: Record<string, [string, string]>
 
   function mapkaT(key: string, ...subs: unknown[]): string
   function mapkaResolvePrice(s: MapkaSettings, data: MapkaData, geo: MapkaGeo | null): MapkaPrice
@@ -23,8 +24,19 @@ declare global {
   function mapkaFormatMoney(value: number, currency: string): string
   function mapkaFormatUnitPrice(value: number, currency: string): string
   function mapkaFormatNumber(value: number, maxDigits?: number): string
-  function mapkaUnit(fuelType: string): string
-  function mapkaConsumptionLabel(fuelType: string): string
+  function mapkaUnit(fuelType: string, units?: string): string
+  function mapkaConsumptionLabel(fuelType: string, units?: string): string
+  function mapkaConsumptionUnit(fuelType: string, units?: string): string
+  function mapkaDistanceUnit(units?: string): string
+  function mapkaToDistance(km: number, units?: string): number
+  function mapkaFormatDistance(km: number, units?: string, maxDigits?: number): string
+  function mapkaToVolume(amount: number, fuelType: string, units?: string): number
+  function mapkaToUnitPrice(perUnit: number, fuelType: string, units?: string): number
+  function mapkaFromUnitPrice(shown: number, fuelType: string, units?: string): number
+  function mapkaToConsumption(metric: number, fuelType: string, units?: string): number
+  function mapkaFromConsumption(shown: number, fuelType: string, units?: string): number
+  function mapkaRoundConsumption(metric: number, fuelType: string, units?: string): number
   function mapkaCountryName(cc: string): string
   function mapkaStartPrice(pln: number, currency: string): number
+  function mapkaFallbackPrice(currency: string): number
 }

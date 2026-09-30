@@ -14,6 +14,7 @@ type OsrmRoute = {
 export type Trip = { stops: Place[]; from: Place; to: Place; route: Route; shares: Record<string, number> | null }
 
 export type Options = {
+  units: string
   fuelType: string
   consumption: number
   passengers: number
@@ -88,11 +89,12 @@ export function sparsePoints(points: { lat: number; lng: number }[], km = 2) {
 export function settingsFor(o: Options): MapkaSettings {
   return {
     ...MAPKA_DEFAULTS,
+    units: o.units,
     fuelType: o.fuelType,
     consumption: o.consumption,
     currency: o.currency,
     autoPrice: !o.ownPrice,
-    price: o.ownPrice || MAPKA_DEFAULTS.price,
+    price: o.ownPrice || mapkaFallbackPrice(o.currency),
     evHomePrice: mapkaStartPrice(1.1, o.currency),
     evFastPrice: mapkaStartPrice(2.8, o.currency),
   }
@@ -134,7 +136,10 @@ export function tripCost(trip: Trip, o: Options, data: MapkaData): Cost {
       cc,
       name: mapkaCountryName(cc),
       pct: Math.round(share * 100),
-      unitPrice: value != null ? `${mapkaFormatUnitPrice(value, o.currency)}/${mapkaUnit(o.fuelType)}` : null,
+      unitPrice:
+        value != null
+          ? `${mapkaFormatUnitPrice(mapkaToUnitPrice(value, o.fuelType, o.units), o.currency)}/${mapkaUnit(o.fuelType, o.units)}`
+          : null,
     }
   })
 

@@ -84,7 +84,14 @@ const REGION_NAMES = Object.fromEntries(
   ].map(([pl, en]) => [slugOf(pl), MAPKA_LOCALE === "pl" ? `województwo ${pl}` : `${en} Voivodeship`])
 )
 
+const US_STATE_CODES = Object.fromEntries(Object.entries(MAPKA_US_STATES).map(([code, [name]]) => [name, code]))
+
 export function placeGeo(place: Place): MapkaPlace {
+  if (place.cc === "us") {
+    const state = place.state || ""
+    const code = place.region || (MAPKA_US_STATES[state] ? state : US_STATE_CODES[state])
+    return { cc: "us", region: code ? `US-${code}` : null, regionName: code ? MAPKA_US_STATES[code]?.[0] ?? null : null }
+  }
   if (place.cc !== "pl") return { cc: place.cc }
   if (place.region) return { cc: "pl", region: `PL-${place.region}`, regionName: REGION_NAMES[MAPKA_REGIONS[place.region]] }
   const code = REGION_CODES[slugOf(place.state || "")]
