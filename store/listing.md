@@ -62,7 +62,7 @@ TRIP HISTORY AND BUSINESS TRIPS
 PRIVACY
 No account, no ads, no analytics, no servers. Your settings and trip history stay in your browser. To find the country for local prices, only the route's start and destination – rounded to about 1 km – are sent to OpenStreetMap, and you can turn that off. Full policy: https://koszt-paliwa.pl/privacy.html
 
-Works on Google Maps in all EU countries, the UK, the US, Switzerland, Norway and Iceland – with automatic prices in the EU, the UK and the US, and your own price in Switzerland, Norway and Iceland. Available in English and Polish.
+Works on Google Maps in all EU countries, the UK, the US, Switzerland, Norway and Iceland – with automatic prices in the EU, the UK and the US, and your own price in Switzerland, Norway and Iceland. Available in English, Polish and German.
 
 Costs are estimates based on average fuel prices and the consumption you enter; actual prices at the pump vary.
 
@@ -98,7 +98,7 @@ HISTORIA PRZEJAZDÓW I KILOMETRÓWKA
 PRYWATNOŚĆ
 Bez konta, reklam, analityki i serwerów. Ustawienia i historia przejazdów zostają w Twojej przeglądarce. Żeby ustalić kraj dla cen lokalnych, do OpenStreetMap wysyłane jest tylko położenie startu i celu trasy – zaokrąglone do ok. 1 km – i możesz to wyłączyć. Pełna polityka: https://koszt-paliwa.pl/privacy.html
 
-Działa w Mapach Google we wszystkich krajach UE, w Wielkiej Brytanii, USA, Szwajcarii, Norwegii i Islandii – z automatycznymi cenami w UE, Wielkiej Brytanii i USA, a w Szwajcarii, Norwegii i Islandii z Twoją własną ceną. Po polsku i po angielsku.
+Działa w Mapach Google we wszystkich krajach UE, w Wielkiej Brytanii, USA, Szwajcarii, Norwegii i Islandii – z automatycznymi cenami w UE, Wielkiej Brytanii i USA, a w Szwajcarii, Norwegii i Islandii z Twoją własną ceną. Po polsku, angielsku i niemiecku.
 
 Koszty są szacunkowe – opierają się na średnich cenach paliw i podanym przez Ciebie spalaniu; ceny na stacjach mogą się różnić.
 
@@ -107,7 +107,7 @@ Tankful to niezależny projekt, niezwiązany z Google ani przez Google niepopier
 
 ---
 
-### Opis – Deutsch (od wersji 1.2.7 – dopiero gdy paczka z `_locales/de` jest w sklepie)
+### Opis – Deutsch (od wersji 1.2.7)
 
 Krótki opis z manifestu: Spritkosten jeder Autoroute in Google Maps – aktuelle Preise für Polen, EU, Großbritannien und USA, E-Autos, pro Person.
 
@@ -146,7 +146,7 @@ Die Kosten sind Schätzungen auf Basis durchschnittlicher Spritpreise und des ei
 Tankful ist ein unabhängiges Projekt und steht in keiner Verbindung zu Google. Open Source (MIT): https://github.com/Michalskii/tankful
 ```
 
-Przy 1.2.7 zmienić też w opisach EN i PL zdanie o językach: „Available in English, Polish and German.” / „Dostępna po polsku, angielsku i niemiecku.” Zrzuty dla karty niemieckiej: na razie `store/en/`.
+W 1.2.7 opisy EN i PL mówią już o trzech językach – przy wysyłce 1.2.7 wkleić je ponownie. Zrzuty dla karty niemieckiej: na razie `store/en/`.
 
 ## Karta „Privacy practices”
 
