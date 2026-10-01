@@ -706,7 +706,7 @@ test("site: language from the URL, old ?lang= redirects to /en or the home page"
     vm.runInNewContext(source("site/public/boot.js"), ctx);
     return { lang: ctx.window.chrome.i18n.getUILanguage(), redirect };
   };
-  const base = "https://michalskii.github.io/tankful/";
+  const base = "https://koszt-paliwa.pl/";
   same(run(base), { lang: "pl", redirect: null });
   same(run(`${base}en`), { lang: "en", redirect: null });
   same(run(`${base}en.html?from=x`), { lang: "en", redirect: null });

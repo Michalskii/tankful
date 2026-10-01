@@ -26,7 +26,7 @@ English (domyślny) + Polski – dla każdego wklej opis i zrzuty z `store/en/` 
 ### Adresy
 | Pole | Wartość |
 |---|---|
-| Homepage URL | https://michalskii.github.io/tankful/ (kalkulator online) |
+| Homepage URL | https://koszt-paliwa.pl/ (kalkulator online) |
 | Support URL | https://github.com/Michalskii/tankful/issues |
 
 ### Krótki opis (z manifestu – tylko do wglądu)
@@ -60,7 +60,7 @@ TRIP HISTORY AND BUSINESS TRIPS
 • Polish mileage allowance ("kilometrówka") at the official per-km rates, for business-trip claims.
 
 PRIVACY
-No account, no ads, no analytics, no servers. Your settings and trip history stay in your browser. To find the country for local prices, only the route's start and destination – rounded to about 1 km – are sent to OpenStreetMap, and you can turn that off. Full policy: https://michalskii.github.io/tankful/privacy.html
+No account, no ads, no analytics, no servers. Your settings and trip history stay in your browser. To find the country for local prices, only the route's start and destination – rounded to about 1 km – are sent to OpenStreetMap, and you can turn that off. Full policy: https://koszt-paliwa.pl/privacy.html
 
 Works on Google Maps in all EU countries, the UK, the US, Switzerland, Norway and Iceland – with automatic prices in the EU, the UK and the US, and your own price in Switzerland, Norway and Iceland. Available in English and Polish.
 
@@ -96,7 +96,7 @@ HISTORIA PRZEJAZDÓW I KILOMETRÓWKA
 • Kilometrówka według oficjalnych stawek za kilometr – do rozliczania podróży służbowych.
 
 PRYWATNOŚĆ
-Bez konta, reklam, analityki i serwerów. Ustawienia i historia przejazdów zostają w Twojej przeglądarce. Żeby ustalić kraj dla cen lokalnych, do OpenStreetMap wysyłane jest tylko położenie startu i celu trasy – zaokrąglone do ok. 1 km – i możesz to wyłączyć. Pełna polityka: https://michalskii.github.io/tankful/privacy.html
+Bez konta, reklam, analityki i serwerów. Ustawienia i historia przejazdów zostają w Twojej przeglądarce. Żeby ustalić kraj dla cen lokalnych, do OpenStreetMap wysyłane jest tylko położenie startu i celu trasy – zaokrąglone do ok. 1 km – i możesz to wyłączyć. Pełna polityka: https://koszt-paliwa.pl/privacy.html
 
 Działa w Mapach Google we wszystkich krajach UE, w Wielkiej Brytanii, USA, Szwajcarii, Norwegii i Islandii – z automatycznymi cenami w UE, Wielkiej Brytanii i USA, a w Szwajcarii, Norwegii i Islandii z Twoją własną ceną. Po polsku i po angielsku.
 
@@ -133,7 +133,7 @@ Refreshes the cached fuel prices and exchange rates once an hour in the backgrou
 ```text
 Google Maps (www.google.<country>/maps*, maps.google.<country>/*, for EU countries, the UK, the US, Switzerland, Norway and Iceland): the content script reads the distance and travel time of each driving route and shows the fuel cost next to it. It runs only on Google Maps pages.
 
-Fuel prices and exchange rates normally come from one public file on the extension's own website (michalskii.github.io/tankful/prices.json, readable without a host permission), which is built every few hours from the sources below (plus Orlen's public wholesale price list, the UK government's weekly road fuel prices and the U.S. EIA's weekly gasoline and diesel prices, used only by the website's build server). The extension contacts these sources directly only when that file is unavailable or out of date:
+Fuel prices and exchange rates normally come from one public file on the extension's own website (koszt-paliwa.pl/prices.json, readable without a host permission), which is built every few hours from the sources below (plus Orlen's public wholesale price list, the UK government's weekly road fuel prices and the U.S. EIA's weekly gasoline and diesel prices, used only by the website's build server). The extension contacts these sources directly only when that file is unavailable or out of date:
 energy.ec.europa.eu: the European Commission's Weekly Oil Bulletin with national fuel prices in EU countries.
 api.nbp.pl: exchange rates from the National Bank of Poland to convert prices between currencies.
 nominatim.openstreetmap.org: finds the country of a route's start and destination to choose local fuel prices; coordinates are rounded to about 1 km, and this can be turned off in the settings.
@@ -166,7 +166,7 @@ All JavaScript is included in the extension package. The extension only download
 - ✓ I do not use or transfer user data to determine creditworthiness or for lending purposes
 
 ### Privacy policy URL
-https://michalskii.github.io/tankful/privacy.html
+https://koszt-paliwa.pl/privacy.html
 
 ---
 
