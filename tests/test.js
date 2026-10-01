@@ -725,12 +725,13 @@ test("site: routes have known cities, unique URLs and OSRM data", () => {
     if (c.cc === "pl") assert.ok(regions[c.region], `${key}: unknown region ${c.region}`);
   }
   for (const lang of ["pl", "en", "de"]) {
-    const slugs = routes.map((r) => r[lang]).filter((x) => lang !== "de" || x);
+    const slugs = routes.map((r) => r[lang]).filter(Boolean);
     same(slugs.filter((x, i) => slugs.indexOf(x) !== i), []);
     for (const slug of slugs) assert.match(slug, /^[a-z0-9]+(-[a-z0-9]+)+$/);
   }
   for (const r of routes) {
-    assert.ok(cities[r.from] && cities[r.to], r.pl);
+    assert.ok(cities[r.from] && cities[r.to], r.pl ?? r.de);
+    assert.ok(r.deOnly ? r.de && !r.pl && !r.en : r.pl && r.en, `${r.pl ?? r.de}: slugs`);
     assert.ok(r.km > 10 && r.minutes > 10, r.pl);
     if (r.shares) assert.ok(Math.abs(Object.values(r.shares).reduce((a, b) => a + b, 0) - 1) < 0.01, `${r.pl}: country shares do not add up to 100%`);
   }

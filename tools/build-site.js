@@ -32,8 +32,7 @@ function page(lang, rel, file, route = null) {
 const GROUPS = [
   [page("pl", "", "index.html"), page("en", "en", "en.html"), page("de", "", "index.html")],
   ...ROUTES.map((r) => [
-    page("pl", `trasa/${r.pl}`, `trasa/${r.pl}.html`, r),
-    page("en", `route/${r.en}`, `route/${r.en}.html`, r),
+    ...(r.deOnly ? [] : [page("pl", `trasa/${r.pl}`, `trasa/${r.pl}.html`, r), page("en", `route/${r.en}`, `route/${r.en}.html`, r)]),
     ...(r.de ? [page("de", `strecke/${r.de}`, `strecke/${r.de}.html`, r.deFlip ? { ...r, from: r.to, to: r.from } : r)] : []),
   ]),
 ];

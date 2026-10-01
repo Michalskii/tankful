@@ -40,7 +40,8 @@
     "url": "https://unsplash.com/photos/FPZ8Lnn5Ws8",
     "alt": {
       "pl": "Dwóch przyjaciół siedzi na dachu samochodu o zachodzie słońca",
-      "en": "Two friends sitting on a car roof at sunset"
+      "en": "Two friends sitting on a car roof at sunset",
+      "de": "Zwei Freunde sitzen bei Sonnenuntergang auf dem Dach eines Autos"
     }
   },
   "croatia": {
@@ -48,7 +49,8 @@
     "url": "https://unsplash.com/photos/l3n2BmpfNfM",
     "alt": {
       "pl": "Wybrzeże Adriatyku z sosnami i spokojnym morzem",
-      "en": "Adriatic coast with pine trees and a calm sea"
+      "en": "Adriatic coast with pine trees and a calm sea",
+      "de": "Adriaküste mit Kiefern und ruhigem Meer"
     }
   },
   "germany": {
@@ -56,7 +58,8 @@
     "url": "https://unsplash.com/photos/kM9LrMOCSGA",
     "alt": {
       "pl": "Autostrada w Niemczech między lasami",
-      "en": "Motorway in Germany running between forests"
+      "en": "Motorway in Germany running between forests",
+      "de": "Autobahn in Deutschland zwischen Wäldern"
     }
   },
   "czechia": {
@@ -82,7 +85,8 @@
     "url": "https://unsplash.com/photos/FOfXNZ-BU2U",
     "alt": {
       "pl": "Plaża nad Bałtykiem z sosnami na wydmie",
-      "en": "Baltic beach with pine trees on the dune"
+      "en": "Baltic beach with pine trees on the dune",
+      "de": "Ostseestrand mit Kiefern auf der Düne"
     }
   },
   "fuel-saving": {
@@ -90,7 +94,8 @@
     "url": "https://unsplash.com/photos/rdHeGGn7rwQ",
     "alt": {
       "pl": "Pusta droga przez zielony las",
-      "en": "Empty road through a green forest"
+      "en": "Empty road through a green forest",
+      "de": "Leere Straße durch einen grünen Wald"
     }
   },
   "price-history": {
@@ -98,7 +103,8 @@
     "url": "https://unsplash.com/photos/DykYMZLzZ8Y",
     "alt": {
       "pl": "Tablica z cenami paliw na stacji benzynowej",
-      "en": "Fuel price board at a petrol station"
+      "en": "Fuel price board at a petrol station",
+      "de": "Preistafel einer Tankstelle"
     }
   },
   "austria": {
@@ -115,7 +121,8 @@
     "url": "https://unsplash.com/photos/sMyQb3i9bNA",
     "alt": {
       "pl": "Parlament nad Dunajem w Budapeszcie",
-      "en": "The Hungarian Parliament on the Danube in Budapest"
+      "en": "The Hungarian Parliament on the Danube in Budapest",
+      "de": "Parlament an der Donau in Budapest"
     }
   },
   "west": {
@@ -123,7 +130,8 @@
     "url": "https://unsplash.com/photos/nnzkZNYWHaU",
     "alt": {
       "pl": "Wieża Eiffla nad Sekwaną w Paryżu",
-      "en": "The Eiffel Tower above the Seine in Paris"
+      "en": "The Eiffel Tower above the Seine in Paris",
+      "de": "Eiffelturm über der Seine in Paris"
     }
   },
   "ev-trip": {
@@ -131,7 +139,8 @@
     "url": "https://unsplash.com/photos/xJLsHl0hIik",
     "alt": {
       "pl": "Kabel ładowania podłączony do samochodu elektrycznego",
-      "en": "Charging cable plugged into an electric car"
+      "en": "Charging cable plugged into an electric car",
+      "de": "Ladekabel an einem Elektroauto"
     }
   },
   "mileage": {
@@ -139,7 +148,8 @@
     "url": "https://unsplash.com/photos/gBtplDUad4U",
     "alt": {
       "pl": "Mężczyzna pracuje na laptopie w samochodzie",
-      "en": "Man working on a laptop in a car"
+      "en": "Man working on a laptop in a car",
+      "de": "Mann arbeitet im Auto am Laptop"
     }
   }
 }

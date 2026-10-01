@@ -1,4 +1,5 @@
 import { placeGeo, type Place } from "@/lib/places"
+import { GERMAN_SITE } from "@/lib/sites"
 import { T } from "@/lib/strings"
 
 const OSRM_URL = "https://router.project-osrm.org/route/v1/driving/"
@@ -95,8 +96,8 @@ export function settingsFor(o: Options): MapkaSettings {
     currency: o.currency,
     autoPrice: !o.ownPrice,
     price: o.ownPrice || mapkaFallbackPrice(o.currency),
-    evHomePrice: mapkaStartPrice(1.1, o.currency),
-    evFastPrice: mapkaStartPrice(2.8, o.currency),
+    evHomePrice: GERMAN_SITE && o.currency === "EUR" ? 0.38 : mapkaStartPrice(1.1, o.currency),
+    evFastPrice: GERMAN_SITE && o.currency === "EUR" ? 0.65 : mapkaStartPrice(2.8, o.currency),
   }
 }
 

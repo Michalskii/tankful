@@ -28,6 +28,16 @@ const CITIES = {
   split: { pl: "Split", en: "Split", de: "Split", lat: 43.5081, lng: 16.4402, cc: "hr" },
   paryz: { pl: "Paryż", en: "Paris", de: "Paris", lat: 48.8566, lng: 2.3522, cc: "fr" },
   amsterdam: { pl: "Amsterdam", en: "Amsterdam", de: "Amsterdam", lat: 52.3676, lng: 4.9041, cc: "nl" },
+  hamburg: { pl: "Hamburg", en: "Hamburg", de: "Hamburg", lat: 53.5511, lng: 9.9937, cc: "de" },
+  kolonia: { pl: "Kolonia", en: "Cologne", de: "Köln", lat: 50.9375, lng: 6.9603, cc: "de" },
+  frankfurt: { pl: "Frankfurt nad Menem", en: "Frankfurt", de: "Frankfurt", lat: 50.1109, lng: 8.6821, cc: "de" },
+  drezno: { pl: "Drezno", en: "Dresden", de: "Dresden", lat: 51.0504, lng: 13.7373, cc: "de" },
+  lipsk: { pl: "Lipsk", en: "Leipzig", de: "Leipzig", lat: 51.3397, lng: 12.3731, cc: "de" },
+  stuttgart: { pl: "Stuttgart", en: "Stuttgart", de: "Stuttgart", lat: 48.7758, lng: 9.1829, cc: "de" },
+  kopenhaga: { pl: "Kopenhaga", en: "Copenhagen", de: "Kopenhagen", lat: 55.6761, lng: 12.5683, cc: "dk" },
+  mediolan: { pl: "Mediolan", en: "Milan", de: "Mailand", lat: 45.4642, lng: 9.19, cc: "it" },
+  werona: { pl: "Werona", en: "Verona", de: "Verona", lat: 45.4384, lng: 10.9916, cc: "it" },
+  wenecja: { pl: "Wenecja", en: "Venice", de: "Venedig", lat: 45.4408, lng: 12.3155, cc: "it" },
 };
 
 const PAIRS = [
@@ -42,6 +52,13 @@ const PAIRS = [
   ["krakow", "wieden"], ["krakow", "budapeszt"], ["krakow", "praga"], ["krakow", "split"],
   ["wroclaw", "berlin"], ["wroclaw", "praga"], ["wroclaw", "monachium"], ["poznan", "berlin"],
   ["szczecin", "berlin"], ["katowice", "wieden"],
+];
+
+const DE_PAIRS = [
+  ["berlin", "praga"], ["drezno", "praga"], ["lipsk", "praga"], ["monachium", "praga"], ["drezno", "wroclaw"],
+  ["monachium", "wieden"], ["berlin", "wieden"], ["monachium", "split"], ["monachium", "wenecja"], ["monachium", "werona"],
+  ["monachium", "mediolan"], ["stuttgart", "mediolan"], ["hamburg", "kopenhaga"], ["hamburg", "amsterdam"],
+  ["kolonia", "amsterdam"], ["kolonia", "paryz"], ["frankfurt", "paryz"], ["berlin", "gdansk"],
 ];
 
 const GERMAN_PAGES = new Set(["de", "at", "cz"]);
@@ -94,27 +111,42 @@ function sparsePoints(points, km = 2) {
 const context = vm.createContext({ console, chrome: { i18n: { getUILanguage: () => "pl", getMessage: () => "" } } });
 for (const f of ["settings.js", "borders.js"]) vm.runInContext(fs.readFileSync(path.join(ROOT, f), "utf8"), context);
 
+const known = fs.existsSync(OUT) ? JSON.parse(fs.readFileSync(OUT, "utf8")).routes : [];
+
+async function osrm(a, b) {
+  const cached = known.find((r) => r.from === a && r.to === b);
+  if (cached) return { km: cached.km, minutes: cached.minutes, shares: cached.shares };
+  const [from, to] = [CITIES[a], CITIES[b]];
+  const res = await fetch(`${OSRM_URL}${from.lng},${from.lat};${to.lng},${to.lat}?overview=full&geometries=polyline6`);
+  const body = await res.json();
+  if (body.code !== "Ok") throw new Error(`${a} → ${b}: ${body.code}`);
+  const [route] = body.routes;
+  const shares = context.mapkaRouteShares(sparsePoints(decodePolyline(route.geometry, 1e6)));
+  await new Promise((r) => setTimeout(r, 1000));
+  return {
+    km: Math.round(route.distance / 100) / 10,
+    minutes: Math.round(route.duration / 60),
+    shares: shares && Object.fromEntries(Object.entries(shares).map(([cc, s]) => [cc, Math.round(s * 1000) / 1000])),
+  };
+}
+
 (async () => {
   const routes = [];
   for (const [a, b] of PAIRS) {
     const [from, to] = [CITIES[a], CITIES[b]];
-    const res = await fetch(`${OSRM_URL}${from.lng},${from.lat};${to.lng},${to.lat}?overview=full&geometries=polyline6`);
-    const body = await res.json();
-    if (body.code !== "Ok") throw new Error(`${a} → ${b}: ${body.code}`);
-    const [route] = body.routes;
-    const shares = context.mapkaRouteShares(sparsePoints(decodePolyline(route.geometry, 1e6)));
     routes.push({
       pl: `${slug(from.pl)}-${slug(to.pl)}`,
       en: `${slug(from.en)}-${slug(to.en)}`,
       ...(GERMAN_PAGES.has(to.cc) ? { de: `${slug(to.de)}-${slug(from.de)}`, deFlip: true } : {}),
       from: a,
       to: b,
-      km: Math.round(route.distance / 100) / 10,
-      minutes: Math.round(route.duration / 60),
-      shares: shares && Object.fromEntries(Object.entries(shares).map(([cc, s]) => [cc, Math.round(s * 1000) / 1000])),
+      ...(await osrm(a, b)),
     });
     console.log(`${routes.at(-1).pl}: ${routes.at(-1).km} km`);
-    await new Promise((r) => setTimeout(r, 1000));
+  }
+  for (const [a, b] of DE_PAIRS) {
+    routes.push({ de: `${slug(CITIES[a].de)}-${slug(CITIES[b].de)}`, deOnly: true, from: a, to: b, ...(await osrm(a, b)) });
+    console.log(`${routes.at(-1).de}: ${routes.at(-1).km} km`);
   }
   fs.writeFileSync(OUT, `${JSON.stringify({ cities: CITIES, routes }, null, 2)}\n`);
   console.log(`${path.relative(ROOT, OUT)}: ${routes.length} routes`);

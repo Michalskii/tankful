@@ -32,6 +32,7 @@ const EN_THE = new Set(["NL", "GB", "CZ"]);
 const DE_DER = new Set(["SK", "CH", "TR"]);
 const DE_DEN = new Set(["NL"]);
 const EV_PLN = { home: 1.1, fast: 2.8 };
+const EV_EUR_DE = { home: 0.38, fast: 0.65 };
 
 const TEXT = {
   pl: {
@@ -247,10 +248,10 @@ function context(lang, data, history) {
     lang === "pl" ? PL_IN[cc] : lang === "de" ? `in ${DE_DER.has(cc) ? "der " : DE_DEN.has(cc) ? "den " : ""}${name(cc)}` : `in ${EN_THE.has(cc) ? "the " : ""}${name(cc)}`;
   const date = (iso) => new Intl.DateTimeFormat(INTL[lang], { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }).format(new Date(iso));
   const fuelName = (f) => FUELS[lang][f];
-  const ev = (key) => toCur(EV_PLN[key]);
+  const ev = (key) => (lang === "de" ? EV_EUR_DE[key] : toCur(EV_PLN[key]));
 
   const routeBySlug = (slug) => {
-    const r = ROUTES.find((x) => x.pl === slug || x.en === slug);
+    const r = ROUTES.find((x) => x.pl === slug || x.en === slug || x.de === slug);
     if (!r) throw new Error(`Unknown route ${slug}`);
     return r;
   };

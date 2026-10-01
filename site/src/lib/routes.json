@@ -179,6 +179,86 @@
       "lat": 52.3676,
       "lng": 4.9041,
       "cc": "nl"
+    },
+    "hamburg": {
+      "pl": "Hamburg",
+      "en": "Hamburg",
+      "de": "Hamburg",
+      "lat": 53.5511,
+      "lng": 9.9937,
+      "cc": "de"
+    },
+    "kolonia": {
+      "pl": "Kolonia",
+      "en": "Cologne",
+      "de": "Köln",
+      "lat": 50.9375,
+      "lng": 6.9603,
+      "cc": "de"
+    },
+    "frankfurt": {
+      "pl": "Frankfurt nad Menem",
+      "en": "Frankfurt",
+      "de": "Frankfurt",
+      "lat": 50.1109,
+      "lng": 8.6821,
+      "cc": "de"
+    },
+    "drezno": {
+      "pl": "Drezno",
+      "en": "Dresden",
+      "de": "Dresden",
+      "lat": 51.0504,
+      "lng": 13.7373,
+      "cc": "de"
+    },
+    "lipsk": {
+      "pl": "Lipsk",
+      "en": "Leipzig",
+      "de": "Leipzig",
+      "lat": 51.3397,
+      "lng": 12.3731,
+      "cc": "de"
+    },
+    "stuttgart": {
+      "pl": "Stuttgart",
+      "en": "Stuttgart",
+      "de": "Stuttgart",
+      "lat": 48.7758,
+      "lng": 9.1829,
+      "cc": "de"
+    },
+    "kopenhaga": {
+      "pl": "Kopenhaga",
+      "en": "Copenhagen",
+      "de": "Kopenhagen",
+      "lat": 55.6761,
+      "lng": 12.5683,
+      "cc": "dk"
+    },
+    "mediolan": {
+      "pl": "Mediolan",
+      "en": "Milan",
+      "de": "Mailand",
+      "lat": 45.4642,
+      "lng": 9.19,
+      "cc": "it"
+    },
+    "werona": {
+      "pl": "Werona",
+      "en": "Verona",
+      "de": "Verona",
+      "lat": 45.4384,
+      "lng": 10.9916,
+      "cc": "it"
+    },
+    "wenecja": {
+      "pl": "Wenecja",
+      "en": "Venice",
+      "de": "Venedig",
+      "lat": 45.4408,
+      "lng": 12.3155,
+      "cc": "it"
     }
   },
   "routes": [
@@ -631,6 +711,230 @@
         "CZ": 0.597,
         "AT": 0.208,
         "PL": 0.195
+      }
+    },
+    {
+      "de": "berlin-prag",
+      "deOnly": true,
+      "from": "berlin",
+      "to": "praga",
+      "km": 346.3,
+      "minutes": 229,
+      "shares": {
+        "DE": 0.702,
+        "CZ": 0.298
+      }
+    },
+    {
+      "de": "dresden-prag",
+      "deOnly": true,
+      "from": "drezno",
+      "to": "praga",
+      "km": 148.3,
+      "minutes": 105,
+      "shares": {
+        "CZ": 0.709,
+        "DE": 0.291
+      }
+    },
+    {
+      "de": "leipzig-prag",
+      "deOnly": true,
+      "from": "lipsk",
+      "to": "praga",
+      "km": 255.1,
+      "minutes": 168,
+      "shares": {
+        "DE": 0.586,
+        "CZ": 0.414
+      }
+    },
+    {
+      "de": "muenchen-prag",
+      "deOnly": true,
+      "from": "monachium",
+      "to": "praga",
+      "km": 381.3,
+      "minutes": 238,
+      "shares": {
+        "DE": 0.558,
+        "CZ": 0.442
+      }
+    },
+    {
+      "de": "dresden-breslau",
+      "deOnly": true,
+      "from": "drezno",
+      "to": "wroclaw",
+      "km": 270.1,
+      "minutes": 187,
+      "shares": {
+        "PL": 0.616,
+        "DE": 0.384
+      }
+    },
+    {
+      "de": "muenchen-wien",
+      "deOnly": true,
+      "from": "monachium",
+      "to": "wieden",
+      "km": 403.4,
+      "minutes": 265,
+      "shares": {
+        "AT": 0.711,
+        "DE": 0.289
+      }
+    },
+    {
+      "de": "berlin-wien",
+      "deOnly": true,
+      "from": "berlin",
+      "to": "wieden",
+      "km": 677.9,
+      "minutes": 447,
+      "shares": {
+        "CZ": 0.523,
+        "DE": 0.358,
+        "AT": 0.118
+      }
+    },
+    {
+      "de": "muenchen-split",
+      "deOnly": true,
+      "from": "monachium",
+      "to": "split",
+      "km": 874.3,
+      "minutes": 585,
+      "shares": {
+        "HR": 0.417,
+        "AT": 0.24,
+        "SI": 0.192,
+        "DE": 0.151
+      }
+    },
+    {
+      "de": "muenchen-venedig",
+      "deOnly": true,
+      "from": "monachium",
+      "to": "wenecja",
+      "km": 567,
+      "minutes": 361,
+      "shares": {
+        "IT": 0.4,
+        "AT": 0.372,
+        "DE": 0.228
+      }
+    },
+    {
+      "de": "muenchen-verona",
+      "deOnly": true,
+      "from": "monachium",
+      "to": "werona",
+      "km": 430.2,
+      "minutes": 297,
+      "shares": {
+        "IT": 0.538,
+        "AT": 0.27,
+        "DE": 0.192
+      }
+    },
+    {
+      "de": "muenchen-mailand",
+      "deOnly": true,
+      "from": "monachium",
+      "to": "mediolan",
+      "km": 495.1,
+      "minutes": 355,
+      "shares": {
+        "DE": 0.641,
+        "IT": 0.197,
+        "AT": 0.162
+      }
+    },
+    {
+      "de": "stuttgart-mailand",
+      "deOnly": true,
+      "from": "stuttgart",
+      "to": "mediolan",
+      "km": 531,
+      "minutes": 371,
+      "shares": {
+        "DE": 0.689,
+        "IT": 0.174,
+        "AT": 0.137
+      }
+    },
+    {
+      "de": "hamburg-kopenhagen",
+      "deOnly": true,
+      "from": "hamburg",
+      "to": "kopenhaga",
+      "km": 469.2,
+      "minutes": 304,
+      "shares": {
+        "DK": 0.624,
+        "DE": 0.376
+      }
+    },
+    {
+      "de": "hamburg-amsterdam",
+      "deOnly": true,
+      "from": "hamburg",
+      "to": "amsterdam",
+      "km": 464.3,
+      "minutes": 300,
+      "shares": {
+        "DE": 0.65,
+        "NL": 0.35
+      }
+    },
+    {
+      "de": "koeln-amsterdam",
+      "deOnly": true,
+      "from": "kolonia",
+      "to": "amsterdam",
+      "km": 262.6,
+      "minutes": 182,
+      "shares": {
+        "NL": 0.518,
+        "DE": 0.482
+      }
+    },
+    {
+      "de": "koeln-paris",
+      "deOnly": true,
+      "from": "kolonia",
+      "to": "paryz",
+      "km": 485.9,
+      "minutes": 322,
+      "shares": {
+        "FR": 0.45,
+        "BE": 0.393,
+        "DE": 0.157
+      }
+    },
+    {
+      "de": "frankfurt-paris",
+      "deOnly": true,
+      "from": "frankfurt",
+      "to": "paryz",
+      "km": 573.3,
+      "minutes": 354,
+      "shares": {
+        "FR": 0.677,
+        "DE": 0.323
+      }
+    },
+    {
+      "de": "berlin-danzig",
+      "deOnly": true,
+      "from": "berlin",
+      "to": "gdansk",
+      "km": 512.3,
+      "minutes": 335,
+      "shares": {
+        "PL": 0.74,
+        "DE": 0.26
       }
     }
   ]

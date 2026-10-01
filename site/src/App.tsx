@@ -22,7 +22,7 @@ import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 import { decodePlace, encodePlace, type Place } from "@/lib/places"
 import { track } from "@/lib/analytics"
 import { PRERENDER } from "@/lib/prerender"
-import { cityName, cityPlace, CURRENT_ROUTE, routeHref, routeTrip } from "@/lib/routes"
+import { cityName, cityPlace, CURRENT_ROUTE, routeHref, routeSlug, routeTrip } from "@/lib/routes"
 import { GERMAN_SITE, guidesHref, homeHref, LANGS, otherSite, siteRoot } from "@/lib/sites"
 import { stopItem, type StopItem } from "@/lib/stops"
 import { T } from "@/lib/strings"
@@ -75,7 +75,7 @@ function langHref(lang: string) {
   p.delete("lang")
   p.delete("prerender")
   const q = p.toString()
-  const route = CURRENT_ROUTE && (lang !== "de" || CURRENT_ROUTE.de) ? routeHref(CURRENT_ROUTE, lang) : null
+  const route = CURRENT_ROUTE && routeSlug(CURRENT_ROUTE, lang) ? routeHref(CURRENT_ROUTE, lang) : null
   const other = otherSite(lang)
   const page = other ? (route ? `${siteRoot(lang)}${route}` : other) : (route ?? homeHref(lang))
   return `${page}${q ? `?${q}` : ""}`
