@@ -1,8 +1,8 @@
 export const SITE_STRINGS = {
   pl: {
-    title: "Kalkulator kosztu przejazdu – Tankful",
-    description: "Policz koszt paliwa na trasę po aktualnych cenach w Polsce, krajach UE, Wielkiej Brytanii i USA – także przez kilka krajów, dla auta elektrycznego i na osobę.",
-    heading: "Ile kosztuje paliwo na tę trasę?",
+    title: "Kalkulator paliwa – koszt paliwa na trasę | Tankful",
+    description: "Kalkulator kosztów paliwa: policz koszt paliwa na trasę ze spalaniem swojego auta, po aktualnych cenach w Polsce, UE, Wielkiej Brytanii i USA – też przez kilka krajów, dla elektryka i na osobę.",
+    heading: "Kalkulator paliwa – ile kosztuje paliwo na tę trasę?",
     lead: "Wpisz, skąd i dokąd jedziesz. Liczymy po aktualnych średnich cenach w Polsce, krajach UE, Wielkiej Brytanii i USA, także na trasach przez kilka krajów.",
     from: "Skąd",
     to: "Dokąd",
@@ -103,9 +103,9 @@ export const SITE_STRINGS = {
     ferry: "prom lub pociąg $1, bez paliwa",
   },
   en: {
-    title: "Trip fuel cost calculator – Tankful",
-    description: "Work out the fuel cost of a trip with current average prices in Poland, the EU, the UK and the US – across borders, for electric cars and per person.",
-    heading: "What will the fuel cost for this trip?",
+    title: "Fuel cost calculator – trip fuel cost by route | Tankful",
+    description: "Fuel cost calculator: work out the fuel cost of a trip from your car's consumption and current average prices in Poland, the EU, the UK and the US – across borders, for electric cars and per person.",
+    heading: "Fuel cost calculator – what will this trip cost?",
     lead: "Enter where you start and where you are going. We use current average prices in Poland, the EU, the UK and the US, including routes through several countries.",
     from: "From",
     to: "To",
