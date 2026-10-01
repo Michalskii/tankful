@@ -197,6 +197,8 @@ function context(lang, data, history) {
       const r = routeBySlug(slug);
       return money((toCur(routePricePln(r, fuel)) * r.km * Number(consumption)) / 100 / Number(people));
     },
+    evtrip: (slug, consumption, key) => money((ev(key) * routeBySlug(slug).km * Number(consumption)) / 100),
+    allowance: (slug, rate) => money(toCur(routeBySlug(slug).km * Number(rate))),
     roundtrip: (slug, fuel, consumption) => {
       const r = routeBySlug(slug);
       return money((toCur(routePricePln(r, fuel)) * r.km * 2 * Number(consumption)) / 100);
@@ -454,6 +456,11 @@ const ICONS = {
   seaside: '<path d="M22 18H2a4 4 0 0 0 4 4h12a4 4 0 0 0 4-4Z"/><path d="M21 14 10 2 3 14h18Z"/><path d="M10 2v16"/>',
   "fuel-saving": '<path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>',
   "price-history": '<path d="M22 7 13.5 15.5 8.5 10.5 2 17"/><path d="M16 7h6v6"/>',
+  austria: '<path d="m8 3 4 8 5-5 5 15H2L8 3z"/>',
+  hungary: '<path d="M3 22h18M5 22V12M19 22V12M3 12h18M12 3l9 9H3l9-9zM9 22v-5h6v5"/>',
+  west: '<path d="M12 2 8 22M12 2l4 20M9.5 15h5M10.5 9h3"/>',
+  "ev-trip": '<path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/>',
+  mileage: '<path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><rect width="20" height="14" x="2" y="6" rx="2"/>',
   croatia: '<circle cx="12" cy="8" r="3.5"/><path d="M12 1.5v1M5.6 4.1l.7.7M18.4 4.1l-.7.7M3 9h1M20 9h1M2 16c2 0 3-1.5 5-1.5s3 1.5 5 1.5 3-1.5 5-1.5 3 1.5 5 1.5M2 21c2 0 3-1.5 5-1.5s3 1.5 5 1.5 3-1.5 5-1.5 3 1.5 5 1.5"/>',
 };
 const icon = (id, cls = "icon") => `<svg class="${cls}" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">${ICONS[id] || ICONS["per-100-km"]}</svg>`;

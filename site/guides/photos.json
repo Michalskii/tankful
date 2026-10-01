@@ -94,5 +94,45 @@
       "pl": "Tablica z cenami paliw na stacji benzynowej",
       "en": "Fuel price board at a petrol station"
     }
+  },
+  "austria": {
+    "author": "Jacek Dylag",
+    "url": "https://unsplash.com/photos/5SjAaqqCCmY",
+    "alt": {
+      "pl": "Katedra św. Szczepana nad dachami Wiednia o zachodzie słońca",
+      "en": "St. Stephen's Cathedral above the rooftops of Vienna at sunset"
+    }
+  },
+  "hungary": {
+    "author": "Ervin Lukacs",
+    "url": "https://unsplash.com/photos/sMyQb3i9bNA",
+    "alt": {
+      "pl": "Parlament nad Dunajem w Budapeszcie",
+      "en": "The Hungarian Parliament on the Danube in Budapest"
+    }
+  },
+  "west": {
+    "author": "Chris Karidis",
+    "url": "https://unsplash.com/photos/nnzkZNYWHaU",
+    "alt": {
+      "pl": "Wieża Eiffla nad Sekwaną w Paryżu",
+      "en": "The Eiffel Tower above the Seine in Paris"
+    }
+  },
+  "ev-trip": {
+    "author": "CHUTTERSNAP",
+    "url": "https://unsplash.com/photos/xJLsHl0hIik",
+    "alt": {
+      "pl": "Kabel ładowania podłączony do samochodu elektrycznego",
+      "en": "Charging cable plugged into an electric car"
+    }
+  },
+  "mileage": {
+    "author": "Vitaly Gariev",
+    "url": "https://unsplash.com/photos/gBtplDUad4U",
+    "alt": {
+      "pl": "Mężczyzna pracuje na laptopie w samochodzie",
+      "en": "Man working on a laptop in a car"
+    }
   }
 }
