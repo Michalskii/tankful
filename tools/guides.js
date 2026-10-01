@@ -69,6 +69,15 @@ const TEXT = {
     noData: "brak danych",
     verdictSame: (fuel) => `Litr ${fuel} kosztuje praktycznie tyle samo po obu stronach granicy.`,
     verdict: (fuel, where, diff, litres, tank) => `Litr ${fuel} jest tańszy ${where} o ${diff} – na ${litres} litrach oszczędzasz ${tank}.`,
+    calcLitres: "Zatankowane litry",
+    calcKm: "Przejechane km",
+    calcFuel: "Paliwo",
+    calcPrice: (cur) => `Cena za litr (${cur})`,
+    calcPriceHint: "średnia w Polsce",
+    calcResult: "Średnie spalanie",
+    calc100: "Koszt 100 km",
+    calcKmCost: "Koszt 1 km",
+    calcButton: "Policz koszt trasy z tym spalaniem",
   },
   en: {
     home: "Calculator",
@@ -111,6 +120,15 @@ const TEXT = {
     noData: "no data",
     verdictSame: (fuel) => `A litre of ${fuel} costs practically the same on both sides of the border.`,
     verdict: (fuel, where, diff, litres, tank) => `A litre of ${fuel} is cheaper ${where} by ${diff} – ${tank} saved on a ${litres}-litre fill-up.`,
+    calcLitres: "Litres filled",
+    calcKm: "Kilometres driven",
+    calcFuel: "Fuel",
+    calcPrice: (cur) => `Price per litre (${cur})`,
+    calcPriceHint: "EU average",
+    calcResult: "Average consumption",
+    calc100: "Cost of 100 km",
+    calcKmCost: "Cost of 1 km",
+    calcButton: "Cost a trip with this consumption",
   },
 };
 
@@ -292,6 +310,32 @@ function context(lang, data, history) {
     },
   };
 
+  blocks.consumption = () => {
+    const avg = (fuel) => {
+      if (lang === "pl") return pln("PL", fuel);
+      const list = EU.map((cc) => pln(cc, fuel)).filter(Boolean);
+      return list.reduce((a, b) => a + b, 0) / list.length;
+    };
+    const fuels = ["pb", "on", "lpg"];
+    const priceOf = Object.fromEntries(fuels.map((f) => [f, Math.round(toCur(avg(f)) * 100) / 100]));
+    const home = lang === "pl" ? "./" : "en";
+    const options = fuels.map((f) => `<option value="${f}">${esc(cap(fuelName(f)))}</option>`).join("");
+    return `<form class="calc" data-prices="${esc(JSON.stringify(priceOf))}" data-currency="${currency}" data-locale="${INTL[lang]}" data-home="${home}">
+<div class="calc-fields">
+<label>${t.calcLitres}<input name="litres" type="number" inputmode="decimal" min="0" step="any" placeholder="42" /></label>
+<label>${t.calcKm}<input name="km" type="number" inputmode="decimal" min="0" step="any" placeholder="600" /></label>
+<label>${t.calcFuel}<select name="fuel">${options}</select></label>
+<label>${esc(t.calcPrice(currency))}<input name="price" type="number" inputmode="decimal" min="0" step="0.01" value="${priceOf.pb}" /><small>${t.calcPriceHint}</small></label>
+</div>
+<div class="calc-result" aria-live="polite">
+<div><span>${t.calcResult}</span><output name="consumption">–</output></div>
+<div><span>${t.calc100}</span><output name="cost100">–</output></div>
+<div><span>${t.calcKmCost}</span><output name="costkm">–</output></div>
+</div>
+<a class="button" href="${home}">${t.calcButton}</a>
+</form>`;
+  };
+
   const histName = (cc) => (cc === "EU" ? t.euAverage : name(cc));
   const histSeries = (cc, fuel) => {
     const values = history.prices[cc]?.[fuel];
@@ -420,7 +464,7 @@ function parse(file) {
   for (const key of ["id", "slug", "title", "heading", "description", "published", "order"]) {
     if (!meta[key]) throw new Error(`${file}: missing "${key}"`);
   }
-  return { ...meta, order: Number(meta.order), body: m[2] };
+  return { ...meta, photo: meta.photo || meta.id, order: Number(meta.order), body: m[2] };
 }
 
 function loadGuides() {
@@ -460,6 +504,7 @@ const ICONS = {
   hungary: '<path d="M3 22h18M5 22V12M19 22V12M3 12h18M12 3l9 9H3l9-9zM9 22v-5h6v5"/>',
   west: '<path d="M12 2 8 22M12 2l4 20M9.5 15h5M10.5 9h3"/>',
   "ev-trip": '<path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/>',
+  consumption: '<path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"/>',
   mileage: '<path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><rect width="20" height="14" x="2" y="6" rx="2"/>',
   croatia: '<circle cx="12" cy="8" r="3.5"/><path d="M12 1.5v1M5.6 4.1l.7.7M18.4 4.1l-.7.7M3 9h1M20 9h1M2 16c2 0 3-1.5 5-1.5s3 1.5 5 1.5 3-1.5 5-1.5 3 1.5 5 1.5M2 21c2 0 3-1.5 5-1.5s3 1.5 5 1.5 3-1.5 5-1.5 3 1.5 5 1.5"/>',
 };
@@ -470,8 +515,12 @@ const CHART_SCRIPTS = `    <script src="chart.umd.min.js" defer></script>
     <script src="guides-charts.js" defer></script>
 `;
 
+const CALC_SCRIPT = `    <script src="guides-consumption.js" defer></script>
+`;
+
 function layout({ lang, title, description, url, alternates, css, schema, hero, main, other }) {
   const charts = main.includes('class="chart"');
+  const calc = main.includes('class="calc"');
   const t = TEXT[lang];
   const home = lang === "pl" ? "./" : "en";
   return `<!doctype html>
@@ -488,7 +537,7 @@ function layout({ lang, title, description, url, alternates, css, schema, hero, 
     <link rel="stylesheet" href="${css}" />
     <link rel="stylesheet" href="guides.css" />
     <script src="guides-analytics.js" defer></script>
-${charts ? CHART_SCRIPTS : ""}    <link rel="canonical" href="${url}" />
+${charts ? CHART_SCRIPTS : ""}${calc ? CALC_SCRIPT : ""}    <link rel="canonical" href="${url}" />
 ${alternates.map((l) => `    ${l}`).join("\n")}
     <meta property="og:type" content="article" />
     <meta property="og:site_name" content="Tankful" />
@@ -538,12 +587,13 @@ function buildGuides({ site, siteUrl, data, history, alternates }) {
   fs.copyFileSync(path.join(GUIDES, "guides.css"), path.join(site, "guides.css"));
   fs.copyFileSync(path.join(GUIDES, "charts.js"), path.join(site, "guides-charts.js"));
   fs.copyFileSync(path.join(GUIDES, "analytics.js"), path.join(site, "guides-analytics.js"));
+  fs.copyFileSync(path.join(GUIDES, "consumption.js"), path.join(site, "guides-consumption.js"));
   fs.mkdirSync(path.join(site, "data/history"), { recursive: true });
   for (const [cc, fuels] of Object.entries(history.prices)) {
     fs.writeFileSync(path.join(site, "data/history", `${cc}.json`), JSON.stringify({ dates: history.dates, plnPerEur: history.plnPerEur, ...fuels }));
   }
   fs.cpSync(path.join(GUIDES, "img"), path.join(site, "img/guides"), { recursive: true });
-  for (const g of guides.pl) if (!PHOTOS[g.id] || !fs.existsSync(path.join(GUIDES, "img", `${g.id}.webp`))) throw new Error(`Missing photo for guide "${g.id}"`);
+  for (const g of guides.pl) if (!PHOTOS[g.photo] || !fs.existsSync(path.join(GUIDES, "img", `${g.photo}.webp`))) throw new Error(`Missing photo for guide "${g.id}"`);
   const photoUrl = (id) => `${siteUrl}img/guides/${id}.jpg`;
   const url = (lang, slug) => `${siteUrl}${DIRS[lang]}/${slug ?? ""}`;
   const href = (lang, slug) => `${DIRS[lang]}/${slug ?? ""}`;
@@ -558,7 +608,7 @@ function buildGuides({ site, siteUrl, data, history, alternates }) {
     const t = TEXT[lang];
     const other = lang === "pl" ? "en" : "pl";
     const list = guides[lang]
-      .map((g) => `        <li><a href="${href(lang, g.slug)}"><div class="card-media"><img class="card-photo" src="img/guides/${g.id}.webp" width="1400" height="735" alt="" loading="lazy" />${icon(g.id, "tile")}</div><div class="card-body"><strong>${esc(g.heading)}</strong><span>${esc(g.description)}</span></div></a></li>`)
+      .map((g) => `        <li><a href="${href(lang, g.slug)}"><div class="card-media"><img class="card-photo" src="img/guides/${g.photo}.webp" width="1400" height="735" alt="" loading="lazy" />${icon(g.id, "tile")}</div><div class="card-body"><strong>${esc(g.heading)}</strong><span>${esc(g.description)}</span></div></a></li>`)
       .join("\n");
     const hero = `        <h1>${t.indexHeading}</h1>
         <p class="lead">${esc(t.indexLead)}</p>`;
@@ -608,10 +658,10 @@ ${list}
       const hero = `        <nav class="crumbs" aria-label="${g.lang === "pl" ? "Ścieżka" : "Breadcrumb"}"><a href="${home}">Tankful</a> / <a href="${href(g.lang)}">${t.guides}</a></nav>
         <div class="hero-title">${icon(g.id, "tile")}<h1>${esc(g.heading)}</h1></div>
         <p class="meta">${esc(t.updated(date(updated)))} · ${esc(t.published(date(g.published)))}</p>`;
-      const photo = PHOTOS[g.id];
+      const photo = PHOTOS[g.photo];
       const main = `      <article>
         <figure class="cover">
-          <img src="img/guides/${g.id}.webp" width="1400" height="735" alt="${esc(photo.alt[g.lang])}" fetchpriority="high" />
+          <img src="img/guides/${g.photo}.webp" width="1400" height="735" alt="${esc(photo.alt[g.lang])}" fetchpriority="high" />
           <figcaption>${t.photo(esc(photo.author), photo.url)}</figcaption>
         </figure>
 ${markdown(g.body, ctx)
@@ -641,7 +691,7 @@ ${more}
           inLanguage: g.lang,
           datePublished: g.published,
           dateModified: updated,
-          image: photoUrl(g.id),
+          image: photoUrl(g.photo),
           author: { "@type": "Person", name: "Michał Goryński" },
           publisher: { "@type": "Organization", name: "Tankful", url: siteUrl, logo: `${siteUrl}app-512.png` },
           isPartOf: { "@type": "WebSite", name: "Tankful", url: siteUrl },
@@ -665,7 +715,7 @@ ${more}
           url: url(g.lang, g.slug),
           alternates: alternates(group),
           css,
-          schema: { image: photoUrl(g.id), data: schemaData },
+          schema: { image: photoUrl(g.photo), data: schemaData },
           hero,
           main,
           other: { lang: other.lang, href: href(other.lang, other.slug) },
