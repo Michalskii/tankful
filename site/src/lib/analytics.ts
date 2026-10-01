@@ -1,4 +1,5 @@
 const ENDPOINT = "https://michalskii.goatcounter.com/count"
+const GERMAN = location.hostname === "spritkosten-europa.de"
 
 function skip() {
   if (/^(localhost|127\.|\[::1\])/.test(location.hostname)) return true
@@ -36,9 +37,10 @@ function referrer() {
 }
 
 export function trackVisit() {
-  send({ p: `${location.hostname === "spritkosten-europa.de" ? "/de" : ""}${location.pathname}`, t: document.title, r: referrer(), e: "false" })
+  send({ p: `${GERMAN ? "/de" : ""}${location.pathname}`, t: document.title, r: referrer(), e: "false" })
 }
 
 export function track(event: string) {
-  send({ p: event, t: event, r: "", e: "true" })
+  const name = GERMAN ? `de-${event}` : event
+  send({ p: name, t: name, r: "", e: "true" })
 }
