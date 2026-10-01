@@ -2,7 +2,7 @@
 id: austria
 order: 13
 slug: samochodem-do-austrii
-title: Samochodem do Austrii i Wiednia – koszt paliwa, winieta | Tankful
+title: Ceny paliw w Austrii i dojazd do Wiednia – koszt paliwa, winieta | Tankful
 heading: Samochodem do Austrii i Wiednia – koszt paliwa, gdzie tankować i winieta
 description: Ile kosztuje paliwo na trasie do Wiednia z Krakowa, Katowic i Warszawy, czy tankować w Polsce, Czechach czy w Austrii, oraz jak kupić austriacką winietę i uniknąć dopłat.
 published: 2026-10-01

@@ -1,5 +1,5 @@
 (() => {
-  for (const form of document.querySelectorAll("form.calc")) {
+  for (const form of document.querySelectorAll('form.calc[data-kind="consumption"]')) {
     const prices = JSON.parse(form.dataset.prices);
     const { currency, locale, home } = form.dataset;
     const money = (v) => new Intl.NumberFormat(locale, { style: "currency", currency, minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(v);

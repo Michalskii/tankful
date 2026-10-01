@@ -2,7 +2,7 @@
 id: croatia
 order: 6
 slug: samochodem-do-chorwacji
-title: Samochodem do Chorwacji – koszt paliwa, gdzie tankować, winiety | Tankful
+title: Ceny paliw w Chorwacji i dojazd samochodem – gdzie tankować | Tankful
 heading: Samochodem do Chorwacji – koszt paliwa, gdzie tankować i jakie winiety
 description: Ile kosztuje paliwo na trasie z Polski do Chorwacji (Kraków i Warszawa – Split), w którym kraju po drodze tankować najtaniej i gdzie potrzebne są winiety.
 published: 2026-09-30

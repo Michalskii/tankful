@@ -5,7 +5,7 @@ order: 3.5
 slug: kalkulator-spalania
 title: Kalkulator spalania – oblicz średnie spalanie l/100 km i koszt 100 km | Tankful
 heading: Kalkulator spalania – ile naprawdę pali Twoje auto
-description: Kalkulator spalania paliwa: wpisz zatankowane litry i przejechane kilometry, a policzymy średnie spalanie w l/100 km oraz koszt 100 km po aktualnej cenie paliwa.
+description: Kalkulator spalania i zużycia paliwa: wpisz zatankowane litry i przejechane kilometry, a policzymy średnie spalanie w l/100 km oraz koszt 100 km po aktualnej cenie paliwa.
 published: 2026-10-01
 ---
 Wpisz, ile litrów zatankowałeś i ile kilometrów przejechałeś od poprzedniego tankowania. Kalkulator policzy średnie spalanie w litrach na 100 km i koszt przejechania 100 km. Cena za litr jest wpisana z góry – to średnia w Polsce z {{date}} – ale możesz ją zmienić na cenę ze swojej stacji.

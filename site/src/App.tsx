@@ -33,6 +33,7 @@ const PREFS_KEY = "tankful-calculator"
 const SITE_CURRENCY = GERMAN_SITE ? "EUR" : MAPKA_CURRENCY
 const TYPICAL_CONSUMPTION: Record<string, number> = { pb: 7.0, pbp: 7.0, on: 6.0, onp: 6.0, lpg: 9.0, ev: 17.0 }
 const FAQ = [
+  ["faqTripQ", "faqTripA"],
   ["faq1q", "faq1a"],
   ["faq2q", "faq2a"],
   ["faq3q", "faq3a"],

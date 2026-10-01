@@ -2,7 +2,7 @@
 id: how-to-calculate
 order: 4
 slug: jak-obliczyc-koszt-paliwa
-title: Jak obliczyć koszt paliwa na trasę – wzór i przykłady | Tankful
+title: Obliczanie kosztu paliwa na trasę – wzór, przykłady i kalkulator | Tankful
 heading: Jak obliczyć koszt paliwa na trasę – wzór i przykłady
 description: Prosty wzór na koszt paliwa na trasę, przykłady z aktualnymi cenami, przejazd tam i z powrotem, podróż przez kilka krajów i najczęstsze błędy w liczeniu.
 published: 2026-09-30

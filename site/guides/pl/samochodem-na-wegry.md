@@ -2,7 +2,7 @@
 id: hungary
 order: 14
 slug: samochodem-na-wegry
-title: Samochodem na Węgry i do Budapesztu – koszt paliwa | Tankful
+title: Ceny paliw na Węgrzech i dojazd do Budapesztu – koszt paliwa | Tankful
 heading: Samochodem na Węgry i do Budapesztu – koszt paliwa, tankowanie i winiety
 description: Ile kosztuje paliwo na trasie z Krakowa i Warszawy do Budapesztu, gdzie po drodze tankować najtaniej – w Polsce, na Słowacji czy na Węgrzech – i jakie winiety kupić.
 published: 2026-10-01

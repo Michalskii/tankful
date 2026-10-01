@@ -88,6 +88,15 @@ const TEXT = {
     calc100: "Koszt 100 km",
     calcKmCost: "Koszt 1 km",
     calcButton: "Policz koszt trasy z tym spalaniem",
+    mileKm: "Przejechane km",
+    mileVehicle: "Pojazd",
+    mileVehicles: { car: "Auto powyżej 900 cm³ – 1,15 zł/km", small: "Auto do 900 cm³ – 0,89 zł/km", moto: "Motocykl – 0,69 zł/km", moped: "Motorower – 0,42 zł/km" },
+    mileConsumption: "Spalanie (l/100 km)",
+    milePrice: "Cena paliwa (zł/l)",
+    milePriceHint: "średnia w Polsce",
+    mileResult: "Kilometrówka",
+    mileFuel: "Koszt paliwa",
+    mileDiff: "Różnica",
     fuelWord: "paliwo",
     neighbour: "Sąsiad",
     drive: "Napęd",
@@ -147,6 +156,15 @@ const TEXT = {
     calc100: "Cost of 100 km",
     calcKmCost: "Cost of 1 km",
     calcButton: "Cost a trip with this consumption",
+    mileKm: "Kilometres driven",
+    mileVehicle: "Vehicle",
+    mileVehicles: { car: "Car over 900 cm³ – PLN 1.15/km", small: "Car up to 900 cm³ – PLN 0.89/km", moto: "Motorcycle – PLN 0.69/km", moped: "Moped – PLN 0.42/km" },
+    mileConsumption: "Consumption (l/100 km)",
+    milePrice: "Fuel price (PLN/l)",
+    milePriceHint: "Polish average",
+    mileResult: "Mileage allowance",
+    mileFuel: "Fuel cost",
+    mileDiff: "Difference",
     fuelWord: "fuel",
     neighbour: "Neighbour",
     drive: "Fuel",
@@ -393,6 +411,25 @@ function context(lang, data, history) {
     },
   };
 
+  blocks.mileage = () => {
+    const rates = { car: 1.15, small: 0.89, moto: 0.69, moped: 0.42 };
+    const options = Object.entries(t.mileVehicles).map(([k, label]) => `<option value="${k}">${esc(label)}</option>`).join("");
+    const price = Math.round(pln("PL", "pb") * 100) / 100;
+    return `<form class="calc" data-kind="mileage" data-rates="${esc(JSON.stringify(rates))}" data-locale="${INTL[lang]}">
+<div class="calc-fields">
+<label>${t.mileKm}<input name="km" type="number" inputmode="decimal" min="0" step="any" placeholder="300" /></label>
+<label>${t.mileVehicle}<select name="vehicle">${options}</select></label>
+<label>${t.mileConsumption}<input name="consumption" type="number" inputmode="decimal" min="0" step="0.1" value="7" /></label>
+<label>${t.milePrice}<input name="price" type="number" inputmode="decimal" min="0" step="0.01" value="${price}" /><small>${t.milePriceHint}</small></label>
+</div>
+<div class="calc-result" aria-live="polite">
+<div><span>${t.mileResult}</span><output name="allowance">–</output></div>
+<div><span>${t.mileFuel}</span><output name="fuel">–</output></div>
+<div><span>${t.mileDiff}</span><output name="diff">–</output></div>
+</div>
+</form>`;
+  };
+
   blocks.consumption = () => {
     const avg = (fuel) => {
       if (lang === "pl") return pln("PL", fuel);
@@ -404,7 +441,7 @@ function context(lang, data, history) {
     const priceOf = Object.fromEntries(fuels.map((f) => [f, Math.round(toCur(avg(f)) * 100) / 100]));
     const home = HOME[lang];
     const options = fuels.map((f) => `<option value="${f}">${esc(cap(fuelName(f)))}</option>`).join("");
-    return `<form class="calc" data-prices="${esc(JSON.stringify(priceOf))}" data-currency="${currency}" data-locale="${INTL[lang]}" data-home="${home}">
+    return `<form class="calc" data-kind="consumption" data-prices="${esc(JSON.stringify(priceOf))}" data-currency="${currency}" data-locale="${INTL[lang]}" data-home="${home}">
 <div class="calc-fields">
 <label>${t.calcLitres}<input name="litres" type="number" inputmode="decimal" min="0" step="any" placeholder="42" /></label>
 <label>${t.calcKm}<input name="km" type="number" inputmode="decimal" min="0" step="any" placeholder="600" /></label>
@@ -653,12 +690,14 @@ const CHART_SCRIPTS = `    <script src="chart.umd.min.js" defer></script>
     <script src="guides-charts.js" defer></script>
 `;
 
-const CALC_SCRIPT = `    <script src="guides-consumption.js" defer></script>
-`;
+const CALC_SCRIPTS = {
+  consumption: `    <script src="guides-consumption.js" defer></script>\n`,
+  mileage: `    <script src="guides-mileage.js" defer></script>\n`,
+};
 
 function layout({ lang, title, description, url, alternates, css, schema, hero, main, other }) {
   const charts = main.includes('class="chart"');
-  const calc = main.includes('class="calc"');
+  const calc = Object.keys(CALC_SCRIPTS).filter((kind) => main.includes(`data-kind="${kind}"`));
   const t = TEXT[lang];
   const home = HOME[lang];
   return `<!doctype html>
@@ -675,7 +714,7 @@ function layout({ lang, title, description, url, alternates, css, schema, hero, 
     <link rel="stylesheet" href="${css}" />
     <link rel="stylesheet" href="guides.css" />
     <script src="guides-analytics.js" defer></script>
-${charts ? CHART_SCRIPTS : ""}${calc ? CALC_SCRIPT : ""}    <link rel="canonical" href="${url}" />
+${charts ? CHART_SCRIPTS : ""}${calc.map((kind) => CALC_SCRIPTS[kind]).join("")}    <link rel="canonical" href="${url}" />
 ${alternates.map((l) => `    ${l}`).join("\n")}
     <meta property="og:type" content="article" />
     <meta property="og:site_name" content="Tankful" />
@@ -726,6 +765,7 @@ function buildGuides({ site, siteUrl, siteUrls, langSite, siteId, data, history,
   fs.copyFileSync(path.join(GUIDES, "charts.js"), path.join(site, "guides-charts.js"));
   fs.copyFileSync(path.join(GUIDES, "analytics.js"), path.join(site, "guides-analytics.js"));
   fs.copyFileSync(path.join(GUIDES, "consumption.js"), path.join(site, "guides-consumption.js"));
+  fs.copyFileSync(path.join(GUIDES, "mileage.js"), path.join(site, "guides-mileage.js"));
   fs.mkdirSync(path.join(site, "data/history"), { recursive: true });
   for (const [cc, fuels] of Object.entries(history.prices)) {
     fs.writeFileSync(path.join(site, "data/history", `${cc}.json`), JSON.stringify({ dates: history.dates, plnPerEur: history.plnPerEur, ...fuels }));
