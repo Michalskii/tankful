@@ -84,7 +84,7 @@ const MAPKA_DEFAULTS = {
   configured: false,
 };
 
-const MAPKA_SITE_URL = "https://michalskii.github.io/tankful/";
+const MAPKA_SITE_URL = "https://koszt-paliwa.pl/";
 
 const MAPKA_FUELS = Object.fromEntries(["pb", "pbp", "on", "onp", "lpg", "ev"].map((f) => [f, mapkaT(`fuel_${f}`)]));
 

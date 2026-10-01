@@ -7,7 +7,7 @@ const ORLEN_URL = "https://tool.orlen.pl/api/wholesalefuelprices/ByProduct";
 const UK_FUEL_PAGE = "https://www.gov.uk/api/content/government/statistics/weekly-road-fuel-prices";
 const EIA_FUEL_RSS = "https://www.eia.gov/petroleum/gasdiesel/includes/gas_diesel_rss.xml";
 const NOMINATIM_URL = "https://nominatim.openstreetmap.org/reverse";
-const SITE_PRICES_URL = `${MAPKA_SITE_URL}prices.json`;
+const SITE_PRICES_URLS = [`${MAPKA_SITE_URL}prices.json`, "https://michalskii.github.io/tankful/prices.json"];
 
 const HOUR = 60 * 60 * 1000;
 const DAY = 24 * HOUR;
@@ -281,9 +281,17 @@ const isEntry = (e) => typeof e?.fetchedAt === "number" && typeof (e.prices || e
 const isNewer = (entry, local) => isEntry(entry) && !(local?.fetchedAt >= entry.fetchedAt);
 
 async function refreshFromSite() {
-  const res = await fetch(SITE_PRICES_URL, { cache: "no-cache" });
-  if (!res.ok) throw new Error(`prices.json: HTTP ${res.status}`);
-  const site = await res.json();
+  let site;
+  for (const url of SITE_PRICES_URLS) {
+    try {
+      const res = await fetch(url, { cache: "no-cache" });
+      if (!res.ok) throw new Error(`prices.json: HTTP ${res.status}`);
+      site = await res.json();
+      break;
+    } catch (e) {
+      if (url === SITE_PRICES_URLS.at(-1)) throw e;
+    }
+  }
   const local = await chrome.storage.local.get(["fuelPrices", "euPrices", "nbpRates", "ukPrices", "usPrices"]);
   const update = { sitePricesCheckedAt: Date.now() };
   for (const key of ["fuelPrices", "euPrices", "nbpRates", "ukPrices", "usPrices"]) {

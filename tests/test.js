@@ -445,7 +445,8 @@ test("geocode: Nominatim gets coordinates rounded to ~1 km, the result is cached
   assert.strictEqual(urls.length, 1);
 });
 
-const SITE_URL = "https://michalskii.github.io/tankful/prices.json";
+const SITE_URL = "https://koszt-paliwa.pl/prices.json";
+const OLD_SITE_URL = "https://michalskii.github.io/tankful/prices.json";
 const BULLETIN_URL = "https://energy.ec.europa.eu/document/download/264c2d0f-f161-4ea3-a777-78faae59bea0_en";
 
 function sitePrices(age) {
@@ -458,11 +459,11 @@ function sitePrices(age) {
   };
 }
 
-function priceServer(site) {
+function priceServer(site, siteUrl = SITE_URL) {
   const urls = [];
   const fetch = async (url) => {
     urls.push(url);
-    if (url === SITE_URL) {
+    if (url === siteUrl) {
       if (!site) return { ok: false, status: 503 };
       return { ok: true, json: async () => JSON.parse(JSON.stringify(site)) };
     }
@@ -491,6 +492,15 @@ test("refreshAll: fresh prices from prices.json, no requests to the sources", as
   same(data.fuelPrices.prices, { pb: 6.5, on: 6.8 });
   same(data.euPrices.prices.DE, { pb: 1.8 });
   same(data.nbpRates.rates, { EUR: 4.3 });
+});
+
+test("refreshAll: prices.json from the old GitHub Pages address when the domain fails", async () => {
+  const { urls, bg } = priceServer(sitePrices(2 * 60 * 60 * 1000), OLD_SITE_URL);
+  const result = await bg.refreshAll(true);
+  same(urls, [SITE_URL, OLD_SITE_URL]);
+  assert.strictEqual(result.ok, true);
+  const { fuelPrices } = await stored(bg, "fuelPrices");
+  same(fuelPrices.prices, { pb: 6.5, on: 6.8 });
 });
 
 test("refreshAll: prices.json at most every 3 h unless forced", async () => {
