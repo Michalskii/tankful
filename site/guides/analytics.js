@@ -11,7 +11,7 @@
   new URLSearchParams(location.search).forEach((v, k) => (k === "ref" || k.startsWith("utm_")) && campaign.set(k, v));
   const q = campaign.toString();
   const params = new URLSearchParams({
-    p: location.pathname,
+    p: `${location.hostname === "spritkosten-europa.de" ? "/de" : ""}${location.pathname}`,
     t: document.title,
     r: referrer,
     e: "false",

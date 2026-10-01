@@ -736,7 +736,7 @@ test("site: routes have known cities, unique URLs and OSRM data", () => {
   }
 });
 
-test("site: PL and EN texts have the same keys and every key used in site/ exists", () => {
+test("site: every language has the same texts keys and every key used in site/ exists", () => {
   const code = source("site/src/lib/strings.ts").replace(/^export /gm, "").split("\ntype Key")[0];
   const strings = vm.runInNewContext(`${code}; SITE_STRINGS`);
   same(Object.keys(strings.en).sort(), Object.keys(strings.pl).sort());

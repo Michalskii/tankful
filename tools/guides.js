@@ -6,17 +6,21 @@ const GUIDES = path.join(ROOT, "site/guides");
 const PHOTOS = JSON.parse(fs.readFileSync(path.join(GUIDES, "photos.json"), "utf8"));
 const { cities: CITIES, routes: ROUTES } = JSON.parse(fs.readFileSync(path.join(ROOT, "site/src/lib/routes.json"), "utf8"));
 
-const DIRS = { pl: "poradniki", en: "guides" };
-const CURRENCY = { pl: "PLN", en: "EUR" };
-const INTL = { pl: "pl-PL", en: "en-GB" };
+const DIRS = { pl: "poradniki", en: "guides", de: "ratgeber" };
+const HOME = { pl: "./", en: "en", de: "./" };
+const OG_LOCALE = { pl: "pl_PL", en: "en_GB", de: "de_DE" };
+const CURRENCY = { pl: "PLN", en: "EUR", de: "EUR" };
+const INTL = { pl: "pl-PL", en: "en-GB", de: "de-DE" };
 const EU = ["AT", "BE", "BG", "HR", "CY", "CZ", "DK", "EE", "FI", "FR", "DE", "GR", "HU", "IE", "IT", "LV", "LT", "LU", "MT", "NL", "PL", "PT", "RO", "SK", "SI", "ES", "SE"];
 const FUELS = {
   pl: { pb: "benzyna 95", on: "diesel", lpg: "LPG", ev: "prąd" },
   en: { pb: "petrol (95)", on: "diesel", lpg: "LPG", ev: "electricity" },
+  de: { pb: "Super 95", on: "Diesel", lpg: "Autogas", ev: "Strom" },
 };
 const FUELS_OF = {
   pl: { pb: "benzyny 95", on: "oleju napędowego", lpg: "LPG" },
   en: { pb: "petrol", on: "diesel", lpg: "LPG" },
+  de: { pb: "Super", on: "Diesel", lpg: "Autogas" },
 };
 const PL_IN = {
   AT: "w Austrii", BE: "w Belgii", BG: "w Bułgarii", HR: "w Chorwacji", CY: "na Cyprze", CZ: "w Czechach", DK: "w Danii",
@@ -25,6 +29,8 @@ const PL_IN = {
   PT: "w Portugalii", RO: "w Rumunii", SK: "na Słowacji", SI: "w Słowenii", ES: "w Hiszpanii", SE: "w Szwecji", GB: "w Wielkiej Brytanii",
 };
 const EN_THE = new Set(["NL", "GB", "CZ"]);
+const DE_DER = new Set(["SK", "CH", "TR"]);
+const DE_DEN = new Set(["NL"]);
 const EV_PLN = { home: 1.1, fast: 2.8 };
 
 const TEXT = {
@@ -78,6 +84,11 @@ const TEXT = {
     calc100: "Koszt 100 km",
     calcKmCost: "Koszt 1 km",
     calcButton: "Policz koszt trasy z tym spalaniem",
+    fuelWord: "paliwo",
+    neighbour: "Sąsiad",
+    drive: "Napęd",
+    route: "Trasa",
+    crumbs: "Ścieżka",
   },
   en: {
     home: "Calculator",
@@ -129,6 +140,67 @@ const TEXT = {
     calc100: "Cost of 100 km",
     calcKmCost: "Cost of 1 km",
     calcButton: "Cost a trip with this consumption",
+    fuelWord: "fuel",
+    neighbour: "Neighbour",
+    drive: "Fuel",
+    route: "Route",
+    crumbs: "Breadcrumb",
+  },
+  de: {
+    home: "Rechner",
+    guides: "Ratgeber",
+    chartRanges: { "1y": "1 Jahr", "3y": "3 Jahre", "5y": "5 Jahre", all: "Seit 2005" },
+    chartRangeLabel: "Zeitraum",
+    chartNow: "Letzte Woche",
+    chartYear: "Vor einem Jahr",
+    chartFive: "Vor 5 Jahren",
+    chartSeries: "Reihe",
+    chartCaption: (date) => `Landesdurchschnitte aus dem wöchentlichen Oil Bulletin der Europäischen Kommission, in Euro. Letzte Woche: ${date}.`,
+    chartAria: (names) => `Preisdiagramm: ${names}`,
+    euAverage: "EU-Durchschnitt",
+    indexTitle: "Ratgeber: Spritpreise und Fahrtkosten in Europa | Tankful",
+    indexHeading: "Ratgeber",
+    indexDescription: "Tanken in Polen und Tschechien, Spritpreise in Österreich und ganz Europa, Spritkosten und Verbrauch berechnen – Ratgeber mit Preisen, die sich mehrmals täglich aktualisieren.",
+    indexLead: "Konkrete Zahlen statt Allgemeinplätze. Die Preise in den Ratgebern aktualisieren sich von selbst, zusammen mit dem Rechner.",
+    updated: (d) => `Preise vom ${d}`,
+    published: (d) => `Veröffentlicht am ${d}`,
+    photo: (author, url) => `Foto: <a href="${url}" rel="noopener">${author}</a> / Unsplash`,
+    cta: "Berechne deine Strecke",
+    ctaText: "Gib Start und Ziel ein – der Rechner zeigt die Spritkosten mit aktuellen Preisen in jedem Land auf der Strecke.",
+    ctaButton: "Zum Rechner",
+    more: "Weitere Ratgeber",
+    sources: "Preise: Weekly Oil Bulletin der Europäischen Kommission (Deutschland, Polen und die anderen EU-Länder), in Polen bei deutlichen Änderungen der Orlen-Großhandelspreise angepasst, Daten der britischen Regierung (GOV.UK), Wechselkurse der Polnischen Nationalbank. Es sind Landesdurchschnitte – an Autobahntankstellen ist es oft teurer.",
+    privacy: "Datenschutz",
+    code: "Quellcode",
+    country: "Land",
+    diff: "Unterschied",
+    cheaper: "Günstiger in",
+    same: "etwa gleich",
+    tank: (l) => `Auf ${l} l`,
+    per100: "Kosten für 100 km",
+    consumption: "Verbrauch",
+    share: "Anteil der Strecke",
+    km: "km",
+    total: "Durchschnitt der Strecke",
+    homeCharging: "Laden zu Hause",
+    fastCharging: "Schnelllader",
+    noData: "keine Daten",
+    verdictSame: (fuel) => `Ein Liter ${fuel} kostet auf beiden Seiten der Grenze praktisch gleich viel.`,
+    verdict: (fuel, where, diff, litres, tank) => `Ein Liter ${fuel} ist ${where} um ${diff} günstiger – bei ${litres} Litern sparst du ${tank}.`,
+    calcLitres: "Getankte Liter",
+    calcKm: "Gefahrene km",
+    calcFuel: "Kraftstoff",
+    calcPrice: (cur) => `Preis pro Liter (${cur})`,
+    calcPriceHint: "Durchschnitt in Deutschland",
+    calcResult: "Durchschnittsverbrauch",
+    calc100: "Kosten für 100 km",
+    calcKmCost: "Kosten für 1 km",
+    calcButton: "Spritkosten für eine Strecke mit diesem Verbrauch berechnen",
+    fuelWord: "Kraftstoff",
+    neighbour: "Nachbarland",
+    drive: "Antrieb",
+    route: "Strecke",
+    crumbs: "Brotkrumen",
   },
 };
 
@@ -162,7 +234,8 @@ function context(lang, data, history) {
   };
   const unitPrice = (v, cur = currency, unit = "l") => (v == null ? t.noData : `${money(toCur(v, cur), cur, 2)}/${unit}`);
   const name = (cc) => new Intl.DisplayNames(INTL[lang], { type: "region" }).of(cc);
-  const inCountry = (cc) => (lang === "pl" ? PL_IN[cc] : `in ${EN_THE.has(cc) ? "the " : ""}${name(cc)}`);
+  const inCountry = (cc) =>
+    lang === "pl" ? PL_IN[cc] : lang === "de" ? `in ${DE_DER.has(cc) ? "der " : DE_DEN.has(cc) ? "den " : ""}${name(cc)}` : `in ${EN_THE.has(cc) ? "the " : ""}${name(cc)}`;
   const date = (iso) => new Intl.DateTimeFormat(INTL[lang], { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }).format(new Date(iso));
   const fuelName = (f) => FUELS[lang][f];
   const ev = (key) => toCur(EV_PLN[key]);
@@ -172,7 +245,7 @@ function context(lang, data, history) {
     if (!r) throw new Error(`Unknown route ${slug}`);
     return r;
   };
-  const cityName = (key) => CITIES[key][lang];
+  const cityName = (key) => CITIES[key][lang] ?? CITIES[key].en;
   const routePricePln = (r, fuel) => {
     const shares = r.shares || { [CITIES[r.from].cc.toUpperCase()]: 1 };
     let sum = 0;
@@ -278,7 +351,7 @@ function context(lang, data, history) {
           ]);
         }
       }
-      return table([`${t.country} – ${lang === "pl" ? "paliwo" : "fuel"}`, esc(name(home)), lang === "pl" ? "Sąsiad" : "Neighbour", t.diff, t.cheaper, t.tank(50)], rows, [1, 2, 3, 5]);
+      return table([`${t.country} – ${t.fuelWord}`, esc(name(home)), t.neighbour, t.diff, t.cheaper, t.tank(50)], rows, [1, 2, 3, 5]);
     },
     per100: (...ccs) => {
       const rows = [
@@ -290,7 +363,7 @@ function context(lang, data, history) {
         [`${cap(fuelName("ev"))} – ${t.homeCharging}`, "17 kWh", ...ccs.map(() => money(ev("home") * 17))],
         [`${cap(fuelName("ev"))} – ${t.fastCharging}`, "17 kWh", ...ccs.map(() => money(ev("fast") * 17))],
       ];
-      return table([lang === "pl" ? "Napęd" : "Fuel", t.consumption, ...ccs.map((cc) => esc(name(cc)))], rows, ccs.map((_, i) => i + 2));
+      return table([t.drive, t.consumption, ...ccs.map((cc) => esc(name(cc)))], rows, ccs.map((_, i) => i + 2));
     },
     route: (slug, fuel = "pb") => {
       const r = routeBySlug(slug);
@@ -304,21 +377,22 @@ function context(lang, data, history) {
       const rows = slugs.map((slug) => {
         const r = routeBySlug(slug);
         const cost = (fuel, c) => money((toCur(routePricePln(r, fuel)) * r.km * c) / 100);
-        return [`<a href="${lang === "pl" ? `trasa/${r.pl}` : `route/${r.en}`}">${esc(cityName(r.from))} – ${esc(cityName(r.to))}</a>`, `${num(r.km)} ${t.km}`, cost("pb", 7), cost("on", 6), cost("lpg", 9)];
+        return [`<a href="${lang === "pl" ? `trasa/${r.pl}` : lang === "de" ? `https://koszt-paliwa.pl/route/${r.en}` : `route/${r.en}`}">${esc(cityName(r.from))} – ${esc(cityName(r.to))}</a>`, `${num(r.km)} ${t.km}`, cost("pb", 7), cost("on", 6), cost("lpg", 9)];
       });
-      return table([lang === "pl" ? "Trasa" : "Route", t.km, `${cap(fuelName("pb"))} 7 l`, `${cap(fuelName("on"))} 6 l`, "LPG 9 l"], rows, [1, 2, 3, 4]);
+      return table([t.route, t.km, `${cap(fuelName("pb"))} 7 l`, `${cap(fuelName("on"))} 6 l`, "LPG 9 l"], rows, [1, 2, 3, 4]);
     },
   };
 
   blocks.consumption = () => {
     const avg = (fuel) => {
       if (lang === "pl") return pln("PL", fuel);
+      if (lang === "de") return pln("DE", fuel);
       const list = EU.map((cc) => pln(cc, fuel)).filter(Boolean);
       return list.reduce((a, b) => a + b, 0) / list.length;
     };
     const fuels = ["pb", "on", "lpg"];
     const priceOf = Object.fromEntries(fuels.map((f) => [f, Math.round(toCur(avg(f)) * 100) / 100]));
-    const home = lang === "pl" ? "./" : "en";
+    const home = HOME[lang];
     const options = fuels.map((f) => `<option value="${f}">${esc(cap(fuelName(f)))}</option>`).join("");
     return `<form class="calc" data-prices="${esc(JSON.stringify(priceOf))}" data-currency="${currency}" data-locale="${INTL[lang]}" data-home="${home}">
 <div class="calc-fields">
@@ -522,7 +596,7 @@ function layout({ lang, title, description, url, alternates, css, schema, hero, 
   const charts = main.includes('class="chart"');
   const calc = main.includes('class="calc"');
   const t = TEXT[lang];
-  const home = lang === "pl" ? "./" : "en";
+  const home = HOME[lang];
   return `<!doctype html>
 <html lang="${lang}">
   <head>
@@ -547,7 +621,7 @@ ${alternates.map((l) => `    ${l}`).join("\n")}
     <meta property="og:image" content="${schema.image}" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:locale" content="${lang === "pl" ? "pl_PL" : "en_GB"}" />
+    <meta property="og:locale" content="${OG_LOCALE[lang]}" />
     <meta name="twitter:card" content="summary_large_image" />
     <script type="application/ld+json">${JSON.stringify(schema.data).replace(/</g, "\\u003c")}</script>
     <meta name="color-scheme" content="light" />
@@ -556,7 +630,7 @@ ${alternates.map((l) => `    ${l}`).join("\n")}
     <header class="site-header">
       <div class="bar">
         <a class="brand" href="${home}"><img src="icon.svg" alt="" width="28" height="28" />Tankful</a>
-        <nav aria-label="${lang === "pl" ? "Menu" : "Menu"}">
+        <nav aria-label="Menu">
           <a href="${home}">${t.home}</a>
           <a href="${DIRS[lang]}/">${t.guides}</a>
           <a class="lang" href="${other.href}" hreflang="${other.lang}" lang="${other.lang}">${other.lang.toUpperCase()}</a>
@@ -581,7 +655,7 @@ ${main}
 `;
 }
 
-function buildGuides({ site, siteUrl, data, history, alternates }) {
+function buildGuides({ site, siteUrl, siteUrls, langSite, siteId, data, history, alternates }) {
   const guides = loadGuides();
   const css = stylesheet(site);
   fs.copyFileSync(path.join(GUIDES, "guides.css"), path.join(site, "guides.css"));
@@ -593,20 +667,22 @@ function buildGuides({ site, siteUrl, data, history, alternates }) {
     fs.writeFileSync(path.join(site, "data/history", `${cc}.json`), JSON.stringify({ dates: history.dates, plnPerEur: history.plnPerEur, ...fuels }));
   }
   fs.cpSync(path.join(GUIDES, "img"), path.join(site, "img/guides"), { recursive: true });
-  for (const g of guides.pl) if (!PHOTOS[g.photo] || !fs.existsSync(path.join(GUIDES, "img", `${g.photo}.webp`))) throw new Error(`Missing photo for guide "${g.id}"`);
+  const langs = Object.keys(DIRS).filter((lang) => langSite[lang] === siteId);
+  for (const g of langs.flatMap((lang) => guides[lang])) if (!PHOTOS[g.photo] || !fs.existsSync(path.join(GUIDES, "img", `${g.photo}.webp`))) throw new Error(`Missing photo for guide "${g.id}"`);
   const photoUrl = (id) => `${siteUrl}img/guides/${id}.jpg`;
-  const url = (lang, slug) => `${siteUrl}${DIRS[lang]}/${slug ?? ""}`;
-  const href = (lang, slug) => `${DIRS[lang]}/${slug ?? ""}`;
+  const url = (lang, slug) => `${siteUrls[langSite[lang]]}${DIRS[lang]}/${slug ?? ""}`;
+  const href = (lang, slug) => (langSite[lang] === siteId ? `${DIRS[lang]}/${slug ?? ""}` : url(lang, slug));
+  const entry = (lang, slug) => ({ lang, url: url(lang, slug), local: langSite[lang] === siteId });
   const groups = [];
   const updated = data.euPrices.date;
 
-  for (const lang of Object.keys(DIRS)) fs.mkdirSync(path.join(site, DIRS[lang]), { recursive: true });
+  for (const lang of langs) fs.mkdirSync(path.join(site, DIRS[lang]), { recursive: true });
 
-  const indexGroup = Object.keys(DIRS).map((lang) => ({ lang, url: url(lang) }));
+  const indexGroup = Object.keys(DIRS).filter((lang) => guides[lang].length).map((lang) => entry(lang));
   groups.push(indexGroup);
-  for (const lang of Object.keys(DIRS)) {
+  for (const lang of langs) {
     const t = TEXT[lang];
-    const other = lang === "pl" ? "en" : "pl";
+    const other = lang === "en" ? "pl" : "en";
     const list = guides[lang]
       .map((g) => `        <li><a href="${href(lang, g.slug)}"><div class="card-media"><img class="card-photo" src="img/guides/${g.photo}.webp" width="1400" height="735" alt="" loading="lazy" />${icon(g.id, "tile")}</div><div class="card-body"><strong>${esc(g.heading)}</strong><span>${esc(g.description)}</span></div></a></li>`)
       .join("\n");
@@ -641,21 +717,22 @@ ${list}
     );
   }
 
-  for (const id of guides.pl.map((g) => g.id)) {
-    const pair = Object.keys(DIRS).map((lang) => guides[lang].find((g) => g.id === id));
-    const group = pair.map((g) => ({ lang: g.lang, url: url(g.lang, g.slug) }));
+  for (const id of [...new Set(Object.values(guides).flat().map((g) => g.id))]) {
+    const pair = Object.keys(DIRS).map((lang) => guides[lang].find((g) => g.id === id)).filter(Boolean);
+    if (!pair.some((g) => langSite[g.lang] === siteId)) continue;
+    const group = pair.map((g) => entry(g.lang, g.slug));
     groups.push(group);
-    for (const g of pair) {
+    for (const g of pair.filter((x) => langSite[x.lang] === siteId)) {
       const t = TEXT[g.lang];
       const ctx = context(g.lang, data, history);
-      const other = pair.find((p) => p !== g);
+      const other = pair.find((p) => p.lang === (g.lang === "en" ? "pl" : "en"));
       const date = (iso) => new Intl.DateTimeFormat(INTL[g.lang], { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }).format(new Date(iso));
       const more = guides[g.lang]
         .filter((x) => x.id !== id)
         .map((x) => `          <li><a href="${href(g.lang, x.slug)}">${esc(x.heading)}</a></li>`)
         .join("\n");
-      const home = g.lang === "pl" ? "./" : "en";
-      const hero = `        <nav class="crumbs" aria-label="${g.lang === "pl" ? "Ścieżka" : "Breadcrumb"}"><a href="${home}">Tankful</a> / <a href="${href(g.lang)}">${t.guides}</a></nav>
+      const home = HOME[g.lang];
+      const hero = `        <nav class="crumbs" aria-label="${t.crumbs}"><a href="${home}">Tankful</a> / <a href="${href(g.lang)}">${t.guides}</a></nav>
         <div class="hero-title">${icon(g.id, "tile")}<h1>${esc(g.heading)}</h1></div>
         <p class="meta">${esc(t.updated(date(updated)))} · ${esc(t.published(date(g.published)))}</p>`;
       const photo = PHOTOS[g.photo];
@@ -700,7 +777,7 @@ ${more}
           "@context": "https://schema.org",
           "@type": "BreadcrumbList",
           itemListElement: [
-            { "@type": "ListItem", position: 1, name: "Tankful", item: `${siteUrl}${g.lang === "pl" ? "" : "en"}` },
+            { "@type": "ListItem", position: 1, name: "Tankful", item: `${siteUrl}${g.lang === "en" ? "en" : ""}` },
             { "@type": "ListItem", position: 2, name: t.guides, item: url(g.lang) },
             { "@type": "ListItem", position: 3, name: g.heading, item: url(g.lang, g.slug) },
           ],
@@ -718,12 +795,12 @@ ${more}
           schema: { image: photoUrl(g.photo), data: schemaData },
           hero,
           main,
-          other: { lang: other.lang, href: href(other.lang, other.slug) },
+          other: other ? { lang: other.lang, href: href(other.lang, other.slug) } : { lang: g.lang === "en" ? "pl" : "en", href: href(g.lang === "en" ? "pl" : "en") },
         })
       );
     }
   }
-  console.log(`Guides: ${guides.pl.length} × ${Object.keys(DIRS).length} languages`);
+  console.log(`Guides: ${langs.map((lang) => `${guides[lang].length} ${lang}`).join(", ")}`);
   return groups;
 }
 

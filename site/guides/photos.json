@@ -4,7 +4,8 @@
     "url": "https://unsplash.com/photos/ULJCBY8Tcfg",
     "alt": {
       "pl": "Wyświetlacz dystrybutora paliwa z ceną i liczbą litrów",
-      "en": "Fuel pump display showing the price and litres"
+      "en": "Fuel pump display showing the price and litres",
+      "de": "Anzeige einer Zapfsäule mit Preis und Litern"
     }
   },
   "border": {
@@ -12,7 +13,8 @@
     "url": "https://unsplash.com/photos/UE_BCpFTuz0",
     "alt": {
       "pl": "Przejście graniczne z tablicą Unii Europejskiej i Austrii",
-      "en": "Border crossing with European Union and Austria signs"
+      "en": "Border crossing with European Union and Austria signs",
+      "de": "Grenzübergang mit Schildern der Europäischen Union und Österreichs"
     }
   },
   "per-100-km": {
@@ -20,7 +22,8 @@
     "url": "https://unsplash.com/photos/gts_Eh4g1lk",
     "alt": {
       "pl": "Prędkościomierz i wskaźnik poziomu paliwa w samochodzie",
-      "en": "Car speedometer and fuel gauge"
+      "en": "Car speedometer and fuel gauge",
+      "de": "Tachometer und Tankanzeige im Auto"
     }
   },
   "how-to-calculate": {
@@ -28,7 +31,8 @@
     "url": "https://unsplash.com/photos/P85dQzlsPlc",
     "alt": {
       "pl": "Telefon z nawigacją i wyznaczoną trasą na szybie samochodu",
-      "en": "Phone with a navigation route mounted on a car windscreen"
+      "en": "Phone with a navigation route mounted on a car windscreen",
+      "de": "Handy mit Navigation und berechneter Route an der Windschutzscheibe"
     }
   },
   "split": {
@@ -60,7 +64,8 @@
     "url": "https://unsplash.com/photos/OyoaCpMCR0U",
     "alt": {
       "pl": "Most Karola i Stare Miasto w Pradze",
-      "en": "Charles Bridge and the Old Town in Prague"
+      "en": "Charles Bridge and the Old Town in Prague",
+      "de": "Karlsbrücke und Altstadt in Prag"
     }
   },
   "lpg": {
@@ -68,7 +73,8 @@
     "url": "https://unsplash.com/photos/4dOr247sHaI",
     "alt": {
       "pl": "Tankowanie samochodu na stacji paliw",
-      "en": "Filling up a car at a fuel station"
+      "en": "Filling up a car at a fuel station",
+      "de": "Ein Auto wird an der Tankstelle betankt"
     }
   },
   "seaside": {
@@ -100,7 +106,8 @@
     "url": "https://unsplash.com/photos/5SjAaqqCCmY",
     "alt": {
       "pl": "Katedra św. Szczepana nad dachami Wiednia o zachodzie słońca",
-      "en": "St. Stephen's Cathedral above the rooftops of Vienna at sunset"
+      "en": "St. Stephen's Cathedral above the rooftops of Vienna at sunset",
+      "de": "Stephansdom über den Dächern von Wien bei Sonnenuntergang"
     }
   },
   "hungary": {

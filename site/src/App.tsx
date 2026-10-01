@@ -23,6 +23,7 @@ import { decodePlace, encodePlace, type Place } from "@/lib/places"
 import { track } from "@/lib/analytics"
 import { PRERENDER } from "@/lib/prerender"
 import { cityName, cityPlace, CURRENT_ROUTE, routeHref, routeTrip } from "@/lib/routes"
+import { GERMAN_SITE, guidesHref, homeHref, LANGS, otherSite } from "@/lib/sites"
 import { stopItem, type StopItem } from "@/lib/stops"
 import { T } from "@/lib/strings"
 import { cn } from "@/lib/utils"
@@ -73,7 +74,7 @@ function langHref(lang: string) {
   p.delete("lang")
   p.delete("prerender")
   const q = p.toString()
-  const page = CURRENT_ROUTE ? routeHref(CURRENT_ROUTE, lang) : lang === "en" ? "en" : "./"
+  const page = otherSite(lang) ?? (CURRENT_ROUTE ? routeHref(CURRENT_ROUTE, lang) : homeHref(lang))
   return `${page}${q ? `?${q}` : ""}`
 }
 
@@ -225,13 +226,13 @@ export default function App() {
     <div className="flex min-h-svh flex-col lg:h-svh">
       <header className="shrink-0 border-b">
         <div className="flex h-14 items-center justify-between px-4 sm:px-6">
-          <a href={MAPKA_LOCALE === "en" ? "en" : "./"} className="flex items-center gap-2 font-semibold tracking-tight">
+          <a href={homeHref()} className="flex items-center gap-2 font-semibold tracking-tight">
             <img src="icon.svg" alt="" className="size-7" />
             Tankful
           </a>
           <div className="flex items-center gap-1">
           <nav className="flex gap-1" aria-label={T("language")}>
-            {["pl", "en"].map((lang) => (
+            {LANGS.map((lang) => (
               <Button key={lang} asChild size="sm" variant={MAPKA_LOCALE === lang ? "secondary" : "ghost"}>
                 <a
                   href={langHref(lang)}
@@ -526,7 +527,7 @@ export default function App() {
               </div>
             </section>
 
-            <PopularRoutes />
+            {!GERMAN_SITE && <PopularRoutes />}
 
             <section aria-labelledby="guides-heading" className="flex flex-col gap-3">
               <h2 id="guides-heading" className="text-base font-semibold">
@@ -534,7 +535,7 @@ export default function App() {
               </h2>
               <a
                 className="text-sm text-muted-foreground underline underline-offset-4 hover:text-foreground"
-                href={MAPKA_LOCALE === "en" ? "guides/" : "poradniki/"}
+                href={guidesHref()}
               >
                 {T("guidesLink")}
               </a>

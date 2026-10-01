@@ -36,7 +36,7 @@ function referrer() {
 }
 
 export function trackVisit() {
-  send({ p: location.pathname, t: document.title, r: referrer(), e: "false" })
+  send({ p: `${location.hostname === "spritkosten-europa.de" ? "/de" : ""}${location.pathname}`, t: document.title, r: referrer(), e: "false" })
 }
 
 export function track(event: string) {

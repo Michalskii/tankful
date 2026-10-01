@@ -9,26 +9,32 @@ const { buildGuides } = require("./guides");
 const ROOT = path.join(__dirname, "..");
 const PUBLIC = path.join(ROOT, "site/public");
 const SITE = path.join(ROOT, "_site");
-const SITE_URL = "https://koszt-paliwa.pl/";
+const args = process.argv.slice(2);
+const SITE_ID = args.find((a) => a.startsWith("--site="))?.slice("--site=".length) || "pl";
+const SITE_URLS = { pl: "https://koszt-paliwa.pl/", de: "https://spritkosten-europa.de/" };
+const LANG_SITE = { pl: "pl", en: "pl", de: "de" };
+if (!SITE_URLS[SITE_ID]) throw new Error(`Unknown site ${SITE_ID}`);
+const SITE_URL = SITE_URLS[SITE_ID];
 const BRAND_COLOR = "#1B2430";
 const APP_ICONS = ["app-192.png", "app-512.png", "app-maskable-512.png", "apple-touch-icon.png"];
 const LANGS = {
   pl: { locale: "pl_PL", timeZone: "Europe/Warsaw" },
   en: { locale: "en_GB", timeZone: "Europe/Berlin" },
+  de: { locale: "de_DE", timeZone: "Europe/Berlin" },
 };
+const SITE_LANGS = Object.keys(LANGS).filter((lang) => LANG_SITE[lang] === SITE_ID);
 const { cities: CITIES, routes: ROUTES } = JSON.parse(fs.readFileSync(path.join(ROOT, "site/src/lib/routes.json"), "utf8"));
 
 function page(lang, rel, file, route = null) {
-  return { lang, ...LANGS[lang], file, url: `${SITE_URL}${rel}`, path: `/${rel}`, route };
+  return { lang, ...LANGS[lang], file, url: `${SITE_URLS[LANG_SITE[lang]]}${rel}`, path: `/${rel}`, route, local: LANG_SITE[lang] === SITE_ID };
 }
 
 const GROUPS = [
-  [page("pl", "", "index.html"), page("en", "en", "en.html")],
+  [page("pl", "", "index.html"), page("en", "en", "en.html"), page("de", "", "index.html")],
   ...ROUTES.map((r) => [page("pl", `trasa/${r.pl}`, `trasa/${r.pl}.html`, r), page("en", `route/${r.en}`, `route/${r.en}.html`, r)]),
 ];
 for (const group of GROUPS) for (const p of group) p.group = group;
-const PAGES = GROUPS.flat();
-const args = process.argv.slice(2);
+const PAGES = GROUPS.flat().filter((p) => p.local);
 const prices = args.find((a) => !a.startsWith("--"));
 const history = args.find((a) => a.startsWith("--history="))?.slice("--history=".length);
 
@@ -93,7 +99,7 @@ function pageStrings(page, strings) {
 const esc = (s) => s.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
 function alternates(group, tag = "link") {
-  const fallback = group.find((p) => p.lang === "en");
+  const fallback = group.find((p) => p.lang === "en") || group[0];
   return [
     ...group.map((p) => `<${tag} rel="alternate" hreflang="${p.lang}" href="${p.url}" />`),
     `<${tag} rel="alternate" hreflang="x-default" href="${fallback.url}" />`,
@@ -142,7 +148,7 @@ function headTags(page, s) {
 function pageHtml(template, page, strings) {
   const s = pageStrings(page, strings);
   let html = template
-    .replace(/<html lang="[^"]*">/, `<html lang="${page.lang}">`)
+    .replace(/<html lang="[^"]*">/, `<html lang="${page.lang}" data-lang="${page.lang}">`)
     .replace(/<title>[^<]*<\/title>/, `<title>${esc(s.title)}</title>`)
     .replace(/<meta name="description" content="[^"]*" \/>/, `<meta name="description" content="${esc(s.description)}" />`)
     .replace("</head>", `${headTags(page, s)}\n  </head>`);
@@ -208,7 +214,7 @@ async function prerender(pages, strings) {
 
 function sitemap(extra = []) {
   const date = new Date().toISOString().slice(0, 10);
-  const urls = [...PAGES, ...extra.flatMap((group) => group.map((p) => ({ ...p, group })))].map((p) => {
+  const urls = [...PAGES, ...extra.flatMap((group) => group.filter((p) => p.local).map((p) => ({ ...p, group })))].map((p) => {
     const links = alternates(p.group, "xhtml:link").map((line) => `    ${line}`).join("\n");
     return `  <url>\n    <loc>${p.url}</loc>\n    <lastmod>${date}</lastmod>\n${links}\n  </url>`;
   }).join("\n");
@@ -221,14 +227,14 @@ async function main() {
 
   const strings = siteStrings();
   const template = fs.readFileSync(path.join(SITE, "index.html"), "utf8");
-  for (const dir of ["trasa", "route"]) fs.mkdirSync(path.join(SITE, dir), { recursive: true });
+  if (SITE_ID === "pl") for (const dir of ["trasa", "route"]) fs.mkdirSync(path.join(SITE, dir), { recursive: true });
   for (const page of PAGES) fs.writeFileSync(path.join(SITE, page.file), pageHtml(template, page, strings));
   const data = JSON.parse(fs.readFileSync(path.join(PUBLIC, "prices.json"), "utf8"));
   const historyData = JSON.parse(fs.readFileSync(path.join(PUBLIC, "history.json"), "utf8"));
-  const guides = buildGuides({ site: SITE, siteUrl: SITE_URL, data, history: historyData, alternates });
+  const guides = buildGuides({ site: SITE, siteUrl: SITE_URL, siteUrls: SITE_URLS, langSite: LANG_SITE, siteId: SITE_ID, data, history: historyData, alternates });
   fs.writeFileSync(path.join(SITE, "sitemap.xml"), sitemap(guides));
   fs.writeFileSync(path.join(SITE, "robots.txt"), `User-agent: *\nAllow: /\n\nSitemap: ${SITE_URL}sitemap.xml\n`);
-  for (const lang of Object.keys(LANGS)) {
+  for (const lang of SITE_LANGS) {
     fs.writeFileSync(path.join(SITE, `manifest-${lang}.webmanifest`), JSON.stringify(manifest(lang, strings), null, 2) + "\n");
   }
 

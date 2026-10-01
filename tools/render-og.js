@@ -23,6 +23,14 @@ const TEXTS = {
     cost: "≈ €45",
     person: "👥 3 × €15",
   },
+  de: {
+    heading: "Was kostet der Sprit für diese Strecke?",
+    points: ["Aktuelle Preise in Deutschland und der EU", "Strecken durch mehrere Länder", "E-Autos und Kosten pro Person"],
+    route: "Berlin → Warschau",
+    meta: "575 km · Super 95 · 7 l/100 km",
+    cost: "≈ 69 €",
+    person: "👥 3 × 23 €",
+  },
 };
 
 function page(t) {

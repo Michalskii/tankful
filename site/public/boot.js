@@ -2,13 +2,14 @@
   const url = new URL(location.href);
   const pathEn = /\/en(\.html)?$/.test(url.pathname) || /\/route\/[^/]+$/.test(url.pathname);
   const param = url.searchParams.get("lang");
-  if ((param === "en" && !pathEn) || (param === "pl" && pathEn)) {
+  const site = globalThis.document?.documentElement?.dataset?.lang === "de" ? "de" : "pl";
+  if (site === "pl" && ((param === "en" && !pathEn) || (param === "pl" && pathEn))) {
     url.searchParams.delete("lang");
     const dir = url.pathname.replace(/[^/]*$/, "");
     url.pathname = param === "en" ? `${dir}en` : dir;
     location.replace(url);
   }
-  const lang = pathEn ? "en" : "pl";
+  const lang = site === "de" ? "de" : pathEn ? "en" : "pl";
   const messages = MAPKA_MESSAGES[lang];
   const i18n = {
     getUILanguage: () => lang,
