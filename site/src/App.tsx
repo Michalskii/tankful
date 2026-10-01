@@ -30,6 +30,7 @@ import { cn } from "@/lib/utils"
 import { fetchRoutes, formatDuration, sparsePoints, tripCost, type Options, type Route, type Trip } from "@/lib/trip"
 
 const PREFS_KEY = "tankful-calculator"
+const SITE_CURRENCY = GERMAN_SITE ? "EUR" : MAPKA_CURRENCY
 const TYPICAL_CONSUMPTION: Record<string, number> = { pb: 7.0, pbp: 7.0, on: 6.0, onp: 6.0, lpg: 9.0, ev: 17.0 }
 const FAQ = [
   ["faq1q", "faq1a"],
@@ -56,14 +57,14 @@ function initialOptions(): Options {
   const prefs = params.has("from") ? {} : readPrefs()
   const fuel = params.get("fuel") || prefs.fuelType || MAPKA_DEFAULTS.fuelType
   const fuelType = MAPKA_FUELS[fuel] ? fuel : MAPKA_DEFAULTS.fuelType
-  const currency = params.get("cur") || prefs.currency || MAPKA_CURRENCY
+  const currency = params.get("cur") || prefs.currency || SITE_CURRENCY
   const units = readPrefs().units || MAPKA_DEFAULTS.units
   return {
     units: units === "us" ? "us" : "metric",
     fuelType,
     consumption: parseFloat(params.get("c") || "") || prefs.consumption || TYPICAL_CONSUMPTION[fuelType],
     passengers: parseInt(params.get("p") || "", 10) || prefs.passengers || 1,
-    currency: MAPKA_CURRENCIES.includes(currency) ? currency : MAPKA_CURRENCY,
+    currency: MAPKA_CURRENCIES.includes(currency) ? currency : SITE_CURRENCY,
     ownPrice: null,
     roundTrip: params.get("rt") === "1",
   }
