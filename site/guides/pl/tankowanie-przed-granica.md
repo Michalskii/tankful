@@ -22,6 +22,12 @@ Jadąc za granicę, najprościej zaoszczędzić, tankując do pełna po tańszej
 
 Ceny to średnie krajowe z biuletynu Komisji Europejskiej ({{date}}), przeliczone po kursie NBP. Dla Ukrainy, Białorusi i Rosji (obwód królewiecki) nie mamy wiarygodnych, regularnie publikowanych średnich, dlatego ich tu nie ma.
 
+## Ceny przy granicach w ostatnim roku
+
+{{chart PL,DE,CZ,SK,LT pb 1y}}
+
+Różnice między krajami zmieniają się z tygodnia na tydzień, a czasem kolejność się odwraca – zwłaszcza przy wahaniach kursów walut. Wykres pokazuje benzynę 95 w złotych za litr; dłuższy okres wybierzesz przyciskami nad wykresem.
+
 ## Niemcy
 
 Różnica między Polską a Niemcami jest zwykle największa ze wszystkich sąsiadów, bo Niemcy mają wysoką akcyzę i opłatę za emisję CO₂. Dlatego przy przejściach w Słubicach, Zgorzelcu czy Kołbaskowie stacje po polskiej stronie mają wielu klientów z Niemiec. Jeśli jedziesz na zachód, zatankuj do pełna przed granicą. Jeśli wracasz, dojedź na rezerwie do Polski, o ile zasięg na to pozwala.

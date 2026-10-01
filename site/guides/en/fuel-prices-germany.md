@@ -15,6 +15,10 @@ A litre of petrol (95) currently costs **{{price DE pb}}** on average in Germany
 
 These are national averages from {{date}}. German motorway service stations (Raststätte) are usually noticeably more expensive than stations in towns.
 
+{{chart PL,DE pb,on 5y}}
+
+A year ago petrol cost {{ago DE pb 52}} in Germany and {{ago PL pb 52}} in Poland.
+
 ## Fuel cost of driving to Germany
 
 One-way cost for the most popular routes from Poland, at typical consumption:

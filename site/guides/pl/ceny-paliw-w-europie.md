@@ -19,6 +19,12 @@ Kraje od najtańszej do najdroższej benzyny. Ceny w euro za litr, w ostatniej k
 
 > Tabela odświeża się kilka razy dziennie, razem z kalkulatorem Tankful. Ceny w krajach UE pochodzą z cotygodniowego biuletynu naftowego Komisji Europejskiej (ostatni: {{date}}), w Wielkiej Brytanii z danych rządu brytyjskiego.
 
+## Jak zmieniały się ceny
+
+{{chart PL,DE,CZ,EU pb 3y}}
+
+Rok temu litr benzyny kosztował w Polsce {{ago PL pb 52}}, a średnio w UE {{ago EU pb 52}}. Pełną historię od {{histstart}} roku znajdziesz w poradniku [historia cen paliw](poradniki/historia-cen-paliw).
+
 ## Skąd takie różnice między krajami
 
 Cena na stacji to w ponad połowie podatki: akcyza, VAT i w części krajów dodatkowe opłaty emisyjne. Dlatego sąsiednie kraje potrafią się różnić o kilkadziesiąt groszy na litrze, mimo że paliwo kupują na tym samym rynku. Najwięcej płaci się zwykle w krajach z wysoką akcyzą i podatkiem od CO₂ (Holandia, Dania, Finlandia, Niemcy), najmniej tam, gdzie podatki są niskie albo państwo reguluje ceny.

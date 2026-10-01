@@ -7,10 +7,14 @@ Thumbs.db
 .DS_Store
 
 _site/
+_prices.json
+_history.json
 site/public/settings.js
 site/public/borders.js
 site/public/messages.js
 site/public/prices.json
+site/public/history.json
+site/public/chart.umd.min.js
 site/public/privacy.html
 site/public/icon.svg
 site/node_modules/

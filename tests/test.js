@@ -188,6 +188,43 @@ test("unzip: a file that is not a ZIP", async () => {
   await assert.rejects(ext.unzip(new ArrayBuffer(100), ["a"]), /nieprawidłowy plik XLSX/);
 });
 
+const history = require("../tools/history");
+const HISTORY_STRINGS = `<sst>
+  <si><t>PL_exchange_rate</t></si>
+  <si><t>PL_price_with_tax_euro95</t></si>
+  <si><t>PL_price_with_tax_LPG</t></si>
+  <si><t>DE_price_with_tax_diesel</t></si>
+  <si><t>UK_price_with_tax_euro95</t></si>
+  <si><t>Date</t></si>
+</sst>`;
+const HISTORY_SHEET = `<worksheet><sheetData>
+  <row r="1"><c r="B1" t="s"><v>0</v></c><c r="C1" t="s"><v>1</v></c><c r="D1" t="s"><v>2</v></c><c r="E1" t="s"><v>3</v></c><c r="F1" t="s"><v>4</v></c></row>
+  <row r="2"><c r="A2" t="s"><v>5</v></c></row>
+  <row r="3"><c r="A3"><v>45665</v></c><c r="B3"><v>0.25</v></c><c r="C3"><v>1500</v></c><c r="D3"><v>700</v></c><c r="E3"><v>1650.4</v></c><c r="F3"><v>1600</v></c></row>
+  <row r="4"><c r="A4"><v>45658</v></c><c r="B4"><v>0.2</v></c><c r="C4"><v>1400</v></c><c r="E4"><v>0</v></c></row>
+</sheetData></worksheet>`;
+const EXPECTED_HISTORY = {
+  dates: ["2025-01-01", "2025-01-08"],
+  plnPerEur: [5, 4],
+  prices: { PL: { pb: [1.4, 1.5], lpg: [null, 0.7] }, DE: { on: [null, 1.65] } },
+};
+
+test("parseHistory: weekly EUR/l series oldest first, PLN rate, EU countries only", () => {
+  same(history.parseHistory(HISTORY_STRINGS, HISTORY_SHEET), EXPECTED_HISTORY);
+});
+
+test("parseHistory: no Polish data is an error", () => {
+  assert.throws(() => history.parseHistory("<sst><si><t>DE_price_with_tax_diesel</t></si></sst>", `<worksheet><sheetData>
+  <row r="1"><c r="B1" t="s"><v>0</v></c></row><row r="2"><c r="A2"><v>45658</v></c><c r="B2"><v>1600</v></c></row>
+</sheetData></worksheet>`), /no data for Poland/);
+});
+
+test("history unzip: deflate-compressed entries", () => {
+  const files = { "xl/sharedStrings.xml": HISTORY_STRINGS, "xl/worksheets/sheet1.xml": HISTORY_SHEET };
+  const out = history.unzip(Buffer.from(zip(files, true)), Object.keys(files));
+  same(history.parseHistory(out["xl/sharedStrings.xml"], out["xl/worksheets/sheet1.xml"]), EXPECTED_HISTORY);
+});
+
 const DATA = {
   fuelPrices: { prices: { pb: 6.2, on: 6.3 } },
   euPrices: { prices: { DE: { pb: 1.8, on: 1.7 } } },

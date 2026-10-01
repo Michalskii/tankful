@@ -22,6 +22,12 @@ When you drive across a border, the easiest saving is to fill up on the cheaper 
 
 Prices are national averages from the European Commission's Weekly Oil Bulletin ({{date}}), converted at National Bank of Poland rates. Ukraine, Belarus and Russia (Kaliningrad) have no reliable, regularly published averages, so they are left out.
 
+## Border prices over the last year
+
+{{chart PL,DE,CZ,SK,LT pb 1y}}
+
+The gaps between countries change from week to week, and sometimes the order flips – especially when exchange rates move. Use the buttons above the chart for a longer period.
+
 ## Germany
 
 The gap between Poland and Germany is usually the largest of all its neighbours, because Germany has high excise duty and a CO₂ levy on fuel. That's why stations on the Polish side at Słubice, Zgorzelec or Kołbaskowo are busy with German drivers. Heading west, fill up before the border; heading east, wait until you're in Poland if your range allows.

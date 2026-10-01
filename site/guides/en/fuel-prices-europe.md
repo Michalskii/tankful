@@ -19,6 +19,12 @@ Countries ordered from the cheapest to the most expensive petrol. Prices in euro
 
 > This table refreshes several times a day, together with the Tankful calculator. EU prices come from the European Commission's Weekly Oil Bulletin (latest: {{date}}), UK prices from the UK government's weekly road fuel prices, converted at National Bank of Poland rates.
 
+## How prices have changed
+
+{{chart PL,DE,CZ,EU pb 3y}}
+
+A year ago a litre of petrol cost {{ago EU pb 52}} on average in the EU and {{ago PL pb 52}} in Poland. The full history since {{histstart}} is in the [fuel price history](guides/fuel-price-history) guide.
+
 ## Why prices differ so much between countries
 
 More than half of the pump price is tax: excise duty, VAT and, in some countries, a carbon levy. That's why neighbouring countries can differ by 30–40 cents a litre even though they buy fuel on the same market. Drivers usually pay the most in countries with high excise and CO₂ taxes (the Netherlands, Denmark, Finland, Germany) and the least where taxes are low or the state caps prices.

@@ -15,6 +15,10 @@ Litr benzyny 95 kosztuje dziś w Czechach średnio **{{price CZ pb}}**, diesla *
 
 Ceny to średnie krajowe z {{date}}, przeliczone po kursie NBP. Czechy mają własną walutę, więc na różnicę wpływa też kurs korony – przy dużych wahaniach kursu to, po której stronie granicy jest taniej, potrafi się zmienić z tygodnia na tydzień.
 
+{{chart PL,CZ pb,on 5y}}
+
+Na wykresie widać, jak często zmienia się to, po której stronie granicy jest taniej. Rok temu benzyna kosztowała w Czechach {{ago CZ pb 52}}, a w Polsce {{ago PL pb 52}}.
+
 ## Ile kosztuje paliwo do Pragi
 
 {{trips wroclaw-praga krakow-praga warszawa-praga}}

@@ -22,6 +22,12 @@ Przyjmijmy, że sekwencyjna instalacja LPG z montażem kosztuje 4500 zł (ceny z
 
 Przy 15 000 km rocznie auto spalające 7 l benzyny oszczędza na gazie około **{{lpgsave PL 7 8.5 15000}}** rocznie. Im większe spalanie i im więcej jeździsz, tym szybciej instalacja się spłaca.
 
+## Ceny LPG i benzyny w czasie
+
+{{chart PL pb,lpg 5y}}
+
+Opłacalność gazu zależy od różnicy między ceną LPG a benzyny. Rok temu litr LPG kosztował {{ago PL lpg 52}}, a benzyny {{ago PL pb 52}}.
+
 ## Dlaczego LPG pali się więcej
 
 Gaz ma mniej energii w litrze niż benzyna, więc silnik zużywa go objętościowo więcej – zwykle o 15–25%. Do tego auto uruchamia się na benzynie i przełącza na gaz dopiero po rozgrzaniu, więc przy krótkich trasach część paliwa to nadal benzyna. W wyliczeniach wyżej przyjmujemy około 20% więcej LPG niż benzyny.

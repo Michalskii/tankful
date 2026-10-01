@@ -15,6 +15,10 @@ Litr benzyny 95 kosztuje dziś w Niemczech średnio **{{price DE pb}}** ({{price
 
 Ceny to średnie krajowe z {{date}}. Na niemieckich stacjach przy autostradach (Raststätte) płaci się zwykle wyraźnie więcej niż w miastach.
 
+{{chart PL,DE pb,on 5y}}
+
+Rok temu benzyna kosztowała w Niemczech {{ago DE pb 52}}, a w Polsce {{ago PL pb 52}}.
+
 ## Ile kosztuje paliwo do Niemiec
 
 Koszt w jedną stronę dla najpopularniejszych tras z Polski, przy typowym spalaniu:

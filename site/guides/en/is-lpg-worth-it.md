@@ -26,6 +26,12 @@ At 15,000 km a year, a car using 7 l of petrol saves about **{{lpgsave PL 7 8.5 
 
 In Germany LPG (Autogas) costs {{price DE lpg}} and petrol {{price DE pb}}. The same 7-litre car saves {{lpgsave DE 7 8.5 100}} per 100 km there. Conversions in Western Europe usually cost more – at an assumed €2,500 the system pays off after about {{payback DE 7 8.5 2500}} km.
 
+## LPG and petrol prices over time
+
+{{chart PL,DE pb,lpg 5y}}
+
+Whether LPG pays off depends on the gap between LPG and petrol prices. A year ago LPG cost {{ago PL lpg 52}} in Poland and {{ago DE lpg 52}} in Germany.
+
 ## Why you use more LPG
 
 LPG holds less energy per litre than petrol, so the engine burns more of it by volume – usually 15–25% more. The car also starts on petrol and switches to gas once warm, so on short trips part of the fuel is still petrol. The figures above assume about 20% more LPG than petrol.

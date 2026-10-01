@@ -15,6 +15,10 @@ A litre of petrol (95) currently costs **{{price CZ pb}}** on average in Czechia
 
 These are national averages from {{date}}. Both countries have their own currency, so the exchange rate between the złoty and the koruna also moves the difference – when rates swing, the cheaper side of the border can change from one week to the next.
 
+{{chart PL,CZ pb,on 5y}}
+
+The chart shows how often the cheaper side of the border changes. A year ago petrol cost {{ago CZ pb 52}} in Czechia and {{ago PL pb 52}} in Poland.
+
 ## Fuel cost of driving to Prague
 
 {{trips wroclaw-praga krakow-praga warszawa-praga}}

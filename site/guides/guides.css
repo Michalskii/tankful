@@ -504,7 +504,70 @@ body {
   color: inherit;
 }
 
+.chart {
+  margin: 1.25rem 0;
+  padding: 1rem 1rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+}
+
+.chart-ranges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  margin-bottom: 0.75rem;
+}
+
+.chart-ranges button {
+  padding: 0.25rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--muted-foreground);
+  font: inherit;
+  font-size: 0.8125rem;
+  cursor: pointer;
+}
+
+.chart-ranges button:hover {
+  border-color: var(--amber);
+  color: var(--ink);
+}
+
+.chart-ranges button[aria-pressed="true"] {
+  border-color: var(--ink);
+  background: var(--ink);
+  color: var(--cream);
+}
+
+.chart-canvas {
+  position: relative;
+  height: 20rem;
+}
+
+.chart:not(.ready) .chart-ranges,
+.chart:not(.ready) .chart-canvas {
+  display: none;
+}
+
+.chart .table-wrap {
+  margin: 0.75rem 0 0;
+}
+
+.chart figcaption {
+  margin-top: 0.5rem;
+  font-size: 0.75rem;
+  color: var(--muted-foreground);
+}
+
 @media (max-width: 480px) {
+  .chart {
+    padding: 0.75rem 0.5rem 0.5rem;
+  }
+  .chart-canvas {
+    height: 16rem;
+  }
+
   .hero h1 {
     font-size: 1.5rem;
   }

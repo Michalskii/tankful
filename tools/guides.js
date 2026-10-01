@@ -31,6 +31,15 @@ const TEXT = {
   pl: {
     home: "Kalkulator",
     guides: "Poradniki",
+    chartRanges: { "1y": "1 rok", "3y": "3 lata", "5y": "5 lat", all: "Od 2005" },
+    chartRangeLabel: "Zakres wykresu",
+    chartNow: "Ostatni tydzień",
+    chartYear: "Rok temu",
+    chartFive: "5 lat temu",
+    chartSeries: "Seria",
+    chartCaption: (date) => `Średnie ceny krajowe z cotygodniowego biuletynu naftowego Komisji Europejskiej, przeliczone na złote po kursie z danego tygodnia. Ostatni tydzień: ${date}.`,
+    chartAria: (names) => `Wykres cen: ${names}`,
+    euAverage: "średnia UE",
     indexTitle: "Poradniki: ceny paliw i koszt przejazdu | Tankful",
     indexHeading: "Poradniki",
     indexDescription: "Aktualne ceny paliw w Europie, tankowanie przed granicą, koszt 100 km i podział kosztów przejazdu – poradniki z danymi odświeżanymi kilka razy dziennie.",
@@ -64,6 +73,15 @@ const TEXT = {
   en: {
     home: "Calculator",
     guides: "Guides",
+    chartRanges: { "1y": "1 year", "3y": "3 years", "5y": "5 years", all: "Since 2005" },
+    chartRangeLabel: "Chart range",
+    chartNow: "Latest week",
+    chartYear: "A year ago",
+    chartFive: "5 years ago",
+    chartSeries: "Series",
+    chartCaption: (date) => `National average prices from the European Commission's Weekly Oil Bulletin, in euro. Latest week: ${date}.`,
+    chartAria: (names) => `Price chart: ${names}`,
+    euAverage: "EU average",
     indexTitle: "Guides: fuel prices and trip costs | Tankful",
     indexHeading: "Guides",
     indexDescription: "Current fuel prices across Europe, filling up before a border, the cost of 100 km and splitting trip costs – guides with data refreshed several times a day.",
@@ -114,7 +132,7 @@ function prices(data) {
   return { pln, eur };
 }
 
-function context(lang, data) {
+function context(lang, data, history) {
   const t = TEXT[lang];
   const currency = CURRENCY[lang];
   const { pln, eur } = prices(data);
@@ -272,6 +290,70 @@ function context(lang, data) {
     },
   };
 
+  const histName = (cc) => (cc === "EU" ? t.euAverage : name(cc));
+  const histSeries = (cc, fuel) => {
+    const values = history.prices[cc]?.[fuel];
+    if (!values) throw new Error(`No price history for ${cc} ${fuel}`);
+    return values.map((v, i) => (v == null ? null : currency === "PLN" ? v * history.plnPerEur[i] : v));
+  };
+  const lastIndex = (values) => {
+    for (let i = values.length - 1; i >= 0; i--) if (values[i] != null) return i;
+    return -1;
+  };
+  const weeksAgo = (values, weeks) => {
+    const last = lastIndex(values);
+    const target = Date.parse(history.dates[last]) - Number(weeks) * 7 * 86400000;
+    for (let i = last; i >= 0; i--) if (values[i] != null && Date.parse(history.dates[i]) <= target) return i;
+    return -1;
+  };
+  const histPrice = (v) => (v == null ? t.noData : `${money(v, currency, 2)}/l`);
+  const monthYear = (iso) => new Intl.DateTimeFormat(INTL[lang], { month: "long", year: "numeric", timeZone: "UTC" }).format(new Date(iso));
+  const peakIndex = (values) => values.reduce((best, v, i) => (v != null && (best < 0 || v > values[best]) ? i : best), -1);
+
+  Object.assign(inline, {
+    histdate: () => date(history.dates[lastIndex(history.prices.PL.pb)]),
+    histstart: () => history.dates[0].slice(0, 4),
+    now: (cc, fuel) => histPrice(histSeries(cc, fuel).at(lastIndex(histSeries(cc, fuel)))),
+    ago: (cc, fuel, weeks) => {
+      const values = histSeries(cc, fuel);
+      return histPrice(values[weeksAgo(values, weeks)]);
+    },
+    change: (cc, fuel, weeks) => {
+      const values = histSeries(cc, fuel);
+      const now = values[lastIndex(values)];
+      const then = values[weeksAgo(values, weeks)];
+      const diff = now - then;
+      const sign = diff > 0 ? "+" : diff < 0 ? "−" : "";
+      return `${sign}${money(Math.abs(diff), currency, 2)} (${sign}${num(Math.abs((diff / then) * 100), 0)}%)`;
+    },
+    peak: (cc, fuel) => {
+      const values = histSeries(cc, fuel);
+      return histPrice(values[peakIndex(values)]);
+    },
+    peakdate: (cc, fuel) => monthYear(history.dates[peakIndex(histSeries(cc, fuel))]),
+  });
+
+  blocks.chart = (countries, fuels = "pb", range = "3y") => {
+    const ccs = countries.split(",");
+    const fs_ = fuels.split(",");
+    const series = ccs.flatMap((cc) => fs_.map((fuel) => ({ cc, fuel })));
+    const label = ({ cc, fuel }) =>
+      ccs.length > 1 && fs_.length > 1 ? `${histName(cc)} – ${fuelName(fuel)}` : ccs.length > 1 ? histName(cc) : cap(fuelName(fuel));
+    const rows = series.map((x) => {
+      const values = histSeries(x.cc, x.fuel);
+      return [esc(label(x)), histPrice(values[lastIndex(values)]), histPrice(values[weeksAgo(values, 52)]), histPrice(values[weeksAgo(values, 260)])];
+    });
+    const buttons = Object.entries(t.chartRanges)
+      .map(([key, text]) => `<button type="button" data-range="${key}"${key === range ? ' aria-pressed="true"' : ' aria-pressed="false"'}>${text}</button>`)
+      .join("");
+    return `<figure class="chart" data-series="${series.map((x) => `${x.cc}:${x.fuel}`).join(",")}" data-labels="${esc(series.map(label).join("|"))}" data-range="${range}" data-currency="${currency}" data-locale="${INTL[lang]}">
+<div class="chart-ranges" role="group" aria-label="${t.chartRangeLabel}">${buttons}</div>
+<div class="chart-canvas"><canvas role="img" aria-label="${esc(t.chartAria(series.map(label).join(", ")))}"></canvas></div>
+${table([t.chartSeries, t.chartNow, t.chartYear, t.chartFive], rows, [1, 2, 3])}
+<figcaption>${esc(t.chartCaption(date(history.dates[lastIndex(history.prices.PL.pb)])))}</figcaption>
+</figure>`;
+  };
+
   return { inline, blocks };
 }
 
@@ -371,12 +453,18 @@ const ICONS = {
   lpg: '<path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.07-2.14-.22-4.05 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.15.43-2.29 1-3a2.5 2.5 0 0 0 2.5 2.5z"/>',
   seaside: '<path d="M22 18H2a4 4 0 0 0 4 4h12a4 4 0 0 0 4-4Z"/><path d="M21 14 10 2 3 14h18Z"/><path d="M10 2v16"/>',
   "fuel-saving": '<path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>',
+  "price-history": '<path d="M22 7 13.5 15.5 8.5 10.5 2 17"/><path d="M16 7h6v6"/>',
   croatia: '<circle cx="12" cy="8" r="3.5"/><path d="M12 1.5v1M5.6 4.1l.7.7M18.4 4.1l-.7.7M3 9h1M20 9h1M2 16c2 0 3-1.5 5-1.5s3 1.5 5 1.5 3-1.5 5-1.5 3 1.5 5 1.5M2 21c2 0 3-1.5 5-1.5s3 1.5 5 1.5 3-1.5 5-1.5 3 1.5 5 1.5"/>',
 };
 const icon = (id, cls = "icon") => `<svg class="${cls}" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">${ICONS[id] || ICONS["per-100-km"]}</svg>`;
 const GAUGE = `<svg class="hero-gauge" viewBox="0 0 128 128" aria-hidden="true"><path d="M31.1 91 A38 38 0 1 1 96.9 91" fill="none" stroke="#F2A516" stroke-width="9" stroke-linecap="round"/><path d="M31.1 91 A38 38 0 1 1 96.9 91" fill="none" stroke="#FAF7F0" stroke-width="1" stroke-dasharray="1 7.95" transform="translate(64 64) scale(1.32) translate(-64 -64)"/><line x1="64" y1="74" x2="87" y2="51" stroke="#FAF7F0" stroke-width="6" stroke-linecap="round"/><circle cx="64" cy="74" r="7" fill="#FAF7F0"/></svg>`;
 
+const CHART_SCRIPTS = `    <script src="chart.umd.min.js" defer></script>
+    <script src="guides-charts.js" defer></script>
+`;
+
 function layout({ lang, title, description, url, alternates, css, schema, hero, main, other }) {
+  const charts = main.includes('class="chart"');
   const t = TEXT[lang];
   const home = lang === "pl" ? "./" : "en";
   return `<!doctype html>
@@ -392,7 +480,7 @@ function layout({ lang, title, description, url, alternates, css, schema, hero, 
     <meta name="theme-color" content="#1B2430" />
     <link rel="stylesheet" href="${css}" />
     <link rel="stylesheet" href="guides.css" />
-    <link rel="canonical" href="${url}" />
+${charts ? CHART_SCRIPTS : ""}    <link rel="canonical" href="${url}" />
 ${alternates.map((l) => `    ${l}`).join("\n")}
     <meta property="og:type" content="article" />
     <meta property="og:site_name" content="Tankful" />
@@ -436,10 +524,15 @@ ${main}
 `;
 }
 
-function buildGuides({ site, siteUrl, data, alternates }) {
+function buildGuides({ site, siteUrl, data, history, alternates }) {
   const guides = loadGuides();
   const css = stylesheet(site);
   fs.copyFileSync(path.join(GUIDES, "guides.css"), path.join(site, "guides.css"));
+  fs.copyFileSync(path.join(GUIDES, "charts.js"), path.join(site, "guides-charts.js"));
+  fs.mkdirSync(path.join(site, "data/history"), { recursive: true });
+  for (const [cc, fuels] of Object.entries(history.prices)) {
+    fs.writeFileSync(path.join(site, "data/history", `${cc}.json`), JSON.stringify({ dates: history.dates, plnPerEur: history.plnPerEur, ...fuels }));
+  }
   fs.cpSync(path.join(GUIDES, "img"), path.join(site, "img/guides"), { recursive: true });
   for (const g of guides.pl) if (!PHOTOS[g.id] || !fs.existsSync(path.join(GUIDES, "img", `${g.id}.webp`))) throw new Error(`Missing photo for guide "${g.id}"`);
   const photoUrl = (id) => `${siteUrl}img/guides/${id}.jpg`;
@@ -495,7 +588,7 @@ ${list}
     groups.push(group);
     for (const g of pair) {
       const t = TEXT[g.lang];
-      const ctx = context(g.lang, data);
+      const ctx = context(g.lang, data, history);
       const other = pair.find((p) => p !== g);
       const date = (iso) => new Intl.DateTimeFormat(INTL[g.lang], { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }).format(new Date(iso));
       const more = guides[g.lang]

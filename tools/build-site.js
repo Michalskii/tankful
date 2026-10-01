@@ -30,12 +30,15 @@ for (const group of GROUPS) for (const p of group) p.group = group;
 const PAGES = GROUPS.flat();
 const args = process.argv.slice(2);
 const prices = args.find((a) => !a.startsWith("--"));
+const history = args.find((a) => a.startsWith("--history="))?.slice("--history=".length);
 
 fs.mkdirSync(PUBLIC, { recursive: true });
 for (const f of ["settings.js", "borders.js"]) fs.copyFileSync(path.join(ROOT, f), path.join(PUBLIC, f));
 for (const f of ["icon.svg", ...APP_ICONS]) fs.copyFileSync(path.join(ROOT, "icons", f), path.join(PUBLIC, f));
 fs.copyFileSync(path.join(ROOT, "docs/privacy.html"), path.join(PUBLIC, "privacy.html"));
 if (prices) fs.copyFileSync(prices, path.join(PUBLIC, "prices.json"));
+if (history) fs.copyFileSync(history, path.join(PUBLIC, "history.json"));
+fs.copyFileSync(path.join(ROOT, "site/node_modules/chart.js/dist/chart.umd.min.js"), path.join(PUBLIC, "chart.umd.min.js"));
 
 const messages = {};
 for (const lang of fs.readdirSync(path.join(ROOT, "_locales"))) {
@@ -221,7 +224,8 @@ async function main() {
   for (const dir of ["trasa", "route"]) fs.mkdirSync(path.join(SITE, dir), { recursive: true });
   for (const page of PAGES) fs.writeFileSync(path.join(SITE, page.file), pageHtml(template, page, strings));
   const data = JSON.parse(fs.readFileSync(path.join(PUBLIC, "prices.json"), "utf8"));
-  const guides = buildGuides({ site: SITE, siteUrl: SITE_URL, data, alternates });
+  const historyData = JSON.parse(fs.readFileSync(path.join(PUBLIC, "history.json"), "utf8"));
+  const guides = buildGuides({ site: SITE, siteUrl: SITE_URL, data, history: historyData, alternates });
   fs.writeFileSync(path.join(SITE, "sitemap.xml"), sitemap(guides));
   for (const lang of Object.keys(LANGS)) {
     fs.writeFileSync(path.join(SITE, `manifest-${lang}.webmanifest`), JSON.stringify(manifest(lang, strings), null, 2) + "\n");
