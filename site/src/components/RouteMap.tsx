@@ -16,6 +16,17 @@ type Props = {
   units: string
 }
 
+const START_VIEW: Record<string, L.LatLngBoundsExpression> = {
+  pl: [
+    [49.0, 14.1],
+    [54.85, 24.15],
+  ],
+  de: [
+    [47.27, 5.87],
+    [55.06, 15.04],
+  ],
+}
+
 export function RouteMap({ routes, selected, onSelect, stops, units }: Props) {
   const container = useRef<HTMLDivElement>(null)
   const map = useRef<L.Map | null>(null)
@@ -25,7 +36,10 @@ export function RouteMap({ routes, selected, onSelect, stops, units }: Props) {
 
   useEffect(() => {
     if (!container.current || PRERENDER) return
-    const m = L.map(container.current, { zoomControl: true }).setView([50.5, 12], 4)
+    const m = L.map(container.current, { zoomControl: true })
+    const start = START_VIEW[MAPKA_LOCALE]
+    if (start) m.fitBounds(start)
+    else m.setView([50.5, 12], 4)
     L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
       maxZoom: 18,
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
