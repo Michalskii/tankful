@@ -1,5 +1,5 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { cityName, CURRENT_ROUTE, routeHref, routeName, ROUTES, routeTrip, type RoutePage } from "@/lib/routes"
+import { cityName, CURRENT_ROUTE, PAGE_ROUTES, routeHref, routeName, routeTrip, type RoutePage } from "@/lib/routes"
 import { T } from "@/lib/strings"
 import { formatDuration, formatRange, tripAmount } from "@/lib/trip"
 
@@ -73,7 +73,7 @@ export function PopularRoutes() {
         {T("popularRoutes")}
       </h2>
       <ul className="flex flex-wrap gap-x-4 gap-y-1.5 text-sm">
-        {ROUTES.filter((r) => r !== CURRENT_ROUTE).map((r) => (
+        {PAGE_ROUTES.filter((r) => r.pl !== CURRENT_ROUTE?.pl).map((r) => (
           <li key={r.pl}>
             <a className="text-muted-foreground underline-offset-4 hover:text-foreground hover:underline" href={routeHref(r)}>
               {routeName(r)}

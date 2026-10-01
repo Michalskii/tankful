@@ -43,6 +43,9 @@ const TEXT = {
     chartYear: "Rok temu",
     chartFive: "5 lat temu",
     chartSeries: "Seria",
+    weekRank: "Miejsce",
+    weekPrice: (date) => `Cena (${date})`,
+    weekChange: "Zmiana w tydzień",
     chartCaption: (date) => `Średnie ceny krajowe z cotygodniowego biuletynu naftowego Komisji Europejskiej, przeliczone na złote po kursie z danego tygodnia. Ostatni tydzień: ${date}.`,
     chartAria: (names) => `Wykres cen: ${names}`,
     euAverage: "średnia UE",
@@ -99,6 +102,9 @@ const TEXT = {
     chartYear: "A year ago",
     chartFive: "5 years ago",
     chartSeries: "Series",
+    weekRank: "Rank",
+    weekPrice: (date) => `Price (${date})`,
+    weekChange: "Change in a week",
     chartCaption: (date) => `National average prices from the European Commission's Weekly Oil Bulletin, in euro. Latest week: ${date}.`,
     chartAria: (names) => `Price chart: ${names}`,
     euAverage: "EU average",
@@ -155,6 +161,9 @@ const TEXT = {
     chartYear: "Vor einem Jahr",
     chartFive: "Vor 5 Jahren",
     chartSeries: "Reihe",
+    weekRank: "Platz",
+    weekPrice: (date) => `Preis (${date})`,
+    weekChange: "Veränderung zur Vorwoche",
     chartCaption: (date) => `Landesdurchschnitte aus dem wöchentlichen Oil Bulletin der Europäischen Kommission, in Euro. Letzte Woche: ${date}.`,
     chartAria: (names) => `Preisdiagramm: ${names}`,
     euAverage: "EU-Durchschnitt",
@@ -377,7 +386,7 @@ function context(lang, data, history) {
       const rows = slugs.map((slug) => {
         const r = routeBySlug(slug);
         const cost = (fuel, c) => money((toCur(routePricePln(r, fuel)) * r.km * c) / 100);
-        return [`<a href="${lang === "pl" ? `trasa/${r.pl}` : lang === "de" ? `https://koszt-paliwa.pl/route/${r.en}` : `route/${r.en}`}">${esc(cityName(r.from))} – ${esc(cityName(r.to))}</a>`, `${num(r.km)} ${t.km}`, cost("pb", 7), cost("on", 6), cost("lpg", 9)];
+        return [`<a href="${lang === "pl" ? `trasa/${r.pl}` : lang === "de" ? (r.de ? `strecke/${r.de}` : `https://koszt-paliwa.pl/route/${r.en}`) : `route/${r.en}`}">${esc(cityName(r.from))} – ${esc(cityName(r.to))}</a>`, `${num(r.km)} ${t.km}`, cost("pb", 7), cost("on", 6), cost("lpg", 9)];
       });
       return table([t.route, t.km, `${cap(fuelName("pb"))} 7 l`, `${cap(fuelName("on"))} 6 l`, "LPG 9 l"], rows, [1, 2, 3, 4]);
     },
@@ -452,6 +461,60 @@ function context(lang, data, history) {
     },
     peakdate: (cc, fuel) => monthYear(history.dates[peakIndex(histSeries(cc, fuel))]),
   });
+
+  const weekly = (fuel) =>
+    [...EU, "EU"]
+      .map((cc) => {
+        const values = history.prices[cc]?.[fuel];
+        if (!values) return null;
+        const series = histSeries(cc, fuel);
+        const last = lastIndex(series);
+        const prev = weeksAgo(series, 1);
+        if (last < 0 || prev < 0 || history.dates[last] !== history.dates[lastIndex(history.prices.EU[fuel])]) return null;
+        return { cc, now: series[last], prev: series[prev] };
+      })
+      .filter(Boolean);
+  const signed = (diff, digits = 2) => {
+    const rounded = Math.round(diff * 10 ** digits);
+    const sign = rounded > 0 ? "+" : rounded < 0 ? "−" : "";
+    return `${sign}${money(Math.abs(diff), currency, digits)}`;
+  };
+  const movers = (fuel) => weekly(fuel).filter((x) => x.cc !== "EU").sort((a, b) => b.now - b.prev - (a.now - a.prev));
+
+  Object.assign(inline, {
+    weekup: (fuel) => {
+      const top = movers(fuel)[0];
+      return `${histName(top.cc)} (${signed(top.now - top.prev)})`;
+    },
+    weekdown: (fuel) => {
+      const bottom = movers(fuel).at(-1);
+      return `${histName(bottom.cc)} (${signed(bottom.now - bottom.prev)})`;
+    },
+    weekrank: (cc, fuel) => String(weekly(fuel).filter((x) => x.cc !== "EU").sort((a, b) => a.now - b.now).findIndex((x) => x.cc === cc) + 1),
+    weekcount: (fuel) => String(weekly(fuel).filter((x) => x.cc !== "EU").length),
+    weekdelta: (cc, fuel) => {
+      const x = weekly(fuel).find((y) => y.cc === cc);
+      return x ? signed(x.now - x.prev) : t.noData;
+    },
+  });
+
+  blocks.weekly = (fuel = "pb") => {
+    const rows = weekly(fuel).sort((a, b) => a.now - b.now);
+    const date = (iso) => new Intl.DateTimeFormat(INTL[lang], { day: "numeric", month: "short", timeZone: "UTC" }).format(new Date(iso));
+    let place = 0;
+    const body = rows.map((x) => {
+      const eu = x.cc === "EU";
+      if (!eu) place++;
+      const diff = x.now - x.prev;
+      const pct = (diff / x.prev) * 100;
+      const pctSign = Math.round(pct * 10) > 0 ? "+" : Math.round(pct * 10) < 0 ? "−" : "";
+      const change = `${signed(diff)} (${pctSign}${num(Math.abs(pct), 1)}%)`;
+      const name = eu ? `<strong>${esc(histName(x.cc))}</strong>` : esc(histName(x.cc));
+      return [eu ? "–" : String(place), name, histPrice(x.now), change];
+    });
+    const last = history.dates[lastIndex(history.prices.EU[fuel])];
+    return table([t.weekRank, t.country, t.weekPrice(date(last)), t.weekChange], body, [0, 2, 3]);
+  };
 
   blocks.chart = (countries, fuels = "pb", range = "3y") => {
     const ccs = countries.split(",");

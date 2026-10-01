@@ -3,6 +3,7 @@
     "warszawa": {
       "pl": "Warszawa",
       "en": "Warsaw",
+      "de": "Warschau",
       "lat": 52.2297,
       "lng": 21.0122,
       "cc": "pl",
@@ -11,6 +12,7 @@
     "krakow": {
       "pl": "Kraków",
       "en": "Kraków",
+      "de": "Krakau",
       "lat": 50.0614,
       "lng": 19.9372,
       "cc": "pl",
@@ -19,6 +21,7 @@
     "gdansk": {
       "pl": "Gdańsk",
       "en": "Gdańsk",
+      "de": "Danzig",
       "lat": 54.352,
       "lng": 18.6466,
       "cc": "pl",
@@ -27,6 +30,7 @@
     "wroclaw": {
       "pl": "Wrocław",
       "en": "Wrocław",
+      "de": "Breslau",
       "lat": 51.1079,
       "lng": 17.0385,
       "cc": "pl",
@@ -35,6 +39,7 @@
     "poznan": {
       "pl": "Poznań",
       "en": "Poznań",
+      "de": "Posen",
       "lat": 52.4064,
       "lng": 16.9252,
       "cc": "pl",
@@ -43,6 +48,7 @@
     "lodz": {
       "pl": "Łódź",
       "en": "Łódź",
+      "de": "Lodz",
       "lat": 51.7592,
       "lng": 19.456,
       "cc": "pl",
@@ -51,6 +57,7 @@
     "katowice": {
       "pl": "Katowice",
       "en": "Katowice",
+      "de": "Kattowitz",
       "lat": 50.2649,
       "lng": 19.0238,
       "cc": "pl",
@@ -59,6 +66,7 @@
     "lublin": {
       "pl": "Lublin",
       "en": "Lublin",
+      "de": "Lublin",
       "lat": 51.2465,
       "lng": 22.5684,
       "cc": "pl",
@@ -67,6 +75,7 @@
     "bialystok": {
       "pl": "Białystok",
       "en": "Białystok",
+      "de": "Białystok",
       "lat": 53.1325,
       "lng": 23.1688,
       "cc": "pl",
@@ -75,6 +84,7 @@
     "szczecin": {
       "pl": "Szczecin",
       "en": "Szczecin",
+      "de": "Stettin",
       "lat": 53.4285,
       "lng": 14.5528,
       "cc": "pl",
@@ -83,6 +93,7 @@
     "rzeszow": {
       "pl": "Rzeszów",
       "en": "Rzeszów",
+      "de": "Rzeszów",
       "lat": 50.0412,
       "lng": 21.9991,
       "cc": "pl",
@@ -91,6 +102,7 @@
     "zakopane": {
       "pl": "Zakopane",
       "en": "Zakopane",
+      "de": "Zakopane",
       "lat": 49.2992,
       "lng": 19.9496,
       "cc": "pl",
@@ -99,6 +111,7 @@
     "berlin": {
       "pl": "Berlin",
       "en": "Berlin",
+      "de": "Berlin",
       "lat": 52.52,
       "lng": 13.405,
       "cc": "de"
@@ -106,6 +119,7 @@
     "monachium": {
       "pl": "Monachium",
       "en": "Munich",
+      "de": "München",
       "lat": 48.1351,
       "lng": 11.582,
       "cc": "de"
@@ -113,6 +127,7 @@
     "praga": {
       "pl": "Praga",
       "en": "Prague",
+      "de": "Prag",
       "lat": 50.0755,
       "lng": 14.4378,
       "cc": "cz"
@@ -120,6 +135,7 @@
     "wieden": {
       "pl": "Wiedeń",
       "en": "Vienna",
+      "de": "Wien",
       "lat": 48.2082,
       "lng": 16.3738,
       "cc": "at"
@@ -127,6 +143,7 @@
     "budapeszt": {
       "pl": "Budapeszt",
       "en": "Budapest",
+      "de": "Budapest",
       "lat": 47.4979,
       "lng": 19.0402,
       "cc": "hu"
@@ -134,6 +151,7 @@
     "wilno": {
       "pl": "Wilno",
       "en": "Vilnius",
+      "de": "Vilnius",
       "lat": 54.6872,
       "lng": 25.2797,
       "cc": "lt"
@@ -141,6 +159,7 @@
     "split": {
       "pl": "Split",
       "en": "Split",
+      "de": "Split",
       "lat": 43.5081,
       "lng": 16.4402,
       "cc": "hr"
@@ -148,6 +167,7 @@
     "paryz": {
       "pl": "Paryż",
       "en": "Paris",
+      "de": "Paris",
       "lat": 48.8566,
       "lng": 2.3522,
       "cc": "fr"
@@ -155,6 +175,7 @@
     "amsterdam": {
       "pl": "Amsterdam",
       "en": "Amsterdam",
+      "de": "Amsterdam",
       "lat": 52.3676,
       "lng": 4.9041,
       "cc": "nl"
@@ -362,6 +383,8 @@
     {
       "pl": "warszawa-berlin",
       "en": "warsaw-berlin",
+      "de": "berlin-warschau",
+      "deFlip": true,
       "from": "warszawa",
       "to": "berlin",
       "km": 570.6,
@@ -374,6 +397,8 @@
     {
       "pl": "warszawa-praga",
       "en": "warsaw-prague",
+      "de": "prag-warschau",
+      "deFlip": true,
       "from": "warszawa",
       "to": "praga",
       "km": 638.3,
@@ -386,6 +411,8 @@
     {
       "pl": "warszawa-wieden",
       "en": "warsaw-vienna",
+      "de": "wien-warschau",
+      "deFlip": true,
       "from": "warszawa",
       "to": "wieden",
       "km": 693.7,
@@ -467,6 +494,8 @@
     {
       "pl": "krakow-wieden",
       "en": "krakow-vienna",
+      "de": "wien-krakau",
+      "deFlip": true,
       "from": "krakow",
       "to": "wieden",
       "km": 465.1,
@@ -493,6 +522,8 @@
     {
       "pl": "krakow-praga",
       "en": "krakow-prague",
+      "de": "prag-krakau",
+      "deFlip": true,
       "from": "krakow",
       "to": "praga",
       "km": 536.4,
@@ -520,6 +551,8 @@
     {
       "pl": "wroclaw-berlin",
       "en": "wroclaw-berlin",
+      "de": "berlin-breslau",
+      "deFlip": true,
       "from": "wroclaw",
       "to": "berlin",
       "km": 343.6,
@@ -532,6 +565,8 @@
     {
       "pl": "wroclaw-praga",
       "en": "wroclaw-prague",
+      "de": "prag-breslau",
+      "deFlip": true,
       "from": "wroclaw",
       "to": "praga",
       "km": 287.3,
@@ -544,6 +579,8 @@
     {
       "pl": "wroclaw-monachium",
       "en": "wroclaw-munich",
+      "de": "muenchen-breslau",
+      "deFlip": true,
       "from": "wroclaw",
       "to": "monachium",
       "km": 723.1,
@@ -556,6 +593,8 @@
     {
       "pl": "poznan-berlin",
       "en": "poznan-berlin",
+      "de": "berlin-posen",
+      "deFlip": true,
       "from": "poznan",
       "to": "berlin",
       "km": 268.5,
@@ -568,6 +607,8 @@
     {
       "pl": "szczecin-berlin",
       "en": "szczecin-berlin",
+      "de": "berlin-stettin",
+      "deFlip": true,
       "from": "szczecin",
       "to": "berlin",
       "km": 150.1,
@@ -580,6 +621,8 @@
     {
       "pl": "katowice-wieden",
       "en": "katowice-vienna",
+      "de": "wien-kattowitz",
+      "deFlip": true,
       "from": "katowice",
       "to": "wieden",
       "km": 385.8,

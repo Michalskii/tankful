@@ -6,6 +6,10 @@ const SITES: Record<string, string> = {
 
 export const LANGS = ["pl", "en", "de"]
 
+export function siteRoot(lang: string) {
+  return lang === "de" ? "https://spritkosten-europa.de/" : "https://koszt-paliwa.pl/"
+}
+
 export const GERMAN_SITE = MAPKA_LOCALE === "de"
 
 export function homeHref(lang = MAPKA_LOCALE) {

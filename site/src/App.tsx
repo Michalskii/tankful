@@ -23,7 +23,7 @@ import { decodePlace, encodePlace, type Place } from "@/lib/places"
 import { track } from "@/lib/analytics"
 import { PRERENDER } from "@/lib/prerender"
 import { cityName, cityPlace, CURRENT_ROUTE, routeHref, routeTrip } from "@/lib/routes"
-import { GERMAN_SITE, guidesHref, homeHref, LANGS, otherSite } from "@/lib/sites"
+import { GERMAN_SITE, guidesHref, homeHref, LANGS, otherSite, siteRoot } from "@/lib/sites"
 import { stopItem, type StopItem } from "@/lib/stops"
 import { T } from "@/lib/strings"
 import { cn } from "@/lib/utils"
@@ -75,7 +75,9 @@ function langHref(lang: string) {
   p.delete("lang")
   p.delete("prerender")
   const q = p.toString()
-  const page = otherSite(lang) ?? (CURRENT_ROUTE ? routeHref(CURRENT_ROUTE, lang) : homeHref(lang))
+  const route = CURRENT_ROUTE && (lang !== "de" || CURRENT_ROUTE.de) ? routeHref(CURRENT_ROUTE, lang) : null
+  const other = otherSite(lang)
+  const page = other ? (route ? `${siteRoot(lang)}${route}` : other) : (route ?? homeHref(lang))
   return `${page}${q ? `?${q}` : ""}`
 }
 
@@ -529,7 +531,7 @@ export default function App() {
               </div>
             </section>
 
-            {!GERMAN_SITE && <PopularRoutes />}
+            <PopularRoutes />
 
             <section aria-labelledby="guides-heading" className="flex flex-col gap-3">
               <h2 id="guides-heading" className="text-base font-semibold">

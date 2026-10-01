@@ -721,11 +721,11 @@ test("site: routes have known cities, unique URLs and OSRM data", () => {
   const { cities, routes } = JSON.parse(source("site/src/lib/routes.json"));
   const regions = vm.runInContext("MAPKA_REGIONS", ext);
   for (const [key, c] of Object.entries(cities)) {
-    assert.ok(c.pl && c.en && Math.abs(c.lat) <= 90 && Math.abs(c.lng) <= 180, key);
+    assert.ok(c.pl && c.en && c.de && Math.abs(c.lat) <= 90 && Math.abs(c.lng) <= 180, key);
     if (c.cc === "pl") assert.ok(regions[c.region], `${key}: unknown region ${c.region}`);
   }
-  for (const lang of ["pl", "en"]) {
-    const slugs = routes.map((r) => r[lang]);
+  for (const lang of ["pl", "en", "de"]) {
+    const slugs = routes.map((r) => r[lang]).filter((x) => lang !== "de" || x);
     same(slugs.filter((x, i) => slugs.indexOf(x) !== i), []);
     for (const slug of slugs) assert.match(slug, /^[a-z0-9]+(-[a-z0-9]+)+$/);
   }

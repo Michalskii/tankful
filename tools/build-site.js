@@ -31,7 +31,11 @@ function page(lang, rel, file, route = null) {
 
 const GROUPS = [
   [page("pl", "", "index.html"), page("en", "en", "en.html"), page("de", "", "index.html")],
-  ...ROUTES.map((r) => [page("pl", `trasa/${r.pl}`, `trasa/${r.pl}.html`, r), page("en", `route/${r.en}`, `route/${r.en}.html`, r)]),
+  ...ROUTES.map((r) => [
+    page("pl", `trasa/${r.pl}`, `trasa/${r.pl}.html`, r),
+    page("en", `route/${r.en}`, `route/${r.en}.html`, r),
+    ...(r.de ? [page("de", `strecke/${r.de}`, `strecke/${r.de}.html`, r.deFlip ? { ...r, from: r.to, to: r.from } : r)] : []),
+  ]),
 ];
 for (const group of GROUPS) for (const p of group) p.group = group;
 const PAGES = GROUPS.flat().filter((p) => p.local);
@@ -227,7 +231,7 @@ async function main() {
 
   const strings = siteStrings();
   const template = fs.readFileSync(path.join(SITE, "index.html"), "utf8");
-  if (SITE_ID === "pl") for (const dir of ["trasa", "route"]) fs.mkdirSync(path.join(SITE, dir), { recursive: true });
+  for (const dir of SITE_ID === "pl" ? ["trasa", "route"] : ["strecke"]) fs.mkdirSync(path.join(SITE, dir), { recursive: true });
   for (const page of PAGES) fs.writeFileSync(path.join(SITE, page.file), pageHtml(template, page, strings));
   const data = JSON.parse(fs.readFileSync(path.join(PUBLIC, "prices.json"), "utf8"));
   const historyData = JSON.parse(fs.readFileSync(path.join(PUBLIC, "history.json"), "utf8"));

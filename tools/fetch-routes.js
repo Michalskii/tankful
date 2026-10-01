@@ -7,27 +7,27 @@ const OUT = path.join(ROOT, "site/src/lib/routes.json");
 const OSRM_URL = "https://router.project-osrm.org/route/v1/driving/";
 
 const CITIES = {
-  warszawa: { pl: "Warszawa", en: "Warsaw", lat: 52.2297, lng: 21.0122, cc: "pl", region: "MZ" },
-  krakow: { pl: "Kraków", en: "Kraków", lat: 50.0614, lng: 19.9372, cc: "pl", region: "MA" },
-  gdansk: { pl: "Gdańsk", en: "Gdańsk", lat: 54.352, lng: 18.6466, cc: "pl", region: "PM" },
-  wroclaw: { pl: "Wrocław", en: "Wrocław", lat: 51.1079, lng: 17.0385, cc: "pl", region: "DS" },
-  poznan: { pl: "Poznań", en: "Poznań", lat: 52.4064, lng: 16.9252, cc: "pl", region: "WP" },
-  lodz: { pl: "Łódź", en: "Łódź", lat: 51.7592, lng: 19.456, cc: "pl", region: "LD" },
-  katowice: { pl: "Katowice", en: "Katowice", lat: 50.2649, lng: 19.0238, cc: "pl", region: "SL" },
-  lublin: { pl: "Lublin", en: "Lublin", lat: 51.2465, lng: 22.5684, cc: "pl", region: "LU" },
-  bialystok: { pl: "Białystok", en: "Białystok", lat: 53.1325, lng: 23.1688, cc: "pl", region: "PD" },
-  szczecin: { pl: "Szczecin", en: "Szczecin", lat: 53.4285, lng: 14.5528, cc: "pl", region: "ZP" },
-  rzeszow: { pl: "Rzeszów", en: "Rzeszów", lat: 50.0412, lng: 21.9991, cc: "pl", region: "PK" },
-  zakopane: { pl: "Zakopane", en: "Zakopane", lat: 49.2992, lng: 19.9496, cc: "pl", region: "MA" },
-  berlin: { pl: "Berlin", en: "Berlin", lat: 52.52, lng: 13.405, cc: "de" },
-  monachium: { pl: "Monachium", en: "Munich", lat: 48.1351, lng: 11.582, cc: "de" },
-  praga: { pl: "Praga", en: "Prague", lat: 50.0755, lng: 14.4378, cc: "cz" },
-  wieden: { pl: "Wiedeń", en: "Vienna", lat: 48.2082, lng: 16.3738, cc: "at" },
-  budapeszt: { pl: "Budapeszt", en: "Budapest", lat: 47.4979, lng: 19.0402, cc: "hu" },
-  wilno: { pl: "Wilno", en: "Vilnius", lat: 54.6872, lng: 25.2797, cc: "lt" },
-  split: { pl: "Split", en: "Split", lat: 43.5081, lng: 16.4402, cc: "hr" },
-  paryz: { pl: "Paryż", en: "Paris", lat: 48.8566, lng: 2.3522, cc: "fr" },
-  amsterdam: { pl: "Amsterdam", en: "Amsterdam", lat: 52.3676, lng: 4.9041, cc: "nl" },
+  warszawa: { pl: "Warszawa", en: "Warsaw", de: "Warschau", lat: 52.2297, lng: 21.0122, cc: "pl", region: "MZ" },
+  krakow: { pl: "Kraków", en: "Kraków", de: "Krakau", lat: 50.0614, lng: 19.9372, cc: "pl", region: "MA" },
+  gdansk: { pl: "Gdańsk", en: "Gdańsk", de: "Danzig", lat: 54.352, lng: 18.6466, cc: "pl", region: "PM" },
+  wroclaw: { pl: "Wrocław", en: "Wrocław", de: "Breslau", lat: 51.1079, lng: 17.0385, cc: "pl", region: "DS" },
+  poznan: { pl: "Poznań", en: "Poznań", de: "Posen", lat: 52.4064, lng: 16.9252, cc: "pl", region: "WP" },
+  lodz: { pl: "Łódź", en: "Łódź", de: "Lodz", lat: 51.7592, lng: 19.456, cc: "pl", region: "LD" },
+  katowice: { pl: "Katowice", en: "Katowice", de: "Kattowitz", lat: 50.2649, lng: 19.0238, cc: "pl", region: "SL" },
+  lublin: { pl: "Lublin", en: "Lublin", de: "Lublin", lat: 51.2465, lng: 22.5684, cc: "pl", region: "LU" },
+  bialystok: { pl: "Białystok", en: "Białystok", de: "Białystok", lat: 53.1325, lng: 23.1688, cc: "pl", region: "PD" },
+  szczecin: { pl: "Szczecin", en: "Szczecin", de: "Stettin", lat: 53.4285, lng: 14.5528, cc: "pl", region: "ZP" },
+  rzeszow: { pl: "Rzeszów", en: "Rzeszów", de: "Rzeszów", lat: 50.0412, lng: 21.9991, cc: "pl", region: "PK" },
+  zakopane: { pl: "Zakopane", en: "Zakopane", de: "Zakopane", lat: 49.2992, lng: 19.9496, cc: "pl", region: "MA" },
+  berlin: { pl: "Berlin", en: "Berlin", de: "Berlin", lat: 52.52, lng: 13.405, cc: "de" },
+  monachium: { pl: "Monachium", en: "Munich", de: "München", lat: 48.1351, lng: 11.582, cc: "de" },
+  praga: { pl: "Praga", en: "Prague", de: "Prag", lat: 50.0755, lng: 14.4378, cc: "cz" },
+  wieden: { pl: "Wiedeń", en: "Vienna", de: "Wien", lat: 48.2082, lng: 16.3738, cc: "at" },
+  budapeszt: { pl: "Budapeszt", en: "Budapest", de: "Budapest", lat: 47.4979, lng: 19.0402, cc: "hu" },
+  wilno: { pl: "Wilno", en: "Vilnius", de: "Vilnius", lat: 54.6872, lng: 25.2797, cc: "lt" },
+  split: { pl: "Split", en: "Split", de: "Split", lat: 43.5081, lng: 16.4402, cc: "hr" },
+  paryz: { pl: "Paryż", en: "Paris", de: "Paris", lat: 48.8566, lng: 2.3522, cc: "fr" },
+  amsterdam: { pl: "Amsterdam", en: "Amsterdam", de: "Amsterdam", lat: 52.3676, lng: 4.9041, cc: "nl" },
 };
 
 const PAIRS = [
@@ -44,9 +44,12 @@ const PAIRS = [
   ["szczecin", "berlin"], ["katowice", "wieden"],
 ];
 
+const GERMAN_PAGES = new Set(["de", "at", "cz"]);
+
 const slug = (name) =>
   name
     .toLowerCase()
+    .replace(/ä/g, "ae").replace(/ö/g, "oe").replace(/ü/g, "ue").replace(/ß/g, "ss")
     .replace(/ł/g, "l")
     .normalize("NFD")
     .replace(/[̀-ͯ]/g, "")
@@ -103,6 +106,7 @@ for (const f of ["settings.js", "borders.js"]) vm.runInContext(fs.readFileSync(p
     routes.push({
       pl: `${slug(from.pl)}-${slug(to.pl)}`,
       en: `${slug(from.en)}-${slug(to.en)}`,
+      ...(GERMAN_PAGES.has(to.cc) ? { de: `${slug(to.de)}-${slug(from.de)}`, deFlip: true } : {}),
       from: a,
       to: b,
       km: Math.round(route.distance / 100) / 10,
