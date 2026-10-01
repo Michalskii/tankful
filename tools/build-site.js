@@ -4,6 +4,7 @@ const http = require("http");
 const path = require("path");
 const vm = require("vm");
 const { dumpDom } = require("./chrome");
+const { buildGuides } = require("./guides");
 
 const ROOT = path.join(__dirname, "..");
 const PUBLIC = path.join(ROOT, "site/public");
@@ -202,9 +203,9 @@ async function prerender(pages, strings) {
   }
 }
 
-function sitemap() {
+function sitemap(extra = []) {
   const date = new Date().toISOString().slice(0, 10);
-  const urls = PAGES.map((p) => {
+  const urls = [...PAGES, ...extra.flatMap((group) => group.map((p) => ({ ...p, group })))].map((p) => {
     const links = alternates(p.group, "xhtml:link").map((line) => `    ${line}`).join("\n");
     return `  <url>\n    <loc>${p.url}</loc>\n    <lastmod>${date}</lastmod>\n${links}\n  </url>`;
   }).join("\n");
@@ -219,7 +220,9 @@ async function main() {
   const template = fs.readFileSync(path.join(SITE, "index.html"), "utf8");
   for (const dir of ["trasa", "route"]) fs.mkdirSync(path.join(SITE, dir), { recursive: true });
   for (const page of PAGES) fs.writeFileSync(path.join(SITE, page.file), pageHtml(template, page, strings));
-  fs.writeFileSync(path.join(SITE, "sitemap.xml"), sitemap());
+  const data = JSON.parse(fs.readFileSync(path.join(PUBLIC, "prices.json"), "utf8"));
+  const guides = buildGuides({ site: SITE, siteUrl: SITE_URL, data, alternates });
+  fs.writeFileSync(path.join(SITE, "sitemap.xml"), sitemap(guides));
   for (const lang of Object.keys(LANGS)) {
     fs.writeFileSync(path.join(SITE, `manifest-${lang}.webmanifest`), JSON.stringify(manifest(lang, strings), null, 2) + "\n");
   }
@@ -234,7 +237,7 @@ async function main() {
       console.warn(`Prerendering skipped: ${e.message}`);
     }
   }
-  console.log(`_site/: ${PAGES.length} pages`);
+  console.log(`_site/: ${PAGES.length + guides.flat().length} pages`);
 }
 
 main().catch((e) => {

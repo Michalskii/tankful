@@ -528,6 +528,18 @@ export default function App() {
 
             <PopularRoutes />
 
+            <section aria-labelledby="guides-heading" className="flex flex-col gap-3">
+              <h2 id="guides-heading" className="text-base font-semibold">
+                {T("guidesHeading")}
+              </h2>
+              <a
+                className="text-sm text-muted-foreground underline underline-offset-4 hover:text-foreground"
+                href={MAPKA_LOCALE === "en" ? "guides/" : "poradniki/"}
+              >
+                {T("guidesLink")}
+              </a>
+            </section>
+
             <footer className="flex flex-col gap-2 text-xs text-muted-foreground">
           <p>
             {T("sources")} {data.updatedAt && T("updated", formatDate(data.updatedAt))}

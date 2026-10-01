@@ -1,0 +1,57 @@
+{
+  "europe-prices": {
+    "author": "Krzysztof Hepner",
+    "url": "https://unsplash.com/photos/ULJCBY8Tcfg",
+    "alt": { "pl": "Wyświetlacz dystrybutora paliwa z ceną i liczbą litrów", "en": "Fuel pump display showing the price and litres" }
+  },
+  "border": {
+    "author": "viktor rejent",
+    "url": "https://unsplash.com/photos/UE_BCpFTuz0",
+    "alt": { "pl": "Przejście graniczne z tablicą Unii Europejskiej i Austrii", "en": "Border crossing with European Union and Austria signs" }
+  },
+  "per-100-km": {
+    "author": "CHUTTERSNAP",
+    "url": "https://unsplash.com/photos/gts_Eh4g1lk",
+    "alt": { "pl": "Prędkościomierz i wskaźnik poziomu paliwa w samochodzie", "en": "Car speedometer and fuel gauge" }
+  },
+  "how-to-calculate": {
+    "author": "William Hadley",
+    "url": "https://unsplash.com/photos/P85dQzlsPlc",
+    "alt": { "pl": "Telefon z nawigacją i wyznaczoną trasą na szybie samochodu", "en": "Phone with a navigation route mounted on a car windscreen" }
+  },
+  "split": {
+    "author": "Kylo",
+    "url": "https://unsplash.com/photos/FPZ8Lnn5Ws8",
+    "alt": { "pl": "Dwóch przyjaciół siedzi na dachu samochodu o zachodzie słońca", "en": "Two friends sitting on a car roof at sunset" }
+  },
+  "croatia": {
+    "author": "Tomi Blasic",
+    "url": "https://unsplash.com/photos/l3n2BmpfNfM",
+    "alt": { "pl": "Wybrzeże Adriatyku z sosnami i spokojnym morzem", "en": "Adriatic coast with pine trees and a calm sea" }
+  },
+  "germany": {
+    "author": "Jennifer Latuperisa-Andresen",
+    "url": "https://unsplash.com/photos/kM9LrMOCSGA",
+    "alt": { "pl": "Autostrada w Niemczech między lasami", "en": "Motorway in Germany running between forests" }
+  },
+  "czechia": {
+    "author": "Martin Krchnacek",
+    "url": "https://unsplash.com/photos/OyoaCpMCR0U",
+    "alt": { "pl": "Most Karola i Stare Miasto w Pradze", "en": "Charles Bridge and the Old Town in Prague" }
+  },
+  "lpg": {
+    "author": "engin akyurt",
+    "url": "https://unsplash.com/photos/4dOr247sHaI",
+    "alt": { "pl": "Tankowanie samochodu na stacji paliw", "en": "Filling up a car at a fuel station" }
+  },
+  "seaside": {
+    "author": "Tomasz Filipek",
+    "url": "https://unsplash.com/photos/FOfXNZ-BU2U",
+    "alt": { "pl": "Plaża nad Bałtykiem z sosnami na wydmie", "en": "Baltic beach with pine trees on the dune" }
+  },
+  "fuel-saving": {
+    "author": "Brandon Frie",
+    "url": "https://unsplash.com/photos/rdHeGGn7rwQ",
+    "alt": { "pl": "Pusta droga przez zielony las", "en": "Empty road through a green forest" }
+  }
+}
