@@ -121,7 +121,8 @@ export default function App() {
 
   useEffect(() => {
     try {
-      const { ownPrice: _, roundTrip: __, ...keep } = options
+      const { ownPrice: _, roundTrip: __, currency, ...rest } = options
+      const keep = currency === SITE_CURRENCY ? rest : { ...rest, currency }
       localStorage.setItem(PREFS_KEY, JSON.stringify(keep))
     } catch {}
   }, [options])
