@@ -480,6 +480,7 @@ function layout({ lang, title, description, url, alternates, css, schema, hero, 
     <meta name="theme-color" content="#1B2430" />
     <link rel="stylesheet" href="${css}" />
     <link rel="stylesheet" href="guides.css" />
+    <script src="guides-analytics.js" defer></script>
 ${charts ? CHART_SCRIPTS : ""}    <link rel="canonical" href="${url}" />
 ${alternates.map((l) => `    ${l}`).join("\n")}
     <meta property="og:type" content="article" />
@@ -529,6 +530,7 @@ function buildGuides({ site, siteUrl, data, history, alternates }) {
   const css = stylesheet(site);
   fs.copyFileSync(path.join(GUIDES, "guides.css"), path.join(site, "guides.css"));
   fs.copyFileSync(path.join(GUIDES, "charts.js"), path.join(site, "guides-charts.js"));
+  fs.copyFileSync(path.join(GUIDES, "analytics.js"), path.join(site, "guides-analytics.js"));
   fs.mkdirSync(path.join(site, "data/history"), { recursive: true });
   for (const [cc, fuels] of Object.entries(history.prices)) {
     fs.writeFileSync(path.join(site, "data/history", `${cc}.json`), JSON.stringify({ dates: history.dates, plnPerEur: history.plnPerEur, ...fuels }));
