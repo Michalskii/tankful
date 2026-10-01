@@ -1,3 +1,4 @@
+process.env.TZ = "Europe/Warsaw";
 const assert = require("assert");
 const fs = require("fs");
 const path = require("path");
