@@ -23,7 +23,7 @@ function readTheme(): Theme {
   }
 }
 
-export function ThemeMenu() {
+export function ThemeMenu({ className }: { className?: string }) {
   const [theme, setTheme] = useState<Theme>(readTheme)
 
   useEffect(() => {
@@ -42,7 +42,7 @@ export function ThemeMenu() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size="icon-sm" aria-label={T("theme")} title={T("theme")}>
+        <Button variant="ghost" size="icon-sm" className={className} aria-label={T("theme")} title={T("theme")}>
           <SunIcon className="dark:hidden" />
           <MoonIcon className="hidden dark:block" />
         </Button>

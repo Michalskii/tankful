@@ -29,7 +29,7 @@ const NAV_SLUGS: Record<string, [Key, string][]> = {
 }
 
 export function navLinks(lang = MAPKA_LOCALE) {
-  return NAV_SLUGS[lang].map(([key, slug]) => ({ key, href: guidesHref(lang) + slug }))
+  return NAV_SLUGS[lang].map(([key, slug]) => ({ key, desc: `${key}Desc` as Key, href: guidesHref(lang) + slug }))
 }
 
 export function otherSite(lang: string) {

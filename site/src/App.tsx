@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "react"
 import { ChevronDownIcon, CopyIcon, Loader2Icon, RouteIcon, TriangleAlertIcon } from "lucide-react"
 import { toast } from "sonner"
 
-import { AboutDialog } from "@/components/AboutDialog"
+import { AboutDialog, HowItWorks } from "@/components/AboutDialog"
 import { InstallCard } from "@/components/InstallCard"
 import { StopList } from "@/components/StopList"
 import { ThemeMenu } from "@/components/ThemeMenu"
@@ -18,7 +18,6 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Separator } from "@/components/ui/separator"
 import { Switch } from "@/components/ui/switch"
 import { Toaster } from "@/components/ui/sonner"
-import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 import { decodePlace, encodePlace, type Place } from "@/lib/places"
 import { track } from "@/lib/analytics"
 import { PRERENDER } from "@/lib/prerender"
@@ -41,7 +40,8 @@ const FAQ = [
   ["faq5q", "faq5a"],
   ["faq6q", "faq6a"],
 ] as const
-const COUNTRY_COLORS = ["bg-country-1", "bg-country-2", "bg-country-3", "bg-country-4", "bg-country-5"]
+const HEADER_BUTTON = "text-cream/70 hover:bg-cream/10 hover:text-cream dark:hover:bg-cream/10 focus-visible:ring-amber/60"
+const COUNTRY_COLORS =["bg-country-1", "bg-country-2", "bg-country-3", "bg-country-4", "bg-country-5"]
 
 const params = new URLSearchParams(location.search)
 let fromLink = params.has("from")
@@ -102,6 +102,9 @@ export default function App() {
   )
   const [consumptionTouched, setConsumptionTouched] = useState(false)
   const [ownPriceText, setOwnPriceText] = useState("")
+  const [moreOpen, setMoreOpen] = useState(() => options.units === "us" || options.currency !== SITE_CURRENCY)
+  const resultRef = useRef<HTMLDivElement>(null)
+  const [resultBelow, setResultBelow] = useState(false)
   const [data, setData] = useState<MapkaData>({ ...MAPKA_DATA_KEYS })
   const [pricesError, setPricesError] = useState(false)
   const [plan, setPlan] = useState<{ stops: Place[]; variants: { route: Route; shares: Record<string, number> | null }[] } | null>(null)
@@ -192,6 +195,20 @@ export default function App() {
     history.replaceState(null, "", `${location.pathname}?${p}`)
   }, [trip, options, selected])
 
+  const hasResult = Boolean(cost && trip)
+  useEffect(() => {
+    const el = resultRef.current
+    if (!el) return
+    const observer = new IntersectionObserver(([entry]) => setResultBelow(!entry.isIntersecting && entry.boundingClientRect.top > 0), { rootMargin: "0px 0px -120px 0px" })
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [hasResult])
+
+  function showResult() {
+    const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches
+    resultRef.current?.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" })
+  }
+
   function changeFuel(fuelType: string) {
     if (!fuelType) return
     const patch: Partial<Options> = { fuelType }
@@ -229,7 +246,7 @@ export default function App() {
 
   return (
     <div className="flex min-h-svh flex-col lg:h-svh">
-      <header className="shrink-0 border-b">
+      <header className="shrink-0 bg-ink text-cream">
         <div className="flex h-14 items-center justify-between px-4 sm:px-6">
           <a href={homeHref()} className="flex items-center gap-2 font-semibold tracking-tight">
             <img src="icon.svg" alt="" className="size-7" />
@@ -237,18 +254,18 @@ export default function App() {
           </a>
           <nav className="mr-auto ml-6 hidden gap-1 lg:flex" aria-label="Menu">
             {navLinks().map(({ key, href }) => (
-              <Button key={key} asChild size="sm" variant="ghost" className="text-muted-foreground">
+              <Button key={key} asChild size="sm" variant="ghost" className={HEADER_BUTTON}>
                 <a href={href}>{T(key)}</a>
               </Button>
             ))}
-            <Button asChild size="sm" variant="ghost" className="text-muted-foreground">
+            <Button asChild size="sm" variant="ghost" className={HEADER_BUTTON}>
               <a href={guidesHref()}>{T("guidesHeading")}</a>
             </Button>
           </nav>
           <div className="flex items-center gap-1">
           <nav className="flex gap-1" aria-label={T("language")}>
             {LANGS.map((lang) => (
-              <Button key={lang} asChild size="sm" variant={MAPKA_LOCALE === lang ? "secondary" : "ghost"}>
+              <Button key={lang} asChild size="sm" variant="ghost" className={cn(HEADER_BUTTON, MAPKA_LOCALE === lang && "bg-cream/10 text-cream")}>
                 <a
                   href={langHref(lang)}
                   aria-current={MAPKA_LOCALE === lang || undefined}
@@ -262,10 +279,20 @@ export default function App() {
               </Button>
             ))}
           </nav>
-            <AboutDialog />
-            <ThemeMenu />
+            <AboutDialog className={HEADER_BUTTON} />
+            <ThemeMenu className={HEADER_BUTTON} />
           </div>
         </div>
+        <nav aria-label="Menu" className="-mt-1 flex gap-1 overflow-x-auto px-2 pb-2 [scrollbar-width:none] sm:px-4 lg:hidden">
+          {navLinks().map(({ key, href }) => (
+            <Button key={key} asChild size="sm" variant="ghost" className={cn(HEADER_BUTTON, "shrink-0")}>
+              <a href={href}>{T(key)}</a>
+            </Button>
+          ))}
+          <Button asChild size="sm" variant="ghost" className={cn(HEADER_BUTTON, "shrink-0")}>
+            <a href={guidesHref()}>{T("guidesHeading")}</a>
+          </Button>
+        </nav>
       </header>
 
       <main className="flex flex-col lg:min-h-0 lg:flex-1 lg:flex-row">
@@ -283,28 +310,24 @@ export default function App() {
 
                 <Separator />
 
-                <div className="flex flex-col gap-2">
-                  <Label>{mapkaT("label_fuel")}</Label>
-                  <ToggleGroup
-                    type="single"
-                    variant="outline"
-                    value={options.fuelType}
-                    onValueChange={changeFuel}
-                    className="grid w-full grid-cols-2"
-                  >
-                    {Object.entries(MAPKA_FUELS).map(([key, name]) => (
-                      <ToggleGroupItem
-                        key={key}
-                        value={key}
-                        className="justify-start data-[state=on]:border-primary data-[state=on]:bg-primary data-[state=on]:text-primary-foreground"
-                      >
-                        {name}
-                      </ToggleGroupItem>
-                    ))}
-                  </ToggleGroup>
-                </div>
-
                 <div className="grid grid-cols-2 gap-3">
+                  <div className="flex min-w-0 flex-col gap-2">
+                    <Label htmlFor="fuel" className="truncate">
+                      {mapkaT("label_fuel")}
+                    </Label>
+                    <Select value={options.fuelType} onValueChange={changeFuel}>
+                      <SelectTrigger id="fuel" className="w-full">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {Object.entries(MAPKA_FUELS).map(([key, name]) => (
+                          <SelectItem key={key} value={key}>
+                            {name}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
                   <div className="flex min-w-0 flex-col gap-2">
                     <Label htmlFor="consumption" className="truncate">
                       {mapkaConsumptionLabel(options.fuelType, options.units)}
@@ -343,6 +366,28 @@ export default function App() {
                       </SelectContent>
                     </Select>
                   </div>
+                  <div className="flex min-w-0 flex-col gap-2">
+                    <Label htmlFor="round-trip" className="truncate">
+                      {T("roundTrip")}
+                    </Label>
+                    <div className="flex h-8 items-center">
+                      <Switch id="round-trip" checked={options.roundTrip} onCheckedChange={(roundTrip) => set({ roundTrip })} />
+                    </div>
+                  </div>
+                </div>
+
+                <button
+                  type="button"
+                  aria-expanded={moreOpen}
+                  aria-controls="more-options"
+                  onClick={() => setMoreOpen((v) => !v)}
+                  className="-my-1 flex items-center gap-1.5 self-start rounded-md py-1 text-sm text-muted-foreground hover:text-foreground"
+                >
+                  <ChevronDownIcon className={cn("size-4 transition-transform", moreOpen && "rotate-180")} />
+                  {T("moreOptions")}
+                </button>
+
+                <div id="more-options" hidden={!moreOpen} className="grid grid-cols-2 gap-3">
                   {options.fuelType !== "ev" && (
                     <div className="flex min-w-0 flex-col gap-2">
                       <Label htmlFor="own-price" className="truncate">
@@ -399,11 +444,6 @@ export default function App() {
                     </Select>
                   </div>
                 </div>
-
-                <div className="flex items-center justify-between gap-3">
-                  <Label htmlFor="round-trip">{T("roundTrip")}</Label>
-                  <Switch id="round-trip" checked={options.roundTrip} onCheckedChange={(roundTrip) => set({ roundTrip })} />
-                </div>
               </CardContent>
             </Card>
 
@@ -421,7 +461,7 @@ export default function App() {
             )}
 
             {cost && trip ? (
-              <Card aria-live="polite" className={loading ? "opacity-60 transition-opacity" : undefined}>
+              <Card ref={resultRef} aria-live="polite" className={cn("scroll-mt-4", loading && "opacity-60 transition-opacity")}>
                 <CardHeader>
                   <CardDescription>{T("resultLabel")}</CardDescription>
                   <CardTitle className="text-5xl font-semibold tracking-tight tabular-nums">≈ {cost.total}</CardTitle>
@@ -523,6 +563,8 @@ export default function App() {
           <div className="order-3 flex flex-col gap-6 p-4 sm:p-6 lg:mt-auto lg:pt-0">
             {CURRENT_ROUTE && <RouteCosts route={CURRENT_ROUTE} data={data} currency={options.currency} />}
 
+            {!CURRENT_ROUTE && <HowItWorks />}
+
             <InstallCard />
 
             <section aria-labelledby="faq-heading" className="flex flex-col gap-3">
@@ -548,11 +590,21 @@ export default function App() {
               <h2 id="guides-heading" className="text-base font-semibold">
                 {T("guidesHeading")}
               </h2>
-              <a
-                className="text-sm text-muted-foreground underline underline-offset-4 hover:text-foreground"
-                href={guidesHref()}
-              >
-                {T("guidesLink")}
+              <ul className="grid gap-2 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
+                {navLinks().map(({ key, desc, href }) => (
+                  <li key={key}>
+                    <a
+                      href={href}
+                      className="flex h-full flex-col gap-0.5 rounded-xl border px-4 py-3 transition-colors hover:border-amber hover:bg-amber/5"
+                    >
+                      <span className="text-sm font-medium">{T(key)}</span>
+                      <span className="text-xs text-muted-foreground">{T(desc)}</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+              <a className="self-start text-sm text-muted-foreground underline underline-offset-4 hover:text-foreground" href={guidesHref()}>
+                {T("guidesAll")}
               </a>
             </section>
 
@@ -577,6 +629,24 @@ export default function App() {
           <RouteMap routes={routes} selected={trips.indexOf(trip!)} onSelect={setSelected} stops={viaStops} units={options.units} />
         </section>
       </main>
+      {cost && trip && resultBelow && (
+        <button
+          type="button"
+          onClick={showResult}
+          className="fixed inset-x-3 bottom-3 z-40 flex items-center justify-between gap-3 rounded-xl bg-ink px-4 py-3 text-left text-cream shadow-lg shadow-ink/30 lg:hidden"
+        >
+          <span className="flex flex-col">
+            <span className="text-xs text-cream/70 tabular-nums">
+              {distance(trip.route.km)} · {formatDuration(trip.route.minutes)}
+            </span>
+            <span className="text-xl font-semibold tabular-nums">≈ {cost.total}</span>
+          </span>
+          <span className="flex items-center gap-1 text-sm font-medium text-amber">
+            {T("showResult")}
+            <ChevronDownIcon className="size-4" />
+          </span>
+        </button>
+      )}
       <Toaster position="bottom-center" />
     </div>
   )

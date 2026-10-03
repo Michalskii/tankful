@@ -8,6 +8,26 @@ const { cities: CITIES, routes: ROUTES } = JSON.parse(fs.readFileSync(path.join(
 
 const DIRS = { pl: "poradniki", en: "guides", de: "ratgeber" };
 const HOME = { pl: "./", en: "en", de: "./" };
+const GROUP_IDS = {
+  prices: ["poland-prices", "weekly", "europe-prices", "price-history", "italy-fuel", "france-fuel", "nl-fuel", "dk-fuel"],
+  border: ["border", "germany", "czechia", "poland-fuel", "slubice-fuel", "swinoujscie-fuel", "zgorzelec-fuel", "kostrzyn-fuel", "cheb-fuel", "lux-fuel"],
+  tools: ["consumption", "lpg-calc", "mileage", "per-100-km", "how-to-calculate", "commute", "split"],
+  trips: ["croatia", "seaside", "austria", "hungary", "west", "italy", "alps"],
+  tips: ["lpg", "fuel-saving", "ev-trip"],
+};
+const GROUP_OVERRIDES = { de: { austria: "prices" } };
+const COMPACT_GROUPS = new Set(["prices", "tools"]);
+const groupOf = (g) => {
+  const group = GROUP_OVERRIDES[g.lang]?.[g.id] ?? Object.keys(GROUP_IDS).find((k) => GROUP_IDS[k].includes(g.id));
+  if (!group) throw new Error(`No group for guide "${g.id}"`);
+  return group;
+};
+const THEME_SCRIPT = `    <script>
+      let theme = null
+      try { theme = localStorage.getItem("tankful-theme") } catch {}
+      document.documentElement.classList.toggle("dark", theme ? theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches)
+    </script>
+`;
 const NAV = {
   pl: [["Koszt trasy", null], ["Ceny paliw", "ceny-paliw-w-polsce"], ["Spalanie", "kalkulator-spalania"], ["LPG", "kalkulator-lpg"], ["Kilometrówka", "kilometrowka"]],
   en: [["Trip cost", null], ["Fuel prices", "fuel-prices-europe"], ["Consumption", "fuel-consumption-calculator"], ["LPG", "lpg-calculator"]],
@@ -66,6 +86,8 @@ const TEXT = {
     ctaText: "Wpisz skąd i dokąd jedziesz – kalkulator poda koszt paliwa z aktualnymi cenami w każdym kraju na trasie.",
     ctaButton: "Otwórz kalkulator",
     more: "Inne poradniki",
+    allGuides: "Wszystkie poradniki",
+    groups: { prices: "Ceny paliw", border: "Tankowanie przy granicy", tools: "Kalkulatory", trips: "Podróże samochodem", tips: "Porady" },
     sources: "Ceny: biuletyn naftowy Komisji Europejskiej (Polska i kraje UE), w Polsce korygowany przy dużych zmianach cen hurtowych Orlenu, dane rządu Wielkiej Brytanii (GOV.UK), kursy walut NBP. To średnie krajowe – na stacjach przy autostradach bywa drożej.",
     privacy: "Polityka prywatności",
     code: "Kod źródłowy",
@@ -150,6 +172,8 @@ const TEXT = {
     ctaText: "Enter where you're driving from and to – the calculator works out the fuel cost with current prices in every country on the way.",
     ctaButton: "Open the calculator",
     more: "More guides",
+    allGuides: "All guides",
+    groups: { prices: "Fuel prices", border: "Filling up near the border", tools: "Calculators", trips: "Road trips", tips: "Tips" },
     sources: "Prices: European Commission Weekly Oil Bulletin (Poland and EU countries), adjusted in Poland when Orlen wholesale prices move significantly, UK government weekly road fuel prices (GOV.UK), National Bank of Poland exchange rates. These are national averages – motorway stations are often more expensive.",
     privacy: "Privacy policy",
     code: "Source code",
@@ -234,6 +258,8 @@ const TEXT = {
     ctaText: "Gib Start und Ziel ein – der Rechner zeigt die Spritkosten mit aktuellen Preisen in jedem Land auf der Strecke.",
     ctaButton: "Zum Rechner",
     more: "Weitere Ratgeber",
+    allGuides: "Alle Ratgeber",
+    groups: { prices: "Spritpreise", border: "Tanken an der Grenze", tools: "Rechner", trips: "Mit dem Auto unterwegs", tips: "Tipps" },
     sources: "Preise: Weekly Oil Bulletin der Europäischen Kommission (Deutschland, Polen und die anderen EU-Länder), in Polen bei deutlichen Änderungen der Orlen-Großhandelspreise angepasst, Daten der britischen Regierung (GOV.UK), Wechselkurse der Polnischen Nationalbank. Es sind Landesdurchschnitte – an Autobahntankstellen ist es oft teurer.",
     privacy: "Datenschutz",
     code: "Quellcode",
@@ -499,10 +525,9 @@ function context(lang, data, history) {
 <label>${esc(t.lpgUpkeep(currency))}<input name="upkeep" type="number" inputmode="decimal" min="0" step="10" value="${upkeep}" /><small>${t.lpgUpkeepHint}</small></label>
 </div>
 <div class="calc-result" aria-live="polite">
+<div class="calc-main"><span>${t.lpgPayback}</span><output name="payback">–</output><span>${t.lpgPaybackKm} <output name="paybackKm">–</output></span></div>
 <div><span>${t.lpgPer100}</span><output name="per100">–</output></div>
 <div><span>${t.lpgYear}</span><output name="year">–</output></div>
-<div><span>${t.lpgPayback}</span><output name="payback">–</output></div>
-<div><span>${t.lpgPaybackKm}</span><output name="paybackKm">–</output></div>
 <div><span>${t.lpgFive}</span><output name="five">–</output></div>
 </div>
 </form>`;
@@ -785,7 +810,7 @@ function layout({ lang, title, description, url, alternates, css, schema, hero, 
   <head>
     <meta charset="UTF-8" />
     <base href="../" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+${THEME_SCRIPT}    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>${esc(title)}</title>
     <meta name="description" content="${esc(description)}" />
     <link rel="icon" type="image/svg+xml" href="icon.svg" />
@@ -807,7 +832,7 @@ ${alternates.map((l) => `    ${l}`).join("\n")}
     <meta property="og:locale" content="${OG_LOCALE[lang]}" />
     <meta name="twitter:card" content="summary_large_image" />
     <script type="application/ld+json">${JSON.stringify(schema.data).replace(/</g, "\\u003c")}</script>
-    <meta name="color-scheme" content="light" />
+    <meta name="color-scheme" content="light dark" />
   </head>
   <body>
     <header class="site-header">
@@ -818,7 +843,7 @@ ${NAV[lang]
       .map(([label, slug]) => {
         const href = slug ? `${DIRS[lang]}/${slug}` : home;
         const current = slug && url.endsWith(`/${href}`) ? ' aria-current="page"' : "";
-        return `          <a${slug ? ' class="nav-extra"' : ""} href="${href}"${current}>${label}</a>\n`;
+        return `          <a href="${href}"${current}>${label}</a>\n`;
       })
       .join("")}          <a href="${DIRS[lang]}/">${t.guides}</a>
           <a class="lang" href="${other.href}" hreflang="${other.lang}" lang="${other.lang}">${other.lang.toUpperCase()}</a>
@@ -873,14 +898,27 @@ function buildGuides({ site, siteUrl, siteUrls, langSite, siteId, data, history,
   for (const lang of langs) {
     const t = TEXT[lang];
     const other = lang === "en" ? "pl" : "en";
-    const list = guides[lang]
-      .map((g) => `        <li><a href="${href(lang, g.slug)}"><div class="card-media"><img class="card-photo" src="img/guides/${g.photo}.webp" width="1400" height="735" alt="" loading="lazy" />${icon(g.id, "tile")}</div><div class="card-body"><strong>${esc(g.heading)}</strong><span>${esc(g.description)}</span></div></a></li>`)
+    const card = (g, compact) =>
+      compact
+        ? `          <li><a href="${href(lang, g.slug)}">${icon(g.id, "tile")}<div class="card-body"><strong>${esc(g.heading)}</strong><span>${esc(g.description)}</span></div></a></li>`
+        : `          <li><a href="${href(lang, g.slug)}"><div class="card-media"><img class="card-photo" src="img/guides/${g.photo}.webp" width="1400" height="735" alt="" loading="lazy" />${icon(g.id, "tile")}</div><div class="card-body"><strong>${esc(g.heading)}</strong><span>${esc(g.description)}</span></div></a></li>`;
+    const list = Object.keys(GROUP_IDS)
+      .map((group) => {
+        const items = guides[lang].filter((g) => groupOf(g) === group);
+        if (!items.length) return "";
+        const compact = COMPACT_GROUPS.has(group);
+        return `      <section class="guide-group" aria-labelledby="group-${group}">
+        <h2 id="group-${group}">${esc(t.groups[group])}</h2>
+        <ul class="guide-list${compact ? " compact" : ""}">
+${items.map((g) => card(g, compact)).join("\n")}
+        </ul>
+      </section>`;
+      })
+      .filter(Boolean)
       .join("\n");
     const hero = `        <h1>${t.indexHeading}</h1>
         <p class="lead">${esc(t.indexLead)}</p>`;
-    const main = `      <ul class="guide-list">
-${list}
-      </ul>`;
+    const main = list;
     const indexSchema = {
       "@context": "https://schema.org",
       "@type": "CollectionPage",
@@ -917,9 +955,10 @@ ${list}
       const ctx = context(g.lang, data, history);
       const other = pair.find((p) => p.lang === (g.lang === "en" ? "pl" : "en"));
       const date = (iso) => new Intl.DateTimeFormat(INTL[g.lang], { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }).format(new Date(iso));
-      const more = guides[g.lang]
-        .filter((x) => x.id !== id)
-        .map((x) => `          <li><a href="${href(g.lang, x.slug)}">${esc(x.heading)}</a></li>`)
+      const others = guides[g.lang].filter((x) => x.id !== id);
+      const related = [...others.filter((x) => groupOf(x) === groupOf(g)), ...others.filter((x) => groupOf(x) !== groupOf(g))].slice(0, 4);
+      const more = related
+        .map((x) => `          <li><a href="${href(g.lang, x.slug)}">${icon(x.id, "tile")}<span>${esc(x.heading)}</span></a></li>`)
         .join("\n");
       const home = HOME[g.lang];
       const hero = `        <nav class="crumbs" aria-label="${t.crumbs}"><a href="${home}">Tankful</a> / <a href="${href(g.lang)}">${t.guides}</a></nav>
@@ -944,9 +983,10 @@ ${markdown(g.body, ctx)
       </section>
       <section class="more">
         <h2>${t.more}</h2>
-        <ul>
+        <ul class="related">
 ${more}
         </ul>
+        <a class="all-guides" href="${href(g.lang)}">${t.allGuides}</a>
       </section>`;
       const schemaData = [
         {

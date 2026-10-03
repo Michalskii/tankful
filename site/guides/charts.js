@@ -1,9 +1,11 @@
 (() => {
-  const COLORS = ["#d98a00", "#2a78d6", "#1baf7a", "#e34948", "#4a3aa7"];
+  const DARK = document.documentElement.classList.contains("dark");
+  const COLORS = DARK ? ["#f2a516", "#5b9cf0", "#2fc48e", "#f06a69", "#9d8ff0"] : ["#d98a00", "#2a78d6", "#1baf7a", "#e34948", "#4a3aa7"];
   const EU_COLOR = "#8a8f98";
-  const INK = "#1b2430";
-  const MUTED = "#6b7280";
-  const GRID = "rgba(27, 36, 48, 0.08)";
+  const INK = DARK ? "#ece9e2" : "#1b2430";
+  const MUTED = DARK ? "#9ca3af" : "#6b7280";
+  const GRID = DARK ? "rgba(255, 255, 255, 0.08)" : "rgba(27, 36, 48, 0.08)";
+  const TOOLTIP = "#1b2430";
   const RANGES = { "1y": 52, "3y": 156, "5y": 260, all: Infinity };
   const cache = {};
 
@@ -48,7 +50,7 @@
         pointRadius: 0,
         pointHoverRadius: 4,
         pointHoverBorderWidth: 2,
-        pointHoverBorderColor: "#fff",
+        pointHoverBorderColor: DARK ? "#12161d" : "#fff",
         tension: 0.2,
         spanGaps: true,
       };
@@ -84,7 +86,7 @@
             labels: { color: INK, usePointStyle: true, pointStyle: "line", boxWidth: 24, font: { size: 12 } },
           },
           tooltip: {
-            backgroundColor: INK,
+            backgroundColor: TOOLTIP,
             titleColor: "#faf7f0",
             bodyColor: "#faf7f0",
             padding: 10,

@@ -72,10 +72,13 @@ export function PopularRoutes() {
       <h2 id="routes-heading" className="text-base font-semibold">
         {T("popularRoutes")}
       </h2>
-      <ul className="flex flex-wrap gap-x-4 gap-y-1.5 text-sm">
+      <ul className="flex flex-wrap gap-1.5 text-sm">
         {PAGE_ROUTES.filter((r) => r !== CURRENT_ROUTE).map((r) => (
           <li key={routeName(r)}>
-            <a className="text-muted-foreground underline-offset-4 hover:text-foreground hover:underline" href={routeHref(r)}>
+            <a
+              className="block rounded-full border px-3 py-1 text-muted-foreground transition-colors hover:border-amber hover:text-foreground"
+              href={routeHref(r)}
+            >
               {routeName(r)}
             </a>
           </li>
