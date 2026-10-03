@@ -100,6 +100,10 @@ export const SITE_STRINGS = {
     routeAssumption: "Wyliczenie dla najszybszej trasy i typowego spalania. Swoje spalanie, liczbę osób i warianty trasy ustawisz w kalkulatorze.",
     popularRoutes: "Popularne trasy",
     guidesHeading: "Poradniki",
+    navPrices: "Ceny paliw",
+    navConsumption: "Spalanie",
+    navLpg: "LPG",
+    navMileage: "Kilometrówka",
     guidesLink: "Ceny paliw w Europie, tankowanie przed granicą, koszt 100 km i inne poradniki",
     language: "Język",
     ferry: "prom lub pociąg $1, bez paliwa",
@@ -205,6 +209,10 @@ export const SITE_STRINGS = {
     routeAssumption: "Costed for the fastest route and typical consumption. Set your own consumption, passengers and route options in the calculator.",
     popularRoutes: "Popular routes",
     guidesHeading: "Guides",
+    navPrices: "Fuel prices",
+    navConsumption: "Consumption",
+    navLpg: "LPG",
+    navMileage: "Mileage allowance",
     guidesLink: "Fuel prices in Europe, filling up before a border, the cost of 100 km and more guides",
     language: "Language",
     ferry: "ferry or train $1, no fuel",
@@ -310,13 +318,17 @@ export const SITE_STRINGS = {
     routeAssumption: "Berechnet für die schnellste Route und einen typischen Verbrauch. Eigenen Verbrauch, Mitfahrer und Routenvarianten stellst du im Rechner ein.",
     popularRoutes: "Beliebte Strecken",
     guidesHeading: "Ratgeber",
+    navPrices: "Spritpreise",
+    navConsumption: "Verbrauch",
+    navLpg: "Autogas",
+    navMileage: "Kilometerpauschale",
     guidesLink: "Tanken in Polen, Spritpreise in Tschechien und Österreich und weitere Ratgeber",
     language: "Sprache",
     ferry: "Fähre oder Zug $1, ohne Sprit",
   },
 };
 
-type Key = keyof (typeof SITE_STRINGS)["pl"]
+export type Key = keyof (typeof SITE_STRINGS)["pl"]
 
 export function T(key: Key, ...subs: unknown[]): string {
   const strings = SITE_STRINGS[(MAPKA_LOCALE in SITE_STRINGS ? MAPKA_LOCALE : "en") as keyof typeof SITE_STRINGS]

@@ -8,6 +8,11 @@ const { cities: CITIES, routes: ROUTES } = JSON.parse(fs.readFileSync(path.join(
 
 const DIRS = { pl: "poradniki", en: "guides", de: "ratgeber" };
 const HOME = { pl: "./", en: "en", de: "./" };
+const NAV = {
+  pl: [["Koszt trasy", null], ["Ceny paliw", "ceny-paliw-w-polsce"], ["Spalanie", "kalkulator-spalania"], ["LPG", "kalkulator-lpg"], ["Kilometrówka", "kilometrowka"]],
+  en: [["Trip cost", null], ["Fuel prices", "fuel-prices-europe"], ["Consumption", "fuel-consumption-calculator"], ["LPG", "lpg-calculator"]],
+  de: [["Fahrtkosten", null], ["Spritpreise", "spritpreise-europa"], ["Verbrauch", "spritverbrauch-berechnen"], ["Autogas", "autogas-rechner"]],
+};
 const OG_LOCALE = { pl: "pl_PL", en: "en_GB", de: "de_DE" };
 const CURRENCY = { pl: "PLN", en: "EUR", de: "EUR" };
 const INTL = { pl: "pl-PL", en: "en-GB", de: "de-DE" };
@@ -97,6 +102,22 @@ const TEXT = {
     mileResult: "Kilometrówka",
     mileFuel: "Koszt paliwa",
     mileDiff: "Różnica",
+    lpgKm: "Roczny przebieg (km)",
+    lpgPbCons: "Spalanie benzyny (l/100 km)",
+    lpgLpgCons: "Spalanie LPG (l/100 km)",
+    lpgLpgConsHint: "zwykle o 20% więcej",
+    lpgPbPrice: (cur) => `Cena benzyny (${cur}/l)`,
+    lpgLpgPrice: (cur) => `Cena LPG (${cur}/l)`,
+    lpgPriceHint: "średnia w Polsce",
+    lpgInstall: (cur) => `Koszt instalacji (${cur})`,
+    lpgUpkeep: (cur) => `Serwis LPG rocznie (${cur})`,
+    lpgUpkeepHint: "przeglądy, filtry, badanie techniczne",
+    lpgPer100: "Oszczędność na 100 km",
+    lpgYear: "Oszczędność rocznie",
+    lpgPayback: "Instalacja zwróci się po",
+    lpgPaybackKm: "Czyli po przejechaniu",
+    lpgFive: "Bilans po 5 latach",
+    lpgUnits: { month: { one: "miesiącu", few: "miesiącach", many: "miesiącach", other: "miesiąca" }, year: { one: "roku", few: "latach", many: "latach", other: "roku" }, never: "nie zwróci się" },
     fuelWord: "paliwo",
     neighbour: "Sąsiad",
     drive: "Napęd",
@@ -165,6 +186,22 @@ const TEXT = {
     mileResult: "Mileage allowance",
     mileFuel: "Fuel cost",
     mileDiff: "Difference",
+    lpgKm: "Kilometres a year",
+    lpgPbCons: "Petrol use (l/100 km)",
+    lpgLpgCons: "LPG use (l/100 km)",
+    lpgLpgConsHint: "usually about 20% more",
+    lpgPbPrice: (cur) => `Petrol price (${cur}/l)`,
+    lpgLpgPrice: (cur) => `LPG price (${cur}/l)`,
+    lpgPriceHint: "Polish average",
+    lpgInstall: (cur) => `Conversion cost (${cur})`,
+    lpgUpkeep: (cur) => `LPG servicing a year (${cur})`,
+    lpgUpkeepHint: "inspections, filters, extra tests",
+    lpgPer100: "Saving per 100 km",
+    lpgYear: "Saving a year",
+    lpgPayback: "Pays for itself after",
+    lpgPaybackKm: "That is after",
+    lpgFive: "Balance after 5 years",
+    lpgUnits: { month: { one: "month", other: "months" }, year: { one: "year", other: "years" }, never: "never pays off" },
     fuelWord: "fuel",
     neighbour: "Neighbour",
     drive: "Fuel",
@@ -224,6 +261,22 @@ const TEXT = {
     calc100: "Kosten für 100 km",
     calcKmCost: "Kosten für 1 km",
     calcButton: "Spritkosten für eine Strecke mit diesem Verbrauch berechnen",
+    lpgKm: "Fahrleistung pro Jahr (km)",
+    lpgPbCons: "Verbrauch Super (l/100 km)",
+    lpgLpgCons: "Verbrauch Autogas (l/100 km)",
+    lpgLpgConsHint: "meist etwa 20 % mehr",
+    lpgPbPrice: (cur) => `Preis Super (${cur}/l)`,
+    lpgLpgPrice: (cur) => `Preis Autogas (${cur}/l)`,
+    lpgPriceHint: "Durchschnitt in Deutschland",
+    lpgInstall: (cur) => `Kosten der Umrüstung (${cur})`,
+    lpgUpkeep: (cur) => `Wartung pro Jahr (${cur})`,
+    lpgUpkeepHint: "Inspektion, Filter, Gasprüfung",
+    lpgPer100: "Ersparnis pro 100 km",
+    lpgYear: "Ersparnis pro Jahr",
+    lpgPayback: "Die Anlage rechnet sich nach",
+    lpgPaybackKm: "Also nach",
+    lpgFive: "Bilanz nach 5 Jahren",
+    lpgUnits: { month: { one: "Monat", other: "Monaten" }, year: { one: "Jahr", other: "Jahren" }, never: "rechnet sich nicht" },
     fuelWord: "Kraftstoff",
     neighbour: "Nachbarland",
     drive: "Antrieb",
@@ -426,6 +479,31 @@ function context(lang, data, history) {
 <div><span>${t.mileResult}</span><output name="allowance">–</output></div>
 <div><span>${t.mileFuel}</span><output name="fuel">–</output></div>
 <div><span>${t.mileDiff}</span><output name="diff">–</output></div>
+</div>
+</form>`;
+  };
+
+  blocks.lpg = () => {
+    const cc = lang === "de" ? "DE" : "PL";
+    const round = (v) => Math.round(toCur(pln(cc, v)) * 100) / 100;
+    const install = { pl: 4500, en: 1050, de: 2500 }[lang];
+    const upkeep = { pl: 300, en: 70, de: 150 }[lang];
+    return `<form class="calc" data-kind="lpg" data-currency="${currency}" data-locale="${INTL[lang]}" data-units="${esc(JSON.stringify(t.lpgUnits))}">
+<div class="calc-fields">
+<label>${t.lpgKm}<input name="km" type="number" inputmode="decimal" min="0" step="1000" value="15000" /></label>
+<label>${t.lpgPbCons}<input name="pbCons" type="number" inputmode="decimal" min="0" step="0.1" value="7" /></label>
+<label>${t.lpgLpgCons}<input name="lpgCons" type="number" inputmode="decimal" min="0" step="0.1" value="8.4" /><small>${t.lpgLpgConsHint}</small></label>
+<label>${esc(t.lpgPbPrice(currency))}<input name="pbPrice" type="number" inputmode="decimal" min="0" step="0.01" value="${round("pb")}" /><small>${t.lpgPriceHint}</small></label>
+<label>${esc(t.lpgLpgPrice(currency))}<input name="lpgPrice" type="number" inputmode="decimal" min="0" step="0.01" value="${round("lpg")}" /><small>${t.lpgPriceHint}</small></label>
+<label>${esc(t.lpgInstall(currency))}<input name="install" type="number" inputmode="decimal" min="0" step="100" value="${install}" /></label>
+<label>${esc(t.lpgUpkeep(currency))}<input name="upkeep" type="number" inputmode="decimal" min="0" step="10" value="${upkeep}" /><small>${t.lpgUpkeepHint}</small></label>
+</div>
+<div class="calc-result" aria-live="polite">
+<div><span>${t.lpgPer100}</span><output name="per100">–</output></div>
+<div><span>${t.lpgYear}</span><output name="year">–</output></div>
+<div><span>${t.lpgPayback}</span><output name="payback">–</output></div>
+<div><span>${t.lpgPaybackKm}</span><output name="paybackKm">–</output></div>
+<div><span>${t.lpgFive}</span><output name="five">–</output></div>
 </div>
 </form>`;
   };
@@ -680,6 +758,7 @@ const ICONS = {
   west: '<path d="M12 2 8 22M12 2l4 20M9.5 15h5M10.5 9h3"/>',
   "ev-trip": '<path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/>',
   consumption: '<path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"/>',
+  "lpg-calc": '<rect width="16" height="20" x="4" y="2" rx="2"/><path d="M8 6h8M16 14v4M16 10h.01M12 10h.01M8 10h.01M12 14h.01M8 14h.01M12 18h.01M8 18h.01"/>',
   mileage: '<path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><rect width="20" height="14" x="2" y="6" rx="2"/>',
   croatia: '<circle cx="12" cy="8" r="3.5"/><path d="M12 1.5v1M5.6 4.1l.7.7M18.4 4.1l-.7.7M3 9h1M20 9h1M2 16c2 0 3-1.5 5-1.5s3 1.5 5 1.5 3-1.5 5-1.5 3 1.5 5 1.5M2 21c2 0 3-1.5 5-1.5s3 1.5 5 1.5 3-1.5 5-1.5 3 1.5 5 1.5"/>',
 };
@@ -693,6 +772,7 @@ const CHART_SCRIPTS = `    <script src="chart.umd.min.js" defer></script>
 const CALC_SCRIPTS = {
   consumption: `    <script src="guides-consumption.js" defer></script>\n`,
   mileage: `    <script src="guides-mileage.js" defer></script>\n`,
+  lpg: `    <script src="guides-lpg.js" defer></script>\n`,
 };
 
 function layout({ lang, title, description, url, alternates, css, schema, hero, main, other }) {
@@ -734,8 +814,13 @@ ${alternates.map((l) => `    ${l}`).join("\n")}
       <div class="bar">
         <a class="brand" href="${home}"><img src="icon.svg" alt="" width="28" height="28" />Tankful</a>
         <nav aria-label="Menu">
-          <a href="${home}">${t.home}</a>
-          <a href="${DIRS[lang]}/">${t.guides}</a>
+${NAV[lang]
+      .map(([label, slug]) => {
+        const href = slug ? `${DIRS[lang]}/${slug}` : home;
+        const current = slug && url.endsWith(`/${href}`) ? ' aria-current="page"' : "";
+        return `          <a${slug ? ' class="nav-extra"' : ""} href="${href}"${current}>${label}</a>\n`;
+      })
+      .join("")}          <a href="${DIRS[lang]}/">${t.guides}</a>
           <a class="lang" href="${other.href}" hreflang="${other.lang}" lang="${other.lang}">${other.lang.toUpperCase()}</a>
         </nav>
       </div>
@@ -766,6 +851,7 @@ function buildGuides({ site, siteUrl, siteUrls, langSite, siteId, data, history,
   fs.copyFileSync(path.join(GUIDES, "analytics.js"), path.join(site, "guides-analytics.js"));
   fs.copyFileSync(path.join(GUIDES, "consumption.js"), path.join(site, "guides-consumption.js"));
   fs.copyFileSync(path.join(GUIDES, "mileage.js"), path.join(site, "guides-mileage.js"));
+  fs.copyFileSync(path.join(GUIDES, "lpg.js"), path.join(site, "guides-lpg.js"));
   fs.mkdirSync(path.join(site, "data/history"), { recursive: true });
   for (const [cc, fuels] of Object.entries(history.prices)) {
     fs.writeFileSync(path.join(site, "data/history", `${cc}.json`), JSON.stringify({ dates: history.dates, plnPerEur: history.plnPerEur, ...fuels }));

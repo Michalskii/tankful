@@ -23,7 +23,7 @@ import { decodePlace, encodePlace, type Place } from "@/lib/places"
 import { track } from "@/lib/analytics"
 import { PRERENDER } from "@/lib/prerender"
 import { cityName, cityPlace, CURRENT_ROUTE, routeHref, routeSlug, routeTrip } from "@/lib/routes"
-import { GERMAN_SITE, guidesHref, homeHref, LANGS, otherSite, siteRoot } from "@/lib/sites"
+import { GERMAN_SITE, guidesHref, homeHref, LANGS, navLinks, otherSite, siteRoot } from "@/lib/sites"
 import { stopItem, type StopItem } from "@/lib/stops"
 import { T } from "@/lib/strings"
 import { cn } from "@/lib/utils"
@@ -235,6 +235,16 @@ export default function App() {
             <img src="icon.svg" alt="" className="size-7" />
             Tankful
           </a>
+          <nav className="mr-auto ml-6 hidden gap-1 lg:flex" aria-label="Menu">
+            {navLinks().map(({ key, href }) => (
+              <Button key={key} asChild size="sm" variant="ghost" className="text-muted-foreground">
+                <a href={href}>{T(key)}</a>
+              </Button>
+            ))}
+            <Button asChild size="sm" variant="ghost" className="text-muted-foreground">
+              <a href={guidesHref()}>{T("guidesHeading")}</a>
+            </Button>
+          </nav>
           <div className="flex items-center gap-1">
           <nav className="flex gap-1" aria-label={T("language")}>
             {LANGS.map((lang) => (

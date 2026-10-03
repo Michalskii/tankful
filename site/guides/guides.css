@@ -54,9 +54,16 @@ body {
   text-decoration: none;
 }
 
-.site-header nav a:hover {
+.site-header nav a:hover,
+.site-header nav a[aria-current="page"] {
   background: rgb(250 247 240 / 0.1);
   color: var(--cream);
+}
+
+@media (max-width: 52rem) {
+  .site-header nav .nav-extra {
+    display: none;
+  }
 }
 
 .hero {

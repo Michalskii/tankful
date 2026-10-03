@@ -9,6 +9,14 @@ published: 2026-10-01
 ---
 Przy dzisiejszych cenach w Polsce litr LPG kosztuje **{{price PL lpg}}**, a benzyny 95 **{{price PL pb}}**. Auto, które pali 7 l benzyny na 100 km, na gazie zużyje około 8,5 l. Przejechanie 100 km kosztuje wtedy **{{cost100 PL pb 7}}** na benzynie i **{{cost100 PL lpg 8.5}}** na LPG – oszczędzasz {{lpgsave PL 7 8.5 100}} na każdych 100 km.
 
+## Kalkulator opłacalności LPG
+
+Wpisz spalanie swojego auta, roczny przebieg i cenę instalacji – kalkulator policzy, ile zaoszczędzisz na gazie i po jakim czasie zwróci się montaż. Ceny paliw są już wpisane: to aktualne średnie w Polsce, możesz je zmienić na ceny ze swojej stacji.
+
+{{lpg}}
+
+Kalkulator ma też swoją osobną stronę: [Kalkulator LPG](poradniki/kalkulator-lpg).
+
 ## Po ilu kilometrach zwraca się instalacja
 
 Przyjmijmy, że sekwencyjna instalacja LPG z montażem kosztuje 4500 zł (ceny zależą od silnika i warsztatu). Wtedy:

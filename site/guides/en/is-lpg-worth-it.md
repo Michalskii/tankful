@@ -9,6 +9,14 @@ published: 2026-10-01
 ---
 At today's prices in Poland a litre of LPG costs **{{price PL lpg}}** and a litre of 95 petrol **{{price PL pb}}**. A car that uses 7 l of petrol per 100 km burns about 8.5 l on LPG. Driving 100 km then costs **{{cost100 PL pb 7}}** on petrol and **{{cost100 PL lpg 8.5}}** on LPG – a saving of {{lpgsave PL 7 8.5 100}} every 100 km.
 
+## LPG payback calculator
+
+Enter your car's consumption, yearly mileage and the cost of the conversion – the calculator works out how much you save on gas and how soon the system pays for itself. Fuel prices are filled in with current Polish averages in euro; change them to the prices at your station.
+
+{{lpg}}
+
+The calculator also has a page of its own: [LPG calculator](guides/lpg-calculator).
+
 ## When a conversion pays for itself
 
 Let's assume a sequential LPG system, fitted, costs €1,050 in Poland (about 4,500 zł; the price depends on the engine and the workshop). Then:

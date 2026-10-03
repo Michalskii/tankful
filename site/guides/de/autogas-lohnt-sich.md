@@ -10,6 +10,14 @@ published: 2026-10-02
 ---
 Ein Liter Autogas kostet in Deutschland aktuell im Schnitt **{{price DE lpg}}**, ein Liter Super **{{price DE pb}}**. Ein Auto, das 7 l Super auf 100 km braucht, verbraucht mit Gas etwa 8,5 l. Damit kosten 100 km **{{cost100 DE pb 7}}** mit Super und **{{cost100 DE lpg 8.5}}** mit Autogas – du sparst {{lpgsave DE 7 8.5 100}} auf jeden 100 km.
 
+## Autogas-Rechner
+
+Gib den Verbrauch deines Autos, die jährliche Fahrleistung und den Preis der Umrüstung ein – der Rechner zeigt, wie viel du mit Gas sparst und wann sich die Anlage bezahlt macht. Die Spritpreise sind schon eingetragen: aktuelle Durchschnittspreise in Deutschland, die du durch die Preise deiner Tankstelle ersetzen kannst.
+
+{{lpg}}
+
+Den Rechner gibt es auch auf einer eigenen Seite: [Autogas-Rechner](ratgeber/autogas-rechner).
+
 ## Wann sich die Umrüstung bezahlt macht
 
 Angenommen, eine Autogasanlage kostet mit Einbau rund 2.500 € – der tatsächliche Preis hängt stark vom Motor und von der Werkstatt ab. Dann gilt:
