@@ -11,6 +11,9 @@
   let floatCollapsed = false;
   let routeCache = { key: null, routes: [] };
   let geo = { key: null, origin: null, dest: null, shares: null };
+  let review = {};
+  let tripCount = 0;
+  const countedRoutes = new Set();
 
   function isDrivingMode() {
     return /!3e0(?!\d)/.test(location.href);
@@ -210,8 +213,16 @@
       costEl.dataset.key = key;
       costEl.title = title;
     }
+    countRoute(found > 0);
     renderFloat(s);
     checkLayout(found > 0 || readRoutes().length > 0);
+  }
+
+  function countRoute(shown) {
+    const key = routeKey();
+    if (!shown || !key || countedRoutes.has(key)) return;
+    countedRoutes.add(key);
+    mapkaUpdateReview((r) => ({ routes: (r.routes || 0) + 1 }));
   }
 
   const LAYOUT_GRACE_MS = 8000;
@@ -313,7 +324,8 @@
     }
     const price = priceFor(s);
     const override = routeOverride();
-    const key = JSON.stringify([routes, s, price, floatCollapsed, !!override]);
+    const askReview = mapkaReviewDue(review, tripCount);
+    const key = JSON.stringify([routes, s, price, floatCollapsed, !!override, askReview]);
     if (floatEl?.dataset.key === key && floatEl.isConnected) return;
 
     if (!floatEl?.isConnected) {
@@ -378,6 +390,7 @@
         (override ? ` · ${mapkaT("float_override_tag")}` : "")
     );
     floatEl.append(list, actions, foot);
+    if (askReview) floatEl.append(mapkaReviewBox("mapka-review"));
   }
 
   function flash(button, text) {
@@ -570,6 +583,13 @@
 
   function onClick(e) {
     if (!alive()) return;
+    const reviewTarget = e.target.closest?.(`.${FLOAT_CLASS} [data-review]`);
+    if (reviewTarget) {
+      e.preventDefault();
+      e.stopPropagation();
+      mapkaReviewAction(reviewTarget.dataset.review);
+      return;
+    }
     const floatTarget = e.target.closest?.(`.${FLOAT_CLASS} [data-float]`);
     const costEl = e.target.closest?.(`.${COST_CLASS}`);
     if (floatTarget) {
@@ -636,6 +656,14 @@
       for (const [key, { newValue }] of Object.entries(changes)) settings[key] = newValue;
     } else if (area === "local") {
       let relevant = false;
+      if (changes.review) {
+        review = changes.review.newValue || {};
+        relevant = true;
+      }
+      if (changes.trips) {
+        tripCount = (changes.trips.newValue || []).length;
+        relevant = true;
+      }
       for (const key of Object.keys(MAPKA_DATA_KEYS)) {
         if (changes[key]) {
           data[key] = changes[key].newValue;
@@ -649,8 +677,10 @@
     schedule();
   });
 
-  chrome.storage.local.get({ floatCollapsed: false }, (r) => {
+  chrome.storage.local.get({ floatCollapsed: false, review: {}, trips: [] }, (r) => {
     floatCollapsed = r.floatCollapsed;
+    review = r.review;
+    tripCount = r.trips.length;
     schedule();
   });
 

@@ -352,5 +352,26 @@
   },
   "csv_consumption_us": {
     "message": "mpg vagy kWh / 100 mi"
+  },
+  "review_title": {
+    "message": "Hasznos a Tankful?"
+  },
+  "review_text": {
+    "message": "Egy rövid értékelés a Chrome Internetes áruházban sokat segít más autósoknak megtalálni."
+  },
+  "review_rate": {
+    "message": "⭐ Értékelés"
+  },
+  "review_later": {
+    "message": "Most nem"
+  },
+  "review_never": {
+    "message": "Ne kérdezze újra"
+  },
+  "review_problem": {
+    "message": "Valami nem működik?"
+  },
+  "review_write": {
+    "message": "Írjon nekünk"
   }
 }

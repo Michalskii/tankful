@@ -352,5 +352,26 @@
   },
   "csv_consumption_us": {
     "message": "mpg nebo kWh na 100 mi"
+  },
+  "review_title": {
+    "message": "Hodí se vám Tankful?"
+  },
+  "review_text": {
+    "message": "Krátké hodnocení v Internetovém obchodě Chrome moc pomůže dalším řidičům ho najít."
+  },
+  "review_rate": {
+    "message": "⭐ Ohodnotit"
+  },
+  "review_later": {
+    "message": "Teď ne"
+  },
+  "review_never": {
+    "message": "Už se neptat"
+  },
+  "review_problem": {
+    "message": "Něco nefunguje?"
+  },
+  "review_write": {
+    "message": "Napište nám"
   }
 }

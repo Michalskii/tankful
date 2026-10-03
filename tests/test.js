@@ -158,6 +158,21 @@ test("mapkaLocalPricePln: without a route the user's own country, Poland only as
   assert.strictEqual(ext.mapkaLocalPricePln(s, data, { cc: "ch" }, "FR"), null);
 });
 
+test("mapkaReviewDue: ask after a week of real use, never after rating, not while snoozed", () => {
+  const day = 86400000;
+  const now = Date.parse("2026-10-20T12:00:00Z");
+  const used = { installedAt: now - 10 * day, routes: 20 };
+  assert.strictEqual(ext.mapkaReviewDue(used, 0, now), true);
+  assert.strictEqual(ext.mapkaReviewDue({ ...used, routes: 19 }, 0, now), false);
+  assert.strictEqual(ext.mapkaReviewDue({ ...used, routes: 0 }, 3, now), true);
+  assert.strictEqual(ext.mapkaReviewDue({ ...used, installedAt: now - 6 * day }, 0, now), false);
+  assert.strictEqual(ext.mapkaReviewDue({ ...used, done: true }, 0, now), false);
+  assert.strictEqual(ext.mapkaReviewDue({ ...used, snoozeUntil: now + day }, 0, now), false);
+  assert.strictEqual(ext.mapkaReviewDue({ ...used, snoozeUntil: now - day }, 0, now), true);
+  assert.strictEqual(ext.mapkaReviewDue({ routes: 50 }, 5, now), false);
+  assert.strictEqual(ext.mapkaReviewDue(undefined, 5, now), false);
+});
+
 test("orlenShift: the latest net wholesale price against the bulletin week, above the threshold", () => {
   const flat = wholesale([6300, 6400, 6250, 6350, 6300, 6400, 6250, 6350, 6300, 6280]);
   assert.strictEqual(ext.orlenShift(flat, "2026-09-19"), 0);

@@ -125,3 +125,86 @@ button.link {
   .hint { color: #9aa0a6; }
   button.link { color: #8ab4f8; border-color: #5f6368; }
 }
+
+.review {
+  position: relative;
+  margin: 0 0 12px;
+  padding: 10px 12px 8px;
+  background: #fef7e0;
+  border-radius: 8px;
+  font-size: 12px;
+}
+
+.review__close {
+  position: absolute;
+  top: 2px;
+  right: 4px;
+  padding: 2px 6px;
+  font: inherit;
+  font-size: 15px;
+  line-height: 1;
+  color: #5f6368;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+.review__text {
+  margin: 0 16px 8px 0;
+  color: #3c4043;
+}
+
+.review__text strong {
+  color: #202124;
+}
+
+.review__actions {
+  display: flex;
+  gap: 8px;
+}
+
+.review__rate,
+.review__later {
+  padding: 5px 12px;
+  font: inherit;
+  font-weight: 500;
+  border-radius: 16px;
+  cursor: pointer;
+}
+
+.review__rate {
+  color: #fff;
+  background: #1a73e8;
+  border: 1px solid #1a73e8;
+}
+
+.review__later {
+  color: #1a73e8;
+  background: transparent;
+  border: 1px solid #dadce0;
+}
+
+.review__problem {
+  margin: 8px 0 0;
+  color: #5f6368;
+  font-size: 11px;
+}
+
+.review__link {
+  padding: 0;
+  font: inherit;
+  color: #1a73e8;
+  background: none;
+  border: 0;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+@media (prefers-color-scheme: dark) {
+  .review { background: #3c3418; }
+  .review__text, .review__problem, .review__close { color: #bdc1c6; }
+  .review__text strong { color: #e8eaed; }
+  .review__rate { color: #202124; background: #8ab4f8; border-color: #8ab4f8; }
+  .review__later { color: #8ab4f8; border-color: #5f6368; }
+  .review__link { color: #8ab4f8; }
+}

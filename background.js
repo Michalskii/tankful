@@ -339,6 +339,9 @@ chrome.runtime.onInstalled.addListener(({ reason }) => {
   chrome.storage.local.remove("regionalPrices");
   refreshAll(true);
   if (reason === "install") chrome.tabs.create({ url: "welcome.html" });
+  chrome.storage.local.get({ review: {} }, ({ review }) => {
+    if (!review.installedAt) chrome.storage.local.set({ review: { ...review, installedAt: Date.now() } });
+  });
 });
 
 chrome.runtime.onStartup.addListener(() => refreshAll());

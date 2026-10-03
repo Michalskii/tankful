@@ -352,5 +352,26 @@
   },
   "csv_consumption_us": {
     "message": "mpg ou kWh aos 100 mi"
+  },
+  "review_title": {
+    "message": "O Tankful é útil?"
+  },
+  "review_text": {
+    "message": "Uma breve avaliação na Chrome Web Store ajuda muito outros condutores a encontrá-lo."
+  },
+  "review_rate": {
+    "message": "⭐ Avaliar"
+  },
+  "review_later": {
+    "message": "Agora não"
+  },
+  "review_never": {
+    "message": "Não perguntar mais"
+  },
+  "review_problem": {
+    "message": "Algo não funciona?"
+  },
+  "review_write": {
+    "message": "Escreva-nos"
   }
 }

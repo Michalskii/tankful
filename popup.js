@@ -81,10 +81,11 @@ function updateView(s) {
 Promise.all([
   mapkaLoadSettings(),
   mapkaLoadData(),
-  new Promise((r) => chrome.storage.local.get({ fuelPricesError: null }, r)),
+  new Promise((r) => chrome.storage.local.get({ fuelPricesError: null, review: {}, trips: [] }, r)),
 ]).then(([s, d, e]) => {
   data = d;
   fuelPricesError = e.fuelPricesError;
+  if (mapkaReviewDue(e.review, e.trips.length)) document.querySelector("h1").after(mapkaReviewBox("review"));
   for (const [key, value] of Object.entries(s)) {
     if (!form[key]) continue;
     if (form[key].type === "checkbox") form[key].checked = value;
@@ -115,6 +116,13 @@ $("refresh").addEventListener("click", () => {
     fuelPricesError = res?.ok ? null : res?.errors?.join("; ") || mapkaT("popup_no_response");
     updateView(readForm());
   });
+});
+
+document.addEventListener("click", (e) => {
+  const target = e.target.closest("[data-review]");
+  if (!target) return;
+  mapkaReviewAction(target.dataset.review);
+  target.closest(".review").remove();
 });
 
 $("history").addEventListener("click", () => {

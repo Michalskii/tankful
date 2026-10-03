@@ -352,5 +352,26 @@
   },
   "csv_consumption_us": {
     "message": "mpg eller kWh pr. 100 mi"
+  },
+  "review_title": {
+    "message": "Har du gavn af Tankful?"
+  },
+  "review_text": {
+    "message": "En kort anmeldelse i Chrome Webshop hjælper andre bilister med at finde den."
+  },
+  "review_rate": {
+    "message": "⭐ Bedøm"
+  },
+  "review_later": {
+    "message": "Ikke nu"
+  },
+  "review_never": {
+    "message": "Spørg ikke igen"
+  },
+  "review_problem": {
+    "message": "Virker noget ikke?"
+  },
+  "review_write": {
+    "message": "Skriv til os"
   }
 }

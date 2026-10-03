@@ -341,3 +341,81 @@
 .mapka-warning__close:hover {
   background: rgba(0, 0, 0, 0.06);
 }
+
+.mapka-review {
+  position: relative;
+  margin: 2px 10px 10px;
+  padding: 10px 12px 8px;
+  background: #fef7e0;
+  border-radius: 8px;
+  font-size: 12px;
+}
+
+.mapka-review__close {
+  position: absolute;
+  top: 2px;
+  right: 4px;
+  padding: 2px 6px;
+  font: inherit;
+  font-size: 15px;
+  line-height: 1;
+  color: #5f6368;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+.mapka-review__text {
+  margin: 0 16px 8px 0;
+  color: #3c4043;
+}
+
+.mapka-review__text strong {
+  color: #202124;
+}
+
+.mapka-review__actions {
+  display: flex;
+  gap: 8px;
+}
+
+.mapka-review__rate,
+.mapka-review__later {
+  padding: 5px 12px;
+  font: inherit;
+  font-weight: 500;
+  border-radius: 16px;
+  cursor: pointer;
+}
+
+.mapka-review__rate {
+  color: #fff;
+  background: #1a73e8;
+  border: 1px solid #1a73e8;
+}
+
+.mapka-review__rate:hover {
+  background: #1765cc;
+}
+
+.mapka-review__later {
+  color: #1a73e8;
+  background: #fff;
+  border: 1px solid #dadce0;
+}
+
+.mapka-review__problem {
+  margin: 8px 0 0;
+  color: #5f6368;
+  font-size: 11px;
+}
+
+.mapka-review__link {
+  padding: 0;
+  font: inherit;
+  color: #1a73e8;
+  background: none;
+  border: 0;
+  text-decoration: underline;
+  cursor: pointer;
+}

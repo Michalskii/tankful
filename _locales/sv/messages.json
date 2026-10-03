@@ -352,5 +352,26 @@
   },
   "csv_consumption_us": {
     "message": "mpg eller kWh per 100 mi"
+  },
+  "review_title": {
+    "message": "Har du nytta av Tankful?"
+  },
+  "review_text": {
+    "message": "Ett kort omdöme i Chrome Web Store hjälper andra bilister att hitta det."
+  },
+  "review_rate": {
+    "message": "⭐ Betygsätt"
+  },
+  "review_later": {
+    "message": "Inte nu"
+  },
+  "review_never": {
+    "message": "Fråga inte igen"
+  },
+  "review_problem": {
+    "message": "Fungerar något inte?"
+  },
+  "review_write": {
+    "message": "Hör av dig"
   }
 }

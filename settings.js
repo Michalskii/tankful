@@ -66,6 +66,66 @@ function mapkaFallbackPrice(currency) {
   return currency === "USD" ? 0.9 : mapkaStartPrice(6.2, currency);
 }
 
+const MAPKA_STORE_URL = "https://chromewebstore.google.com/detail/fiogjemolijaleckapbcngibelfbpfgp";
+const MAPKA_ISSUES_URL = "https://github.com/Michalskii/tankful/issues/new";
+const MAPKA_REVIEW = { routes: 20, trips: 3, days: 7, snoozeDays: 30 };
+
+function mapkaReviewDue(review, trips = 0, now = Date.now()) {
+  if (!review?.installedAt || review.done) return false;
+  if (review.snoozeUntil && now < review.snoozeUntil) return false;
+  if (now - review.installedAt < MAPKA_REVIEW.days * 86400000) return false;
+  return (review.routes || 0) >= MAPKA_REVIEW.routes || trips >= MAPKA_REVIEW.trips;
+}
+
+function mapkaReviewUrl() {
+  return `${MAPKA_STORE_URL}/reviews?hl=${MAPKA_LOCALE.replace("_", "-")}`;
+}
+
+function mapkaUpdateReview(change) {
+  return new Promise((resolve) =>
+    chrome.storage.local.get({ review: {} }, ({ review }) => {
+      const next = { ...review, ...change(review) };
+      chrome.storage.local.set({ review: next }, () => resolve(next));
+    })
+  );
+}
+
+function mapkaReviewAction(action) {
+  if (action === "rate") {
+    window.open(mapkaReviewUrl(), "_blank", "noopener");
+    return mapkaUpdateReview(() => ({ done: true }));
+  }
+  if (action === "problem") {
+    window.open(MAPKA_ISSUES_URL, "_blank", "noopener");
+    return Promise.resolve(null);
+  }
+  if (action === "later") return mapkaUpdateReview(() => ({ snoozeUntil: Date.now() + MAPKA_REVIEW.snoozeDays * 86400000 }));
+  return mapkaUpdateReview(() => ({ done: true }));
+}
+
+function mapkaReviewBox(className) {
+  const box = document.createElement("div");
+  box.className = className;
+  const make = (tag, cls, text, action) => {
+    const e = document.createElement(tag);
+    if (cls) e.className = `${className}__${cls}`;
+    e.textContent = text;
+    if (action) e.dataset.review = action;
+    if (tag === "button") e.type = "button";
+    return e;
+  };
+  const close = make("button", "close", "×", "never");
+  close.title = mapkaT("review_never");
+  const text = make("p", "text", "");
+  text.append(make("strong", null, mapkaT("review_title")), ` ${mapkaT("review_text")}`);
+  const actions = make("div", "actions", "");
+  actions.append(make("button", "rate", mapkaT("review_rate"), "rate"), make("button", "later", mapkaT("review_later"), "later"));
+  const problem = make("p", "problem", `${mapkaT("review_problem")} `);
+  problem.append(make("button", "link", mapkaT("review_write"), "problem"));
+  box.append(close, text, actions, problem);
+  return box;
+}
+
 const MAPKA_DEFAULTS = {
   units: MAPKA_UNITS,
   consumption: 7.0,

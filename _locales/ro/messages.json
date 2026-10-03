@@ -352,5 +352,26 @@
   },
   "csv_consumption_us": {
     "message": "mpg sau kWh la 100 mi"
+  },
+  "review_title": {
+    "message": "Îți este util Tankful?"
+  },
+  "review_text": {
+    "message": "O scurtă recenzie în Magazinul web Chrome îi ajută mult pe alți șoferi să-l găsească."
+  },
+  "review_rate": {
+    "message": "⭐ Evaluează"
+  },
+  "review_later": {
+    "message": "Nu acum"
+  },
+  "review_never": {
+    "message": "Nu mai întreba"
+  },
+  "review_problem": {
+    "message": "Ceva nu funcționează?"
+  },
+  "review_write": {
+    "message": "Scrie-ne"
   }
 }

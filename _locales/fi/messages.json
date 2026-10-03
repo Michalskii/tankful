@@ -352,5 +352,26 @@
   },
   "csv_consumption_us": {
     "message": "mpg tai kWh / 100 mi"
+  },
+  "review_title": {
+    "message": "Onko Tankfulista hyötyä?"
+  },
+  "review_text": {
+    "message": "Lyhyt arvio Chrome Web Storessa auttaa muita autoilijoita löytämään sen."
+  },
+  "review_rate": {
+    "message": "⭐ Arvioi"
+  },
+  "review_later": {
+    "message": "Ei nyt"
+  },
+  "review_never": {
+    "message": "Älä kysy uudelleen"
+  },
+  "review_problem": {
+    "message": "Eikö jokin toimi?"
+  },
+  "review_write": {
+    "message": "Kerro meille"
   }
 }
