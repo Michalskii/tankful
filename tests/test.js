@@ -17,11 +17,22 @@ function i18n(lang) {
   };
 }
 
+const NOW = Date.parse("2026-09-30T12:00:00Z");
+class FixedDate extends Date {
+  constructor(...args) {
+    super(...(args.length ? args : [NOW]));
+  }
+  static now() {
+    return NOW;
+  }
+}
+
 function loadExtension({ fetch, lang = "pl" } = {}) {
   const store = {};
   const listener = { addListener() {} };
   const context = vm.createContext({
     console,
+    Date: FixedDate,
     TextDecoder,
     URL,
     Blob: global.Blob,
@@ -122,19 +133,27 @@ const wholesale = (values, start = "2026-09-15") =>
   values.map((value, i) => ({ date: new Date(Date.parse(start) + i * 86400000).toISOString().slice(0, 10), value }));
 
 test("polandPrices: the EU bulletin in PLN at the NBP rate of the bulletin date", () => {
-  same(ext.polandPrices(BULLETIN, 4.35), { pb: 7.92, on: 8.87, lpg: 3.13, onp: 8.87 });
+  same(ext.polandPrices(BULLETIN, 4.35, null, "2026-09-22"), { pb: 7.92, on: 8.87, lpg: 3.13, onp: 8.87 });
   assert.throws(() => ext.polandPrices({ prices: { DE: { pb: 1.8 } } }, 4.35), /brak cen dla Polski/);
 });
 
-test("polandPrices: Orlen wholesale shifts the price and gives Pb98", () => {
-  same(ext.polandPrices(BULLETIN, 4.35, { pb: 0.3, on: 0, pbpSpread: 0.81 }), { pb: 8.22, on: 8.87, lpg: 3.13, pbp: 9.03, onp: 8.87 });
+test("polandPrices: Orlen net wholesale shift gets VAT and gives Pb98", () => {
+  same(ext.polandPrices(BULLETIN, 4.35, { pb: 0.3, on: 0, pbpSpread: 0.81 }, "2026-09-22"), { pb: 8.29, on: 8.87, lpg: 3.13, pbp: 9.28, onp: 8.87 });
 });
 
-test("orlenShift: only lasting moves above the threshold count, with VAT", () => {
+test("polandPrices: reduced 8% VAT on petrol and diesel from 3 October 2026, not on LPG", () => {
+  same(ext.polandPrices(BULLETIN, 4.35, null, "2026-10-03"), { pb: 6.95, on: 7.79, lpg: 3.13, onp: 7.79 });
+  same(ext.polandPrices(BULLETIN, 4.35, null, "2027-01-01"), { pb: 7.92, on: 8.87, lpg: 3.13, onp: 8.87 });
+  same(ext.polandPrices({ ...BULLETIN, date: "2026-10-05" }, 4.35, null, "2026-10-06"), { pb: 7.92, on: 8.87, lpg: 3.13, onp: 8.87 });
+});
+
+test("orlenShift: the latest net wholesale price against the bulletin week, above the threshold", () => {
   const flat = wholesale([6300, 6400, 6250, 6350, 6300, 6400, 6250, 6350, 6300, 6280]);
   assert.strictEqual(ext.orlenShift(flat, "2026-09-19"), 0);
   const rising = wholesale([6000, 6000, 6000, 6000, 6000, 6000, 6300, 6300, 6300, 6300, 6300]);
-  close(ext.orlenShift(rising, "2026-09-19"), 0.37);
+  close(ext.orlenShift(rising, "2026-09-19"), 0.3);
+  const cut = wholesale([6300, 6300, 6300, 6300, 6300, 6300, 6300, 6050]);
+  close(ext.orlenShift(cut, "2026-09-19"), -0.25);
   assert.strictEqual(ext.orlenShift(rising.slice(0, 5), "2026-09-19"), 0);
 });
 
@@ -450,7 +469,7 @@ const OLD_SITE_URL = "https://michalskii.github.io/tankful/prices.json";
 const BULLETIN_URL = "https://energy.ec.europa.eu/document/download/264c2d0f-f161-4ea3-a777-78faae59bea0_en";
 
 function sitePrices(age) {
-  const at = Date.now() - age;
+  const at = NOW - age;
   return {
     updatedAt: new Date(at).toISOString(),
     fuelPrices: { prices: { pb: 6.5, on: 6.8 }, date: "2026-09-22", fetchedAt: at },

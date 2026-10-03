@@ -16,7 +16,8 @@ const MAX_AGE = { national: 24 * HOUR, eu: 72 * HOUR, nbp: 48 * HOUR, uk: 72 * H
 
 const ORLEN_PRODUCTS = { pb: 41, pbp: 42, on: 43 };
 const FUEL_VAT = 1.23;
-const ORLEN_THRESHOLD = 0.15;
+const REDUCED_FUEL_VAT = [{ from: "2026-10-03", to: "2026-12-31", rate: 1.08, fuels: ["pb", "on"] }];
+const ORLEN_THRESHOLD = 0.12;
 
 const EU_COLUMNS = { B: "pb", C: "on", G: "lpg" };
 const EU_NAMES = {
@@ -47,11 +48,16 @@ async function fetchOrlen(productId, from, to) {
     .sort((a, b) => a.date.localeCompare(b.date));
 }
 
+function fuelVat(fuel, date) {
+  const period = REDUCED_FUEL_VAT.find((p) => p.fuels.includes(fuel) && date >= p.from && date <= p.to);
+  return period ? period.rate : FUEL_VAT;
+}
+
 function orlenShift(history, bulletinDate) {
   const before = history.filter((r) => r.date <= bulletinDate).slice(-5);
-  const recent = history.slice(-5);
-  if (before.length < 3 || recent.length < 3 || recent[recent.length - 1].date <= bulletinDate) return 0;
-  const shift = ((average(recent) - average(before)) * FUEL_VAT) / 1000;
+  const latest = history[history.length - 1];
+  if (before.length < 3 || !latest || latest.date <= bulletinDate) return 0;
+  const shift = (latest.value - average(before)) / 1000;
   return Math.abs(shift) > ORLEN_THRESHOLD ? round2(shift) : 0;
 }
 
@@ -68,16 +74,16 @@ async function fetchOrlenCorrection(bulletinDate) {
   };
 }
 
-function polandPrices(euPrices, eurRate, orlen = null) {
+function polandPrices(euPrices, eurRate, orlen = null, today = isoDay(Date.now())) {
   const base = euPrices?.prices?.PL;
   if (!base?.pb) throw new Error(mapkaT("error_poland_prices"));
   const prices = {};
-  for (const fuel of ["pb", "on", "lpg"]) if (base[fuel]) prices[fuel] = base[fuel] * eurRate;
-  if (orlen) {
-    prices.pb += orlen.pb;
-    if (prices.on) prices.on += orlen.on;
-    if (orlen.pbpSpread > 0) prices.pbp = prices.pb + orlen.pbpSpread;
+  for (const fuel of ["pb", "on", "lpg"]) {
+    if (!base[fuel]) continue;
+    const net = (base[fuel] * eurRate) / fuelVat(fuel, euPrices.date) + (orlen?.[fuel] || 0);
+    prices[fuel] = net * fuelVat(fuel, today);
   }
+  if (orlen?.pbpSpread > 0) prices.pbp = prices.pb + orlen.pbpSpread * fuelVat("pb", today);
   if (prices.on) prices.onp = prices.on;
   return Object.fromEntries(Object.entries(prices).map(([fuel, value]) => [fuel, round2(value)]));
 }
