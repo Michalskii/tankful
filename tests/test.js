@@ -147,6 +147,17 @@ test("polandPrices: reduced 8% VAT on petrol and diesel from 3 October 2026, not
   same(ext.polandPrices({ ...BULLETIN, date: "2026-10-05" }, 4.35, null, "2026-10-06"), { pb: 7.92, on: 8.87, lpg: 3.13, onp: 8.87 });
 });
 
+test("mapkaLocalPricePln: without a route the user's own country, Poland only as a fallback", () => {
+  const data = { fuelPrices: { prices: { pb: 6.75 } }, euPrices: { prices: { FR: { pb: 1.8 } } }, nbpRates: { rates: { EUR: 4.3 } } };
+  const s = { fuelType: "pb", localPrices: true };
+  close(ext.mapkaLocalPricePln(s, data, null, "FR").price, 1.8 * 4.3);
+  close(ext.mapkaLocalPricePln({ ...s, localPrices: false }, data, { cc: "pl" }, "FR").price, 1.8 * 4.3);
+  close(ext.mapkaLocalPricePln(s, data, null, "PL").price, 6.75);
+  close(ext.mapkaLocalPricePln(s, data, null, "CH").price, 6.75);
+  close(ext.mapkaLocalPricePln(s, data, { cc: "pl" }, "FR").price, 6.75);
+  assert.strictEqual(ext.mapkaLocalPricePln(s, data, { cc: "ch" }, "FR"), null);
+});
+
 test("orlenShift: the latest net wholesale price against the bulletin week, above the threshold", () => {
   const flat = wholesale([6300, 6400, 6250, 6350, 6300, 6400, 6250, 6350, 6300, 6280]);
   assert.strictEqual(ext.orlenShift(flat, "2026-09-19"), 0);

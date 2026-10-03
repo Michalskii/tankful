@@ -197,18 +197,17 @@ function mapkaOwnPricePln(s, data, cc, geo) {
   return { price: value * rate, label: area && state ? `${state} (${mapkaCountryName(cc)})` : mapkaCountryName(cc) };
 }
 
-function mapkaLocalPricePln(s, data, geo) {
-  const cc = geo?.cc?.toUpperCase();
-  if ((!cc || !s.localPrices) && MAPKA_OWN_SOURCES[MAPKA_COUNTRY]) return mapkaOwnPricePln(s, data, MAPKA_COUNTRY, null);
-  if (!cc || cc === "PL" || !s.localPrices) {
-    const prices = data.fuelPrices?.prices;
-    const national = prices?.[s.fuelType] ?? prices?.[MAPKA_EU_FUEL[s.fuelType]];
-    return national ? { price: national, label: mapkaT("price_national") } : null;
-  }
-  if (MAPKA_OWN_SOURCES[cc]) return mapkaOwnPricePln(s, data, cc, geo);
-  const eur = data.euPrices?.prices?.[cc]?.[MAPKA_EU_FUEL[s.fuelType]];
+function mapkaLocalPricePln(s, data, geo, home = MAPKA_COUNTRY) {
+  const route = s.localPrices ? geo?.cc?.toUpperCase() : null;
+  const cc = route || home;
+  if (MAPKA_OWN_SOURCES[cc]) return mapkaOwnPricePln(s, data, cc, route ? geo : null);
+  const eur = cc === "PL" ? null : data.euPrices?.prices?.[cc]?.[MAPKA_EU_FUEL[s.fuelType]];
   const rate = data.nbpRates?.rates?.EUR;
-  return eur && rate ? { price: eur * rate, label: mapkaCountryName(cc) } : null;
+  if (eur && rate) return { price: eur * rate, label: mapkaCountryName(cc) };
+  if (route && route !== "PL") return null;
+  const prices = data.fuelPrices?.prices;
+  const national = prices?.[s.fuelType] ?? prices?.[MAPKA_EU_FUEL[s.fuelType]];
+  return national ? { price: national, label: mapkaT("price_national") } : null;
 }
 
 let mapkaBorderIndex = null;
@@ -314,7 +313,7 @@ function mapkaResolvePrice(s, data, geo) {
   let pln = origin.price;
   let source = mapkaT("price_single", origin.label, mapkaShownUnitPrice(origin.price, s, data));
 
-  const originCc = (geo?.origin?.cc || "pl").toUpperCase();
+  const originCc = (geo?.origin?.cc || MAPKA_COUNTRY).toUpperCase();
   const destCc = geo?.dest?.cc?.toUpperCase();
   const route = s.localPrices && geo?.shares ? mapkaRoutePricePln(s, data, geo) : null;
   if (route) {
