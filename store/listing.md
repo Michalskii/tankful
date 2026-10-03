@@ -13,7 +13,7 @@ sprawdź też tutaj i w `docs/privacy.html`.
 **Lifestyle → Travel** (alternatywnie: Productivity → Tools)
 
 ### Języki karty
-English (domyślny) + Polski – dla każdego wklej opis i zrzuty z `store/en/` lub `store/pl/`. Od 1.2.7 także Deutsch (opis niżej, zrzuty z `store/en/`).
+Od 1.2.8: English (domyślny), Polski, Deutsch, Français, Italiano, Español, Nederlands, Čeština, Română, Português (Portugal), Svenska, Ελληνικά, Magyar, Български, Dansk, Suomi – opisy w `store/listing.html`.
 
 ### Grafiki
 | Pole | Plik |
@@ -29,124 +29,12 @@ English (domyślny) + Polski – dla każdego wklej opis i zrzuty z `store/en/` 
 | Homepage URL | https://koszt-paliwa.pl/ (kalkulator online) |
 | Support URL | https://github.com/Michalskii/tankful/issues |
 
-### Krótki opis (z manifestu – tylko do wglądu)
-- EN: See the fuel cost of every Google Maps driving route – live prices for Poland, the EU, the UK and the US, EVs, cost per person.
-- PL: Koszt paliwa przy każdej trasie w Mapach Google – aktualne ceny w UE, Wielkiej Brytanii i USA, auta elektryczne, koszt na osobę.
+### Opisy (pełny opis, nazwa, krótki opis)
+Wszystkie języki są w **`store/listing.html`** – zakładka na język i przycisk „Kopiuj” przy każdym polu. Źródła: `store/descriptions/<język>.txt` (pełne opisy) i `_locales/<język>/messages.json` (nazwa, krótki opis). Po zmianie: `node store/listing.js`.
 
-### Opis – English
-
-```text
-Know what a drive will cost before you set off. Tankful adds the estimated fuel cost right next to the time and distance of every driving route in Google Maps – no copying numbers into a calculator.
-
-WHAT YOU GET
-• The cost of every route option in the Google Maps route list and in the route details.
-• A compact panel on the map that compares all route options side by side.
-• Round-trip cost and cost per person, e.g. "4 × PLN 51" when four people share the ride.
-• Settings for one route only – take a friend's car for a single trip without changing your defaults.
-• One click to copy a trip summary, or save the trip to your history.
-
-LIVE FUEL PRICES
-• Poland and other EU countries: national averages from the European Commission's Weekly Oil Bulletin; in Poland adjusted when Orlen wholesale prices move significantly.
-• UK: the UK government's weekly road fuel prices.
-• US: the U.S. Energy Information Administration's weekly gasoline and diesel prices for the state or its region (e.g. California, Texas, Gulf Coast), in miles, gallons and mpg.
-• Trips through several countries: the price is weighted by the kilometres driven in each country.
-• Petrol 95 and 98, diesel, premium diesel and LPG – or set your own price.
-• Electric cars: a range from charging at home to fast chargers.
-• Prices in PLN, EUR, CZK, HUF, RON, SEK, DKK, GBP, CHF, NOK, ISK or USD, converted at National Bank of Poland rates.
-
-TRIP HISTORY AND BUSINESS TRIPS
-• Save trips and see them grouped by month with total distance and cost.
-• Export to CSV for your spreadsheet or accounting.
-• Polish mileage allowance ("kilometrówka") at the official per-km rates, for business-trip claims.
-
-PRIVACY
-No account, no ads, no analytics, no servers. Your settings and trip history stay in your browser. To find the country for local prices, only the route's start and destination – rounded to about 1 km – are sent to OpenStreetMap, and you can turn that off. Full policy: https://koszt-paliwa.pl/privacy.html
-
-Works on Google Maps in all EU countries, the UK, the US, Switzerland, Norway and Iceland – with automatic prices in the EU, the UK and the US, and your own price in Switzerland, Norway and Iceland. Available in English, Polish and German.
-
-Costs are estimates based on average fuel prices and the consumption you enter; actual prices at the pump vary.
-
-Tankful is an independent project and is not affiliated with or endorsed by Google. Open source (MIT): https://github.com/Michalskii/tankful
-```
-
-### Opis – Polski
-
-```text
-Wiedz, ile kosztuje przejazd, zanim ruszysz. Tankful pokazuje szacunkowy koszt paliwa obok czasu i dystansu każdej trasy samochodowej w Mapach Google – bez przepisywania liczb do kalkulatora.
-
-CO DOSTAJESZ
-• Koszt każdego wariantu trasy – na liście tras i w szczegółach trasy.
-• Panel na mapie, który zestawia wszystkie warianty obok siebie.
-• Koszt tam i z powrotem oraz koszt na osobę, np. „4 × 51 zł”, gdy jedziecie we czwórkę.
-• Ustawienia tylko dla jednej trasy – jedziesz raz autem znajomego i nie zmieniasz swoich domyślnych.
-• Jednym kliknięciem skopiujesz podsumowanie trasy albo zapiszesz przejazd w historii.
-
-AKTUALNE CENY PALIW
-• Polska i inne kraje UE: średnie krajowe z cotygodniowego biuletynu Komisji Europejskiej (Weekly Oil Bulletin); w Polsce korygowane przy dużych zmianach cen hurtowych Orlenu.
-• Wielka Brytania: cotygodniowe ceny paliw rządu brytyjskiego.
-• USA: cotygodniowe ceny benzyny i diesla amerykańskiej agencji EIA dla stanu albo regionu (np. Kalifornia, Teksas, Gulf Coast), w milach, galonach i mpg.
-• Trasy przez kilka krajów: cena ważona kilometrami przejechanymi w każdym kraju.
-• Benzyna 95 i 98, diesel, diesel premium i LPG – albo Twoja własna cena.
-• Auta elektryczne: przedział od ładowania w domu po szybkie ładowarki.
-• Ceny w PLN, EUR, CZK, HUF, RON, SEK, DKK, GBP, CHF, NOK, ISK lub USD, przeliczane po kursach NBP.
-
-HISTORIA PRZEJAZDÓW I KILOMETRÓWKA
-• Zapisuj przejazdy i przeglądaj je z podziałem na miesiące, z sumą kilometrów i kosztów.
-• Eksport do CSV – do arkusza albo księgowości.
-• Kilometrówka według oficjalnych stawek za kilometr – do rozliczania podróży służbowych.
-
-PRYWATNOŚĆ
-Bez konta, reklam, analityki i serwerów. Ustawienia i historia przejazdów zostają w Twojej przeglądarce. Żeby ustalić kraj dla cen lokalnych, do OpenStreetMap wysyłane jest tylko położenie startu i celu trasy – zaokrąglone do ok. 1 km – i możesz to wyłączyć. Pełna polityka: https://koszt-paliwa.pl/privacy.html
-
-Działa w Mapach Google we wszystkich krajach UE, w Wielkiej Brytanii, USA, Szwajcarii, Norwegii i Islandii – z automatycznymi cenami w UE, Wielkiej Brytanii i USA, a w Szwajcarii, Norwegii i Islandii z Twoją własną ceną. Po polsku, angielsku i niemiecku.
-
-Koszty są szacunkowe – opierają się na średnich cenach paliw i podanym przez Ciebie spalaniu; ceny na stacjach mogą się różnić.
-
-Tankful to niezależny projekt, niezwiązany z Google ani przez Google niepopierany. Otwarty kod (MIT): https://github.com/Michalskii/tankful
-```
+Przy dodaniu języka do karty: w panelu „Store listing” wybierz język, wklej pełny opis, dodaj zrzuty (na razie z `store/en/`, dla polskiego `store/pl/`).
 
 ---
-
-### Opis – Deutsch (od wersji 1.2.7)
-
-Krótki opis z manifestu: Spritkosten jeder Autoroute in Google Maps – aktuelle Preise für Polen, EU, Großbritannien und USA, E-Autos, pro Person.
-
-```text
-Wisse vor der Abfahrt, was die Fahrt kostet. Tankful zeigt die geschätzten Spritkosten direkt neben Fahrzeit und Entfernung jeder Autoroute in Google Maps – ohne Zahlen in einen Rechner zu übertragen.
-
-DAS BEKOMMST DU
-• Die Kosten jeder Routenvariante in der Routenliste und in den Routendetails von Google Maps.
-• Ein kompaktes Panel auf der Karte, das alle Routenvarianten nebeneinander vergleicht.
-• Kosten für Hin- und Rückfahrt und pro Person, z. B. „4 × 12 €“, wenn vier Leute mitfahren.
-• Einstellungen nur für eine Route – fahr einmal mit dem Auto eines Freundes, ohne deine Standardwerte zu ändern.
-• Mit einem Klick eine Zusammenfassung kopieren oder die Fahrt im Fahrtenbuch speichern.
-
-AKTUELLE SPRITPREISE
-• Deutschland, Polen und die anderen EU-Länder: Landesdurchschnitte aus dem Weekly Oil Bulletin der Europäischen Kommission; in Polen angepasst, wenn sich die Orlen-Großhandelspreise deutlich ändern.
-• Großbritannien: die wöchentlichen Kraftstoffpreise der britischen Regierung.
-• USA: die wöchentlichen Benzin- und Dieselpreise der U.S. Energy Information Administration für den Bundesstaat oder die Region, in Meilen, Gallonen und mpg.
-• Fahrten durch mehrere Länder: Der Preis wird mit den in jedem Land gefahrenen Kilometern gewichtet – so siehst du, was Tanken in Polen oder Tschechien unterwegs ausmacht.
-• Super 95 und Super Plus 98, Diesel, Premium-Diesel und Autogas – oder ein eigener Preis.
-• E-Autos: eine Spanne vom Laden zu Hause bis zum Schnelllader.
-• Preise in EUR, PLN, CZK, HUF, RON, SEK, DKK, GBP, CHF, NOK, ISK oder USD, umgerechnet zu Kursen der Polnischen Nationalbank.
-
-FAHRTENBUCH
-• Fahrten speichern und nach Monaten gruppiert mit Gesamtstrecke und Kosten sehen.
-• Export als CSV für Tabellenkalkulation oder Buchhaltung.
-
-DATENSCHUTZ
-Kein Konto, keine Werbung, keine Analyse, keine Server. Deine Einstellungen und dein Fahrtenbuch bleiben in deinem Browser. Um das Land für die Landespreise zu bestimmen, werden nur Start und Ziel der Route – auf etwa 1 km gerundet – an OpenStreetMap gesendet, und das kannst du abschalten. Vollständige Erklärung: https://koszt-paliwa.pl/privacy.html
-
-Funktioniert mit Google Maps in allen EU-Ländern, Großbritannien, den USA, der Schweiz, Norwegen und Island – mit automatischen Preisen in der EU, Großbritannien und den USA und eigenem Preis in der Schweiz, Norwegen und Island. Verfügbar auf Deutsch, Englisch und Polnisch.
-
-Online-Rechner ohne Erweiterung: https://spritkosten-europa.de/
-
-Die Kosten sind Schätzungen auf Basis durchschnittlicher Spritpreise und des eingegebenen Verbrauchs; die Preise an der Zapfsäule weichen ab.
-
-Tankful ist ein unabhängiges Projekt und steht in keiner Verbindung zu Google. Open Source (MIT): https://github.com/Michalskii/tankful
-```
-
-W 1.2.7 opisy EN i PL mówią już o trzech językach – przy wysyłce 1.2.7 wkleić je ponownie. Zrzuty dla karty niemieckiej: na razie `store/en/`.
 
 ## Karta „Privacy practices”
 

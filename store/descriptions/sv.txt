@@ -1,0 +1,32 @@
+Vet vad resan kostar innan du åker. Tankful visar den beräknade bränslekostnaden direkt bredvid restid och avstånd för varje bilrutt i Google Maps – utan att du behöver knappa in siffror i en miniräknare.
+
+DET HÄR FÅR DU
+• Kostnaden för varje ruttalternativ, i ruttlistan och i ruttens detaljer.
+• En kompakt panel på kartan som jämför alla alternativ sida vid sida.
+• Kostnad tur och retur och per person, t.ex. ”4 × 140 kr” när ni är fyra i bilen.
+• Inställningar för en enda rutt – kör en väns bil en gång utan att ändra dina standardvärden.
+• Ett klick för att kopiera en sammanfattning eller spara resan i historiken.
+
+AKTUELLA BRÄNSLEPRISER
+• EU-länder: nationella snittpriser från EU-kommissionens Weekly Oil Bulletin; i Polen justerade när Orlens grossistpriser eller bränsleskatterna ändras.
+• Storbritannien: brittiska regeringens veckovisa bränslepriser.
+• USA: amerikanska EIA:s veckovisa priser på bensin och diesel för delstaten eller regionen, i miles, gallon och mpg.
+• Resor genom flera länder: priset viktas efter kilometrarna i varje land – så ser du vad det kostar att tanka i Tyskland eller Danmark på vägen.
+• Bensin 95 och 98, diesel, premiumdiesel och gasol (LPG) – eller ditt eget pris.
+• Elbilar: ett intervall från laddning hemma till snabbladdare.
+• Priser i SEK, EUR, DKK, NOK, PLN, CZK, HUF, RON, GBP, CHF, ISK eller USD, omräknade till Polens nationalbanks kurser.
+
+RESHISTORIK
+• Spara resor och se dem grupperade per månad med total sträcka och kostnad.
+• Export till CSV för kalkylblad eller bokföring.
+
+INTEGRITET
+Inget konto, ingen reklam, ingen analys, inga servrar. Dina inställningar och din reshistorik stannar i webbläsaren. För att hitta landet och dess priser skickas bara ruttens start och mål – avrundade till ungefär 1 km – till OpenStreetMap, och det går att stänga av. Fullständig policy: https://koszt-paliwa.pl/privacy.html
+
+Fungerar i Google Maps i alla EU-länder, Storbritannien, USA, Schweiz, Norge och Island – med automatiska priser i EU, Storbritannien och USA och eget pris i Schweiz, Norge och Island. Tillgängligt på 16 europeiska språk.
+
+Onlinekalkylator utan tillägg: https://koszt-paliwa.pl/en
+
+Kostnaderna är uppskattningar baserade på genomsnittliga bränslepriser och den förbrukning du anger; priset vid pumpen kan skilja sig.
+
+Tankful är ett oberoende projekt och är inte kopplat till eller godkänt av Google. Öppen källkod (MIT): https://github.com/Michalskii/tankful

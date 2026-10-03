@@ -1,0 +1,356 @@
+{
+  "appName": {
+    "message": "Tankful – üzemanyagköltség minden útvonalhoz"
+  },
+  "appDescription": {
+    "message": "Minden Google Maps-útvonal üzemanyagköltsége – aktuális árak az EU-ban, Nagy-Britanniában és az USA-ban, villanyautók, fejenként."
+  },
+  "actionTitle": {
+    "message": "Útiköltség beállításai"
+  },
+  "fuel_pb": {
+    "message": "Benzin 95"
+  },
+  "fuel_pbp": {
+    "message": "Benzin 98"
+  },
+  "fuel_on": {
+    "message": "Dízel"
+  },
+  "fuel_onp": {
+    "message": "Prémium dízel"
+  },
+  "fuel_lpg": {
+    "message": "Autógáz (LPG)"
+  },
+  "fuel_ev": {
+    "message": "Elektromos (EV)"
+  },
+  "mileage_small_label": {
+    "message": "900 cm³-ig"
+  },
+  "mileage_large_label": {
+    "message": "900 cm³ felett / elektromos"
+  },
+  "mileage_off": {
+    "message": "Ne mutassa"
+  },
+  "mileage_small_option": {
+    "message": "900 cm³-ig – $1/km"
+  },
+  "mileage_large_option": {
+    "message": "900 cm³ felett vagy elektromos – $1/km"
+  },
+  "price_manual": {
+    "message": "saját ár"
+  },
+  "price_missing": {
+    "message": "nincsenek aktuális árak – saját ár"
+  },
+  "price_no_rate": {
+    "message": "nincs $1 árfolyam – saját ár"
+  },
+  "price_national": {
+    "message": "lengyel átlag"
+  },
+  "price_single": {
+    "message": "$1 $2"
+  },
+  "price_average": {
+    "message": "$1 $2 és $3 $4 átlaga"
+  },
+  "price_route": {
+    "message": "útvonal átlaga: $1"
+  },
+  "price_ev": {
+    "message": "otthon $1 – gyorstöltő $2 / kWh"
+  },
+  "trip_cost": {
+    "message": "Útiköltség"
+  },
+  "route_default": {
+    "message": "Útvonal"
+  },
+  "per_person": {
+    "message": "$1/fő"
+  },
+  "people_line": {
+    "message": "👥 $1 × $2"
+  },
+  "round_short": {
+    "message": "oda-vissza"
+  },
+  "round_long": {
+    "message": "oda-vissza"
+  },
+  "cost_setup": {
+    "message": "⚙ Üzemanyag beállítása"
+  },
+  "cost_mileage": {
+    "message": "🧾 kilométerpénz $1"
+  },
+  "title_setup": {
+    "message": "Kattintson az üzemanyag és a fogyasztás kiválasztásához"
+  },
+  "title_round": {
+    "message": "Oda-vissza: ugyanaz az útvonal × 2."
+  },
+  "title_mileage": {
+    "message": "Lengyel kilométerpénz: $1/km ($2)."
+  },
+  "title_override": {
+    "message": "Beállítások csak ehhez az útvonalhoz."
+  },
+  "click_to_change": {
+    "message": "Kattintson a módosításhoz."
+  },
+  "warn_text": {
+    "message": "🚗 A Tankful nem találja az útvonal hosszát – lehet, hogy a Google módosította a Maps oldalát. Az útiköltség átmenetileg nem érhető el."
+  },
+  "warn_hide": {
+    "message": "Elrejtés ennél az útvonalnál"
+  },
+  "float_settings": {
+    "message": "Üzemanyag-beállítások"
+  },
+  "float_expand": {
+    "message": "Kibontás"
+  },
+  "float_collapse": {
+    "message": "Összecsukás"
+  },
+  "float_setup": {
+    "message": "⚙ Üzemanyag és fogyasztás beállítása"
+  },
+  "float_show_route": {
+    "message": "Útvonal megjelenítése a térképen"
+  },
+  "float_copy": {
+    "message": "📋 Másolás"
+  },
+  "float_copy_title": {
+    "message": "A kiválasztott útvonal összefoglalójának másolása"
+  },
+  "float_save": {
+    "message": "💾 Út mentése"
+  },
+  "float_save_title": {
+    "message": "A kiválasztott útvonal hozzáadása az utak előzményeihez"
+  },
+  "float_override_tag": {
+    "message": "✎ csak ez az útvonal"
+  },
+  "copied": {
+    "message": "✓ Másolva"
+  },
+  "copy_failed": {
+    "message": "Sikertelen"
+  },
+  "saved_flash": {
+    "message": "✓ Mentve"
+  },
+  "summary_fuel": {
+    "message": "Üzemanyag: $1"
+  },
+  "summary_round": {
+    "message": "Oda-vissza: $1"
+  },
+  "summary_link": {
+    "message": "— a Tankful számolta: $1"
+  },
+  "summary_mileage": {
+    "message": "Kilométerpénz: $1"
+  },
+  "panel_title_first": {
+    "message": "Az Ön autója"
+  },
+  "label_fuel": {
+    "message": "Üzemanyag"
+  },
+  "label_passengers": {
+    "message": "Személyek"
+  },
+  "consumption_fuel": {
+    "message": "Fogyasztás ($1 / 100 km)"
+  },
+  "consumption_ev": {
+    "message": "Energiafogyasztás ($1 / 100 km)"
+  },
+  "panel_price": {
+    "message": "Ár: $1"
+  },
+  "btn_route_only": {
+    "message": "Csak ez az útvonal"
+  },
+  "btn_save": {
+    "message": "Mentés"
+  },
+  "btn_save_default": {
+    "message": "Mentés alapértelmezettként"
+  },
+  "btn_reset_route": {
+    "message": "Alapértékek visszaállítása ennél az útvonalnál"
+  },
+  "popup_auto_price": {
+    "message": "Átlagárak automatikus letöltése"
+  },
+  "popup_refresh": {
+    "message": "Frissítés"
+  },
+  "popup_local_prices": {
+    "message": "Az útvonal országainak árai (EU, Egyesült Királyság és USA)"
+  },
+  "popup_local_hint": {
+    "message": "Az útvonal kezdő- és célpontja (~1 km-re kerekítve) az ország meghatározásához az OpenStreetMaphez kerül."
+  },
+  "popup_manual_price": {
+    "message": "Saját ár (literenként)"
+  },
+  "popup_ev_home": {
+    "message": "Otthoni áram (kWh)"
+  },
+  "popup_ev_fast": {
+    "message": "Gyorstöltő (kWh)"
+  },
+  "popup_currency": {
+    "message": "Pénznem"
+  },
+  "popup_mileage": {
+    "message": "Kilométerpénz (lengyel tarifák)"
+  },
+  "popup_summary_link": {
+    "message": "Tankful-hivatkozás hozzáadása a másolt összefoglalókhoz"
+  },
+  "popup_round_trip": {
+    "message": "Oda-vissza költség megjelenítése"
+  },
+  "popup_floating": {
+    "message": "Útvonalpanel a térképen"
+  },
+  "popup_history": {
+    "message": "📒 Utak előzményei"
+  },
+  "popup_saved": {
+    "message": "Mentve"
+  },
+  "popup_fetching": {
+    "message": "Letöltés…"
+  },
+  "popup_fetch_error": {
+    "message": "A letöltés sikertelen – a saját ár van használatban."
+  },
+  "popup_no_response": {
+    "message": "nincs válasz"
+  },
+  "popup_preview": {
+    "message": "$1 ≈ $2"
+  },
+  "welcome_page_title": {
+    "message": "Tankful – első beállítás"
+  },
+  "welcome_tagline": {
+    "message": "Üzemanyagköltség minden útvonalhoz"
+  },
+  "welcome_lead": {
+    "message": "Válassza ki az üzemanyagot és adja meg a fogyasztást. Ez alapján minden autós útvonalnál látni fogja a becsült útiköltséget a Google Mapsben."
+  },
+  "welcome_consumption": {
+    "message": "Átlagfogyasztás"
+  },
+  "welcome_submit": {
+    "message": "Mentés és a Google Maps megnyitása"
+  },
+  "welcome_hint": {
+    "message": "Bármikor módosíthatja: kattintson a bővítmény ikonjára vagy a költségre a térképen, és válassza ki, hogy a változás csak egy útvonalra vonatkozik vagy alapértelmezett lesz."
+  },
+  "welcome_ev": {
+    "message": "Elektromos autónál tartományt mutatunk: otthoni töltés – gyorstöltő. Az áramárakat a bővítmény beállításaiban adhatja meg."
+  },
+  "welcome_price_auto": {
+    "message": "Aktuális ár: $1 – automatikusan frissül."
+  },
+  "welcome_price_pending": {
+    "message": "Az átlagos üzemanyagárak hamarosan letöltődnek a háttérben."
+  },
+  "history_title": {
+    "message": "Utak előzményei"
+  },
+  "history_lead": {
+    "message": "A térképen lévő panel „💾 Út mentése” gombjával mentett útvonalak."
+  },
+  "history_export": {
+    "message": "CSV exportálása"
+  },
+  "history_empty": {
+    "message": "Még nincs mentett útja. Tervezzen egy autós útvonalat a Google Mapsben, és kattintson a „💾 Út mentése” gombra a térkép jobb felső sarkában lévő panelen."
+  },
+  "trips_one": {
+    "message": "$1 út"
+  },
+  "trips_few": {
+    "message": "$1 út"
+  },
+  "trips_many": {
+    "message": "$1 út"
+  },
+  "trips_other": {
+    "message": "$1 út"
+  },
+  "history_round_on": {
+    "message": "Oda-vissza (kattintson az egy irányért)"
+  },
+  "history_round_off": {
+    "message": "Egy irány (kattintson az oda-visszáért)"
+  },
+  "history_delete": {
+    "message": "Út törlése"
+  },
+  "history_delete_confirm": {
+    "message": "Törli a(z) $1 → $2 utat?"
+  },
+  "csv_header": {
+    "message": "Dátum;Honnan;Hová;Útvonal;Távolság ($1);Oda-vissza;Üzemanyag;Fogyasztás ($2);Személyek;Költség ettől;Költség eddig;Pénznem;Kilométerpénz"
+  },
+  "csv_yes": {
+    "message": "igen"
+  },
+  "csv_no": {
+    "message": "nem"
+  },
+  "csv_filename": {
+    "message": "utak"
+  },
+  "error_poland_prices": {
+    "message": "EU-közlöny: nincsenek árak Lengyelországra"
+  },
+  "error_eu_file": {
+    "message": "EU-közlöny: érvénytelen XLSX-fájl"
+  },
+  "error_eu_prices": {
+    "message": "EU-közlöny: nem található ár"
+  },
+  "consumption_fuel_us": {
+    "message": "Fogyasztás (mpg)"
+  },
+  "consumption_ev_us": {
+    "message": "Energiafogyasztás (kWh / 100 mi)"
+  },
+  "popup_manual_price_us": {
+    "message": "Saját ár (gallononként)"
+  },
+  "label_units": {
+    "message": "Mértékegységek"
+  },
+  "units_metric": {
+    "message": "Kilométer és liter"
+  },
+  "units_us": {
+    "message": "Mérföld és amerikai gallon (mpg)"
+  },
+  "csv_consumption_metric": {
+    "message": "/ 100 km"
+  },
+  "csv_consumption_us": {
+    "message": "mpg vagy kWh / 100 mi"
+  }
+}

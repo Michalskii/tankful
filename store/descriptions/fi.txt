@@ -1,0 +1,32 @@
+Tiedä matkan hinta ennen lähtöä. Tankful näyttää arvioidut polttoainekulut jokaisen Google Maps -ajoreitin ajoajan ja matkan vieressä – ilman lukujen kopioimista laskimeen.
+
+MITÄ SAAT
+• Jokaisen reittivaihtoehdon kulut reittiluettelossa ja reitin tiedoissa.
+• Kompaktin paneelin kartalla, joka vertailee kaikkia vaihtoehtoja rinnakkain.
+• Meno-paluun kulut ja kulut henkilöä kohden, esim. ”4 × 12 €”, kun matkustatte neljästään.
+• Asetukset vain yhdelle reitille – aja kerran kaverin autolla muuttamatta oletusasetuksiasi.
+• Yhdellä napsautuksella kopioit matkan yhteenvedon tai tallennat sen historiaan.
+
+AJANTASAISET POLTTOAINEHINNAT
+• EU-maat: kansalliset keskihinnat Euroopan komission viikoittaisesta Oil Bulletin -tiedotteesta; Puolassa korjattuina, kun Orlenin tukkuhinnat tai polttoaineverot muuttuvat.
+• Iso-Britannia: Britannian hallituksen viikoittaiset polttoainehinnat.
+• USA: Yhdysvaltain EIA:n viikoittaiset bensiinin ja dieselin hinnat osavaltiolle tai alueelle, maileina, gallonoina ja mpg:nä.
+• Usean maan läpi kulkevat matkat: hinta painotetaan kussakin maassa ajetuilla kilometreillä – näet, mitä tankkaus Ruotsissa tai Virossa matkan varrella maksaa.
+• Bensiini 95 ja 98, diesel, premium-diesel ja nestekaasu (LPG) – tai oma hinta.
+• Sähköautot: vaihteluväli kotilatauksesta pikalatureihin.
+• Hinnat valuutoissa EUR, SEK, NOK, DKK, PLN, CZK, HUF, RON, GBP, CHF, ISK tai USD, muunnettuna Puolan keskuspankin kursseilla.
+
+MATKAHISTORIA
+• Tallenna matkoja ja näe ne kuukausittain ryhmiteltyinä kokonaismatkan ja -kulujen kanssa.
+• Vienti CSV-tiedostoon taulukkolaskentaa tai kirjanpitoa varten.
+
+YKSITYISYYS
+Ei tiliä, ei mainoksia, ei analytiikkaa, ei palvelimia. Asetuksesi ja matkahistoriasi pysyvät selaimessasi. Maan ja sen hintojen selvittämiseksi OpenStreetMapiin lähetetään vain reitin lähtö- ja määränpää – noin 1 km:n tarkkuuteen pyöristettynä – ja sen voi kytkeä pois. Koko käytäntö: https://koszt-paliwa.pl/privacy.html
+
+Toimii Google Mapsissa kaikissa EU-maissa, Isossa-Britanniassa, USA:ssa, Sveitsissä, Norjassa ja Islannissa – automaattisilla hinnoilla EU:ssa, Isossa-Britanniassa ja USA:ssa sekä omalla hinnalla Sveitsissä, Norjassa ja Islannissa. Saatavilla 16 eurooppalaisella kielellä.
+
+Verkkolaskuri ilman laajennusta: https://koszt-paliwa.pl/en
+
+Kulut ovat arvioita, jotka perustuvat polttoaineiden keskihintoihin ja antamaasi kulutukseen; hinnat asemalla voivat poiketa.
+
+Tankful on itsenäinen projekti, joka ei liity Googleen eikä ole Googlen hyväksymä. Avoin lähdekoodi (MIT): https://github.com/Michalskii/tankful

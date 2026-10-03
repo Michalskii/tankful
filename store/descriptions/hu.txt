@@ -1,0 +1,32 @@
+Tudja meg indulás előtt, mennyibe kerül az út. A Tankful minden autós útvonal menetideje és távolsága mellett megmutatja a becsült üzemanyagköltséget a Google Mapsben – anélkül, hogy számokat kellene átírnia egy számológépbe.
+
+AMIT KAP
+• Minden útvonalváltozat költségét, az útvonallistában és az útvonal részleteinél.
+• Egy kompakt panelt a térképen, amely egymás mellett hasonlítja össze a változatokat.
+• Oda-vissza költséget és fejenkénti költséget, pl. „4 × 4800 Ft”, ha négyen utaznak.
+• Beállításokat csak egy útvonalhoz – egyszer egy barát autójával megy, és nem kell módosítania az alapértékeket.
+• Egy kattintással másolhatja az út összefoglalóját, vagy elmentheti az előzmények közé.
+
+AKTUÁLIS ÜZEMANYAGÁRAK
+• EU-országok: országos átlagárak az Európai Bizottság heti olajárközlönyéből (Weekly Oil Bulletin); Lengyelországban korrigálva, ha változnak az Orlen nagykereskedelmi árai vagy az üzemanyagadók.
+• Egyesült Királyság: a brit kormány heti üzemanyagárai.
+• USA: az amerikai EIA heti benzin- és dízelárai az adott államra vagy régióra, mérföldben, gallonban és mpg-ben.
+• Több országon átvezető utak: az ár az egyes országokban megtett kilométerekkel súlyozott – látja, mennyibe kerül tankolni Szlovákiában vagy Ausztriában útközben.
+• Benzin 95 és 98, dízel, prémium dízel és autógáz (LPG) – vagy saját ár.
+• Elektromos autók: tartomány az otthoni töltéstől a gyorstöltőkig.
+• Árak HUF, EUR, PLN, CZK, RON, SEK, DKK, GBP, CHF, NOK, ISK vagy USD pénznemben, a Lengyel Nemzeti Bank árfolyamán átszámítva.
+
+UTAK ELŐZMÉNYEI
+• Mentse el útjait, és nézze meg őket havonta csoportosítva, összesített távolsággal és költséggel.
+• Exportálás CSV-be táblázatkezelőhöz vagy könyveléshez.
+
+ADATVÉDELEM
+Nincs fiók, nincs reklám, nincs analitika, nincsenek szerverek. A beállítások és az előzmények a böngészőjében maradnak. Az ország és árainak meghatározásához csak az útvonal kezdő- és célpontja kerül az OpenStreetMaphez – kb. 1 km-re kerekítve –, és ez kikapcsolható. Teljes szabályzat: https://koszt-paliwa.pl/privacy.html
+
+Működik a Google Mapsben az összes EU-országban, az Egyesült Királyságban, az USA-ban, Svájcban, Norvégiában és Izlandon – automatikus árakkal az EU-ban, az Egyesült Királyságban és az USA-ban, Svájcban, Norvégiában és Izlandon saját árral. 16 európai nyelven érhető el.
+
+Online kalkulátor bővítmény nélkül: https://koszt-paliwa.pl/en
+
+A költségek becslések az átlagos üzemanyagárak és a megadott fogyasztás alapján; a kúton fizetett ár eltérhet.
+
+A Tankful független projekt, nem kapcsolódik a Google-hoz, és a Google nem támogatja. Nyílt forráskód (MIT): https://github.com/Michalskii/tankful

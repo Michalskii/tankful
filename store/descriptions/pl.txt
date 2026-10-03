@@ -1,0 +1,33 @@
+Wiedz, ile kosztuje przejazd, zanim ruszysz. Tankful pokazuje szacunkowy koszt paliwa obok czasu i dystansu każdej trasy samochodowej w Mapach Google – bez przepisywania liczb do kalkulatora.
+
+CO DOSTAJESZ
+• Koszt każdego wariantu trasy – na liście tras i w szczegółach trasy.
+• Panel na mapie, który zestawia wszystkie warianty obok siebie.
+• Koszt tam i z powrotem oraz koszt na osobę, np. „4 × 51 zł”, gdy jedziecie we czwórkę.
+• Ustawienia tylko dla jednej trasy – jedziesz raz autem znajomego i nie zmieniasz swoich domyślnych.
+• Jednym kliknięciem skopiujesz podsumowanie trasy albo zapiszesz przejazd w historii.
+
+AKTUALNE CENY PALIW
+• Polska i inne kraje UE: średnie krajowe z cotygodniowego biuletynu Komisji Europejskiej (Weekly Oil Bulletin); w Polsce korygowane przy zmianach cen hurtowych Orlenu i podatków (np. obniżony VAT).
+• Wielka Brytania: cotygodniowe ceny paliw rządu brytyjskiego.
+• USA: cotygodniowe ceny benzyny i diesla amerykańskiej agencji EIA dla stanu albo regionu (np. Kalifornia, Teksas, Gulf Coast), w milach, galonach i mpg.
+• Trasy przez kilka krajów: cena ważona kilometrami przejechanymi w każdym kraju.
+• Benzyna 95 i 98, diesel, diesel premium i LPG – albo Twoja własna cena.
+• Auta elektryczne: przedział od ładowania w domu po szybkie ładowarki.
+• Ceny w PLN, EUR, CZK, HUF, RON, SEK, DKK, GBP, CHF, NOK, ISK lub USD, przeliczane po kursach NBP.
+
+HISTORIA PRZEJAZDÓW I KILOMETRÓWKA
+• Zapisuj przejazdy i przeglądaj je z podziałem na miesiące, z sumą kilometrów i kosztów.
+• Eksport do CSV – do arkusza albo księgowości.
+• Kilometrówka według oficjalnych stawek za kilometr – do rozliczania podróży służbowych.
+
+PRYWATNOŚĆ
+Bez konta, reklam, analityki i serwerów. Ustawienia i historia przejazdów zostają w Twojej przeglądarce. Żeby ustalić kraj dla cen lokalnych, do OpenStreetMap wysyłane jest tylko położenie startu i celu trasy – zaokrąglone do ok. 1 km – i możesz to wyłączyć. Pełna polityka: https://koszt-paliwa.pl/privacy.html
+
+Działa w Mapach Google we wszystkich krajach UE, w Wielkiej Brytanii, USA, Szwajcarii, Norwegii i Islandii – z automatycznymi cenami w UE, Wielkiej Brytanii i USA, a w Szwajcarii, Norwegii i Islandii z Twoją własną ceną. Dostępna w 16 językach europejskich.
+
+Kalkulator online bez wtyczki: https://koszt-paliwa.pl/
+
+Koszty są szacunkowe – opierają się na średnich cenach paliw i podanym przez Ciebie spalaniu; ceny na stacjach mogą się różnić.
+
+Tankful to niezależny projekt, niezwiązany z Google ani przez Google niepopierany. Otwarty kod (MIT): https://github.com/Michalskii/tankful

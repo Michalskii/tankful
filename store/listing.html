@@ -1,0 +1,1011 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tankful – opisy do Chrome Web Store</title>
+<style>
+  :root { --ink: #1b2430; --amber: #f2a516; --muted: #6b7280; --border: #e5e7eb; --bg: #faf7f0; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font: 15px/1.5 system-ui, sans-serif; color: var(--ink); background: var(--bg); }
+  header { position: sticky; top: 0; z-index: 1; padding: 16px 24px 0; background: var(--ink); color: #faf7f0; }
+  h1 { margin: 0 0 4px; font-size: 18px; }
+  header p { margin: 0 0 12px; font-size: 13px; color: #b8c0cb; }
+  nav { display: flex; gap: 4px; overflow-x: auto; }
+  nav button { flex-shrink: 0; padding: 8px 14px; border: 0; border-radius: 8px 8px 0 0; background: transparent; color: #b8c0cb; font: inherit; cursor: pointer; }
+  nav button[aria-selected="true"] { background: var(--bg); color: var(--ink); font-weight: 600; }
+  main { max-width: 960px; margin: 0 auto; padding: 24px; }
+  .lang { display: none; }
+  .lang.active { display: block; }
+  .store-lang { margin: 0 0 16px; color: var(--muted); }
+  .store-lang b { color: var(--ink); }
+  .field { margin-bottom: 20px; }
+  .field-head { display: flex; align-items: center; gap: 12px; margin-bottom: 6px; }
+  .field-head label { font-weight: 600; }
+  .count { margin-right: auto; font-size: 12px; color: var(--muted); }
+  textarea { width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 10px; background: #fff; color: var(--ink); font: 14px/1.5 ui-monospace, Consolas, monospace; resize: vertical; }
+  button[data-copy] { padding: 6px 14px; border: 0; border-radius: 8px; background: var(--amber); color: var(--ink); font: inherit; font-weight: 600; cursor: pointer; }
+  button[data-copy].done { background: #34a853; color: #fff; }
+  .hint { padding: 12px 16px; border-left: 3px solid var(--amber); border-radius: 0 8px 8px 0; background: #fdf1d8; font-size: 14px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Tankful – opisy do Chrome Web Store</h1>
+  <p>Wygenerowane z <code>store/descriptions/*.txt</code> i <code>_locales</code>. Po zmianie tekstów: <code>node store/listing.js</code>.</p>
+  <nav role="tablist"><button role="tab" type="button" data-lang="en" aria-selected="true">English</button><button role="tab" type="button" data-lang="pl" aria-selected="false">Polski</button><button role="tab" type="button" data-lang="de" aria-selected="false">Deutsch</button><button role="tab" type="button" data-lang="fr" aria-selected="false">Français</button><button role="tab" type="button" data-lang="it" aria-selected="false">Italiano</button><button role="tab" type="button" data-lang="es" aria-selected="false">Español</button><button role="tab" type="button" data-lang="nl" aria-selected="false">Nederlands</button><button role="tab" type="button" data-lang="cs" aria-selected="false">Čeština</button><button role="tab" type="button" data-lang="ro" aria-selected="false">Română</button><button role="tab" type="button" data-lang="pt_PT" aria-selected="false">Português (Portugal)</button><button role="tab" type="button" data-lang="sv" aria-selected="false">Svenska</button><button role="tab" type="button" data-lang="el" aria-selected="false">Ελληνικά</button><button role="tab" type="button" data-lang="hu" aria-selected="false">Magyar</button><button role="tab" type="button" data-lang="bg" aria-selected="false">Български</button><button role="tab" type="button" data-lang="da" aria-selected="false">Dansk</button><button role="tab" type="button" data-lang="fi" aria-selected="false">Suomi</button></nav>
+</header>
+<main>
+  <section class="lang active" id="lang-en">
+    <p class="store-lang">Język w panelu sklepu: <b>English</b></p>
+    <p class="hint">Nazwę i krótki opis sklep bierze z manifestu wtyczki – tu są tylko do wglądu. Do panelu wklejasz <b>pełny opis</b>.</p>
+      <div class="field">
+        <div class="field-head">
+          <label for="desc-en">Pełny opis (Description)</label>
+          <span class="count">2519 zn. · limit 16 000</span>
+          <button type="button" data-copy="desc-en">Kopiuj</button>
+        </div>
+        <textarea id="desc-en" readonly rows="34">Know what a drive will cost before you set off. Tankful adds the estimated fuel cost right next to the time and distance of every driving route in Google Maps – no copying numbers into a calculator.
+
+WHAT YOU GET
+• The cost of every route option in the Google Maps route list and in the route details.
+• A compact panel on the map that compares all route options side by side.
+• Round-trip cost and cost per person, e.g. &quot;4 × €12&quot; when four people share the ride.
+• Settings for one route only – take a friend's car for a single trip without changing your defaults.
+• One click to copy a trip summary, or save the trip to your history.
+
+LIVE FUEL PRICES
+• EU countries: national averages from the European Commission's Weekly Oil Bulletin; in Poland adjusted when Orlen wholesale prices or fuel taxes change.
+• UK: the UK government's weekly road fuel prices.
+• US: the U.S. Energy Information Administration's weekly gasoline and diesel prices for the state or its region (e.g. California, Texas, Gulf Coast), in miles, gallons and mpg.
+• Trips through several countries: the price is weighted by the kilometres driven in each country.
+• Petrol 95 and 98, diesel, premium diesel and LPG – or set your own price.
+• Electric cars: a range from charging at home to fast chargers.
+• Prices in EUR, PLN, CZK, HUF, RON, SEK, DKK, GBP, CHF, NOK, ISK or USD, converted at National Bank of Poland rates.
+
+TRIP HISTORY
+• Save trips and see them grouped by month with total distance and cost.
+• Export to CSV for your spreadsheet or accounting.
+• Polish mileage allowance (&quot;kilometrówka&quot;) at the official per-km rates, for business-trip claims in Poland.
+
+PRIVACY
+No account, no ads, no analytics, no servers. Your settings and trip history stay in your browser. To find the country for local prices, only the route's start and destination – rounded to about 1 km – are sent to OpenStreetMap, and you can turn that off. Full policy: https://koszt-paliwa.pl/privacy.html
+
+Works on Google Maps in all EU countries, the UK, the US, Switzerland, Norway and Iceland – with automatic prices in the EU, the UK and the US, and your own price in Switzerland, Norway and Iceland. Available in 16 European languages.
+
+Online calculator without the extension: https://koszt-paliwa.pl/en
+
+Costs are estimates based on average fuel prices and the consumption you enter; actual prices at the pump vary.
+
+Tankful is an independent project and is not affiliated with or endorsed by Google. Open source (MIT): https://github.com/Michalskii/tankful</textarea>
+      </div>
+      <div class="field">
+        <div class="field-head">
+          <label for="name-en">Nazwa (z manifestu)</label>
+          <span class="count">35 zn. · limit 75</span>
+          <button type="button" data-copy="name-en">Kopiuj</button>
+        </div>
+        <textarea id="name-en" readonly rows="2">Tankful – fuel cost for every route</textarea>
+      </div>
+      <div class="field">
+        <div class="field-head">
+          <label for="summary-en">Krótki opis (z manifestu)</label>
+          <span class="count">127 zn. · limit 132</span>
+          <button type="button" data-copy="summary-en">Kopiuj</button>
+        </div>
+        <textarea id="summary-en" readonly rows="2">See the fuel cost of every Google Maps driving route – live prices for Poland, the EU, the UK and the US, EVs, cost per person.</textarea>
+      </div>
+  </section>
+  <section class="lang" id="lang-pl">
+    <p class="store-lang">Język w panelu sklepu: <b>Polish</b></p>
+    <p class="hint">Nazwę i krótki opis sklep bierze z manifestu wtyczki – tu są tylko do wglądu. Do panelu wklejasz <b>pełny opis</b>.</p>
+      <div class="field">
+        <div class="field-head">
+          <label for="desc-pl">Pełny opis (Description)</label>
+          <span class="count">2559 zn. · limit 16 000</span>
+          <button type="button" data-copy="desc-pl">Kopiuj</button>
+        </div>
+        <textarea id="desc-pl" readonly rows="34">Wiedz, ile kosztuje przejazd, zanim ruszysz. Tankful pokazuje szacunkowy koszt paliwa obok czasu i dystansu każdej trasy samochodowej w Mapach Google – bez przepisywania liczb do kalkulatora.
+
+CO DOSTAJESZ
+• Koszt każdego wariantu trasy – na liście tras i w szczegółach trasy.
+• Panel na mapie, który zestawia wszystkie warianty obok siebie.
+• Koszt tam i z powrotem oraz koszt na osobę, np. „4 × 51 zł”, gdy jedziecie we czwórkę.
+• Ustawienia tylko dla jednej trasy – jedziesz raz autem znajomego i nie zmieniasz swoich domyślnych.
+• Jednym kliknięciem skopiujesz podsumowanie trasy albo zapiszesz przejazd w historii.
+
+AKTUALNE CENY PALIW
+• Polska i inne kraje UE: średnie krajowe z cotygodniowego biuletynu Komisji Europejskiej (Weekly Oil Bulletin); w Polsce korygowane przy zmianach cen hurtowych Orlenu i podatków (np. obniżony VAT).
+• Wielka Brytania: cotygodniowe ceny paliw rządu brytyjskiego.
+• USA: cotygodniowe ceny benzyny i diesla amerykańskiej agencji EIA dla stanu albo regionu (np. Kalifornia, Teksas, Gulf Coast), w milach, galonach i mpg.
+• Trasy przez kilka krajów: cena ważona kilometrami przejechanymi w każdym kraju.
+• Benzyna 95 i 98, diesel, diesel premium i LPG – albo Twoja własna cena.
+• Auta elektryczne: przedział od ładowania w domu po szybkie ładowarki.
+• Ceny w PLN, EUR, CZK, HUF, RON, SEK, DKK, GBP, CHF, NOK, ISK lub USD, przeliczane po kursach NBP.
+
+HISTORIA PRZEJAZDÓW I KILOMETRÓWKA
+• Zapisuj przejazdy i przeglądaj je z podziałem na miesiące, z sumą kilometrów i kosztów.
+• Eksport do CSV – do arkusza albo księgowości.
+• Kilometrówka według oficjalnych stawek za kilometr – do rozliczania podróży służbowych.
+
+PRYWATNOŚĆ
+Bez konta, reklam, analityki i serwerów. Ustawienia i historia przejazdów zostają w Twojej przeglądarce. Żeby ustalić kraj dla cen lokalnych, do OpenStreetMap wysyłane jest tylko położenie startu i celu trasy – zaokrąglone do ok. 1 km – i możesz to wyłączyć. Pełna polityka: https://koszt-paliwa.pl/privacy.html
+
+Działa w Mapach Google we wszystkich krajach UE, w Wielkiej Brytanii, USA, Szwajcarii, Norwegii i Islandii – z automatycznymi cenami w UE, Wielkiej Brytanii i USA, a w Szwajcarii, Norwegii i Islandii z Twoją własną ceną. Dostępna w 16 językach europejskich.
+
+Kalkulator online bez wtyczki: https://koszt-paliwa.pl/
+
+Koszty są szacunkowe – opierają się na średnich cenach paliw i podanym przez Ciebie spalaniu; ceny na stacjach mogą się różnić.
+
+Tankful to niezależny projekt, niezwiązany z Google ani przez Google niepopierany. Otwarty kod (MIT): https://github.com/Michalskii/tankful</textarea>
+      </div>
+      <div class="field">
+        <div class="field-head">
+          <label for="name-pl">Nazwa (z manifestu)</label>
+          <span class="count">32 zn. · limit 75</span>
+          <button type="button" data-copy="name-pl">Kopiuj</button>
+        </div>
+        <textarea id="name-pl" readonly rows="2">Tankful – koszt paliwa na trasie</textarea>
+      </div>
+      <div class="field">
+        <div class="field-head">
+          <label for="summary-pl">Krótki opis (z manifestu)</label>
+          <span class="count">128 zn. · limit 132</span>
+          <button type="button" data-copy="summary-pl">Kopiuj</button>
+        </div>
+        <textarea id="summary-pl" readonly rows="2">Koszt paliwa przy każdej trasie w Mapach Google – aktualne ceny w UE, Wielkiej Brytanii i USA, auta elektryczne, koszt na osobę.</textarea>
+      </div>
+  </section>
+  <section class="lang" id="lang-de">
+    <p class="store-lang">Język w panelu sklepu: <b>German</b></p>
+    <p class="hint">Nazwę i krótki opis sklep bierze z manifestu wtyczki – tu są tylko do wglądu. Do panelu wklejasz <b>pełny opis</b>.</p>
+      <div class="field">
+        <div class="field-head">
+          <label for="desc-de">Pełny opis (Description)</label>
+          <span class="count">2768 zn. · limit 16 000</span>
+          <button type="button" data-copy="desc-de">Kopiuj</button>
+        </div>
+        <textarea id="desc-de" readonly rows="33">Wisse vor der Abfahrt, was die Fahrt kostet. Tankful zeigt die geschätzten Spritkosten direkt neben Fahrzeit und Entfernung jeder Autoroute in Google Maps – ohne Zahlen in einen Rechner zu übertragen.
+
+DAS BEKOMMST DU
+• Die Kosten jeder Routenvariante in der Routenliste und in den Routendetails von Google Maps.
+• Ein kompaktes Panel auf der Karte, das alle Routenvarianten nebeneinander vergleicht.
+• Kosten für Hin- und Rückfahrt und pro Person, z. B. „4 × 12 €“, wenn vier Leute mitfahren.
+• Einstellungen nur für eine Route – fahr einmal mit dem Auto eines Freundes, ohne deine Standardwerte zu ändern.
+• Mit einem Klick eine Zusammenfassung kopieren oder die Fahrt im Fahrtenbuch speichern.
+
+AKTUELLE SPRITPREISE
+• Deutschland, Polen und die anderen EU-Länder: Landesdurchschnitte aus dem Weekly Oil Bulletin der Europäischen Kommission; in Polen angepasst, wenn sich die Orlen-Großhandelspreise oder die Steuern auf Kraftstoff ändern.
+• Großbritannien: die wöchentlichen Kraftstoffpreise der britischen Regierung.
+• USA: die wöchentlichen Benzin- und Dieselpreise der U.S. Energy Information Administration für den Bundesstaat oder die Region, in Meilen, Gallonen und mpg.
+• Fahrten durch mehrere Länder: Der Preis wird mit den in jedem Land gefahrenen Kilometern gewichtet – so siehst du, was Tanken in Polen oder Tschechien unterwegs ausmacht.
+• Super 95 und Super Plus 98, Diesel, Premium-Diesel und Autogas – oder ein eigener Preis.
+• E-Autos: eine Spanne vom Laden zu Hause bis zum Schnelllader.
+• Preise in EUR, PLN, CZK, HUF, RON, SEK, DKK, GBP, CHF, NOK, ISK oder USD, umgerechnet zu Kursen der Polnischen Nationalbank.
+
+FAHRTENBUCH
+• Fahrten speichern und nach Monaten gruppiert mit Gesamtstrecke und Kosten sehen.
+• Export als CSV für Tabellenkalkulation oder Buchhaltung.
+
+DATENSCHUTZ
+Kein Konto, keine Werbung, keine Analyse, keine Server. Deine Einstellungen und dein Fahrtenbuch bleiben in deinem Browser. Um das Land für die Landespreise zu bestimmen, werden nur Start und Ziel der Route – auf etwa 1 km gerundet – an OpenStreetMap gesendet, und das kannst du abschalten. Vollständige Erklärung: https://koszt-paliwa.pl/privacy.html
+
+Funktioniert mit Google Maps in allen EU-Ländern, Großbritannien, den USA, der Schweiz, Norwegen und Island – mit automatischen Preisen in der EU, Großbritannien und den USA und eigenem Preis in der Schweiz, Norwegen und Island. Verfügbar in 16 europäischen Sprachen.
+
+Online-Rechner ohne Erweiterung: https://spritkosten-europa.de/
+
+Die Kosten sind Schätzungen auf Basis durchschnittlicher Spritpreise und des eingegebenen Verbrauchs; die Preise an der Zapfsäule weichen ab.
+
+Tankful ist ein unabhängiges Projekt und steht in keiner Verbindung zu Google. Open Source (MIT): https://github.com/Michalskii/tankful</textarea>
+      </div>
+      <div class="field">
+        <div class="field-head">
+          <label for="name-de">Nazwa (z manifestu)</label>
+          <span class="count">36 zn. · limit 75</span>
+          <button type="button" data-copy="name-de">Kopiuj</button>
+        </div>
+        <textarea id="name-de" readonly rows="2">Tankful – Spritkosten für jede Route</textarea>
+      </div>
+      <div class="field">
+        <div class="field-head">
+          <label for="summary-de">Krótki opis (z manifestu)</label>
+          <span class="count">120 zn. · limit 132</span>
+          <button type="button" data-copy="summary-de">Kopiuj</button>
+        </div>
+        <textarea id="summary-de" readonly rows="2">Spritkosten jeder Autoroute in Google Maps – aktuelle Preise für Polen, EU, Großbritannien und USA, E-Autos, pro Person.</textarea>
+      </div>
+  </section>
+  <section class="lang" id="lang-fr">
+    <p class="store-lang">Język w panelu sklepu: <b>French</b></p>
+    <p class="hint">Nazwę i krótki opis sklep bierze z manifestu wtyczki – tu są tylko do wglądu. Do panelu wklejasz <b>pełny opis</b>.</p>
+      <div class="field">
+        <div class="field-head">
+          <label for="desc-fr">Pełny opis (Description)</label>
+          <span class="count">2871 zn. · limit 16 000</span>
+          <button type="button" data-copy="desc-fr">Kopiuj</button>
+        </div>
+        <textarea id="desc-fr" readonly rows="33">Sachez ce que coûtera un trajet avant de partir. Tankful affiche le coût estimé du carburant juste à côté de la durée et de la distance de chaque itinéraire en voiture dans Google Maps – sans recopier de chiffres dans une calculatrice.
+
+CE QUE VOUS OBTENEZ
+• Le coût de chaque variante d'itinéraire, dans la liste des itinéraires et dans le détail de l'itinéraire.
+• Un panneau compact sur la carte qui compare toutes les variantes côte à côte.
+• Le coût aller-retour et le coût par personne, par ex. « 4 × 12 € » quand vous voyagez à quatre.
+• Des réglages pour un seul itinéraire – prenez la voiture d'un ami pour un trajet sans modifier vos réglages par défaut.
+• Un clic pour copier le résumé du trajet ou l'enregistrer dans votre historique.
+
+PRIX DES CARBURANTS À JOUR
+• Pays de l'UE : moyennes nationales du Bulletin pétrolier hebdomadaire de la Commission européenne ; en Pologne, ajustées lorsque les prix de gros d'Orlen ou les taxes sur les carburants changent.
+• Royaume-Uni : les prix hebdomadaires des carburants publiés par le gouvernement britannique.
+• États-Unis : les prix hebdomadaires de l'essence et du diesel de l'agence américaine EIA pour l'État ou sa région, en miles, gallons et mpg.
+• Trajets à travers plusieurs pays : le prix est pondéré par les kilomètres parcourus dans chaque pays – vous voyez ce que coûte un plein en Espagne ou au Luxembourg en chemin.
+• Essence 95 et 98, diesel, diesel premium et GPL – ou votre propre prix.
+• Voitures électriques : une fourchette entre la recharge à domicile et les bornes rapides.
+• Prix en EUR, PLN, CZK, HUF, RON, SEK, DKK, GBP, CHF, NOK, ISK ou USD, convertis aux taux de la Banque nationale de Pologne.
+
+HISTORIQUE DES TRAJETS
+• Enregistrez vos trajets et retrouvez-les par mois, avec la distance et le coût totaux.
+• Export CSV pour votre tableur ou votre comptabilité.
+
+CONFIDENTIALITÉ
+Pas de compte, pas de publicité, pas de statistiques, pas de serveurs. Vos réglages et votre historique restent dans votre navigateur. Pour trouver le pays et ses prix, seuls le départ et l'arrivée de l'itinéraire – arrondis à environ 1 km – sont envoyés à OpenStreetMap, et vous pouvez le désactiver. Politique complète : https://koszt-paliwa.pl/privacy.html
+
+Fonctionne sur Google Maps dans tous les pays de l'UE, au Royaume-Uni, aux États-Unis, en Suisse, en Norvège et en Islande – avec des prix automatiques dans l'UE, au Royaume-Uni et aux États-Unis, et votre propre prix en Suisse, en Norvège et en Islande. Disponible en 16 langues européennes.
+
+Calculateur en ligne sans extension : https://koszt-paliwa.pl/en
+
+Les coûts sont des estimations basées sur les prix moyens des carburants et la consommation indiquée ; les prix à la pompe peuvent varier.
+
+Tankful est un projet indépendant, sans lien avec Google ni approuvé par Google. Code source ouvert (MIT) : https://github.com/Michalskii/tankful</textarea>
+      </div>
+      <div class="field">
+        <div class="field-head">
+          <label for="name-fr">Nazwa (z manifestu)</label>
+          <span class="count">46 zn. · limit 75</span>
+          <button type="button" data-copy="name-fr">Kopiuj</button>
+        </div>
+        <textarea id="name-fr" readonly rows="2">Tankful – coût du carburant pour chaque trajet</textarea>
+      </div>
+      <div class="field">
+        <div class="field-head">
+          <label for="summary-fr">Krótki opis (z manifestu)</label>
+          <span class="count">129 zn. · limit 132</span>
+          <button type="button" data-copy="summary-fr">Kopiuj</button>
+        </div>
+        <textarea id="summary-fr" readonly rows="2">Le coût du carburant de chaque itinéraire Google Maps – prix actuels dans l'UE, au Royaume-Uni et aux USA, VE, coût par personne.</textarea>
+      </div>
+  </section>
+  <section class="lang" id="lang-it">
+    <p class="store-lang">Język w panelu sklepu: <b>Italian</b></p>
+    <p class="hint">Nazwę i krótki opis sklep bierze z manifestu wtyczki – tu są tylko do wglądu. Do panelu wklejasz <b>pełny opis</b>.</p>
+      <div class="field">
+        <div class="field-head">
+          <label for="desc-it">Pełny opis (Description)</label>
+          <span class="count">2661 zn. · limit 16 000</span>
+          <button type="button" data-copy="desc-it">Kopiuj</button>
+        </div>
+        <textarea id="desc-it" readonly rows="33">Sappi quanto costerà un viaggio prima di partire. Tankful mostra il costo stimato del carburante accanto alla durata e alla distanza di ogni percorso in auto su Google Maps – senza ricopiare numeri in una calcolatrice.
+
+COSA OTTIENI
+• Il costo di ogni variante del percorso, nell'elenco dei percorsi e nei dettagli del percorso.
+• Un pannello compatto sulla mappa che confronta tutte le varianti fianco a fianco.
+• Il costo di andata e ritorno e il costo a persona, ad es. “4 × 12 €” quando viaggiate in quattro.
+• Impostazioni per un solo percorso – prendi l'auto di un amico per un viaggio senza cambiare le tue impostazioni predefinite.
+• Un clic per copiare il riepilogo del viaggio o salvarlo nello storico.
+
+PREZZI DEI CARBURANTI AGGIORNATI
+• Paesi UE: medie nazionali del Bollettino petrolifero settimanale della Commissione europea; in Polonia corrette quando cambiano i prezzi all'ingrosso di Orlen o le tasse sui carburanti.
+• Regno Unito: i prezzi settimanali dei carburanti del governo britannico.
+• USA: i prezzi settimanali di benzina e diesel dell'agenzia statunitense EIA per lo Stato o la sua regione, in miglia, galloni e mpg.
+• Viaggi attraverso più paesi: il prezzo è ponderato sui chilometri percorsi in ciascun paese – vedi quanto conviene fare il pieno in Austria o in Slovenia.
+• Benzina 95 e 98, diesel, diesel premium e GPL – oppure il tuo prezzo.
+• Auto elettriche: un intervallo dalla ricarica a casa alle colonnine rapide.
+• Prezzi in EUR, PLN, CZK, HUF, RON, SEK, DKK, GBP, CHF, NOK, ISK o USD, convertiti ai tassi della Banca nazionale di Polonia.
+
+STORICO DEI VIAGGI
+• Salva i viaggi e consultali raggruppati per mese, con distanza e costo totali.
+• Esportazione CSV per il tuo foglio di calcolo o la contabilità.
+
+PRIVACY
+Nessun account, nessuna pubblicità, nessuna statistica, nessun server. Le impostazioni e lo storico restano nel tuo browser. Per trovare il paese e i suoi prezzi vengono inviati a OpenStreetMap solo la partenza e la destinazione del percorso – arrotondate a circa 1 km – e puoi disattivarlo. Informativa completa: https://koszt-paliwa.pl/privacy.html
+
+Funziona su Google Maps in tutti i paesi UE, nel Regno Unito, negli USA, in Svizzera, Norvegia e Islanda – con prezzi automatici in UE, Regno Unito e USA e il tuo prezzo in Svizzera, Norvegia e Islanda. Disponibile in 16 lingue europee.
+
+Calcolatore online senza estensione: https://koszt-paliwa.pl/en
+
+I costi sono stime basate sui prezzi medi dei carburanti e sul consumo inserito; i prezzi alla pompa possono variare.
+
+Tankful è un progetto indipendente, non affiliato né approvato da Google. Codice aperto (MIT): https://github.com/Michalskii/tankful</textarea>
+      </div>
+      <div class="field">
+        <div class="field-head">
+          <label for="name-it">Nazwa (z manifestu)</label>
+          <span class="count">48 zn. · limit 75</span>
+          <button type="button" data-copy="name-it">Kopiuj</button>
+        </div>
+        <textarea id="name-it" readonly rows="2">Tankful – costo del carburante per ogni percorso</textarea>
+      </div>
+      <div class="field">
+        <div class="field-head">
+          <label for="summary-it">Krótki opis (z manifestu)</label>
+          <span class="count">132 zn. · limit 132</span>
+          <button type="button" data-copy="summary-it">Kopiuj</button>
+        </div>
+        <textarea id="summary-it" readonly rows="2">Costo del carburante di ogni percorso in Google Maps – prezzi aggiornati in UE, Regno Unito e USA, auto elettriche, costo a persona.</textarea>
+      </div>
+  </section>
+  <section class="lang" id="lang-es">
+    <p class="store-lang">Język w panelu sklepu: <b>Spanish</b></p>
+    <p class="hint">Nazwę i krótki opis sklep bierze z manifestu wtyczki – tu są tylko do wglądu. Do panelu wklejasz <b>pełny opis</b>.</p>
+      <div class="field">
+        <div class="field-head">
+          <label for="desc-es">Pełny opis (Description)</label>
+          <span class="count">2671 zn. · limit 16 000</span>
+          <button type="button" data-copy="desc-es">Kopiuj</button>
+        </div>
+        <textarea id="desc-es" readonly rows="33">Sabe cuánto costará un viaje antes de salir. Tankful muestra el coste estimado del combustible junto al tiempo y la distancia de cada ruta en coche de Google Maps, sin copiar números en una calculadora.
+
+QUÉ OBTIENES
+• El coste de cada variante de la ruta, en la lista de rutas y en los detalles de la ruta.
+• Un panel compacto en el mapa que compara todas las variantes una al lado de otra.
+• El coste de ida y vuelta y el coste por persona, por ejemplo «4 × 12 €» si viajáis cuatro.
+• Ajustes para una sola ruta: coge el coche de un amigo para un viaje sin cambiar tus valores predeterminados.
+• Un clic para copiar el resumen del viaje o guardarlo en el historial.
+
+PRECIOS DEL COMBUSTIBLE ACTUALIZADOS
+• Países de la UE: medias nacionales del Boletín Petrolero semanal de la Comisión Europea; en Polonia, ajustadas cuando cambian los precios mayoristas de Orlen o los impuestos sobre el combustible.
+• Reino Unido: los precios semanales del combustible del Gobierno británico.
+• EE. UU.: los precios semanales de gasolina y diésel de la agencia estadounidense EIA para el estado o su región, en millas, galones y mpg.
+• Viajes por varios países: el precio se pondera por los kilómetros recorridos en cada país; así ves cuánto cuesta repostar en Francia o en Portugal por el camino.
+• Gasolina 95 y 98, diésel, diésel premium y GLP, o tu propio precio.
+• Coches eléctricos: un rango desde la carga en casa hasta los cargadores rápidos.
+• Precios en EUR, PLN, CZK, HUF, RON, SEK, DKK, GBP, CHF, NOK, ISK o USD, convertidos al tipo del Banco Nacional de Polonia.
+
+HISTORIAL DE VIAJES
+• Guarda viajes y consúltalos agrupados por mes, con la distancia y el coste totales.
+• Exportación a CSV para tu hoja de cálculo o contabilidad.
+
+PRIVACIDAD
+Sin cuenta, sin anuncios, sin estadísticas, sin servidores. Tus ajustes y tu historial se quedan en tu navegador. Para saber el país y sus precios, solo se envían a OpenStreetMap el origen y el destino de la ruta, redondeados a aproximadamente 1 km, y puedes desactivarlo. Política completa: https://koszt-paliwa.pl/privacy.html
+
+Funciona en Google Maps en todos los países de la UE, Reino Unido, EE. UU., Suiza, Noruega e Islandia, con precios automáticos en la UE, Reino Unido y EE. UU. y tu propio precio en Suiza, Noruega e Islandia. Disponible en 16 idiomas europeos.
+
+Calculadora online sin extensión: https://koszt-paliwa.pl/en
+
+Los costes son estimaciones basadas en los precios medios del combustible y el consumo que indicas; los precios en la gasolinera pueden variar.
+
+Tankful es un proyecto independiente, sin relación con Google ni respaldado por Google. Código abierto (MIT): https://github.com/Michalskii/tankful</textarea>
+      </div>
+      <div class="field">
+        <div class="field-head">
+          <label for="name-es">Nazwa (z manifestu)</label>
+          <span class="count">44 zn. · limit 75</span>
+          <button type="button" data-copy="name-es">Kopiuj</button>
+        </div>
+        <textarea id="name-es" readonly rows="2">Tankful – coste del combustible en cada ruta</textarea>
+      </div>
+      <div class="field">
+        <div class="field-head">
+          <label for="summary-es">Krótki opis (z manifestu)</label>
+          <span class="count">132 zn. · limit 132</span>
+          <button type="button" data-copy="summary-es">Kopiuj</button>
+        </div>
+        <textarea id="summary-es" readonly rows="2">Coste del combustible de cada ruta en Google Maps – precios actuales en la UE, Reino Unido y EE. UU., eléctricos, coste por persona.</textarea>
+      </div>
+  </section>
+  <section class="lang" id="lang-nl">
+    <p class="store-lang">Język w panelu sklepu: <b>Dutch</b></p>
+    <p class="hint">Nazwę i krótki opis sklep bierze z manifestu wtyczki – tu są tylko do wglądu. Do panelu wklejasz <b>pełny opis</b>.</p>
+      <div class="field">
+        <div class="field-head">
+          <label for="desc-nl">Pełny opis (Description)</label>
+          <span class="count">2603 zn. · limit 16 000</span>
+          <button type="button" data-copy="desc-nl">Kopiuj</button>
+        </div>
+        <textarea id="desc-nl" readonly rows="33">Weet wat een rit kost voordat je vertrekt. Tankful toont de geschatte brandstofkosten direct naast de reistijd en afstand van elke autoroute in Google Maps – zonder getallen over te typen in een rekenmachine.
+
+WAT JE KRIJGT
+• De kosten van elke routevariant, in de routelijst en in de routedetails.
+• Een compact paneel op de kaart dat alle varianten naast elkaar vergelijkt.
+• Kosten heen en terug en per persoon, bijv. ‘4 × € 12’ als je met z'n vieren rijdt.
+• Instellingen voor één route – rijd een keer met de auto van een vriend zonder je standaardinstellingen te wijzigen.
+• Met één klik een samenvatting kopiëren of de rit in je rittenoverzicht opslaan.
+
+ACTUELE BRANDSTOFPRIJZEN
+• EU-landen: landelijke gemiddelden uit het wekelijkse Oil Bulletin van de Europese Commissie; in Polen aangepast als de groothandelsprijzen van Orlen of de brandstofbelastingen veranderen.
+• Verenigd Koninkrijk: de wekelijkse brandstofprijzen van de Britse overheid.
+• VS: de wekelijkse benzine- en dieselprijzen van het Amerikaanse EIA voor de staat of regio, in mijlen, gallons en mpg.
+• Ritten door meerdere landen: de prijs wordt gewogen naar de kilometers in elk land – zo zie je wat tanken in België, Duitsland of Luxemburg onderweg scheelt.
+• Benzine 95 en 98, diesel, premium diesel en LPG – of je eigen prijs.
+• Elektrische auto's: een bereik van thuis laden tot snelladers.
+• Prijzen in EUR, PLN, CZK, HUF, RON, SEK, DKK, GBP, CHF, NOK, ISK of USD, omgerekend tegen de koersen van de Nationale Bank van Polen.
+
+RITTENOVERZICHT
+• Sla ritten op en bekijk ze per maand, met totale afstand en kosten.
+• Export naar CSV voor je spreadsheet of boekhouding.
+
+PRIVACY
+Geen account, geen advertenties, geen statistieken, geen servers. Je instellingen en rittenoverzicht blijven in je browser. Om het land en de bijbehorende prijzen te bepalen, worden alleen start en bestemming van de route – afgerond op ongeveer 1 km – naar OpenStreetMap gestuurd, en dat kun je uitzetten. Volledig beleid: https://koszt-paliwa.pl/privacy.html
+
+Werkt in Google Maps in alle EU-landen, het VK, de VS, Zwitserland, Noorwegen en IJsland – met automatische prijzen in de EU, het VK en de VS en je eigen prijs in Zwitserland, Noorwegen en IJsland. Beschikbaar in 16 Europese talen.
+
+Online rekenmachine zonder extensie: https://koszt-paliwa.pl/en
+
+De kosten zijn schattingen op basis van gemiddelde brandstofprijzen en het verbruik dat je invult; de prijzen aan de pomp kunnen afwijken.
+
+Tankful is een onafhankelijk project en is niet verbonden aan of goedgekeurd door Google. Open source (MIT): https://github.com/Michalskii/tankful</textarea>
+      </div>
+      <div class="field">
+        <div class="field-head">
+          <label for="name-nl">Nazwa (z manifestu)</label>
+          <span class="count">41 zn. · limit 75</span>
+          <button type="button" data-copy="name-nl">Kopiuj</button>
+        </div>
+        <textarea id="name-nl" readonly rows="2">Tankful – brandstofkosten voor elke route</textarea>
+      </div>
+      <div class="field">
+        <div class="field-head">
+          <label for="summary-nl">Krótki opis (z manifestu)</label>
+          <span class="count">129 zn. · limit 132</span>
+          <button type="button" data-copy="summary-nl">Kopiuj</button>
+        </div>
+        <textarea id="summary-nl" readonly rows="2">De brandstofkosten van elke autoroute in Google Maps – actuele prijzen in de EU, het VK en de VS, elektrisch, kosten per persoon.</textarea>
+      </div>
+  </section>
+  <section class="lang" id="lang-cs">
+    <p class="store-lang">Język w panelu sklepu: <b>Czech</b></p>
+    <p class="hint">Nazwę i krótki opis sklep bierze z manifestu wtyczki – tu są tylko do wglądu. Do panelu wklejasz <b>pełny opis</b>.</p>
+      <div class="field">
+        <div class="field-head">
+          <label for="desc-cs">Pełny opis (Description)</label>
+          <span class="count">2302 zn. · limit 16 000</span>
+          <button type="button" data-copy="desc-cs">Kopiuj</button>
+        </div>
+        <textarea id="desc-cs" readonly rows="33">Zjistěte, kolik cesta bude stát, ještě než vyrazíte. Tankful ukazuje odhadovanou cenu paliva hned vedle času a vzdálenosti každé trasy autem v Mapách Google – bez přepisování čísel do kalkulačky.
+
+CO ZÍSKÁTE
+• Cenu každé varianty trasy – v seznamu tras i v podrobnostech trasy.
+• Kompaktní panel na mapě, který porovná všechny varianty vedle sebe.
+• Cenu tam i zpět a cenu na osobu, např. „4 × 300 Kč“, když jedete ve čtyřech.
+• Nastavení jen pro jednu trasu – jednou si půjčíte auto od kamaráda a výchozí nastavení zůstane.
+• Jedním kliknutím zkopírujete shrnutí cesty nebo ji uložíte do historie.
+
+AKTUÁLNÍ CENY PALIV
+• Země EU: celostátní průměry z týdenního Oil Bulletinu Evropské komise; v Polsku upravené při změně velkoobchodních cen Orlenu nebo daní z paliv.
+• Velká Británie: týdenní ceny paliv britské vlády.
+• USA: týdenní ceny benzínu a nafty americké agentury EIA pro daný stát nebo region, v mílích, galonech a mpg.
+• Cesty přes více zemí: cena je vážená kilometry ujetými v každé zemi – uvidíte, kolik ušetříte natankováním v Polsku nebo na Slovensku.
+• Benzín 95 a 98, nafta, prémiová nafta a LPG – nebo vlastní cena.
+• Elektromobily: rozpětí od nabíjení doma po rychlonabíječky.
+• Ceny v CZK, EUR, PLN, HUF, RON, SEK, DKK, GBP, CHF, NOK, ISK nebo USD, přepočtené kurzy Polské národní banky.
+
+HISTORIE CEST
+• Ukládejte cesty a prohlížejte je po měsících, s celkovou vzdáleností a cenou.
+• Export do CSV pro tabulku nebo účetnictví.
+
+SOUKROMÍ
+Žádný účet, žádné reklamy, žádná analytika, žádné servery. Nastavení a historie cest zůstávají ve vašem prohlížeči. Aby bylo možné zjistit zemi a její ceny, posílá se do OpenStreetMap jen start a cíl trasy – zaokrouhlené na zhruba 1 km – a lze to vypnout. Celé zásady: https://koszt-paliwa.pl/privacy.html
+
+Funguje v Mapách Google ve všech zemích EU, ve Velké Británii, USA, Švýcarsku, Norsku a na Islandu – s automatickými cenami v EU, Velké Británii a USA a s vlastní cenou ve Švýcarsku, Norsku a na Islandu. K dispozici v 16 evropských jazycích.
+
+Online kalkulačka bez rozšíření: https://koszt-paliwa.pl/en
+
+Ceny jsou odhady podle průměrných cen paliv a zadané spotřeby; ceny u pumpy se mohou lišit.
+
+Tankful je nezávislý projekt, není spojen se společností Google ani jí podporován. Otevřený kód (MIT): https://github.com/Michalskii/tankful</textarea>
+      </div>
+      <div class="field">
+        <div class="field-head">
+          <label for="name-cs">Nazwa (z manifestu)</label>
+          <span class="count">36 zn. · limit 75</span>
+          <button type="button" data-copy="name-cs">Kopiuj</button>
+        </div>
+        <textarea id="name-cs" readonly rows="2">Tankful – cena paliva na každé trase</textarea>
+      </div>
+      <div class="field">
+        <div class="field-head">
+          <label for="summary-cs">Krótki opis (z manifestu)</label>
+          <span class="count">115 zn. · limit 132</span>
+          <button type="button" data-copy="summary-cs">Kopiuj</button>
+        </div>
+        <textarea id="summary-cs" readonly rows="2">Cena paliva u každé trasy v Mapách Google – aktuální ceny v EU, Velké Británii a USA, elektromobily, cena na osobu.</textarea>
+      </div>
+  </section>
+  <section class="lang" id="lang-ro">
+    <p class="store-lang">Język w panelu sklepu: <b>Romanian</b></p>
+    <p class="hint">Nazwę i krótki opis sklep bierze z manifestu wtyczki – tu są tylko do wglądu. Do panelu wklejasz <b>pełny opis</b>.</p>
+      <div class="field">
+        <div class="field-head">
+          <label for="desc-ro">Pełny opis (Description)</label>
+          <span class="count">2558 zn. · limit 16 000</span>
+          <button type="button" data-copy="desc-ro">Kopiuj</button>
+        </div>
+        <textarea id="desc-ro" readonly rows="33">Află cât te costă un drum înainte să pleci. Tankful afișează costul estimat al carburantului chiar lângă durata și distanța fiecărui traseu cu mașina din Google Maps – fără să copiezi cifre într-un calculator.
+
+CE PRIMEȘTI
+• Costul fiecărei variante de traseu, în lista de trasee și în detaliile traseului.
+• Un panou compact pe hartă care compară toate variantele una lângă alta.
+• Costul dus-întors și costul pe persoană, de ex. „4 × 60 lei” când mergeți patru.
+• Setări doar pentru un traseu – mergi o dată cu mașina unui prieten fără să-ți schimbi setările implicite.
+• Un clic pentru a copia rezumatul călătoriei sau a o salva în istoric.
+
+PREȚURI ACTUALE LA CARBURANȚI
+• Țările UE: mediile naționale din Buletinul petrolier săptămânal al Comisiei Europene; în Polonia ajustate când se schimbă prețurile en-gros Orlen sau taxele pe carburanți.
+• Regatul Unit: prețurile săptămânale ale carburanților publicate de guvernul britanic.
+• SUA: prețurile săptămânale la benzină și motorină ale agenției americane EIA pentru stat sau regiune, în mile, galoane și mpg.
+• Călătorii prin mai multe țări: prețul este ponderat cu kilometrii parcurși în fiecare țară – vezi cât te costă plinul în Ungaria sau în Bulgaria pe drum.
+• Benzină 95 și 98, motorină, motorină premium și GPL – sau prețul tău.
+• Mașini electrice: un interval de la încărcarea acasă la stațiile rapide.
+• Prețuri în RON, EUR, PLN, CZK, HUF, SEK, DKK, GBP, CHF, NOK, ISK sau USD, convertite la cursurile Băncii Naționale a Poloniei.
+
+ISTORICUL CĂLĂTORIILOR
+• Salvează călătoriile și vezi-le grupate pe luni, cu distanța și costul total.
+• Export CSV pentru foaia de calcul sau contabilitate.
+
+CONFIDENȚIALITATE
+Fără cont, fără reclame, fără statistici, fără servere. Setările și istoricul rămân în browserul tău. Pentru a afla țara și prețurile ei, către OpenStreetMap se trimit doar plecarea și destinația traseului – rotunjite la aproximativ 1 km – iar asta se poate dezactiva. Politica completă: https://koszt-paliwa.pl/privacy.html
+
+Funcționează în Google Maps în toate țările UE, Regatul Unit, SUA, Elveția, Norvegia și Islanda – cu prețuri automate în UE, Regatul Unit și SUA și cu prețul tău în Elveția, Norvegia și Islanda. Disponibilă în 16 limbi europene.
+
+Calculator online fără extensie: https://koszt-paliwa.pl/en
+
+Costurile sunt estimări pe baza prețurilor medii ale carburanților și a consumului introdus; prețurile la pompă pot varia.
+
+Tankful este un proiect independent, fără legătură cu Google și neaprobat de Google. Cod deschis (MIT): https://github.com/Michalskii/tankful</textarea>
+      </div>
+      <div class="field">
+        <div class="field-head">
+          <label for="name-ro">Nazwa (z manifestu)</label>
+          <span class="count">48 zn. · limit 75</span>
+          <button type="button" data-copy="name-ro">Kopiuj</button>
+        </div>
+        <textarea id="name-ro" readonly rows="2">Tankful – costul carburantului pe fiecare traseu</textarea>
+      </div>
+      <div class="field">
+        <div class="field-head">
+          <label for="summary-ro">Krótki opis (z manifestu)</label>
+          <span class="count">129 zn. · limit 132</span>
+          <button type="button" data-copy="summary-ro">Kopiuj</button>
+        </div>
+        <textarea id="summary-ro" readonly rows="2">Costul carburantului pe fiecare traseu din Google Maps – prețuri actuale în UE, Regatul Unit și SUA, electrice, cost pe persoană.</textarea>
+      </div>
+  </section>
+  <section class="lang" id="lang-pt_PT">
+    <p class="store-lang">Język w panelu sklepu: <b>Portuguese (Portugal)</b></p>
+    <p class="hint">Nazwę i krótki opis sklep bierze z manifestu wtyczki – tu są tylko do wglądu. Do panelu wklejasz <b>pełny opis</b>.</p>
+      <div class="field">
+        <div class="field-head">
+          <label for="desc-pt_PT">Pełny opis (Description)</label>
+          <span class="count">2602 zn. · limit 16 000</span>
+          <button type="button" data-copy="desc-pt_PT">Kopiuj</button>
+        </div>
+        <textarea id="desc-pt_PT" readonly rows="33">Saiba quanto vai custar uma viagem antes de partir. O Tankful mostra o custo estimado do combustível ao lado do tempo e da distância de cada percurso de carro no Google Maps – sem copiar números para uma calculadora.
+
+O QUE OBTÉM
+• O custo de cada variante do percurso, na lista de percursos e nos detalhes do percurso.
+• Um painel compacto no mapa que compara todas as variantes lado a lado.
+• O custo de ida e volta e o custo por pessoa, por ex. «4 × 12 €» quando viajam quatro.
+• Definições só para um percurso – leve o carro de um amigo numa viagem sem alterar as suas predefinições.
+• Um clique para copiar o resumo da viagem ou guardá-la no histórico.
+
+PREÇOS DOS COMBUSTÍVEIS ATUALIZADOS
+• Países da UE: médias nacionais do Boletim Petrolífero semanal da Comissão Europeia; na Polónia, ajustadas quando mudam os preços grossistas da Orlen ou os impostos sobre combustíveis.
+• Reino Unido: os preços semanais dos combustíveis do governo britânico.
+• EUA: os preços semanais da gasolina e do gasóleo da agência norte-americana EIA para o estado ou a região, em milhas, galões e mpg.
+• Viagens por vários países: o preço é ponderado pelos quilómetros percorridos em cada país – veja quanto custa atestar em Espanha pelo caminho.
+• Gasolina 95 e 98, gasóleo, gasóleo premium e GPL – ou o seu próprio preço.
+• Carros elétricos: um intervalo entre o carregamento em casa e os carregadores rápidos.
+• Preços em EUR, PLN, CZK, HUF, RON, SEK, DKK, GBP, CHF, NOK, ISK ou USD, convertidos às taxas do Banco Nacional da Polónia.
+
+HISTÓRICO DE VIAGENS
+• Guarde viagens e veja-as agrupadas por mês, com a distância e o custo totais.
+• Exportação para CSV para a sua folha de cálculo ou contabilidade.
+
+PRIVACIDADE
+Sem conta, sem anúncios, sem estatísticas, sem servidores. As suas definições e o histórico ficam no seu navegador. Para saber o país e os seus preços, só a origem e o destino do percurso – arredondados a cerca de 1 km – são enviados ao OpenStreetMap, e pode desativar isso. Política completa: https://koszt-paliwa.pl/privacy.html
+
+Funciona no Google Maps em todos os países da UE, Reino Unido, EUA, Suíça, Noruega e Islândia – com preços automáticos na UE, Reino Unido e EUA e o seu próprio preço na Suíça, Noruega e Islândia. Disponível em 16 línguas europeias.
+
+Calculadora online sem extensão: https://koszt-paliwa.pl/en
+
+Os custos são estimativas com base nos preços médios dos combustíveis e no consumo indicado; os preços na bomba podem variar.
+
+O Tankful é um projeto independente, sem ligação à Google nem aprovado pela Google. Código aberto (MIT): https://github.com/Michalskii/tankful</textarea>
+      </div>
+      <div class="field">
+        <div class="field-head">
+          <label for="name-pt_PT">Nazwa (z manifestu)</label>
+          <span class="count">47 zn. · limit 75</span>
+          <button type="button" data-copy="name-pt_PT">Kopiuj</button>
+        </div>
+        <textarea id="name-pt_PT" readonly rows="2">Tankful – custo do combustível em cada percurso</textarea>
+      </div>
+      <div class="field">
+        <div class="field-head">
+          <label for="summary-pt_PT">Krótki opis (z manifestu)</label>
+          <span class="count">125 zn. · limit 132</span>
+          <button type="button" data-copy="summary-pt_PT">Kopiuj</button>
+        </div>
+        <textarea id="summary-pt_PT" readonly rows="2">O custo do combustível de cada percurso no Google Maps – preços atuais na UE, Reino Unido e EUA, elétricos, custo por pessoa.</textarea>
+      </div>
+  </section>
+  <section class="lang" id="lang-sv">
+    <p class="store-lang">Język w panelu sklepu: <b>Swedish</b></p>
+    <p class="hint">Nazwę i krótki opis sklep bierze z manifestu wtyczki – tu są tylko do wglądu. Do panelu wklejasz <b>pełny opis</b>.</p>
+      <div class="field">
+        <div class="field-head">
+          <label for="desc-sv">Pełny opis (Description)</label>
+          <span class="count">2433 zn. · limit 16 000</span>
+          <button type="button" data-copy="desc-sv">Kopiuj</button>
+        </div>
+        <textarea id="desc-sv" readonly rows="33">Vet vad resan kostar innan du åker. Tankful visar den beräknade bränslekostnaden direkt bredvid restid och avstånd för varje bilrutt i Google Maps – utan att du behöver knappa in siffror i en miniräknare.
+
+DET HÄR FÅR DU
+• Kostnaden för varje ruttalternativ, i ruttlistan och i ruttens detaljer.
+• En kompakt panel på kartan som jämför alla alternativ sida vid sida.
+• Kostnad tur och retur och per person, t.ex. ”4 × 140 kr” när ni är fyra i bilen.
+• Inställningar för en enda rutt – kör en väns bil en gång utan att ändra dina standardvärden.
+• Ett klick för att kopiera en sammanfattning eller spara resan i historiken.
+
+AKTUELLA BRÄNSLEPRISER
+• EU-länder: nationella snittpriser från EU-kommissionens Weekly Oil Bulletin; i Polen justerade när Orlens grossistpriser eller bränsleskatterna ändras.
+• Storbritannien: brittiska regeringens veckovisa bränslepriser.
+• USA: amerikanska EIA:s veckovisa priser på bensin och diesel för delstaten eller regionen, i miles, gallon och mpg.
+• Resor genom flera länder: priset viktas efter kilometrarna i varje land – så ser du vad det kostar att tanka i Tyskland eller Danmark på vägen.
+• Bensin 95 och 98, diesel, premiumdiesel och gasol (LPG) – eller ditt eget pris.
+• Elbilar: ett intervall från laddning hemma till snabbladdare.
+• Priser i SEK, EUR, DKK, NOK, PLN, CZK, HUF, RON, GBP, CHF, ISK eller USD, omräknade till Polens nationalbanks kurser.
+
+RESHISTORIK
+• Spara resor och se dem grupperade per månad med total sträcka och kostnad.
+• Export till CSV för kalkylblad eller bokföring.
+
+INTEGRITET
+Inget konto, ingen reklam, ingen analys, inga servrar. Dina inställningar och din reshistorik stannar i webbläsaren. För att hitta landet och dess priser skickas bara ruttens start och mål – avrundade till ungefär 1 km – till OpenStreetMap, och det går att stänga av. Fullständig policy: https://koszt-paliwa.pl/privacy.html
+
+Fungerar i Google Maps i alla EU-länder, Storbritannien, USA, Schweiz, Norge och Island – med automatiska priser i EU, Storbritannien och USA och eget pris i Schweiz, Norge och Island. Tillgängligt på 16 europeiska språk.
+
+Onlinekalkylator utan tillägg: https://koszt-paliwa.pl/en
+
+Kostnaderna är uppskattningar baserade på genomsnittliga bränslepriser och den förbrukning du anger; priset vid pumpen kan skilja sig.
+
+Tankful är ett oberoende projekt och är inte kopplat till eller godkänt av Google. Öppen källkod (MIT): https://github.com/Michalskii/tankful</textarea>
+      </div>
+      <div class="field">
+        <div class="field-head">
+          <label for="name-sv">Nazwa (z manifestu)</label>
+          <span class="count">39 zn. · limit 75</span>
+          <button type="button" data-copy="name-sv">Kopiuj</button>
+        </div>
+        <textarea id="name-sv" readonly rows="2">Tankful – bränslekostnad för varje rutt</textarea>
+      </div>
+      <div class="field">
+        <div class="field-head">
+          <label for="summary-sv">Krótki opis (z manifestu)</label>
+          <span class="count">125 zn. · limit 132</span>
+          <button type="button" data-copy="summary-sv">Kopiuj</button>
+        </div>
+        <textarea id="summary-sv" readonly rows="2">Bränslekostnaden för varje bilrutt i Google Maps – aktuella priser i EU, Storbritannien och USA, elbilar, kostnad per person.</textarea>
+      </div>
+  </section>
+  <section class="lang" id="lang-el">
+    <p class="store-lang">Język w panelu sklepu: <b>Greek</b></p>
+    <p class="hint">Nazwę i krótki opis sklep bierze z manifestu wtyczki – tu są tylko do wglądu. Do panelu wklejasz <b>pełny opis</b>.</p>
+      <div class="field">
+        <div class="field-head">
+          <label for="desc-el">Pełny opis (Description)</label>
+          <span class="count">2726 zn. · limit 16 000</span>
+          <button type="button" data-copy="desc-el">Kopiuj</button>
+        </div>
+        <textarea id="desc-el" readonly rows="33">Μάθετε πόσο θα κοστίσει μια διαδρομή πριν ξεκινήσετε. Το Tankful δείχνει το εκτιμώμενο κόστος καυσίμου δίπλα στον χρόνο και την απόσταση κάθε διαδρομής με αυτοκίνητο στο Google Maps – χωρίς να αντιγράφετε αριθμούς σε αριθμομηχανή.
+
+ΤΙ ΠΑΙΡΝΕΤΕ
+• Το κόστος κάθε εναλλακτικής διαδρομής, στη λίστα διαδρομών και στις λεπτομέρειες της διαδρομής.
+• Έναν μικρό πίνακα στον χάρτη που συγκρίνει όλες τις εναλλακτικές δίπλα δίπλα.
+• Κόστος μετ' επιστροφής και ανά άτομο, π.χ. «4 × 12 €» όταν ταξιδεύετε τέσσερις.
+• Ρυθμίσεις μόνο για μία διαδρομή – πάρτε το αυτοκίνητο ενός φίλου για μία φορά χωρίς να αλλάξετε τις προεπιλογές σας.
+• Με ένα κλικ αντιγράφετε τη σύνοψη της διαδρομής ή την αποθηκεύετε στο ιστορικό.
+
+ΤΡΕΧΟΥΣΕΣ ΤΙΜΕΣ ΚΑΥΣΙΜΩΝ
+• Χώρες της ΕΕ: εθνικοί μέσοι όροι από το εβδομαδιαίο Δελτίο Πετρελαίου της Ευρωπαϊκής Επιτροπής· στην Πολωνία διορθώνονται όταν αλλάζουν οι τιμές χονδρικής της Orlen ή οι φόροι στα καύσιμα.
+• Ηνωμένο Βασίλειο: οι εβδομαδιαίες τιμές καυσίμων της βρετανικής κυβέρνησης.
+• ΗΠΑ: οι εβδομαδιαίες τιμές βενζίνης και πετρελαίου της αμερικανικής υπηρεσίας EIA για την πολιτεία ή την περιοχή, σε μίλια, γαλόνια και mpg.
+• Ταξίδια μέσα από πολλές χώρες: η τιμή σταθμίζεται με τα χιλιόμετρα σε κάθε χώρα – βλέπετε πόσο κοστίζει ο ανεφοδιασμός στη Βουλγαρία στη διαδρομή.
+• Βενζίνη 95 και 98, πετρέλαιο κίνησης, πετρέλαιο premium και υγραέριο – ή δική σας τιμή.
+• Ηλεκτρικά αυτοκίνητα: εύρος από τη φόρτιση στο σπίτι έως τους ταχυφορτιστές.
+• Τιμές σε EUR, PLN, CZK, HUF, RON, SEK, DKK, GBP, CHF, NOK, ISK ή USD, με τις ισοτιμίες της Εθνικής Τράπεζας της Πολωνίας.
+
+ΙΣΤΟΡΙΚΟ ΔΙΑΔΡΟΜΩΝ
+• Αποθηκεύστε διαδρομές και δείτε τες ανά μήνα, με συνολική απόσταση και κόστος.
+• Εξαγωγή σε CSV για υπολογιστικό φύλλο ή λογιστική.
+
+ΑΠΟΡΡΗΤΟ
+Χωρίς λογαριασμό, διαφημίσεις, στατιστικά ή διακομιστές. Οι ρυθμίσεις και το ιστορικό μένουν στον περιηγητή σας. Για να βρεθεί η χώρα και οι τιμές της, στέλνονται στο OpenStreetMap μόνο η αφετηρία και ο προορισμός της διαδρομής – στρογγυλεμένα στο 1 km περίπου – και μπορείτε να το απενεργοποιήσετε. Πλήρης πολιτική: https://koszt-paliwa.pl/privacy.html
+
+Λειτουργεί στο Google Maps σε όλες τις χώρες της ΕΕ, στο Ηνωμένο Βασίλειο, τις ΗΠΑ, την Ελβετία, τη Νορβηγία και την Ισλανδία – με αυτόματες τιμές σε ΕΕ, Ηνωμένο Βασίλειο και ΗΠΑ και δική σας τιμή σε Ελβετία, Νορβηγία και Ισλανδία. Διαθέσιμο σε 16 ευρωπαϊκές γλώσσες.
+
+Διαδικτυακός υπολογιστής χωρίς επέκταση: https://koszt-paliwa.pl/en
+
+Τα κόστη είναι εκτιμήσεις με βάση τις μέσες τιμές καυσίμων και την κατανάλωση που δηλώνετε· οι τιμές στην αντλία μπορεί να διαφέρουν.
+
+Το Tankful είναι ανεξάρτητο έργο, χωρίς σχέση με την Google ούτε εγκεκριμένο από αυτήν. Ανοιχτός κώδικας (MIT): https://github.com/Michalskii/tankful</textarea>
+      </div>
+      <div class="field">
+        <div class="field-head">
+          <label for="name-el">Nazwa (z manifestu)</label>
+          <span class="count">43 zn. · limit 75</span>
+          <button type="button" data-copy="name-el">Kopiuj</button>
+        </div>
+        <textarea id="name-el" readonly rows="2">Tankful – κόστος καυσίμου για κάθε διαδρομή</textarea>
+      </div>
+      <div class="field">
+        <div class="field-head">
+          <label for="summary-el">Krótki opis (z manifestu)</label>
+          <span class="count">129 zn. · limit 132</span>
+          <button type="button" data-copy="summary-el">Kopiuj</button>
+        </div>
+        <textarea id="summary-el" readonly rows="2">Το κόστος καυσίμου κάθε διαδρομής στο Google Maps – τρέχουσες τιμές σε ΕΕ, Ηνωμένο Βασίλειο και ΗΠΑ, ηλεκτρικά, κόστος ανά άτομο.</textarea>
+      </div>
+  </section>
+  <section class="lang" id="lang-hu">
+    <p class="store-lang">Język w panelu sklepu: <b>Hungarian</b></p>
+    <p class="hint">Nazwę i krótki opis sklep bierze z manifestu wtyczki – tu są tylko do wglądu. Do panelu wklejasz <b>pełny opis</b>.</p>
+      <div class="field">
+        <div class="field-head">
+          <label for="desc-hu">Pełny opis (Description)</label>
+          <span class="count">2628 zn. · limit 16 000</span>
+          <button type="button" data-copy="desc-hu">Kopiuj</button>
+        </div>
+        <textarea id="desc-hu" readonly rows="33">Tudja meg indulás előtt, mennyibe kerül az út. A Tankful minden autós útvonal menetideje és távolsága mellett megmutatja a becsült üzemanyagköltséget a Google Mapsben – anélkül, hogy számokat kellene átírnia egy számológépbe.
+
+AMIT KAP
+• Minden útvonalváltozat költségét, az útvonallistában és az útvonal részleteinél.
+• Egy kompakt panelt a térképen, amely egymás mellett hasonlítja össze a változatokat.
+• Oda-vissza költséget és fejenkénti költséget, pl. „4 × 4800 Ft”, ha négyen utaznak.
+• Beállításokat csak egy útvonalhoz – egyszer egy barát autójával megy, és nem kell módosítania az alapértékeket.
+• Egy kattintással másolhatja az út összefoglalóját, vagy elmentheti az előzmények közé.
+
+AKTUÁLIS ÜZEMANYAGÁRAK
+• EU-országok: országos átlagárak az Európai Bizottság heti olajárközlönyéből (Weekly Oil Bulletin); Lengyelországban korrigálva, ha változnak az Orlen nagykereskedelmi árai vagy az üzemanyagadók.
+• Egyesült Királyság: a brit kormány heti üzemanyagárai.
+• USA: az amerikai EIA heti benzin- és dízelárai az adott államra vagy régióra, mérföldben, gallonban és mpg-ben.
+• Több országon átvezető utak: az ár az egyes országokban megtett kilométerekkel súlyozott – látja, mennyibe kerül tankolni Szlovákiában vagy Ausztriában útközben.
+• Benzin 95 és 98, dízel, prémium dízel és autógáz (LPG) – vagy saját ár.
+• Elektromos autók: tartomány az otthoni töltéstől a gyorstöltőkig.
+• Árak HUF, EUR, PLN, CZK, RON, SEK, DKK, GBP, CHF, NOK, ISK vagy USD pénznemben, a Lengyel Nemzeti Bank árfolyamán átszámítva.
+
+UTAK ELŐZMÉNYEI
+• Mentse el útjait, és nézze meg őket havonta csoportosítva, összesített távolsággal és költséggel.
+• Exportálás CSV-be táblázatkezelőhöz vagy könyveléshez.
+
+ADATVÉDELEM
+Nincs fiók, nincs reklám, nincs analitika, nincsenek szerverek. A beállítások és az előzmények a böngészőjében maradnak. Az ország és árainak meghatározásához csak az útvonal kezdő- és célpontja kerül az OpenStreetMaphez – kb. 1 km-re kerekítve –, és ez kikapcsolható. Teljes szabályzat: https://koszt-paliwa.pl/privacy.html
+
+Működik a Google Mapsben az összes EU-országban, az Egyesült Királyságban, az USA-ban, Svájcban, Norvégiában és Izlandon – automatikus árakkal az EU-ban, az Egyesült Királyságban és az USA-ban, Svájcban, Norvégiában és Izlandon saját árral. 16 európai nyelven érhető el.
+
+Online kalkulátor bővítmény nélkül: https://koszt-paliwa.pl/en
+
+A költségek becslések az átlagos üzemanyagárak és a megadott fogyasztás alapján; a kúton fizetett ár eltérhet.
+
+A Tankful független projekt, nem kapcsolódik a Google-hoz, és a Google nem támogatja. Nyílt forráskód (MIT): https://github.com/Michalskii/tankful</textarea>
+      </div>
+      <div class="field">
+        <div class="field-head">
+          <label for="name-hu">Nazwa (z manifestu)</label>
+          <span class="count">44 zn. · limit 75</span>
+          <button type="button" data-copy="name-hu">Kopiuj</button>
+        </div>
+        <textarea id="name-hu" readonly rows="2">Tankful – üzemanyagköltség minden útvonalhoz</textarea>
+      </div>
+      <div class="field">
+        <div class="field-head">
+          <label for="summary-hu">Krótki opis (z manifestu)</label>
+          <span class="count">129 zn. · limit 132</span>
+          <button type="button" data-copy="summary-hu">Kopiuj</button>
+        </div>
+        <textarea id="summary-hu" readonly rows="2">Minden Google Maps-útvonal üzemanyagköltsége – aktuális árak az EU-ban, Nagy-Britanniában és az USA-ban, villanyautók, fejenként.</textarea>
+      </div>
+  </section>
+  <section class="lang" id="lang-bg">
+    <p class="store-lang">Język w panelu sklepu: <b>Bulgarian</b></p>
+    <p class="hint">Nazwę i krótki opis sklep bierze z manifestu wtyczki – tu są tylko do wglądu. Do panelu wklejasz <b>pełny opis</b>.</p>
+      <div class="field">
+        <div class="field-head">
+          <label for="desc-bg">Pełny opis (Description)</label>
+          <span class="count">2566 zn. · limit 16 000</span>
+          <button type="button" data-copy="desc-bg">Kopiuj</button>
+        </div>
+        <textarea id="desc-bg" readonly rows="33">Разберете колко ще струва пътуването, преди да тръгнете. Tankful показва прогнозния разход за гориво точно до времето и разстоянието на всеки маршрут с кола в Google Maps – без да преписвате числа в калкулатор.
+
+КАКВО ПОЛУЧАВАТЕ
+• Разхода за всеки вариант на маршрута – в списъка с маршрути и в подробностите за маршрута.
+• Компактен панел върху картата, който сравнява всички варианти един до друг.
+• Разход за отиване и връщане и на човек, напр. „4 × 12 €“, когато пътувате четирима.
+• Настройки само за един маршрут – карате веднъж колата на приятел, без да променяте настройките си по подразбиране.
+• С едно кликване копирате обобщение на пътуването или го запазвате в историята.
+
+АКТУАЛНИ ЦЕНИ НА ГОРИВАТА
+• Държави от ЕС: средни национални цени от седмичния петролен бюлетин на Европейската комисия; в Полша се коригират при промяна на цените на едро на Orlen или на данъците върху горивата.
+• Обединено кралство: седмичните цени на горивата на британското правителство.
+• САЩ: седмичните цени на бензина и дизела на американската агенция EIA за щата или региона, в мили, галони и mpg.
+• Пътувания през няколко държави: цената се претегля по километрите във всяка държава – виждате колко струва зареждането в Румъния или Гърция по пътя.
+• Бензин 95 и 98, дизел, премиум дизел и пропан-бутан – или собствена цена.
+• Електромобили: диапазон от зареждане вкъщи до бързи зарядни станции.
+• Цени в EUR, PLN, CZK, HUF, RON, SEK, DKK, GBP, CHF, NOK, ISK или USD, превалутирани по курса на Националната банка на Полша.
+
+ИСТОРИЯ НА ПЪТУВАНИЯТА
+• Запазвайте пътувания и ги разглеждайте по месеци, с общо разстояние и разход.
+• Експорт в CSV за таблица или счетоводство.
+
+ПОВЕРИТЕЛНОСТ
+Без профил, без реклами, без анализи, без сървъри. Настройките и историята остават във вашия браузър. За да се определи държавата и цените ѝ, до OpenStreetMap се изпращат само началото и краят на маршрута – закръглени до около 1 km – и това може да се изключи. Пълна политика: https://koszt-paliwa.pl/privacy.html
+
+Работи в Google Maps във всички държави от ЕС, Обединеното кралство, САЩ, Швейцария, Норвегия и Исландия – с автоматични цени в ЕС, Обединеното кралство и САЩ и собствена цена в Швейцария, Норвегия и Исландия. Налично на 16 европейски езика.
+
+Онлайн калкулатор без разширение: https://koszt-paliwa.pl/en
+
+Разходите са приблизителни – изчислени по средните цени на горивата и въведения разход; цените на бензиностанцията може да се различават.
+
+Tankful е независим проект, несвързан с Google и неодобрен от Google. Отворен код (MIT): https://github.com/Michalskii/tankful</textarea>
+      </div>
+      <div class="field">
+        <div class="field-head">
+          <label for="name-bg">Nazwa (z manifestu)</label>
+          <span class="count">43 zn. · limit 75</span>
+          <button type="button" data-copy="name-bg">Kopiuj</button>
+        </div>
+        <textarea id="name-bg" readonly rows="2">Tankful – разход за гориво за всеки маршрут</textarea>
+      </div>
+      <div class="field">
+        <div class="field-head">
+          <label for="summary-bg">Krótki opis (z manifestu)</label>
+          <span class="count">124 zn. · limit 132</span>
+          <button type="button" data-copy="summary-bg">Kopiuj</button>
+        </div>
+        <textarea id="summary-bg" readonly rows="2">Разходът за гориво на всеки маршрут в Google Maps – актуални цени в ЕС, Обединеното кралство и САЩ, електромобили, на човек.</textarea>
+      </div>
+  </section>
+  <section class="lang" id="lang-da">
+    <p class="store-lang">Język w panelu sklepu: <b>Danish</b></p>
+    <p class="hint">Nazwę i krótki opis sklep bierze z manifestu wtyczki – tu są tylko do wglądu. Do panelu wklejasz <b>pełny opis</b>.</p>
+      <div class="field">
+        <div class="field-head">
+          <label for="desc-da">Pełny opis (Description)</label>
+          <span class="count">2364 zn. · limit 16 000</span>
+          <button type="button" data-copy="desc-da">Kopiuj</button>
+        </div>
+        <textarea id="desc-da" readonly rows="33">Vid, hvad turen koster, før du kører. Tankful viser den anslåede brændstofudgift lige ved siden af køretid og afstand for hver bilrute i Google Maps – uden at du skal taste tal ind i en lommeregner.
+
+DET FÅR DU
+• Udgiften for hvert rutealternativ, i rutelisten og i rutens detaljer.
+• Et kompakt panel på kortet, der sammenligner alle alternativer side om side.
+• Udgift tur-retur og pr. person, f.eks. »4 × 90 kr.«, når I er fire i bilen.
+• Indstillinger for én rute – kør en vens bil én gang uden at ændre dine standardindstillinger.
+• Ét klik for at kopiere et resumé af turen eller gemme den i historikken.
+
+AKTUELLE BRÆNDSTOFPRISER
+• EU-lande: nationale gennemsnitspriser fra EU-Kommissionens ugentlige Oil Bulletin; i Polen justeret, når Orlens engrospriser eller brændstofafgifterne ændres.
+• Storbritannien: den britiske regerings ugentlige brændstofpriser.
+• USA: det amerikanske EIA's ugentlige benzin- og dieselpriser for staten eller regionen, i miles, gallons og mpg.
+• Ture gennem flere lande: prisen vægtes efter kilometerne i hvert land – så du kan se, hvad det koster at tanke i Tyskland eller Sverige på vejen.
+• Benzin 95 og 98, diesel, premium diesel og autogas (LPG) – eller din egen pris.
+• Elbiler: et interval fra opladning hjemme til lynladere.
+• Priser i DKK, EUR, SEK, NOK, PLN, CZK, HUF, RON, GBP, CHF, ISK eller USD, omregnet efter Polens Nationalbanks kurser.
+
+TURHISTORIK
+• Gem ture, og se dem samlet pr. måned med samlet afstand og udgift.
+• Eksport til CSV til regneark eller bogføring.
+
+PRIVATLIV
+Ingen konto, ingen reklamer, ingen analyse, ingen servere. Dine indstillinger og din turhistorik bliver i din browser. For at finde landet og dets priser sendes kun rutens start og mål – afrundet til ca. 1 km – til OpenStreetMap, og det kan slås fra. Fuld politik: https://koszt-paliwa.pl/privacy.html
+
+Virker i Google Maps i alle EU-lande, Storbritannien, USA, Schweiz, Norge og Island – med automatiske priser i EU, Storbritannien og USA og din egen pris i Schweiz, Norge og Island. Fås på 16 europæiske sprog.
+
+Onlineberegner uden udvidelse: https://koszt-paliwa.pl/en
+
+Udgifterne er skøn baseret på gennemsnitlige brændstofpriser og det forbrug, du angiver; prisen ved standeren kan afvige.
+
+Tankful er et uafhængigt projekt og er ikke tilknyttet eller godkendt af Google. Open source (MIT): https://github.com/Michalskii/tankful</textarea>
+      </div>
+      <div class="field">
+        <div class="field-head">
+          <label for="name-da">Nazwa (z manifestu)</label>
+          <span class="count">39 zn. · limit 75</span>
+          <button type="button" data-copy="name-da">Kopiuj</button>
+        </div>
+        <textarea id="name-da" readonly rows="2">Tankful – brændstofudgift for hver rute</textarea>
+      </div>
+      <div class="field">
+        <div class="field-head">
+          <label for="summary-da">Krótki opis (z manifestu)</label>
+          <span class="count">123 zn. · limit 132</span>
+          <button type="button" data-copy="summary-da">Kopiuj</button>
+        </div>
+        <textarea id="summary-da" readonly rows="2">Brændstofudgiften for hver bilrute i Google Maps – aktuelle priser i EU, Storbritannien og USA, elbiler, udgift pr. person.</textarea>
+      </div>
+  </section>
+  <section class="lang" id="lang-fi">
+    <p class="store-lang">Język w panelu sklepu: <b>Finnish</b></p>
+    <p class="hint">Nazwę i krótki opis sklep bierze z manifestu wtyczki – tu są tylko do wglądu. Do panelu wklejasz <b>pełny opis</b>.</p>
+      <div class="field">
+        <div class="field-head">
+          <label for="desc-fi">Pełny opis (Description)</label>
+          <span class="count">2556 zn. · limit 16 000</span>
+          <button type="button" data-copy="desc-fi">Kopiuj</button>
+        </div>
+        <textarea id="desc-fi" readonly rows="33">Tiedä matkan hinta ennen lähtöä. Tankful näyttää arvioidut polttoainekulut jokaisen Google Maps -ajoreitin ajoajan ja matkan vieressä – ilman lukujen kopioimista laskimeen.
+
+MITÄ SAAT
+• Jokaisen reittivaihtoehdon kulut reittiluettelossa ja reitin tiedoissa.
+• Kompaktin paneelin kartalla, joka vertailee kaikkia vaihtoehtoja rinnakkain.
+• Meno-paluun kulut ja kulut henkilöä kohden, esim. ”4 × 12 €”, kun matkustatte neljästään.
+• Asetukset vain yhdelle reitille – aja kerran kaverin autolla muuttamatta oletusasetuksiasi.
+• Yhdellä napsautuksella kopioit matkan yhteenvedon tai tallennat sen historiaan.
+
+AJANTASAISET POLTTOAINEHINNAT
+• EU-maat: kansalliset keskihinnat Euroopan komission viikoittaisesta Oil Bulletin -tiedotteesta; Puolassa korjattuina, kun Orlenin tukkuhinnat tai polttoaineverot muuttuvat.
+• Iso-Britannia: Britannian hallituksen viikoittaiset polttoainehinnat.
+• USA: Yhdysvaltain EIA:n viikoittaiset bensiinin ja dieselin hinnat osavaltiolle tai alueelle, maileina, gallonoina ja mpg:nä.
+• Usean maan läpi kulkevat matkat: hinta painotetaan kussakin maassa ajetuilla kilometreillä – näet, mitä tankkaus Ruotsissa tai Virossa matkan varrella maksaa.
+• Bensiini 95 ja 98, diesel, premium-diesel ja nestekaasu (LPG) – tai oma hinta.
+• Sähköautot: vaihteluväli kotilatauksesta pikalatureihin.
+• Hinnat valuutoissa EUR, SEK, NOK, DKK, PLN, CZK, HUF, RON, GBP, CHF, ISK tai USD, muunnettuna Puolan keskuspankin kursseilla.
+
+MATKAHISTORIA
+• Tallenna matkoja ja näe ne kuukausittain ryhmiteltyinä kokonaismatkan ja -kulujen kanssa.
+• Vienti CSV-tiedostoon taulukkolaskentaa tai kirjanpitoa varten.
+
+YKSITYISYYS
+Ei tiliä, ei mainoksia, ei analytiikkaa, ei palvelimia. Asetuksesi ja matkahistoriasi pysyvät selaimessasi. Maan ja sen hintojen selvittämiseksi OpenStreetMapiin lähetetään vain reitin lähtö- ja määränpää – noin 1 km:n tarkkuuteen pyöristettynä – ja sen voi kytkeä pois. Koko käytäntö: https://koszt-paliwa.pl/privacy.html
+
+Toimii Google Mapsissa kaikissa EU-maissa, Isossa-Britanniassa, USA:ssa, Sveitsissä, Norjassa ja Islannissa – automaattisilla hinnoilla EU:ssa, Isossa-Britanniassa ja USA:ssa sekä omalla hinnalla Sveitsissä, Norjassa ja Islannissa. Saatavilla 16 eurooppalaisella kielellä.
+
+Verkkolaskuri ilman laajennusta: https://koszt-paliwa.pl/en
+
+Kulut ovat arvioita, jotka perustuvat polttoaineiden keskihintoihin ja antamaasi kulutukseen; hinnat asemalla voivat poiketa.
+
+Tankful on itsenäinen projekti, joka ei liity Googleen eikä ole Googlen hyväksymä. Avoin lähdekoodi (MIT): https://github.com/Michalskii/tankful</textarea>
+      </div>
+      <div class="field">
+        <div class="field-head">
+          <label for="name-fi">Nazwa (z manifestu)</label>
+          <span class="count">45 zn. · limit 75</span>
+          <button type="button" data-copy="name-fi">Kopiuj</button>
+        </div>
+        <textarea id="name-fi" readonly rows="2">Tankful – polttoainekulut jokaiselle reitille</textarea>
+      </div>
+      <div class="field">
+        <div class="field-head">
+          <label for="summary-fi">Krótki opis (z manifestu)</label>
+          <span class="count">131 zn. · limit 132</span>
+          <button type="button" data-copy="summary-fi">Kopiuj</button>
+        </div>
+        <textarea id="summary-fi" readonly rows="2">Jokaisen Google Maps -reitin polttoainekulut – ajantasaiset hinnat EU:ssa, Isossa-Britanniassa ja USA:ssa, sähköautot, per henkilö.</textarea>
+      </div>
+  </section>
+</main>
+<script>
+  const tabs = document.querySelectorAll("nav button");
+  const show = (code) => {
+    for (const t of tabs) t.setAttribute("aria-selected", String(t.dataset.lang === code));
+    for (const s of document.querySelectorAll(".lang")) s.classList.toggle("active", s.id === "lang-" + code);
+    try { localStorage.setItem("tankful-listing-lang", code); } catch {}
+  };
+  for (const t of tabs) t.addEventListener("click", () => show(t.dataset.lang));
+  try { const saved = localStorage.getItem("tankful-listing-lang"); if (saved && document.getElementById("lang-" + saved)) show(saved); } catch {}
+  for (const b of document.querySelectorAll("[data-copy]")) {
+    b.addEventListener("click", async () => {
+      const area = document.getElementById(b.dataset.copy);
+      try {
+        await navigator.clipboard.writeText(area.value);
+      } catch {
+        area.select();
+        document.execCommand("copy");
+      }
+      b.textContent = "Skopiowano ✓";
+      b.classList.add("done");
+      setTimeout(() => { b.textContent = "Kopiuj"; b.classList.remove("done"); }, 1500);
+    });
+  }
+</script>
+</body>
+</html>

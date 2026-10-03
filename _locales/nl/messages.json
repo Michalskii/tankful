@@ -1,0 +1,356 @@
+{
+  "appName": {
+    "message": "Tankful – brandstofkosten voor elke route"
+  },
+  "appDescription": {
+    "message": "De brandstofkosten van elke autoroute in Google Maps – actuele prijzen in de EU, het VK en de VS, elektrisch, kosten per persoon."
+  },
+  "actionTitle": {
+    "message": "Instellingen ritkosten"
+  },
+  "fuel_pb": {
+    "message": "Benzine 95"
+  },
+  "fuel_pbp": {
+    "message": "Benzine 98"
+  },
+  "fuel_on": {
+    "message": "Diesel"
+  },
+  "fuel_onp": {
+    "message": "Premium diesel"
+  },
+  "fuel_lpg": {
+    "message": "LPG"
+  },
+  "fuel_ev": {
+    "message": "Elektrisch (EV)"
+  },
+  "mileage_small_label": {
+    "message": "tot 900 cc"
+  },
+  "mileage_large_label": {
+    "message": "boven 900 cc / elektrisch"
+  },
+  "mileage_off": {
+    "message": "Niet tonen"
+  },
+  "mileage_small_option": {
+    "message": "Tot 900 cc – $1/km"
+  },
+  "mileage_large_option": {
+    "message": "Boven 900 cc of elektrisch – $1/km"
+  },
+  "price_manual": {
+    "message": "eigen prijs"
+  },
+  "price_missing": {
+    "message": "geen actuele prijzen – eigen prijs"
+  },
+  "price_no_rate": {
+    "message": "geen wisselkoers $1 – eigen prijs"
+  },
+  "price_national": {
+    "message": "gem. Polen"
+  },
+  "price_single": {
+    "message": "$1 $2"
+  },
+  "price_average": {
+    "message": "gemiddelde van $1 $2 en $3 $4"
+  },
+  "price_route": {
+    "message": "routegemiddelde: $1"
+  },
+  "price_ev": {
+    "message": "thuis $1 – snellader $2 per kWh"
+  },
+  "trip_cost": {
+    "message": "Ritkosten"
+  },
+  "route_default": {
+    "message": "Route"
+  },
+  "per_person": {
+    "message": "$1/persoon"
+  },
+  "people_line": {
+    "message": "👥 $1 × $2"
+  },
+  "round_short": {
+    "message": "heen en terug"
+  },
+  "round_long": {
+    "message": "heen en terug"
+  },
+  "cost_setup": {
+    "message": "⚙ Brandstof instellen"
+  },
+  "cost_mileage": {
+    "message": "🧾 kilometervergoeding $1"
+  },
+  "title_setup": {
+    "message": "Klik om brandstof en verbruik te kiezen"
+  },
+  "title_round": {
+    "message": "Heen en terug: dezelfde route × 2."
+  },
+  "title_mileage": {
+    "message": "Poolse kilometervergoeding: $1/km ($2)."
+  },
+  "title_override": {
+    "message": "Instellingen alleen voor deze route."
+  },
+  "click_to_change": {
+    "message": "Klik om te wijzigen."
+  },
+  "warn_text": {
+    "message": "🚗 Tankful vindt de afstand van deze route niet – misschien heeft Google de Maps-pagina aangepast. De ritkosten zijn tijdelijk niet beschikbaar."
+  },
+  "warn_hide": {
+    "message": "Verbergen voor deze route"
+  },
+  "float_settings": {
+    "message": "Brandstofinstellingen"
+  },
+  "float_expand": {
+    "message": "Uitklappen"
+  },
+  "float_collapse": {
+    "message": "Inklappen"
+  },
+  "float_setup": {
+    "message": "⚙ Brandstof en verbruik instellen"
+  },
+  "float_show_route": {
+    "message": "Deze route op de kaart tonen"
+  },
+  "float_copy": {
+    "message": "📋 Kopiëren"
+  },
+  "float_copy_title": {
+    "message": "Een samenvatting van de gekozen route kopiëren"
+  },
+  "float_save": {
+    "message": "💾 Rit opslaan"
+  },
+  "float_save_title": {
+    "message": "De gekozen route aan je rittenoverzicht toevoegen"
+  },
+  "float_override_tag": {
+    "message": "✎ alleen deze route"
+  },
+  "copied": {
+    "message": "✓ Gekopieerd"
+  },
+  "copy_failed": {
+    "message": "Mislukt"
+  },
+  "saved_flash": {
+    "message": "✓ Opgeslagen"
+  },
+  "summary_fuel": {
+    "message": "Brandstof: $1"
+  },
+  "summary_round": {
+    "message": "Heen en terug: $1"
+  },
+  "summary_link": {
+    "message": "— berekend met Tankful: $1"
+  },
+  "summary_mileage": {
+    "message": "Kilometervergoeding: $1"
+  },
+  "panel_title_first": {
+    "message": "Je auto"
+  },
+  "label_fuel": {
+    "message": "Brandstof"
+  },
+  "label_passengers": {
+    "message": "Personen"
+  },
+  "consumption_fuel": {
+    "message": "Verbruik ($1 per 100 km)"
+  },
+  "consumption_ev": {
+    "message": "Energieverbruik ($1 per 100 km)"
+  },
+  "panel_price": {
+    "message": "Prijs: $1"
+  },
+  "btn_route_only": {
+    "message": "Alleen deze route"
+  },
+  "btn_save": {
+    "message": "Opslaan"
+  },
+  "btn_save_default": {
+    "message": "Als standaard opslaan"
+  },
+  "btn_reset_route": {
+    "message": "Standaardinstellingen voor deze route herstellen"
+  },
+  "popup_auto_price": {
+    "message": "Gemiddelde prijzen automatisch ophalen"
+  },
+  "popup_refresh": {
+    "message": "Vernieuwen"
+  },
+  "popup_local_prices": {
+    "message": "Prijzen van de landen op de route (EU, VK en VS)"
+  },
+  "popup_local_hint": {
+    "message": "Start en bestemming van de route (afgerond op ~1 km) worden naar OpenStreetMap gestuurd om het land te bepalen."
+  },
+  "popup_manual_price": {
+    "message": "Eigen prijs (per liter)"
+  },
+  "popup_ev_home": {
+    "message": "Stroom thuis (kWh)"
+  },
+  "popup_ev_fast": {
+    "message": "Snellader (kWh)"
+  },
+  "popup_currency": {
+    "message": "Valuta"
+  },
+  "popup_mileage": {
+    "message": "Kilometervergoeding (Poolse tarieven)"
+  },
+  "popup_summary_link": {
+    "message": "Tankful-link toevoegen aan gekopieerde samenvattingen"
+  },
+  "popup_round_trip": {
+    "message": "Kosten heen en terug tonen"
+  },
+  "popup_floating": {
+    "message": "Routepaneel op de kaart"
+  },
+  "popup_history": {
+    "message": "📒 Rittenoverzicht"
+  },
+  "popup_saved": {
+    "message": "Opgeslagen"
+  },
+  "popup_fetching": {
+    "message": "Ophalen…"
+  },
+  "popup_fetch_error": {
+    "message": "Downloaden mislukt – de eigen prijs wordt gebruikt."
+  },
+  "popup_no_response": {
+    "message": "geen antwoord"
+  },
+  "popup_preview": {
+    "message": "$1 ≈ $2"
+  },
+  "welcome_page_title": {
+    "message": "Tankful – eerste instelling"
+  },
+  "welcome_tagline": {
+    "message": "Brandstofkosten voor elke route"
+  },
+  "welcome_lead": {
+    "message": "Kies je brandstof en vul je verbruik in. Daarmee zie je de geschatte ritkosten van elke autoroute in Google Maps."
+  },
+  "welcome_consumption": {
+    "message": "Gemiddeld verbruik"
+  },
+  "welcome_submit": {
+    "message": "Opslaan en Google Maps openen"
+  },
+  "welcome_hint": {
+    "message": "Je kunt dit altijd wijzigen: klik op het pictogram van de extensie of op de kosten op de kaart en kies of de wijziging voor één route geldt of als standaard wordt opgeslagen."
+  },
+  "welcome_ev": {
+    "message": "Voor een elektrische auto tonen we een bereik: thuis laden – snellader. Stroomprijzen stel je in bij de instellingen van de extensie."
+  },
+  "welcome_price_auto": {
+    "message": "Actuele prijs: $1 – wordt automatisch bijgewerkt."
+  },
+  "welcome_price_pending": {
+    "message": "De gemiddelde brandstofprijzen worden zo meteen op de achtergrond opgehaald."
+  },
+  "history_title": {
+    "message": "Rittenoverzicht"
+  },
+  "history_lead": {
+    "message": "Routes die je opslaat met de knop ‘💾 Rit opslaan’ in het paneel op de kaart."
+  },
+  "history_export": {
+    "message": "CSV exporteren"
+  },
+  "history_empty": {
+    "message": "Je hebt nog geen opgeslagen ritten. Plan een autoroute in Google Maps en klik op ‘💾 Rit opslaan’ in het paneel rechtsboven op de kaart."
+  },
+  "trips_one": {
+    "message": "$1 rit"
+  },
+  "trips_few": {
+    "message": "$1 ritten"
+  },
+  "trips_many": {
+    "message": "$1 ritten"
+  },
+  "trips_other": {
+    "message": "$1 ritten"
+  },
+  "history_round_on": {
+    "message": "Heen en terug (klik voor alleen heen)"
+  },
+  "history_round_off": {
+    "message": "Alleen heen (klik voor heen en terug)"
+  },
+  "history_delete": {
+    "message": "Rit verwijderen"
+  },
+  "history_delete_confirm": {
+    "message": "De rit $1 → $2 verwijderen?"
+  },
+  "csv_header": {
+    "message": "Datum;Van;Naar;Route;Afstand ($1);Heen en terug;Brandstof;Verbruik ($2);Personen;Kosten van;Kosten tot;Valuta;Kilometervergoeding"
+  },
+  "csv_yes": {
+    "message": "ja"
+  },
+  "csv_no": {
+    "message": "nee"
+  },
+  "csv_filename": {
+    "message": "ritten"
+  },
+  "error_poland_prices": {
+    "message": "EU-bulletin: geen prijzen voor Polen"
+  },
+  "error_eu_file": {
+    "message": "EU-bulletin: ongeldig XLSX-bestand"
+  },
+  "error_eu_prices": {
+    "message": "EU-bulletin: geen prijzen gevonden"
+  },
+  "consumption_fuel_us": {
+    "message": "Verbruik (mpg)"
+  },
+  "consumption_ev_us": {
+    "message": "Energieverbruik (kWh per 100 mi)"
+  },
+  "popup_manual_price_us": {
+    "message": "Eigen prijs (per gallon)"
+  },
+  "label_units": {
+    "message": "Eenheden"
+  },
+  "units_metric": {
+    "message": "Kilometers en liters"
+  },
+  "units_us": {
+    "message": "Mijlen en US-gallons (mpg)"
+  },
+  "csv_consumption_metric": {
+    "message": "per 100 km"
+  },
+  "csv_consumption_us": {
+    "message": "mpg of kWh per 100 mi"
+  }
+}

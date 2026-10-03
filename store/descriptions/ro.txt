@@ -1,0 +1,32 @@
+Află cât te costă un drum înainte să pleci. Tankful afișează costul estimat al carburantului chiar lângă durata și distanța fiecărui traseu cu mașina din Google Maps – fără să copiezi cifre într-un calculator.
+
+CE PRIMEȘTI
+• Costul fiecărei variante de traseu, în lista de trasee și în detaliile traseului.
+• Un panou compact pe hartă care compară toate variantele una lângă alta.
+• Costul dus-întors și costul pe persoană, de ex. „4 × 60 lei” când mergeți patru.
+• Setări doar pentru un traseu – mergi o dată cu mașina unui prieten fără să-ți schimbi setările implicite.
+• Un clic pentru a copia rezumatul călătoriei sau a o salva în istoric.
+
+PREȚURI ACTUALE LA CARBURANȚI
+• Țările UE: mediile naționale din Buletinul petrolier săptămânal al Comisiei Europene; în Polonia ajustate când se schimbă prețurile en-gros Orlen sau taxele pe carburanți.
+• Regatul Unit: prețurile săptămânale ale carburanților publicate de guvernul britanic.
+• SUA: prețurile săptămânale la benzină și motorină ale agenției americane EIA pentru stat sau regiune, în mile, galoane și mpg.
+• Călătorii prin mai multe țări: prețul este ponderat cu kilometrii parcurși în fiecare țară – vezi cât te costă plinul în Ungaria sau în Bulgaria pe drum.
+• Benzină 95 și 98, motorină, motorină premium și GPL – sau prețul tău.
+• Mașini electrice: un interval de la încărcarea acasă la stațiile rapide.
+• Prețuri în RON, EUR, PLN, CZK, HUF, SEK, DKK, GBP, CHF, NOK, ISK sau USD, convertite la cursurile Băncii Naționale a Poloniei.
+
+ISTORICUL CĂLĂTORIILOR
+• Salvează călătoriile și vezi-le grupate pe luni, cu distanța și costul total.
+• Export CSV pentru foaia de calcul sau contabilitate.
+
+CONFIDENȚIALITATE
+Fără cont, fără reclame, fără statistici, fără servere. Setările și istoricul rămân în browserul tău. Pentru a afla țara și prețurile ei, către OpenStreetMap se trimit doar plecarea și destinația traseului – rotunjite la aproximativ 1 km – iar asta se poate dezactiva. Politica completă: https://koszt-paliwa.pl/privacy.html
+
+Funcționează în Google Maps în toate țările UE, Regatul Unit, SUA, Elveția, Norvegia și Islanda – cu prețuri automate în UE, Regatul Unit și SUA și cu prețul tău în Elveția, Norvegia și Islanda. Disponibilă în 16 limbi europene.
+
+Calculator online fără extensie: https://koszt-paliwa.pl/en
+
+Costurile sunt estimări pe baza prețurilor medii ale carburanților și a consumului introdus; prețurile la pompă pot varia.
+
+Tankful este un proiect independent, fără legătură cu Google și neaprobat de Google. Cod deschis (MIT): https://github.com/Michalskii/tankful

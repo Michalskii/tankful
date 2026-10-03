@@ -1,0 +1,356 @@
+{
+  "appName": {
+    "message": "Tankful – polttoainekulut jokaiselle reitille"
+  },
+  "appDescription": {
+    "message": "Jokaisen Google Maps -reitin polttoainekulut – ajantasaiset hinnat EU:ssa, Isossa-Britanniassa ja USA:ssa, sähköautot, per henkilö."
+  },
+  "actionTitle": {
+    "message": "Matkakulujen asetukset"
+  },
+  "fuel_pb": {
+    "message": "Bensiini 95"
+  },
+  "fuel_pbp": {
+    "message": "Bensiini 98"
+  },
+  "fuel_on": {
+    "message": "Diesel"
+  },
+  "fuel_onp": {
+    "message": "Premium-diesel"
+  },
+  "fuel_lpg": {
+    "message": "Nestekaasu (LPG)"
+  },
+  "fuel_ev": {
+    "message": "Sähköauto (EV)"
+  },
+  "mileage_small_label": {
+    "message": "enintään 900 cm³"
+  },
+  "mileage_large_label": {
+    "message": "yli 900 cm³ / sähkö"
+  },
+  "mileage_off": {
+    "message": "Älä näytä"
+  },
+  "mileage_small_option": {
+    "message": "Enintään 900 cm³ – $1/km"
+  },
+  "mileage_large_option": {
+    "message": "Yli 900 cm³ tai sähkö – $1/km"
+  },
+  "price_manual": {
+    "message": "oma hinta"
+  },
+  "price_missing": {
+    "message": "ei ajantasaisia hintoja – oma hinta"
+  },
+  "price_no_rate": {
+    "message": "ei valuuttakurssia $1 – oma hinta"
+  },
+  "price_national": {
+    "message": "Puolan keskihinta"
+  },
+  "price_single": {
+    "message": "$1 $2"
+  },
+  "price_average": {
+    "message": "keskiarvo: $1 $2 ja $3 $4"
+  },
+  "price_route": {
+    "message": "reitin keskiarvo: $1"
+  },
+  "price_ev": {
+    "message": "kotona $1 – pikalaturi $2 / kWh"
+  },
+  "trip_cost": {
+    "message": "Matkan kulut"
+  },
+  "route_default": {
+    "message": "Reitti"
+  },
+  "per_person": {
+    "message": "$1/hlö"
+  },
+  "people_line": {
+    "message": "👥 $1 × $2"
+  },
+  "round_short": {
+    "message": "meno-paluu"
+  },
+  "round_long": {
+    "message": "meno-paluu"
+  },
+  "cost_setup": {
+    "message": "⚙ Valitse polttoaine"
+  },
+  "cost_mileage": {
+    "message": "🧾 kilometrikorvaus $1"
+  },
+  "title_setup": {
+    "message": "Valitse polttoaine ja kulutus napsauttamalla"
+  },
+  "title_round": {
+    "message": "Meno-paluu: sama reitti × 2."
+  },
+  "title_mileage": {
+    "message": "Puolan kilometrikorvaus: $1/km ($2)."
+  },
+  "title_override": {
+    "message": "Asetukset vain tälle reitille."
+  },
+  "click_to_change": {
+    "message": "Muuta napsauttamalla."
+  },
+  "warn_text": {
+    "message": "🚗 Tankful ei löydä tämän reitin pituutta – Google on ehkä muuttanut Maps-sivua. Matkan kulut eivät ole tilapäisesti saatavilla."
+  },
+  "warn_hide": {
+    "message": "Piilota tältä reitiltä"
+  },
+  "float_settings": {
+    "message": "Polttoaineasetukset"
+  },
+  "float_expand": {
+    "message": "Laajenna"
+  },
+  "float_collapse": {
+    "message": "Pienennä"
+  },
+  "float_setup": {
+    "message": "⚙ Valitse polttoaine ja kulutus"
+  },
+  "float_show_route": {
+    "message": "Näytä tämä reitti kartalla"
+  },
+  "float_copy": {
+    "message": "📋 Kopioi"
+  },
+  "float_copy_title": {
+    "message": "Kopioi yhteenveto valitusta reitistä"
+  },
+  "float_save": {
+    "message": "💾 Tallenna matka"
+  },
+  "float_save_title": {
+    "message": "Lisää valittu reitti matkahistoriaan"
+  },
+  "float_override_tag": {
+    "message": "✎ vain tämä reitti"
+  },
+  "copied": {
+    "message": "✓ Kopioitu"
+  },
+  "copy_failed": {
+    "message": "Epäonnistui"
+  },
+  "saved_flash": {
+    "message": "✓ Tallennettu"
+  },
+  "summary_fuel": {
+    "message": "Polttoaine: $1"
+  },
+  "summary_round": {
+    "message": "Meno-paluu: $1"
+  },
+  "summary_link": {
+    "message": "— laskettu Tankfulilla: $1"
+  },
+  "summary_mileage": {
+    "message": "Kilometrikorvaus: $1"
+  },
+  "panel_title_first": {
+    "message": "Autosi"
+  },
+  "label_fuel": {
+    "message": "Polttoaine"
+  },
+  "label_passengers": {
+    "message": "Henkilöt"
+  },
+  "consumption_fuel": {
+    "message": "Kulutus ($1 / 100 km)"
+  },
+  "consumption_ev": {
+    "message": "Energiankulutus ($1 / 100 km)"
+  },
+  "panel_price": {
+    "message": "Hinta: $1"
+  },
+  "btn_route_only": {
+    "message": "Vain tämä reitti"
+  },
+  "btn_save": {
+    "message": "Tallenna"
+  },
+  "btn_save_default": {
+    "message": "Tallenna oletukseksi"
+  },
+  "btn_reset_route": {
+    "message": "Palauta oletukset tälle reitille"
+  },
+  "popup_auto_price": {
+    "message": "Hae keskihinnat automaattisesti"
+  },
+  "popup_refresh": {
+    "message": "Päivitä"
+  },
+  "popup_local_prices": {
+    "message": "Reitin maiden hinnat (EU, Iso-Britannia ja USA)"
+  },
+  "popup_local_hint": {
+    "message": "Reitin lähtö- ja määränpää (pyöristettynä ~1 km) lähetetään OpenStreetMapiin maan selvittämiseksi."
+  },
+  "popup_manual_price": {
+    "message": "Oma hinta (litralta)"
+  },
+  "popup_ev_home": {
+    "message": "Kotisähkö (kWh)"
+  },
+  "popup_ev_fast": {
+    "message": "Pikalaturi (kWh)"
+  },
+  "popup_currency": {
+    "message": "Valuutta"
+  },
+  "popup_mileage": {
+    "message": "Kilometrikorvaus (Puolan taksat)"
+  },
+  "popup_summary_link": {
+    "message": "Lisää Tankful-linkki kopioituihin yhteenvetoihin"
+  },
+  "popup_round_trip": {
+    "message": "Näytä meno-paluun kulut"
+  },
+  "popup_floating": {
+    "message": "Reittipaneeli kartalla"
+  },
+  "popup_history": {
+    "message": "📒 Matkahistoria"
+  },
+  "popup_saved": {
+    "message": "Tallennettu"
+  },
+  "popup_fetching": {
+    "message": "Haetaan…"
+  },
+  "popup_fetch_error": {
+    "message": "Haku epäonnistui – käytetään omaa hintaa."
+  },
+  "popup_no_response": {
+    "message": "ei vastausta"
+  },
+  "popup_preview": {
+    "message": "$1 ≈ $2"
+  },
+  "welcome_page_title": {
+    "message": "Tankful – ensimmäinen asetus"
+  },
+  "welcome_tagline": {
+    "message": "Polttoainekulut jokaiselle reitille"
+  },
+  "welcome_lead": {
+    "message": "Valitse polttoaine ja anna kulutus. Niiden perusteella näet jokaisen Google Maps -ajoreitin arvioidut kulut."
+  },
+  "welcome_consumption": {
+    "message": "Keskikulutus"
+  },
+  "welcome_submit": {
+    "message": "Tallenna ja avaa Google Maps"
+  },
+  "welcome_hint": {
+    "message": "Voit muuttaa tätä milloin tahansa: napsauta laajennuksen kuvaketta tai kartalla näkyvää hintaa ja valitse, koskeeko muutos yhtä reittiä vai tallennetaanko se oletukseksi."
+  },
+  "welcome_ev": {
+    "message": "Sähköautolle näytämme vaihteluvälin: lataus kotona – pikalaturi. Sähkön hinnat voit asettaa laajennuksen asetuksissa."
+  },
+  "welcome_price_auto": {
+    "message": "Nykyinen hinta: $1 – päivittyy automaattisesti."
+  },
+  "welcome_price_pending": {
+    "message": "Polttoaineiden keskihinnat haetaan taustalla hetken kuluttua."
+  },
+  "history_title": {
+    "message": "Matkahistoria"
+  },
+  "history_lead": {
+    "message": "Reitit, jotka on tallennettu kartan paneelin ”💾 Tallenna matka” -painikkeella."
+  },
+  "history_export": {
+    "message": "Vie CSV"
+  },
+  "history_empty": {
+    "message": "Sinulla ei ole vielä tallennettuja matkoja. Suunnittele ajoreitti Google Mapsissa ja napsauta ”💾 Tallenna matka” kartan oikeassa yläkulmassa olevassa paneelissa."
+  },
+  "trips_one": {
+    "message": "$1 matka"
+  },
+  "trips_few": {
+    "message": "$1 matkaa"
+  },
+  "trips_many": {
+    "message": "$1 matkaa"
+  },
+  "trips_other": {
+    "message": "$1 matkaa"
+  },
+  "history_round_on": {
+    "message": "Meno-paluu (napsauta, niin vain meno)"
+  },
+  "history_round_off": {
+    "message": "Vain meno (napsauta, niin meno-paluu)"
+  },
+  "history_delete": {
+    "message": "Poista matka"
+  },
+  "history_delete_confirm": {
+    "message": "Poistetaanko matka $1 → $2?"
+  },
+  "csv_header": {
+    "message": "Päivämäärä;Mistä;Mihin;Reitti;Matka ($1);Meno-paluu;Polttoaine;Kulutus ($2);Henkilöt;Kulut alkaen;Kulut enintään;Valuutta;Kilometrikorvaus"
+  },
+  "csv_yes": {
+    "message": "kyllä"
+  },
+  "csv_no": {
+    "message": "ei"
+  },
+  "csv_filename": {
+    "message": "matkat"
+  },
+  "error_poland_prices": {
+    "message": "EU:n tiedote: ei hintoja Puolalle"
+  },
+  "error_eu_file": {
+    "message": "EU:n tiedote: virheellinen XLSX-tiedosto"
+  },
+  "error_eu_prices": {
+    "message": "EU:n tiedote: hintoja ei löytynyt"
+  },
+  "consumption_fuel_us": {
+    "message": "Kulutus (mpg)"
+  },
+  "consumption_ev_us": {
+    "message": "Energiankulutus (kWh / 100 mi)"
+  },
+  "popup_manual_price_us": {
+    "message": "Oma hinta (gallonalta)"
+  },
+  "label_units": {
+    "message": "Yksiköt"
+  },
+  "units_metric": {
+    "message": "Kilometrit ja litrat"
+  },
+  "units_us": {
+    "message": "Mailit ja US-gallonat (mpg)"
+  },
+  "csv_consumption_metric": {
+    "message": "/ 100 km"
+  },
+  "csv_consumption_us": {
+    "message": "mpg tai kWh / 100 mi"
+  }
+}

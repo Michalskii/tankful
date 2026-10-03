@@ -1,0 +1,356 @@
+{
+  "appName": {
+    "message": "Tankful – bränslekostnad för varje rutt"
+  },
+  "appDescription": {
+    "message": "Bränslekostnaden för varje bilrutt i Google Maps – aktuella priser i EU, Storbritannien och USA, elbilar, kostnad per person."
+  },
+  "actionTitle": {
+    "message": "Inställningar för resekostnad"
+  },
+  "fuel_pb": {
+    "message": "Bensin 95"
+  },
+  "fuel_pbp": {
+    "message": "Bensin 98"
+  },
+  "fuel_on": {
+    "message": "Diesel"
+  },
+  "fuel_onp": {
+    "message": "Premiumdiesel"
+  },
+  "fuel_lpg": {
+    "message": "Gasol (LPG)"
+  },
+  "fuel_ev": {
+    "message": "Elbil (EV)"
+  },
+  "mileage_small_label": {
+    "message": "upp till 900 cm³"
+  },
+  "mileage_large_label": {
+    "message": "över 900 cm³ / el"
+  },
+  "mileage_off": {
+    "message": "Visa inte"
+  },
+  "mileage_small_option": {
+    "message": "Upp till 900 cm³ – $1/km"
+  },
+  "mileage_large_option": {
+    "message": "Över 900 cm³ eller el – $1/km"
+  },
+  "price_manual": {
+    "message": "eget pris"
+  },
+  "price_missing": {
+    "message": "inga aktuella priser – eget pris"
+  },
+  "price_no_rate": {
+    "message": "ingen växelkurs för $1 – eget pris"
+  },
+  "price_national": {
+    "message": "snitt Polen"
+  },
+  "price_single": {
+    "message": "$1 $2"
+  },
+  "price_average": {
+    "message": "snitt av $1 $2 och $3 $4"
+  },
+  "price_route": {
+    "message": "ruttens snitt: $1"
+  },
+  "price_ev": {
+    "message": "hemma $1 – snabbladdare $2 per kWh"
+  },
+  "trip_cost": {
+    "message": "Resekostnad"
+  },
+  "route_default": {
+    "message": "Rutt"
+  },
+  "per_person": {
+    "message": "$1/person"
+  },
+  "people_line": {
+    "message": "👥 $1 × $2"
+  },
+  "round_short": {
+    "message": "tur och retur"
+  },
+  "round_long": {
+    "message": "tur och retur"
+  },
+  "cost_setup": {
+    "message": "⚙ Välj bränsle"
+  },
+  "cost_mileage": {
+    "message": "🧾 milersättning $1"
+  },
+  "title_setup": {
+    "message": "Klicka för att välja bränsle och förbrukning"
+  },
+  "title_round": {
+    "message": "Tur och retur: samma rutt × 2."
+  },
+  "title_mileage": {
+    "message": "Polsk milersättning: $1/km ($2)."
+  },
+  "title_override": {
+    "message": "Inställningar bara för den här rutten."
+  },
+  "click_to_change": {
+    "message": "Klicka för att ändra."
+  },
+  "warn_text": {
+    "message": "🚗 Tankful hittar inte ruttens avstånd – Google kan ha ändrat Maps-sidan. Resekostnaden är tillfälligt otillgänglig."
+  },
+  "warn_hide": {
+    "message": "Dölj för den här rutten"
+  },
+  "float_settings": {
+    "message": "Bränsleinställningar"
+  },
+  "float_expand": {
+    "message": "Visa mer"
+  },
+  "float_collapse": {
+    "message": "Visa mindre"
+  },
+  "float_setup": {
+    "message": "⚙ Välj bränsle och förbrukning"
+  },
+  "float_show_route": {
+    "message": "Visa den här rutten på kartan"
+  },
+  "float_copy": {
+    "message": "📋 Kopiera"
+  },
+  "float_copy_title": {
+    "message": "Kopiera en sammanfattning av den valda rutten"
+  },
+  "float_save": {
+    "message": "💾 Spara resa"
+  },
+  "float_save_title": {
+    "message": "Lägg till den valda rutten i reshistoriken"
+  },
+  "float_override_tag": {
+    "message": "✎ bara den här rutten"
+  },
+  "copied": {
+    "message": "✓ Kopierat"
+  },
+  "copy_failed": {
+    "message": "Misslyckades"
+  },
+  "saved_flash": {
+    "message": "✓ Sparat"
+  },
+  "summary_fuel": {
+    "message": "Bränsle: $1"
+  },
+  "summary_round": {
+    "message": "Tur och retur: $1"
+  },
+  "summary_link": {
+    "message": "— beräknat med Tankful: $1"
+  },
+  "summary_mileage": {
+    "message": "Milersättning: $1"
+  },
+  "panel_title_first": {
+    "message": "Din bil"
+  },
+  "label_fuel": {
+    "message": "Bränsle"
+  },
+  "label_passengers": {
+    "message": "Personer"
+  },
+  "consumption_fuel": {
+    "message": "Förbrukning ($1 per 100 km)"
+  },
+  "consumption_ev": {
+    "message": "Energiförbrukning ($1 per 100 km)"
+  },
+  "panel_price": {
+    "message": "Pris: $1"
+  },
+  "btn_route_only": {
+    "message": "Bara den här rutten"
+  },
+  "btn_save": {
+    "message": "Spara"
+  },
+  "btn_save_default": {
+    "message": "Spara som standard"
+  },
+  "btn_reset_route": {
+    "message": "Återställ standard för den här rutten"
+  },
+  "popup_auto_price": {
+    "message": "Hämta snittpriser automatiskt"
+  },
+  "popup_refresh": {
+    "message": "Uppdatera"
+  },
+  "popup_local_prices": {
+    "message": "Priser i länderna längs rutten (EU, Storbritannien och USA)"
+  },
+  "popup_local_hint": {
+    "message": "Ruttens start och mål (avrundade till ~1 km) skickas till OpenStreetMap för att hitta landet."
+  },
+  "popup_manual_price": {
+    "message": "Eget pris (per liter)"
+  },
+  "popup_ev_home": {
+    "message": "El hemma (kWh)"
+  },
+  "popup_ev_fast": {
+    "message": "Snabbladdare (kWh)"
+  },
+  "popup_currency": {
+    "message": "Valuta"
+  },
+  "popup_mileage": {
+    "message": "Milersättning (polska tjänstesatser)"
+  },
+  "popup_summary_link": {
+    "message": "Lägg till en Tankful-länk i kopierade sammanfattningar"
+  },
+  "popup_round_trip": {
+    "message": "Visa kostnad tur och retur"
+  },
+  "popup_floating": {
+    "message": "Ruttpanel på kartan"
+  },
+  "popup_history": {
+    "message": "📒 Reshistorik"
+  },
+  "popup_saved": {
+    "message": "Sparat"
+  },
+  "popup_fetching": {
+    "message": "Hämtar…"
+  },
+  "popup_fetch_error": {
+    "message": "Hämtningen misslyckades – eget pris används."
+  },
+  "popup_no_response": {
+    "message": "inget svar"
+  },
+  "popup_preview": {
+    "message": "$1 ≈ $2"
+  },
+  "welcome_page_title": {
+    "message": "Tankful – första inställning"
+  },
+  "welcome_tagline": {
+    "message": "Bränslekostnad för varje rutt"
+  },
+  "welcome_lead": {
+    "message": "Välj bränsle och ange förbrukning. Utifrån det ser du den beräknade resekostnaden för varje bilrutt i Google Maps."
+  },
+  "welcome_consumption": {
+    "message": "Genomsnittlig förbrukning"
+  },
+  "welcome_submit": {
+    "message": "Spara och öppna Google Maps"
+  },
+  "welcome_hint": {
+    "message": "Du kan ändra det när som helst: klicka på tilläggets ikon eller på kostnaden på kartan och välj om ändringen gäller en rutt eller sparas som standard."
+  },
+  "welcome_ev": {
+    "message": "För en elbil visar vi ett intervall: laddning hemma – snabbladdare. Elpriserna ställer du in i tilläggets inställningar."
+  },
+  "welcome_price_auto": {
+    "message": "Aktuellt pris: $1 – uppdateras automatiskt."
+  },
+  "welcome_price_pending": {
+    "message": "Snittpriserna för bränsle hämtas i bakgrunden om ett ögonblick."
+  },
+  "history_title": {
+    "message": "Reshistorik"
+  },
+  "history_lead": {
+    "message": "Rutter som sparats med knappen ”💾 Spara resa” i panelen på kartan."
+  },
+  "history_export": {
+    "message": "Exportera CSV"
+  },
+  "history_empty": {
+    "message": "Du har inga sparade resor än. Planera en bilrutt i Google Maps och klicka på ”💾 Spara resa” i panelen uppe till höger på kartan."
+  },
+  "trips_one": {
+    "message": "$1 resa"
+  },
+  "trips_few": {
+    "message": "$1 resor"
+  },
+  "trips_many": {
+    "message": "$1 resor"
+  },
+  "trips_other": {
+    "message": "$1 resor"
+  },
+  "history_round_on": {
+    "message": "Tur och retur (klicka för enkel resa)"
+  },
+  "history_round_off": {
+    "message": "Enkel resa (klicka för tur och retur)"
+  },
+  "history_delete": {
+    "message": "Ta bort resa"
+  },
+  "history_delete_confirm": {
+    "message": "Ta bort resan $1 → $2?"
+  },
+  "csv_header": {
+    "message": "Datum;Från;Till;Rutt;Avstånd ($1);Tur och retur;Bränsle;Förbrukning ($2);Personer;Kostnad från;Kostnad till;Valuta;Milersättning"
+  },
+  "csv_yes": {
+    "message": "ja"
+  },
+  "csv_no": {
+    "message": "nej"
+  },
+  "csv_filename": {
+    "message": "resor"
+  },
+  "error_poland_prices": {
+    "message": "EU-bulletinen: inga priser för Polen"
+  },
+  "error_eu_file": {
+    "message": "EU-bulletinen: ogiltig XLSX-fil"
+  },
+  "error_eu_prices": {
+    "message": "EU-bulletinen: inga priser hittades"
+  },
+  "consumption_fuel_us": {
+    "message": "Förbrukning (mpg)"
+  },
+  "consumption_ev_us": {
+    "message": "Energiförbrukning (kWh per 100 mi)"
+  },
+  "popup_manual_price_us": {
+    "message": "Eget pris (per gallon)"
+  },
+  "label_units": {
+    "message": "Enheter"
+  },
+  "units_metric": {
+    "message": "Kilometer och liter"
+  },
+  "units_us": {
+    "message": "Engelska mil och US-gallon (mpg)"
+  },
+  "csv_consumption_metric": {
+    "message": "per 100 km"
+  },
+  "csv_consumption_us": {
+    "message": "mpg eller kWh per 100 mi"
+  }
+}

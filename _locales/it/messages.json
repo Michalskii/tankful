@@ -1,0 +1,356 @@
+{
+  "appName": {
+    "message": "Tankful – costo del carburante per ogni percorso"
+  },
+  "appDescription": {
+    "message": "Costo del carburante di ogni percorso in Google Maps – prezzi aggiornati in UE, Regno Unito e USA, auto elettriche, costo a persona."
+  },
+  "actionTitle": {
+    "message": "Impostazioni del costo del viaggio"
+  },
+  "fuel_pb": {
+    "message": "Benzina 95"
+  },
+  "fuel_pbp": {
+    "message": "Benzina 98"
+  },
+  "fuel_on": {
+    "message": "Diesel"
+  },
+  "fuel_onp": {
+    "message": "Diesel premium"
+  },
+  "fuel_lpg": {
+    "message": "GPL"
+  },
+  "fuel_ev": {
+    "message": "Elettrica (EV)"
+  },
+  "mileage_small_label": {
+    "message": "fino a 900 cm³"
+  },
+  "mileage_large_label": {
+    "message": "oltre 900 cm³ / elettrica"
+  },
+  "mileage_off": {
+    "message": "Non mostrare"
+  },
+  "mileage_small_option": {
+    "message": "Fino a 900 cm³ – $1/km"
+  },
+  "mileage_large_option": {
+    "message": "Oltre 900 cm³ o elettrica – $1/km"
+  },
+  "price_manual": {
+    "message": "prezzo manuale"
+  },
+  "price_missing": {
+    "message": "nessun prezzo aggiornato – prezzo manuale"
+  },
+  "price_no_rate": {
+    "message": "nessun tasso di cambio $1 – prezzo manuale"
+  },
+  "price_national": {
+    "message": "media Polonia"
+  },
+  "price_single": {
+    "message": "$1 $2"
+  },
+  "price_average": {
+    "message": "media di $1 $2 e $3 $4"
+  },
+  "price_route": {
+    "message": "media del percorso: $1"
+  },
+  "price_ev": {
+    "message": "casa $1 – colonnina rapida $2 per kWh"
+  },
+  "trip_cost": {
+    "message": "Costo del viaggio"
+  },
+  "route_default": {
+    "message": "Percorso"
+  },
+  "per_person": {
+    "message": "$1/persona"
+  },
+  "people_line": {
+    "message": "👥 $1 × $2"
+  },
+  "round_short": {
+    "message": "andata e ritorno"
+  },
+  "round_long": {
+    "message": "andata e ritorno"
+  },
+  "cost_setup": {
+    "message": "⚙ Imposta carburante"
+  },
+  "cost_mileage": {
+    "message": "🧾 rimborso chilometrico $1"
+  },
+  "title_setup": {
+    "message": "Clicca per scegliere carburante e consumo"
+  },
+  "title_round": {
+    "message": "Andata e ritorno: lo stesso percorso × 2."
+  },
+  "title_mileage": {
+    "message": "Rimborso chilometrico polacco: $1/km ($2)."
+  },
+  "title_override": {
+    "message": "Impostazioni solo per questo percorso."
+  },
+  "click_to_change": {
+    "message": "Clicca per modificare."
+  },
+  "warn_text": {
+    "message": "🚗 Tankful non trova la distanza di questo percorso – forse Google ha cambiato la pagina di Maps. Il costo del viaggio non è disponibile per ora."
+  },
+  "warn_hide": {
+    "message": "Nascondi per questo percorso"
+  },
+  "float_settings": {
+    "message": "Impostazioni carburante"
+  },
+  "float_expand": {
+    "message": "Espandi"
+  },
+  "float_collapse": {
+    "message": "Comprimi"
+  },
+  "float_setup": {
+    "message": "⚙ Imposta carburante e consumo"
+  },
+  "float_show_route": {
+    "message": "Mostra questo percorso sulla mappa"
+  },
+  "float_copy": {
+    "message": "📋 Copia"
+  },
+  "float_copy_title": {
+    "message": "Copia un riepilogo del percorso selezionato"
+  },
+  "float_save": {
+    "message": "💾 Salva viaggio"
+  },
+  "float_save_title": {
+    "message": "Aggiungi il percorso selezionato allo storico dei viaggi"
+  },
+  "float_override_tag": {
+    "message": "✎ solo questo percorso"
+  },
+  "copied": {
+    "message": "✓ Copiato"
+  },
+  "copy_failed": {
+    "message": "Errore"
+  },
+  "saved_flash": {
+    "message": "✓ Salvato"
+  },
+  "summary_fuel": {
+    "message": "Carburante: $1"
+  },
+  "summary_round": {
+    "message": "Andata e ritorno: $1"
+  },
+  "summary_link": {
+    "message": "— calcolato con Tankful: $1"
+  },
+  "summary_mileage": {
+    "message": "Rimborso chilometrico: $1"
+  },
+  "panel_title_first": {
+    "message": "La tua auto"
+  },
+  "label_fuel": {
+    "message": "Carburante"
+  },
+  "label_passengers": {
+    "message": "Persone"
+  },
+  "consumption_fuel": {
+    "message": "Consumo ($1 per 100 km)"
+  },
+  "consumption_ev": {
+    "message": "Consumo di energia ($1 per 100 km)"
+  },
+  "panel_price": {
+    "message": "Prezzo: $1"
+  },
+  "btn_route_only": {
+    "message": "Solo questo percorso"
+  },
+  "btn_save": {
+    "message": "Salva"
+  },
+  "btn_save_default": {
+    "message": "Salva come predefinito"
+  },
+  "btn_reset_route": {
+    "message": "Ripristina le impostazioni predefinite per questo percorso"
+  },
+  "popup_auto_price": {
+    "message": "Scarica automaticamente i prezzi medi"
+  },
+  "popup_refresh": {
+    "message": "Aggiorna"
+  },
+  "popup_local_prices": {
+    "message": "Prezzi dei paesi lungo il percorso (UE, Regno Unito e USA)"
+  },
+  "popup_local_hint": {
+    "message": "Partenza e destinazione del percorso (arrotondate a ~1 km) vengono inviate a OpenStreetMap per trovare il paese."
+  },
+  "popup_manual_price": {
+    "message": "Prezzo manuale (al litro)"
+  },
+  "popup_ev_home": {
+    "message": "Elettricità di casa (kWh)"
+  },
+  "popup_ev_fast": {
+    "message": "Colonnina rapida (kWh)"
+  },
+  "popup_currency": {
+    "message": "Valuta"
+  },
+  "popup_mileage": {
+    "message": "Rimborso chilometrico (tariffe polacche)"
+  },
+  "popup_summary_link": {
+    "message": "Aggiungi un link a Tankful ai riepiloghi copiati"
+  },
+  "popup_round_trip": {
+    "message": "Mostra il costo di andata e ritorno"
+  },
+  "popup_floating": {
+    "message": "Pannello del percorso sulla mappa"
+  },
+  "popup_history": {
+    "message": "📒 Storico dei viaggi"
+  },
+  "popup_saved": {
+    "message": "Salvato"
+  },
+  "popup_fetching": {
+    "message": "Download in corso…"
+  },
+  "popup_fetch_error": {
+    "message": "Download non riuscito – viene usato il prezzo manuale."
+  },
+  "popup_no_response": {
+    "message": "nessuna risposta"
+  },
+  "popup_preview": {
+    "message": "$1 ≈ $2"
+  },
+  "welcome_page_title": {
+    "message": "Tankful – prima configurazione"
+  },
+  "welcome_tagline": {
+    "message": "Il costo del carburante per ogni percorso"
+  },
+  "welcome_lead": {
+    "message": "Scegli il carburante e inserisci il consumo. In base a questo vedrai il costo stimato di ogni percorso in auto su Google Maps."
+  },
+  "welcome_consumption": {
+    "message": "Consumo medio"
+  },
+  "welcome_submit": {
+    "message": "Salva e apri Google Maps"
+  },
+  "welcome_hint": {
+    "message": "Puoi cambiarlo in qualsiasi momento: clicca sull'icona dell'estensione o sul costo sulla mappa, poi scegli se la modifica vale per un solo percorso o come predefinita."
+  },
+  "welcome_ev": {
+    "message": "Per un'auto elettrica mostriamo un intervallo: ricarica a casa – colonnina rapida. Puoi impostare i prezzi dell'elettricità nelle impostazioni dell'estensione."
+  },
+  "welcome_price_auto": {
+    "message": "Prezzo attuale: $1 – aggiornato automaticamente."
+  },
+  "welcome_price_pending": {
+    "message": "I prezzi medi dei carburanti verranno scaricati in background tra un attimo."
+  },
+  "history_title": {
+    "message": "Storico dei viaggi"
+  },
+  "history_lead": {
+    "message": "Percorsi salvati con il pulsante “💾 Salva viaggio” nel pannello sulla mappa."
+  },
+  "history_export": {
+    "message": "Esporta CSV"
+  },
+  "history_empty": {
+    "message": "Non hai ancora viaggi salvati. Pianifica un percorso in auto su Google Maps e clicca “💾 Salva viaggio” nel pannello in alto a destra della mappa."
+  },
+  "trips_one": {
+    "message": "$1 viaggio"
+  },
+  "trips_few": {
+    "message": "$1 viaggi"
+  },
+  "trips_many": {
+    "message": "$1 viaggi"
+  },
+  "trips_other": {
+    "message": "$1 viaggi"
+  },
+  "history_round_on": {
+    "message": "Andata e ritorno (clicca per contare solo l'andata)"
+  },
+  "history_round_off": {
+    "message": "Solo andata (clicca per contare andata e ritorno)"
+  },
+  "history_delete": {
+    "message": "Elimina viaggio"
+  },
+  "history_delete_confirm": {
+    "message": "Eliminare il viaggio $1 → $2?"
+  },
+  "csv_header": {
+    "message": "Data;Partenza;Arrivo;Percorso;Distanza ($1);Andata e ritorno;Carburante;Consumo ($2);Persone;Costo da;Costo a;Valuta;Rimborso chilometrico"
+  },
+  "csv_yes": {
+    "message": "sì"
+  },
+  "csv_no": {
+    "message": "no"
+  },
+  "csv_filename": {
+    "message": "viaggi"
+  },
+  "error_poland_prices": {
+    "message": "Bollettino UE: nessun prezzo per la Polonia"
+  },
+  "error_eu_file": {
+    "message": "Bollettino UE: file XLSX non valido"
+  },
+  "error_eu_prices": {
+    "message": "Bollettino UE: nessun prezzo trovato"
+  },
+  "consumption_fuel_us": {
+    "message": "Consumo (mpg)"
+  },
+  "consumption_ev_us": {
+    "message": "Consumo di energia (kWh per 100 mi)"
+  },
+  "popup_manual_price_us": {
+    "message": "Prezzo manuale (al gallone)"
+  },
+  "label_units": {
+    "message": "Unità"
+  },
+  "units_metric": {
+    "message": "Chilometri e litri"
+  },
+  "units_us": {
+    "message": "Miglia e galloni USA (mpg)"
+  },
+  "csv_consumption_metric": {
+    "message": "per 100 km"
+  },
+  "csv_consumption_us": {
+    "message": "mpg o kWh per 100 mi"
+  }
+}

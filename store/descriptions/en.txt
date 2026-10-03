@@ -1,0 +1,33 @@
+Know what a drive will cost before you set off. Tankful adds the estimated fuel cost right next to the time and distance of every driving route in Google Maps – no copying numbers into a calculator.
+
+WHAT YOU GET
+• The cost of every route option in the Google Maps route list and in the route details.
+• A compact panel on the map that compares all route options side by side.
+• Round-trip cost and cost per person, e.g. "4 × €12" when four people share the ride.
+• Settings for one route only – take a friend's car for a single trip without changing your defaults.
+• One click to copy a trip summary, or save the trip to your history.
+
+LIVE FUEL PRICES
+• EU countries: national averages from the European Commission's Weekly Oil Bulletin; in Poland adjusted when Orlen wholesale prices or fuel taxes change.
+• UK: the UK government's weekly road fuel prices.
+• US: the U.S. Energy Information Administration's weekly gasoline and diesel prices for the state or its region (e.g. California, Texas, Gulf Coast), in miles, gallons and mpg.
+• Trips through several countries: the price is weighted by the kilometres driven in each country.
+• Petrol 95 and 98, diesel, premium diesel and LPG – or set your own price.
+• Electric cars: a range from charging at home to fast chargers.
+• Prices in EUR, PLN, CZK, HUF, RON, SEK, DKK, GBP, CHF, NOK, ISK or USD, converted at National Bank of Poland rates.
+
+TRIP HISTORY
+• Save trips and see them grouped by month with total distance and cost.
+• Export to CSV for your spreadsheet or accounting.
+• Polish mileage allowance ("kilometrówka") at the official per-km rates, for business-trip claims in Poland.
+
+PRIVACY
+No account, no ads, no analytics, no servers. Your settings and trip history stay in your browser. To find the country for local prices, only the route's start and destination – rounded to about 1 km – are sent to OpenStreetMap, and you can turn that off. Full policy: https://koszt-paliwa.pl/privacy.html
+
+Works on Google Maps in all EU countries, the UK, the US, Switzerland, Norway and Iceland – with automatic prices in the EU, the UK and the US, and your own price in Switzerland, Norway and Iceland. Available in 16 European languages.
+
+Online calculator without the extension: https://koszt-paliwa.pl/en
+
+Costs are estimates based on average fuel prices and the consumption you enter; actual prices at the pump vary.
+
+Tankful is an independent project and is not affiliated with or endorsed by Google. Open source (MIT): https://github.com/Michalskii/tankful

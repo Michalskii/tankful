@@ -1,0 +1,32 @@
+Zjistěte, kolik cesta bude stát, ještě než vyrazíte. Tankful ukazuje odhadovanou cenu paliva hned vedle času a vzdálenosti každé trasy autem v Mapách Google – bez přepisování čísel do kalkulačky.
+
+CO ZÍSKÁTE
+• Cenu každé varianty trasy – v seznamu tras i v podrobnostech trasy.
+• Kompaktní panel na mapě, který porovná všechny varianty vedle sebe.
+• Cenu tam i zpět a cenu na osobu, např. „4 × 300 Kč“, když jedete ve čtyřech.
+• Nastavení jen pro jednu trasu – jednou si půjčíte auto od kamaráda a výchozí nastavení zůstane.
+• Jedním kliknutím zkopírujete shrnutí cesty nebo ji uložíte do historie.
+
+AKTUÁLNÍ CENY PALIV
+• Země EU: celostátní průměry z týdenního Oil Bulletinu Evropské komise; v Polsku upravené při změně velkoobchodních cen Orlenu nebo daní z paliv.
+• Velká Británie: týdenní ceny paliv britské vlády.
+• USA: týdenní ceny benzínu a nafty americké agentury EIA pro daný stát nebo region, v mílích, galonech a mpg.
+• Cesty přes více zemí: cena je vážená kilometry ujetými v každé zemi – uvidíte, kolik ušetříte natankováním v Polsku nebo na Slovensku.
+• Benzín 95 a 98, nafta, prémiová nafta a LPG – nebo vlastní cena.
+• Elektromobily: rozpětí od nabíjení doma po rychlonabíječky.
+• Ceny v CZK, EUR, PLN, HUF, RON, SEK, DKK, GBP, CHF, NOK, ISK nebo USD, přepočtené kurzy Polské národní banky.
+
+HISTORIE CEST
+• Ukládejte cesty a prohlížejte je po měsících, s celkovou vzdáleností a cenou.
+• Export do CSV pro tabulku nebo účetnictví.
+
+SOUKROMÍ
+Žádný účet, žádné reklamy, žádná analytika, žádné servery. Nastavení a historie cest zůstávají ve vašem prohlížeči. Aby bylo možné zjistit zemi a její ceny, posílá se do OpenStreetMap jen start a cíl trasy – zaokrouhlené na zhruba 1 km – a lze to vypnout. Celé zásady: https://koszt-paliwa.pl/privacy.html
+
+Funguje v Mapách Google ve všech zemích EU, ve Velké Británii, USA, Švýcarsku, Norsku a na Islandu – s automatickými cenami v EU, Velké Británii a USA a s vlastní cenou ve Švýcarsku, Norsku a na Islandu. K dispozici v 16 evropských jazycích.
+
+Online kalkulačka bez rozšíření: https://koszt-paliwa.pl/en
+
+Ceny jsou odhady podle průměrných cen paliv a zadané spotřeby; ceny u pumpy se mohou lišit.
+
+Tankful je nezávislý projekt, není spojen se společností Google ani jí podporován. Otevřený kód (MIT): https://github.com/Michalskii/tankful

@@ -1,0 +1,356 @@
+{
+  "appName": {
+    "message": "Tankful – разход за гориво за всеки маршрут"
+  },
+  "appDescription": {
+    "message": "Разходът за гориво на всеки маршрут в Google Maps – актуални цени в ЕС, Обединеното кралство и САЩ, електромобили, на човек."
+  },
+  "actionTitle": {
+    "message": "Настройки на разхода за пътуване"
+  },
+  "fuel_pb": {
+    "message": "Бензин 95"
+  },
+  "fuel_pbp": {
+    "message": "Бензин 98"
+  },
+  "fuel_on": {
+    "message": "Дизел"
+  },
+  "fuel_onp": {
+    "message": "Премиум дизел"
+  },
+  "fuel_lpg": {
+    "message": "Пропан-бутан (LPG)"
+  },
+  "fuel_ev": {
+    "message": "Електромобил (EV)"
+  },
+  "mileage_small_label": {
+    "message": "до 900 см³"
+  },
+  "mileage_large_label": {
+    "message": "над 900 см³ / електромобил"
+  },
+  "mileage_off": {
+    "message": "Не показвай"
+  },
+  "mileage_small_option": {
+    "message": "До 900 см³ – $1/km"
+  },
+  "mileage_large_option": {
+    "message": "Над 900 см³ или електромобил – $1/km"
+  },
+  "price_manual": {
+    "message": "ръчна цена"
+  },
+  "price_missing": {
+    "message": "няма актуални цени – ръчна цена"
+  },
+  "price_no_rate": {
+    "message": "няма курс за $1 – ръчна цена"
+  },
+  "price_national": {
+    "message": "средно Полша"
+  },
+  "price_single": {
+    "message": "$1 $2"
+  },
+  "price_average": {
+    "message": "средно от $1 $2 и $3 $4"
+  },
+  "price_route": {
+    "message": "средно за маршрута: $1"
+  },
+  "price_ev": {
+    "message": "вкъщи $1 – бързо зареждане $2 за kWh"
+  },
+  "trip_cost": {
+    "message": "Разход за пътуването"
+  },
+  "route_default": {
+    "message": "Маршрут"
+  },
+  "per_person": {
+    "message": "$1/човек"
+  },
+  "people_line": {
+    "message": "👥 $1 × $2"
+  },
+  "round_short": {
+    "message": "отиване и връщане"
+  },
+  "round_long": {
+    "message": "отиване и връщане"
+  },
+  "cost_setup": {
+    "message": "⚙ Избери гориво"
+  },
+  "cost_mileage": {
+    "message": "🧾 километрични $1"
+  },
+  "title_setup": {
+    "message": "Кликнете, за да изберете гориво и разход"
+  },
+  "title_round": {
+    "message": "Отиване и връщане: същият маршрут × 2."
+  },
+  "title_mileage": {
+    "message": "Полски километрични: $1/km ($2)."
+  },
+  "title_override": {
+    "message": "Настройки само за този маршрут."
+  },
+  "click_to_change": {
+    "message": "Кликнете, за да промените."
+  },
+  "warn_text": {
+    "message": "🚗 Tankful не намира разстоянието на маршрута – възможно е Google да е променил страницата на Maps. Разходът временно не е достъпен."
+  },
+  "warn_hide": {
+    "message": "Скрий за този маршрут"
+  },
+  "float_settings": {
+    "message": "Настройки на горивото"
+  },
+  "float_expand": {
+    "message": "Разгъни"
+  },
+  "float_collapse": {
+    "message": "Свий"
+  },
+  "float_setup": {
+    "message": "⚙ Избери гориво и разход"
+  },
+  "float_show_route": {
+    "message": "Покажи маршрута на картата"
+  },
+  "float_copy": {
+    "message": "📋 Копирай"
+  },
+  "float_copy_title": {
+    "message": "Копирай обобщение на избрания маршрут"
+  },
+  "float_save": {
+    "message": "💾 Запази пътуването"
+  },
+  "float_save_title": {
+    "message": "Добави избрания маршрут в историята на пътуванията"
+  },
+  "float_override_tag": {
+    "message": "✎ само този маршрут"
+  },
+  "copied": {
+    "message": "✓ Копирано"
+  },
+  "copy_failed": {
+    "message": "Грешка"
+  },
+  "saved_flash": {
+    "message": "✓ Запазено"
+  },
+  "summary_fuel": {
+    "message": "Гориво: $1"
+  },
+  "summary_round": {
+    "message": "Отиване и връщане: $1"
+  },
+  "summary_link": {
+    "message": "— изчислено с Tankful: $1"
+  },
+  "summary_mileage": {
+    "message": "Километрични: $1"
+  },
+  "panel_title_first": {
+    "message": "Вашият автомобил"
+  },
+  "label_fuel": {
+    "message": "Гориво"
+  },
+  "label_passengers": {
+    "message": "Хора"
+  },
+  "consumption_fuel": {
+    "message": "Разход ($1 на 100 km)"
+  },
+  "consumption_ev": {
+    "message": "Разход на енергия ($1 на 100 km)"
+  },
+  "panel_price": {
+    "message": "Цена: $1"
+  },
+  "btn_route_only": {
+    "message": "Само този маршрут"
+  },
+  "btn_save": {
+    "message": "Запази"
+  },
+  "btn_save_default": {
+    "message": "Запази по подразбиране"
+  },
+  "btn_reset_route": {
+    "message": "Възстанови настройките по подразбиране за този маршрут"
+  },
+  "popup_auto_price": {
+    "message": "Автоматично изтегляне на средни цени"
+  },
+  "popup_refresh": {
+    "message": "Обнови"
+  },
+  "popup_local_prices": {
+    "message": "Цени в държавите по маршрута (ЕС, Обединеното кралство и САЩ)"
+  },
+  "popup_local_hint": {
+    "message": "Началото и краят на маршрута (закръглени до ~1 km) се изпращат до OpenStreetMap, за да се определи държавата."
+  },
+  "popup_manual_price": {
+    "message": "Ръчна цена (за литър)"
+  },
+  "popup_ev_home": {
+    "message": "Ток вкъщи (kWh)"
+  },
+  "popup_ev_fast": {
+    "message": "Бързо зареждане (kWh)"
+  },
+  "popup_currency": {
+    "message": "Валута"
+  },
+  "popup_mileage": {
+    "message": "Километрични (полски ставки)"
+  },
+  "popup_summary_link": {
+    "message": "Добавяй връзка към Tankful в копираните обобщения"
+  },
+  "popup_round_trip": {
+    "message": "Показвай разхода за отиване и връщане"
+  },
+  "popup_floating": {
+    "message": "Панел на маршрута върху картата"
+  },
+  "popup_history": {
+    "message": "📒 История на пътуванията"
+  },
+  "popup_saved": {
+    "message": "Запазено"
+  },
+  "popup_fetching": {
+    "message": "Изтегляне…"
+  },
+  "popup_fetch_error": {
+    "message": "Изтеглянето не успя – използва се ръчната цена."
+  },
+  "popup_no_response": {
+    "message": "няма отговор"
+  },
+  "popup_preview": {
+    "message": "$1 ≈ $2"
+  },
+  "welcome_page_title": {
+    "message": "Tankful – първоначална настройка"
+  },
+  "welcome_tagline": {
+    "message": "Разход за гориво за всеки маршрут"
+  },
+  "welcome_lead": {
+    "message": "Изберете гориво и въведете разхода. Въз основа на това ще виждате прогнозния разход за всеки маршрут с кола в Google Maps."
+  },
+  "welcome_consumption": {
+    "message": "Среден разход"
+  },
+  "welcome_submit": {
+    "message": "Запази и отвори Google Maps"
+  },
+  "welcome_hint": {
+    "message": "Можете да промените това по всяко време: кликнете иконата на разширението или разхода на картата и изберете дали промяната важи за един маршрут, или се запазва по подразбиране."
+  },
+  "welcome_ev": {
+    "message": "За електромобил показваме диапазон: зареждане вкъщи – бързо зареждане. Цените на тока задавате в настройките на разширението."
+  },
+  "welcome_price_auto": {
+    "message": "Актуална цена: $1 – обновява се автоматично."
+  },
+  "welcome_price_pending": {
+    "message": "Средните цени на горивата ще бъдат изтеглени във фонов режим след малко."
+  },
+  "history_title": {
+    "message": "История на пътуванията"
+  },
+  "history_lead": {
+    "message": "Маршрути, запазени с бутона „💾 Запази пътуването“ в панела на картата."
+  },
+  "history_export": {
+    "message": "Експорт в CSV"
+  },
+  "history_empty": {
+    "message": "Все още нямате запазени пътувания. Планирайте маршрут с кола в Google Maps и кликнете „💾 Запази пътуването“ в панела горе вдясно на картата."
+  },
+  "trips_one": {
+    "message": "$1 пътуване"
+  },
+  "trips_few": {
+    "message": "$1 пътувания"
+  },
+  "trips_many": {
+    "message": "$1 пътувания"
+  },
+  "trips_other": {
+    "message": "$1 пътувания"
+  },
+  "history_round_on": {
+    "message": "Отиване и връщане (кликнете за еднопосочно)"
+  },
+  "history_round_off": {
+    "message": "Еднопосочно (кликнете за отиване и връщане)"
+  },
+  "history_delete": {
+    "message": "Изтрий пътуването"
+  },
+  "history_delete_confirm": {
+    "message": "Да се изтрие ли пътуването $1 → $2?"
+  },
+  "csv_header": {
+    "message": "Дата;От;До;Маршрут;Разстояние ($1);Отиване и връщане;Гориво;Разход ($2);Хора;Разход от;Разход до;Валута;Километрични"
+  },
+  "csv_yes": {
+    "message": "да"
+  },
+  "csv_no": {
+    "message": "не"
+  },
+  "csv_filename": {
+    "message": "patuvania"
+  },
+  "error_poland_prices": {
+    "message": "Бюлетин на ЕС: няма цени за Полша"
+  },
+  "error_eu_file": {
+    "message": "Бюлетин на ЕС: невалиден XLSX файл"
+  },
+  "error_eu_prices": {
+    "message": "Бюлетин на ЕС: не са намерени цени"
+  },
+  "consumption_fuel_us": {
+    "message": "Разход (mpg)"
+  },
+  "consumption_ev_us": {
+    "message": "Разход на енергия (kWh на 100 mi)"
+  },
+  "popup_manual_price_us": {
+    "message": "Ръчна цена (за галон)"
+  },
+  "label_units": {
+    "message": "Мерни единици"
+  },
+  "units_metric": {
+    "message": "Километри и литри"
+  },
+  "units_us": {
+    "message": "Мили и американски галони (mpg)"
+  },
+  "csv_consumption_metric": {
+    "message": "на 100 km"
+  },
+  "csv_consumption_us": {
+    "message": "mpg или kWh на 100 mi"
+  }
+}

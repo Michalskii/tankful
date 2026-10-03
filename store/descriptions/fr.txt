@@ -1,0 +1,32 @@
+Sachez ce que coûtera un trajet avant de partir. Tankful affiche le coût estimé du carburant juste à côté de la durée et de la distance de chaque itinéraire en voiture dans Google Maps – sans recopier de chiffres dans une calculatrice.
+
+CE QUE VOUS OBTENEZ
+• Le coût de chaque variante d'itinéraire, dans la liste des itinéraires et dans le détail de l'itinéraire.
+• Un panneau compact sur la carte qui compare toutes les variantes côte à côte.
+• Le coût aller-retour et le coût par personne, par ex. « 4 × 12 € » quand vous voyagez à quatre.
+• Des réglages pour un seul itinéraire – prenez la voiture d'un ami pour un trajet sans modifier vos réglages par défaut.
+• Un clic pour copier le résumé du trajet ou l'enregistrer dans votre historique.
+
+PRIX DES CARBURANTS À JOUR
+• Pays de l'UE : moyennes nationales du Bulletin pétrolier hebdomadaire de la Commission européenne ; en Pologne, ajustées lorsque les prix de gros d'Orlen ou les taxes sur les carburants changent.
+• Royaume-Uni : les prix hebdomadaires des carburants publiés par le gouvernement britannique.
+• États-Unis : les prix hebdomadaires de l'essence et du diesel de l'agence américaine EIA pour l'État ou sa région, en miles, gallons et mpg.
+• Trajets à travers plusieurs pays : le prix est pondéré par les kilomètres parcourus dans chaque pays – vous voyez ce que coûte un plein en Espagne ou au Luxembourg en chemin.
+• Essence 95 et 98, diesel, diesel premium et GPL – ou votre propre prix.
+• Voitures électriques : une fourchette entre la recharge à domicile et les bornes rapides.
+• Prix en EUR, PLN, CZK, HUF, RON, SEK, DKK, GBP, CHF, NOK, ISK ou USD, convertis aux taux de la Banque nationale de Pologne.
+
+HISTORIQUE DES TRAJETS
+• Enregistrez vos trajets et retrouvez-les par mois, avec la distance et le coût totaux.
+• Export CSV pour votre tableur ou votre comptabilité.
+
+CONFIDENTIALITÉ
+Pas de compte, pas de publicité, pas de statistiques, pas de serveurs. Vos réglages et votre historique restent dans votre navigateur. Pour trouver le pays et ses prix, seuls le départ et l'arrivée de l'itinéraire – arrondis à environ 1 km – sont envoyés à OpenStreetMap, et vous pouvez le désactiver. Politique complète : https://koszt-paliwa.pl/privacy.html
+
+Fonctionne sur Google Maps dans tous les pays de l'UE, au Royaume-Uni, aux États-Unis, en Suisse, en Norvège et en Islande – avec des prix automatiques dans l'UE, au Royaume-Uni et aux États-Unis, et votre propre prix en Suisse, en Norvège et en Islande. Disponible en 16 langues européennes.
+
+Calculateur en ligne sans extension : https://koszt-paliwa.pl/en
+
+Les coûts sont des estimations basées sur les prix moyens des carburants et la consommation indiquée ; les prix à la pompe peuvent varier.
+
+Tankful est un projet indépendant, sans lien avec Google ni approuvé par Google. Code source ouvert (MIT) : https://github.com/Michalskii/tankful

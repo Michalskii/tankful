@@ -1,0 +1,356 @@
+{
+  "appName": {
+    "message": "Tankful – κόστος καυσίμου για κάθε διαδρομή"
+  },
+  "appDescription": {
+    "message": "Το κόστος καυσίμου κάθε διαδρομής στο Google Maps – τρέχουσες τιμές σε ΕΕ, Ηνωμένο Βασίλειο και ΗΠΑ, ηλεκτρικά, κόστος ανά άτομο."
+  },
+  "actionTitle": {
+    "message": "Ρυθμίσεις κόστους διαδρομής"
+  },
+  "fuel_pb": {
+    "message": "Βενζίνη 95"
+  },
+  "fuel_pbp": {
+    "message": "Βενζίνη 98"
+  },
+  "fuel_on": {
+    "message": "Πετρέλαιο κίνησης"
+  },
+  "fuel_onp": {
+    "message": "Πετρέλαιο premium"
+  },
+  "fuel_lpg": {
+    "message": "Υγραέριο (LPG)"
+  },
+  "fuel_ev": {
+    "message": "Ηλεκτρικό (EV)"
+  },
+  "mileage_small_label": {
+    "message": "έως 900 cc"
+  },
+  "mileage_large_label": {
+    "message": "άνω των 900 cc / ηλεκτρικό"
+  },
+  "mileage_off": {
+    "message": "Να μην εμφανίζεται"
+  },
+  "mileage_small_option": {
+    "message": "Έως 900 cc – $1/km"
+  },
+  "mileage_large_option": {
+    "message": "Άνω των 900 cc ή ηλεκτρικό – $1/km"
+  },
+  "price_manual": {
+    "message": "δική σας τιμή"
+  },
+  "price_missing": {
+    "message": "χωρίς τρέχουσες τιμές – δική σας τιμή"
+  },
+  "price_no_rate": {
+    "message": "χωρίς ισοτιμία $1 – δική σας τιμή"
+  },
+  "price_national": {
+    "message": "μ.ό. Πολωνίας"
+  },
+  "price_single": {
+    "message": "$1 $2"
+  },
+  "price_average": {
+    "message": "μέσος όρος $1 $2 και $3 $4"
+  },
+  "price_route": {
+    "message": "μέσος όρος διαδρομής: $1"
+  },
+  "price_ev": {
+    "message": "σπίτι $1 – ταχυφορτιστής $2 ανά kWh"
+  },
+  "trip_cost": {
+    "message": "Κόστος διαδρομής"
+  },
+  "route_default": {
+    "message": "Διαδρομή"
+  },
+  "per_person": {
+    "message": "$1/άτομο"
+  },
+  "people_line": {
+    "message": "👥 $1 × $2"
+  },
+  "round_short": {
+    "message": "μετ' επιστροφής"
+  },
+  "round_long": {
+    "message": "μετ' επιστροφής"
+  },
+  "cost_setup": {
+    "message": "⚙ Επιλογή καυσίμου"
+  },
+  "cost_mileage": {
+    "message": "🧾 αποζημίωση χιλιομέτρων $1"
+  },
+  "title_setup": {
+    "message": "Κάντε κλικ για να επιλέξετε καύσιμο και κατανάλωση"
+  },
+  "title_round": {
+    "message": "Μετ' επιστροφής: η ίδια διαδρομή × 2."
+  },
+  "title_mileage": {
+    "message": "Πολωνική αποζημίωση χιλιομέτρων: $1/km ($2)."
+  },
+  "title_override": {
+    "message": "Ρυθμίσεις μόνο για αυτή τη διαδρομή."
+  },
+  "click_to_change": {
+    "message": "Κάντε κλικ για αλλαγή."
+  },
+  "warn_text": {
+    "message": "🚗 Το Tankful δεν βρίσκει την απόσταση αυτής της διαδρομής – ίσως η Google άλλαξε τη σελίδα του Maps. Το κόστος δεν είναι προσωρινά διαθέσιμο."
+  },
+  "warn_hide": {
+    "message": "Απόκρυψη για αυτή τη διαδρομή"
+  },
+  "float_settings": {
+    "message": "Ρυθμίσεις καυσίμου"
+  },
+  "float_expand": {
+    "message": "Ανάπτυξη"
+  },
+  "float_collapse": {
+    "message": "Σύμπτυξη"
+  },
+  "float_setup": {
+    "message": "⚙ Επιλογή καυσίμου και κατανάλωσης"
+  },
+  "float_show_route": {
+    "message": "Εμφάνιση αυτής της διαδρομής στον χάρτη"
+  },
+  "float_copy": {
+    "message": "📋 Αντιγραφή"
+  },
+  "float_copy_title": {
+    "message": "Αντιγραφή σύνοψης της επιλεγμένης διαδρομής"
+  },
+  "float_save": {
+    "message": "💾 Αποθήκευση"
+  },
+  "float_save_title": {
+    "message": "Προσθήκη της επιλεγμένης διαδρομής στο ιστορικό"
+  },
+  "float_override_tag": {
+    "message": "✎ μόνο αυτή η διαδρομή"
+  },
+  "copied": {
+    "message": "✓ Αντιγράφηκε"
+  },
+  "copy_failed": {
+    "message": "Αποτυχία"
+  },
+  "saved_flash": {
+    "message": "✓ Αποθηκεύτηκε"
+  },
+  "summary_fuel": {
+    "message": "Καύσιμο: $1"
+  },
+  "summary_round": {
+    "message": "Μετ' επιστροφής: $1"
+  },
+  "summary_link": {
+    "message": "— υπολογίστηκε με το Tankful: $1"
+  },
+  "summary_mileage": {
+    "message": "Αποζημίωση χιλιομέτρων: $1"
+  },
+  "panel_title_first": {
+    "message": "Το αυτοκίνητό σας"
+  },
+  "label_fuel": {
+    "message": "Καύσιμο"
+  },
+  "label_passengers": {
+    "message": "Άτομα"
+  },
+  "consumption_fuel": {
+    "message": "Κατανάλωση ($1 ανά 100 km)"
+  },
+  "consumption_ev": {
+    "message": "Κατανάλωση ενέργειας ($1 ανά 100 km)"
+  },
+  "panel_price": {
+    "message": "Τιμή: $1"
+  },
+  "btn_route_only": {
+    "message": "Μόνο αυτή η διαδρομή"
+  },
+  "btn_save": {
+    "message": "Αποθήκευση"
+  },
+  "btn_save_default": {
+    "message": "Αποθήκευση ως προεπιλογή"
+  },
+  "btn_reset_route": {
+    "message": "Επαναφορά προεπιλογών για αυτή τη διαδρομή"
+  },
+  "popup_auto_price": {
+    "message": "Αυτόματη λήψη μέσων τιμών"
+  },
+  "popup_refresh": {
+    "message": "Ανανέωση"
+  },
+  "popup_local_prices": {
+    "message": "Τιμές των χωρών της διαδρομής (ΕΕ, Ηνωμένο Βασίλειο και ΗΠΑ)"
+  },
+  "popup_local_hint": {
+    "message": "Η αφετηρία και ο προορισμός (στρογγυλεμένα στο ~1 km) στέλνονται στο OpenStreetMap για να βρεθεί η χώρα."
+  },
+  "popup_manual_price": {
+    "message": "Δική σας τιμή (ανά λίτρο)"
+  },
+  "popup_ev_home": {
+    "message": "Ρεύμα στο σπίτι (kWh)"
+  },
+  "popup_ev_fast": {
+    "message": "Ταχυφορτιστής (kWh)"
+  },
+  "popup_currency": {
+    "message": "Νόμισμα"
+  },
+  "popup_mileage": {
+    "message": "Αποζημίωση χιλιομέτρων (πολωνικές τιμές)"
+  },
+  "popup_summary_link": {
+    "message": "Προσθήκη συνδέσμου Tankful στις αντιγραμμένες συνόψεις"
+  },
+  "popup_round_trip": {
+    "message": "Εμφάνιση κόστους μετ' επιστροφής"
+  },
+  "popup_floating": {
+    "message": "Πίνακας διαδρομής στον χάρτη"
+  },
+  "popup_history": {
+    "message": "📒 Ιστορικό διαδρομών"
+  },
+  "popup_saved": {
+    "message": "Αποθηκεύτηκε"
+  },
+  "popup_fetching": {
+    "message": "Λήψη…"
+  },
+  "popup_fetch_error": {
+    "message": "Η λήψη απέτυχε – χρησιμοποιείται η δική σας τιμή."
+  },
+  "popup_no_response": {
+    "message": "καμία απάντηση"
+  },
+  "popup_preview": {
+    "message": "$1 ≈ $2"
+  },
+  "welcome_page_title": {
+    "message": "Tankful – πρώτη ρύθμιση"
+  },
+  "welcome_tagline": {
+    "message": "Κόστος καυσίμου για κάθε διαδρομή"
+  },
+  "welcome_lead": {
+    "message": "Επιλέξτε καύσιμο και δηλώστε την κατανάλωση. Με βάση αυτά θα βλέπετε το εκτιμώμενο κόστος κάθε διαδρομής με αυτοκίνητο στο Google Maps."
+  },
+  "welcome_consumption": {
+    "message": "Μέση κατανάλωση"
+  },
+  "welcome_submit": {
+    "message": "Αποθήκευση και άνοιγμα του Google Maps"
+  },
+  "welcome_hint": {
+    "message": "Μπορείτε να το αλλάξετε όποτε θέλετε: κάντε κλικ στο εικονίδιο της επέκτασης ή στο κόστος στον χάρτη και επιλέξτε αν η αλλαγή ισχύει για μία διαδρομή ή ως προεπιλογή."
+  },
+  "welcome_ev": {
+    "message": "Για ηλεκτρικό αυτοκίνητο δείχνουμε ένα εύρος: φόρτιση στο σπίτι – ταχυφορτιστής. Τις τιμές ρεύματος τις ορίζετε στις ρυθμίσεις της επέκτασης."
+  },
+  "welcome_price_auto": {
+    "message": "Τρέχουσα τιμή: $1 – ενημερώνεται αυτόματα."
+  },
+  "welcome_price_pending": {
+    "message": "Οι μέσες τιμές καυσίμων θα ληφθούν στο παρασκήνιο σε λίγο."
+  },
+  "history_title": {
+    "message": "Ιστορικό διαδρομών"
+  },
+  "history_lead": {
+    "message": "Διαδρομές που αποθηκεύσατε με το κουμπί «💾 Αποθήκευση» στον πίνακα του χάρτη."
+  },
+  "history_export": {
+    "message": "Εξαγωγή CSV"
+  },
+  "history_empty": {
+    "message": "Δεν έχετε ακόμη αποθηκευμένες διαδρομές. Σχεδιάστε μια διαδρομή με αυτοκίνητο στο Google Maps και κάντε κλικ στο «💾 Αποθήκευση» στον πίνακα πάνω δεξιά στον χάρτη."
+  },
+  "trips_one": {
+    "message": "$1 διαδρομή"
+  },
+  "trips_few": {
+    "message": "$1 διαδρομές"
+  },
+  "trips_many": {
+    "message": "$1 διαδρομές"
+  },
+  "trips_other": {
+    "message": "$1 διαδρομές"
+  },
+  "history_round_on": {
+    "message": "Μετ' επιστροφής (κλικ για απλή μετάβαση)"
+  },
+  "history_round_off": {
+    "message": "Απλή μετάβαση (κλικ για μετ' επιστροφής)"
+  },
+  "history_delete": {
+    "message": "Διαγραφή διαδρομής"
+  },
+  "history_delete_confirm": {
+    "message": "Διαγραφή της διαδρομής $1 → $2;"
+  },
+  "csv_header": {
+    "message": "Ημερομηνία;Από;Προς;Διαδρομή;Απόσταση ($1);Μετ' επιστροφής;Καύσιμο;Κατανάλωση ($2);Άτομα;Κόστος από;Κόστος έως;Νόμισμα;Αποζημίωση χιλιομέτρων"
+  },
+  "csv_yes": {
+    "message": "ναι"
+  },
+  "csv_no": {
+    "message": "όχι"
+  },
+  "csv_filename": {
+    "message": "diadromes"
+  },
+  "error_poland_prices": {
+    "message": "Δελτίο ΕΕ: δεν υπάρχουν τιμές για την Πολωνία"
+  },
+  "error_eu_file": {
+    "message": "Δελτίο ΕΕ: μη έγκυρο αρχείο XLSX"
+  },
+  "error_eu_prices": {
+    "message": "Δελτίο ΕΕ: δεν βρέθηκαν τιμές"
+  },
+  "consumption_fuel_us": {
+    "message": "Κατανάλωση (mpg)"
+  },
+  "consumption_ev_us": {
+    "message": "Κατανάλωση ενέργειας (kWh ανά 100 mi)"
+  },
+  "popup_manual_price_us": {
+    "message": "Δική σας τιμή (ανά γαλόνι)"
+  },
+  "label_units": {
+    "message": "Μονάδες"
+  },
+  "units_metric": {
+    "message": "Χιλιόμετρα και λίτρα"
+  },
+  "units_us": {
+    "message": "Μίλια και γαλόνια ΗΠΑ (mpg)"
+  },
+  "csv_consumption_metric": {
+    "message": "ανά 100 km"
+  },
+  "csv_consumption_us": {
+    "message": "mpg ή kWh ανά 100 mi"
+  }
+}

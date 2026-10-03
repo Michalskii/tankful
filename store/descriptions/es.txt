@@ -1,0 +1,32 @@
+Sabe cuánto costará un viaje antes de salir. Tankful muestra el coste estimado del combustible junto al tiempo y la distancia de cada ruta en coche de Google Maps, sin copiar números en una calculadora.
+
+QUÉ OBTIENES
+• El coste de cada variante de la ruta, en la lista de rutas y en los detalles de la ruta.
+• Un panel compacto en el mapa que compara todas las variantes una al lado de otra.
+• El coste de ida y vuelta y el coste por persona, por ejemplo «4 × 12 €» si viajáis cuatro.
+• Ajustes para una sola ruta: coge el coche de un amigo para un viaje sin cambiar tus valores predeterminados.
+• Un clic para copiar el resumen del viaje o guardarlo en el historial.
+
+PRECIOS DEL COMBUSTIBLE ACTUALIZADOS
+• Países de la UE: medias nacionales del Boletín Petrolero semanal de la Comisión Europea; en Polonia, ajustadas cuando cambian los precios mayoristas de Orlen o los impuestos sobre el combustible.
+• Reino Unido: los precios semanales del combustible del Gobierno británico.
+• EE. UU.: los precios semanales de gasolina y diésel de la agencia estadounidense EIA para el estado o su región, en millas, galones y mpg.
+• Viajes por varios países: el precio se pondera por los kilómetros recorridos en cada país; así ves cuánto cuesta repostar en Francia o en Portugal por el camino.
+• Gasolina 95 y 98, diésel, diésel premium y GLP, o tu propio precio.
+• Coches eléctricos: un rango desde la carga en casa hasta los cargadores rápidos.
+• Precios en EUR, PLN, CZK, HUF, RON, SEK, DKK, GBP, CHF, NOK, ISK o USD, convertidos al tipo del Banco Nacional de Polonia.
+
+HISTORIAL DE VIAJES
+• Guarda viajes y consúltalos agrupados por mes, con la distancia y el coste totales.
+• Exportación a CSV para tu hoja de cálculo o contabilidad.
+
+PRIVACIDAD
+Sin cuenta, sin anuncios, sin estadísticas, sin servidores. Tus ajustes y tu historial se quedan en tu navegador. Para saber el país y sus precios, solo se envían a OpenStreetMap el origen y el destino de la ruta, redondeados a aproximadamente 1 km, y puedes desactivarlo. Política completa: https://koszt-paliwa.pl/privacy.html
+
+Funciona en Google Maps en todos los países de la UE, Reino Unido, EE. UU., Suiza, Noruega e Islandia, con precios automáticos en la UE, Reino Unido y EE. UU. y tu propio precio en Suiza, Noruega e Islandia. Disponible en 16 idiomas europeos.
+
+Calculadora online sin extensión: https://koszt-paliwa.pl/en
+
+Los costes son estimaciones basadas en los precios medios del combustible y el consumo que indicas; los precios en la gasolinera pueden variar.
+
+Tankful es un proyecto independiente, sin relación con Google ni respaldado por Google. Código abierto (MIT): https://github.com/Michalskii/tankful

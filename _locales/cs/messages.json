@@ -1,0 +1,356 @@
+{
+  "appName": {
+    "message": "Tankful – cena paliva na každé trase"
+  },
+  "appDescription": {
+    "message": "Cena paliva u každé trasy v Mapách Google – aktuální ceny v EU, Velké Británii a USA, elektromobily, cena na osobu."
+  },
+  "actionTitle": {
+    "message": "Nastavení ceny cesty"
+  },
+  "fuel_pb": {
+    "message": "Benzín 95"
+  },
+  "fuel_pbp": {
+    "message": "Benzín 98"
+  },
+  "fuel_on": {
+    "message": "Nafta"
+  },
+  "fuel_onp": {
+    "message": "Prémiová nafta"
+  },
+  "fuel_lpg": {
+    "message": "LPG"
+  },
+  "fuel_ev": {
+    "message": "Elektromobil (EV)"
+  },
+  "mileage_small_label": {
+    "message": "do 900 cm³"
+  },
+  "mileage_large_label": {
+    "message": "nad 900 cm³ / elektromobil"
+  },
+  "mileage_off": {
+    "message": "Nezobrazovat"
+  },
+  "mileage_small_option": {
+    "message": "Do 900 cm³ – $1/km"
+  },
+  "mileage_large_option": {
+    "message": "Nad 900 cm³ nebo elektromobil – $1/km"
+  },
+  "price_manual": {
+    "message": "vlastní cena"
+  },
+  "price_missing": {
+    "message": "chybí aktuální ceny – vlastní cena"
+  },
+  "price_no_rate": {
+    "message": "chybí kurz $1 – vlastní cena"
+  },
+  "price_national": {
+    "message": "průměr Polsko"
+  },
+  "price_single": {
+    "message": "$1 $2"
+  },
+  "price_average": {
+    "message": "průměr z $1 $2 a $3 $4"
+  },
+  "price_route": {
+    "message": "průměr trasy: $1"
+  },
+  "price_ev": {
+    "message": "doma $1 – rychlonabíječka $2 za kWh"
+  },
+  "trip_cost": {
+    "message": "Cena cesty"
+  },
+  "route_default": {
+    "message": "Trasa"
+  },
+  "per_person": {
+    "message": "$1/osoba"
+  },
+  "people_line": {
+    "message": "👥 $1 × $2"
+  },
+  "round_short": {
+    "message": "tam i zpět"
+  },
+  "round_long": {
+    "message": "tam i zpět"
+  },
+  "cost_setup": {
+    "message": "⚙ Nastavit palivo"
+  },
+  "cost_mileage": {
+    "message": "🧾 cestovní náhrada $1"
+  },
+  "title_setup": {
+    "message": "Klikněte a vyberte palivo a spotřebu"
+  },
+  "title_round": {
+    "message": "Tam i zpět: stejná trasa × 2."
+  },
+  "title_mileage": {
+    "message": "Polská náhrada za km: $1/km ($2)."
+  },
+  "title_override": {
+    "message": "Nastavení jen pro tuto trasu."
+  },
+  "click_to_change": {
+    "message": "Klikněte pro změnu."
+  },
+  "warn_text": {
+    "message": "🚗 Tankful nenašel vzdálenost této trasy – Google možná změnil stránku Map. Cena cesty je dočasně nedostupná."
+  },
+  "warn_hide": {
+    "message": "Skrýt pro tuto trasu"
+  },
+  "float_settings": {
+    "message": "Nastavení paliva"
+  },
+  "float_expand": {
+    "message": "Rozbalit"
+  },
+  "float_collapse": {
+    "message": "Sbalit"
+  },
+  "float_setup": {
+    "message": "⚙ Nastavit palivo a spotřebu"
+  },
+  "float_show_route": {
+    "message": "Zobrazit tuto trasu na mapě"
+  },
+  "float_copy": {
+    "message": "📋 Kopírovat"
+  },
+  "float_copy_title": {
+    "message": "Zkopírovat shrnutí vybrané trasy"
+  },
+  "float_save": {
+    "message": "💾 Uložit cestu"
+  },
+  "float_save_title": {
+    "message": "Přidat vybranou trasu do historie cest"
+  },
+  "float_override_tag": {
+    "message": "✎ jen tato trasa"
+  },
+  "copied": {
+    "message": "✓ Zkopírováno"
+  },
+  "copy_failed": {
+    "message": "Nepovedlo se"
+  },
+  "saved_flash": {
+    "message": "✓ Uloženo"
+  },
+  "summary_fuel": {
+    "message": "Palivo: $1"
+  },
+  "summary_round": {
+    "message": "Tam i zpět: $1"
+  },
+  "summary_link": {
+    "message": "— spočítáno v Tankful: $1"
+  },
+  "summary_mileage": {
+    "message": "Cestovní náhrada: $1"
+  },
+  "panel_title_first": {
+    "message": "Vaše auto"
+  },
+  "label_fuel": {
+    "message": "Palivo"
+  },
+  "label_passengers": {
+    "message": "Osoby"
+  },
+  "consumption_fuel": {
+    "message": "Spotřeba ($1 na 100 km)"
+  },
+  "consumption_ev": {
+    "message": "Spotřeba energie ($1 na 100 km)"
+  },
+  "panel_price": {
+    "message": "Cena: $1"
+  },
+  "btn_route_only": {
+    "message": "Jen tato trasa"
+  },
+  "btn_save": {
+    "message": "Uložit"
+  },
+  "btn_save_default": {
+    "message": "Uložit jako výchozí"
+  },
+  "btn_reset_route": {
+    "message": "Obnovit výchozí nastavení pro tuto trasu"
+  },
+  "popup_auto_price": {
+    "message": "Automaticky stahovat průměrné ceny"
+  },
+  "popup_refresh": {
+    "message": "Obnovit"
+  },
+  "popup_local_prices": {
+    "message": "Ceny zemí na trase (EU, Velká Británie a USA)"
+  },
+  "popup_local_hint": {
+    "message": "Start a cíl trasy (zaokrouhlené na ~1 km) se posílají do OpenStreetMap, aby se zjistila země."
+  },
+  "popup_manual_price": {
+    "message": "Vlastní cena (za litr)"
+  },
+  "popup_ev_home": {
+    "message": "Elektřina doma (kWh)"
+  },
+  "popup_ev_fast": {
+    "message": "Rychlonabíječka (kWh)"
+  },
+  "popup_currency": {
+    "message": "Měna"
+  },
+  "popup_mileage": {
+    "message": "Cestovní náhrada (polské sazby)"
+  },
+  "popup_summary_link": {
+    "message": "Přidávat odkaz na Tankful do zkopírovaných shrnutí"
+  },
+  "popup_round_trip": {
+    "message": "Zobrazit cenu tam i zpět"
+  },
+  "popup_floating": {
+    "message": "Panel trasy na mapě"
+  },
+  "popup_history": {
+    "message": "📒 Historie cest"
+  },
+  "popup_saved": {
+    "message": "Uloženo"
+  },
+  "popup_fetching": {
+    "message": "Stahuji…"
+  },
+  "popup_fetch_error": {
+    "message": "Stažení se nepovedlo – používá se vlastní cena."
+  },
+  "popup_no_response": {
+    "message": "bez odpovědi"
+  },
+  "popup_preview": {
+    "message": "$1 ≈ $2"
+  },
+  "welcome_page_title": {
+    "message": "Tankful – první nastavení"
+  },
+  "welcome_tagline": {
+    "message": "Cena paliva na každé trase"
+  },
+  "welcome_lead": {
+    "message": "Vyberte palivo a zadejte spotřebu. Podle toho uvidíte odhadovanou cenu každé trasy autem v Mapách Google."
+  },
+  "welcome_consumption": {
+    "message": "Průměrná spotřeba"
+  },
+  "welcome_submit": {
+    "message": "Uložit a otevřít Mapy Google"
+  },
+  "welcome_hint": {
+    "message": "Kdykoli to můžete změnit: klikněte na ikonu rozšíření nebo na cenu na mapě a zvolte, zda změna platí jen pro jednu trasu, nebo se uloží jako výchozí."
+  },
+  "welcome_ev": {
+    "message": "U elektromobilu ukážeme rozpětí: nabíjení doma – rychlonabíječka. Ceny elektřiny nastavíte v nastavení rozšíření."
+  },
+  "welcome_price_auto": {
+    "message": "Aktuální cena: $1 – aktualizuje se automaticky."
+  },
+  "welcome_price_pending": {
+    "message": "Průměrné ceny paliv se za chvíli stáhnou na pozadí."
+  },
+  "history_title": {
+    "message": "Historie cest"
+  },
+  "history_lead": {
+    "message": "Trasy uložené tlačítkem „💾 Uložit cestu“ v panelu na mapě."
+  },
+  "history_export": {
+    "message": "Exportovat CSV"
+  },
+  "history_empty": {
+    "message": "Zatím nemáte žádné uložené cesty. Naplánujte trasu autem v Mapách Google a klikněte na „💾 Uložit cestu“ v panelu vpravo nahoře na mapě."
+  },
+  "trips_one": {
+    "message": "$1 cesta"
+  },
+  "trips_few": {
+    "message": "$1 cesty"
+  },
+  "trips_many": {
+    "message": "$1 cesty"
+  },
+  "trips_other": {
+    "message": "$1 cest"
+  },
+  "history_round_on": {
+    "message": "Tam i zpět (klikněte pro jednu cestu)"
+  },
+  "history_round_off": {
+    "message": "Jednosměrně (klikněte pro tam i zpět)"
+  },
+  "history_delete": {
+    "message": "Smazat cestu"
+  },
+  "history_delete_confirm": {
+    "message": "Smazat cestu $1 → $2?"
+  },
+  "csv_header": {
+    "message": "Datum;Odkud;Kam;Trasa;Vzdálenost ($1);Tam i zpět;Palivo;Spotřeba ($2);Osoby;Cena od;Cena do;Měna;Cestovní náhrada"
+  },
+  "csv_yes": {
+    "message": "ano"
+  },
+  "csv_no": {
+    "message": "ne"
+  },
+  "csv_filename": {
+    "message": "cesty"
+  },
+  "error_poland_prices": {
+    "message": "Bulletin EU: chybí ceny pro Polsko"
+  },
+  "error_eu_file": {
+    "message": "Bulletin EU: neplatný soubor XLSX"
+  },
+  "error_eu_prices": {
+    "message": "Bulletin EU: nenalezeny žádné ceny"
+  },
+  "consumption_fuel_us": {
+    "message": "Spotřeba (mpg)"
+  },
+  "consumption_ev_us": {
+    "message": "Spotřeba energie (kWh na 100 mi)"
+  },
+  "popup_manual_price_us": {
+    "message": "Vlastní cena (za galon)"
+  },
+  "label_units": {
+    "message": "Jednotky"
+  },
+  "units_metric": {
+    "message": "Kilometry a litry"
+  },
+  "units_us": {
+    "message": "Míle a americké galony (mpg)"
+  },
+  "csv_consumption_metric": {
+    "message": "na 100 km"
+  },
+  "csv_consumption_us": {
+    "message": "mpg nebo kWh na 100 mi"
+  }
+}

@@ -1,0 +1,356 @@
+{
+  "appName": {
+    "message": "Tankful – costul carburantului pe fiecare traseu"
+  },
+  "appDescription": {
+    "message": "Costul carburantului pe fiecare traseu din Google Maps – prețuri actuale în UE, Regatul Unit și SUA, electrice, cost pe persoană."
+  },
+  "actionTitle": {
+    "message": "Setări cost călătorie"
+  },
+  "fuel_pb": {
+    "message": "Benzină 95"
+  },
+  "fuel_pbp": {
+    "message": "Benzină 98"
+  },
+  "fuel_on": {
+    "message": "Motorină"
+  },
+  "fuel_onp": {
+    "message": "Motorină premium"
+  },
+  "fuel_lpg": {
+    "message": "GPL"
+  },
+  "fuel_ev": {
+    "message": "Electric (EV)"
+  },
+  "mileage_small_label": {
+    "message": "până la 900 cm³"
+  },
+  "mileage_large_label": {
+    "message": "peste 900 cm³ / electric"
+  },
+  "mileage_off": {
+    "message": "Nu afișa"
+  },
+  "mileage_small_option": {
+    "message": "Până la 900 cm³ – $1/km"
+  },
+  "mileage_large_option": {
+    "message": "Peste 900 cm³ sau electric – $1/km"
+  },
+  "price_manual": {
+    "message": "preț manual"
+  },
+  "price_missing": {
+    "message": "lipsesc prețurile actuale – preț manual"
+  },
+  "price_no_rate": {
+    "message": "lipsește cursul $1 – preț manual"
+  },
+  "price_national": {
+    "message": "medie Polonia"
+  },
+  "price_single": {
+    "message": "$1 $2"
+  },
+  "price_average": {
+    "message": "media dintre $1 $2 și $3 $4"
+  },
+  "price_route": {
+    "message": "media traseului: $1"
+  },
+  "price_ev": {
+    "message": "acasă $1 – încărcare rapidă $2 pe kWh"
+  },
+  "trip_cost": {
+    "message": "Costul călătoriei"
+  },
+  "route_default": {
+    "message": "Traseu"
+  },
+  "per_person": {
+    "message": "$1/persoană"
+  },
+  "people_line": {
+    "message": "👥 $1 × $2"
+  },
+  "round_short": {
+    "message": "dus-întors"
+  },
+  "round_long": {
+    "message": "dus-întors"
+  },
+  "cost_setup": {
+    "message": "⚙ Alege carburantul"
+  },
+  "cost_mileage": {
+    "message": "🧾 decontare pe km $1"
+  },
+  "title_setup": {
+    "message": "Dă clic pentru a alege carburantul și consumul"
+  },
+  "title_round": {
+    "message": "Dus-întors: același traseu × 2."
+  },
+  "title_mileage": {
+    "message": "Decontare poloneză pe km: $1/km ($2)."
+  },
+  "title_override": {
+    "message": "Setări doar pentru acest traseu."
+  },
+  "click_to_change": {
+    "message": "Dă clic pentru a modifica."
+  },
+  "warn_text": {
+    "message": "🚗 Tankful nu găsește distanța acestui traseu – poate Google a schimbat pagina Maps. Costul călătoriei nu este disponibil momentan."
+  },
+  "warn_hide": {
+    "message": "Ascunde pentru acest traseu"
+  },
+  "float_settings": {
+    "message": "Setări carburant"
+  },
+  "float_expand": {
+    "message": "Extinde"
+  },
+  "float_collapse": {
+    "message": "Restrânge"
+  },
+  "float_setup": {
+    "message": "⚙ Alege carburantul și consumul"
+  },
+  "float_show_route": {
+    "message": "Arată acest traseu pe hartă"
+  },
+  "float_copy": {
+    "message": "📋 Copiază"
+  },
+  "float_copy_title": {
+    "message": "Copiază un rezumat al traseului selectat"
+  },
+  "float_save": {
+    "message": "💾 Salvează călătoria"
+  },
+  "float_save_title": {
+    "message": "Adaugă traseul selectat în istoricul călătoriilor"
+  },
+  "float_override_tag": {
+    "message": "✎ doar acest traseu"
+  },
+  "copied": {
+    "message": "✓ Copiat"
+  },
+  "copy_failed": {
+    "message": "Eroare"
+  },
+  "saved_flash": {
+    "message": "✓ Salvat"
+  },
+  "summary_fuel": {
+    "message": "Carburant: $1"
+  },
+  "summary_round": {
+    "message": "Dus-întors: $1"
+  },
+  "summary_link": {
+    "message": "— calculat cu Tankful: $1"
+  },
+  "summary_mileage": {
+    "message": "Decontare pe km: $1"
+  },
+  "panel_title_first": {
+    "message": "Mașina ta"
+  },
+  "label_fuel": {
+    "message": "Carburant"
+  },
+  "label_passengers": {
+    "message": "Persoane"
+  },
+  "consumption_fuel": {
+    "message": "Consum ($1 la 100 km)"
+  },
+  "consumption_ev": {
+    "message": "Consum de energie ($1 la 100 km)"
+  },
+  "panel_price": {
+    "message": "Preț: $1"
+  },
+  "btn_route_only": {
+    "message": "Doar acest traseu"
+  },
+  "btn_save": {
+    "message": "Salvează"
+  },
+  "btn_save_default": {
+    "message": "Salvează ca implicit"
+  },
+  "btn_reset_route": {
+    "message": "Restabilește setările implicite pentru acest traseu"
+  },
+  "popup_auto_price": {
+    "message": "Descarcă automat prețurile medii"
+  },
+  "popup_refresh": {
+    "message": "Actualizează"
+  },
+  "popup_local_prices": {
+    "message": "Prețurile țărilor de pe traseu (UE, Regatul Unit și SUA)"
+  },
+  "popup_local_hint": {
+    "message": "Plecarea și destinația traseului (rotunjite la ~1 km) sunt trimise către OpenStreetMap pentru a afla țara."
+  },
+  "popup_manual_price": {
+    "message": "Preț manual (pe litru)"
+  },
+  "popup_ev_home": {
+    "message": "Electricitate acasă (kWh)"
+  },
+  "popup_ev_fast": {
+    "message": "Încărcare rapidă (kWh)"
+  },
+  "popup_currency": {
+    "message": "Monedă"
+  },
+  "popup_mileage": {
+    "message": "Decontare pe km (tarife poloneze)"
+  },
+  "popup_summary_link": {
+    "message": "Adaugă un link Tankful la rezumatele copiate"
+  },
+  "popup_round_trip": {
+    "message": "Arată costul dus-întors"
+  },
+  "popup_floating": {
+    "message": "Panoul traseului pe hartă"
+  },
+  "popup_history": {
+    "message": "📒 Istoricul călătoriilor"
+  },
+  "popup_saved": {
+    "message": "Salvat"
+  },
+  "popup_fetching": {
+    "message": "Se descarcă…"
+  },
+  "popup_fetch_error": {
+    "message": "Descărcarea a eșuat – se folosește prețul manual."
+  },
+  "popup_no_response": {
+    "message": "niciun răspuns"
+  },
+  "popup_preview": {
+    "message": "$1 ≈ $2"
+  },
+  "welcome_page_title": {
+    "message": "Tankful – prima configurare"
+  },
+  "welcome_tagline": {
+    "message": "Costul carburantului pe fiecare traseu"
+  },
+  "welcome_lead": {
+    "message": "Alege carburantul și introdu consumul. Pe baza lor vei vedea costul estimat al fiecărui traseu cu mașina în Google Maps."
+  },
+  "welcome_consumption": {
+    "message": "Consum mediu"
+  },
+  "welcome_submit": {
+    "message": "Salvează și deschide Google Maps"
+  },
+  "welcome_hint": {
+    "message": "Poți schimba oricând: dă clic pe pictograma extensiei sau pe cost pe hartă, apoi alege dacă modificarea se aplică unui singur traseu sau se salvează ca implicită."
+  },
+  "welcome_ev": {
+    "message": "Pentru o mașină electrică arătăm un interval: încărcare acasă – încărcare rapidă. Prețurile electricității le setezi în setările extensiei."
+  },
+  "welcome_price_auto": {
+    "message": "Preț actual: $1 – actualizat automat."
+  },
+  "welcome_price_pending": {
+    "message": "Prețurile medii ale carburanților vor fi descărcate în fundal imediat."
+  },
+  "history_title": {
+    "message": "Istoricul călătoriilor"
+  },
+  "history_lead": {
+    "message": "Trasee salvate cu butonul „💾 Salvează călătoria” din panoul de pe hartă."
+  },
+  "history_export": {
+    "message": "Exportă CSV"
+  },
+  "history_empty": {
+    "message": "Nu ai încă nicio călătorie salvată. Planifică un traseu cu mașina în Google Maps și dă clic pe „💾 Salvează călătoria” în panoul din colțul dreapta sus al hărții."
+  },
+  "trips_one": {
+    "message": "$1 călătorie"
+  },
+  "trips_few": {
+    "message": "$1 călătorii"
+  },
+  "trips_many": {
+    "message": "$1 de călătorii"
+  },
+  "trips_other": {
+    "message": "$1 de călătorii"
+  },
+  "history_round_on": {
+    "message": "Dus-întors (dă clic pentru doar dus)"
+  },
+  "history_round_off": {
+    "message": "Doar dus (dă clic pentru dus-întors)"
+  },
+  "history_delete": {
+    "message": "Șterge călătoria"
+  },
+  "history_delete_confirm": {
+    "message": "Ștergi călătoria $1 → $2?"
+  },
+  "csv_header": {
+    "message": "Data;De la;Până la;Traseu;Distanță ($1);Dus-întors;Carburant;Consum ($2);Persoane;Cost de la;Cost până la;Monedă;Decontare pe km"
+  },
+  "csv_yes": {
+    "message": "da"
+  },
+  "csv_no": {
+    "message": "nu"
+  },
+  "csv_filename": {
+    "message": "calatorii"
+  },
+  "error_poland_prices": {
+    "message": "Buletinul UE: lipsesc prețurile pentru Polonia"
+  },
+  "error_eu_file": {
+    "message": "Buletinul UE: fișier XLSX invalid"
+  },
+  "error_eu_prices": {
+    "message": "Buletinul UE: nu s-au găsit prețuri"
+  },
+  "consumption_fuel_us": {
+    "message": "Consum (mpg)"
+  },
+  "consumption_ev_us": {
+    "message": "Consum de energie (kWh la 100 mi)"
+  },
+  "popup_manual_price_us": {
+    "message": "Preț manual (pe galon)"
+  },
+  "label_units": {
+    "message": "Unități"
+  },
+  "units_metric": {
+    "message": "Kilometri și litri"
+  },
+  "units_us": {
+    "message": "Mile și galoane SUA (mpg)"
+  },
+  "csv_consumption_metric": {
+    "message": "la 100 km"
+  },
+  "csv_consumption_us": {
+    "message": "mpg sau kWh la 100 mi"
+  }
+}

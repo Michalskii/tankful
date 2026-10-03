@@ -1,0 +1,32 @@
+Weet wat een rit kost voordat je vertrekt. Tankful toont de geschatte brandstofkosten direct naast de reistijd en afstand van elke autoroute in Google Maps – zonder getallen over te typen in een rekenmachine.
+
+WAT JE KRIJGT
+• De kosten van elke routevariant, in de routelijst en in de routedetails.
+• Een compact paneel op de kaart dat alle varianten naast elkaar vergelijkt.
+• Kosten heen en terug en per persoon, bijv. ‘4 × € 12’ als je met z'n vieren rijdt.
+• Instellingen voor één route – rijd een keer met de auto van een vriend zonder je standaardinstellingen te wijzigen.
+• Met één klik een samenvatting kopiëren of de rit in je rittenoverzicht opslaan.
+
+ACTUELE BRANDSTOFPRIJZEN
+• EU-landen: landelijke gemiddelden uit het wekelijkse Oil Bulletin van de Europese Commissie; in Polen aangepast als de groothandelsprijzen van Orlen of de brandstofbelastingen veranderen.
+• Verenigd Koninkrijk: de wekelijkse brandstofprijzen van de Britse overheid.
+• VS: de wekelijkse benzine- en dieselprijzen van het Amerikaanse EIA voor de staat of regio, in mijlen, gallons en mpg.
+• Ritten door meerdere landen: de prijs wordt gewogen naar de kilometers in elk land – zo zie je wat tanken in België, Duitsland of Luxemburg onderweg scheelt.
+• Benzine 95 en 98, diesel, premium diesel en LPG – of je eigen prijs.
+• Elektrische auto's: een bereik van thuis laden tot snelladers.
+• Prijzen in EUR, PLN, CZK, HUF, RON, SEK, DKK, GBP, CHF, NOK, ISK of USD, omgerekend tegen de koersen van de Nationale Bank van Polen.
+
+RITTENOVERZICHT
+• Sla ritten op en bekijk ze per maand, met totale afstand en kosten.
+• Export naar CSV voor je spreadsheet of boekhouding.
+
+PRIVACY
+Geen account, geen advertenties, geen statistieken, geen servers. Je instellingen en rittenoverzicht blijven in je browser. Om het land en de bijbehorende prijzen te bepalen, worden alleen start en bestemming van de route – afgerond op ongeveer 1 km – naar OpenStreetMap gestuurd, en dat kun je uitzetten. Volledig beleid: https://koszt-paliwa.pl/privacy.html
+
+Werkt in Google Maps in alle EU-landen, het VK, de VS, Zwitserland, Noorwegen en IJsland – met automatische prijzen in de EU, het VK en de VS en je eigen prijs in Zwitserland, Noorwegen en IJsland. Beschikbaar in 16 Europese talen.
+
+Online rekenmachine zonder extensie: https://koszt-paliwa.pl/en
+
+De kosten zijn schattingen op basis van gemiddelde brandstofprijzen en het verbruik dat je invult; de prijzen aan de pomp kunnen afwijken.
+
+Tankful is een onafhankelijk project en is niet verbonden aan of goedgekeurd door Google. Open source (MIT): https://github.com/Michalskii/tankful
