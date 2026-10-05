@@ -78,6 +78,7 @@ const TEXT = {
     weekPrice: (date) => `Cena (${date})`,
     weekChange: "Zmiana w tydzień",
     chartCaption: (date) => `Średnie ceny krajowe z cotygodniowego biuletynu naftowego Komisji Europejskiej, przeliczone na złote po kursie z danego tygodnia. Ostatni tydzień: ${date}.`,
+    plAdjusted: "Polska: aktualna średnia cena z uwzględnieniem obniżki VAT i zmian cen hurtowych Orlenu – ta sama, z której liczy kalkulator.",
     chartAria: (names) => `Wykres cen: ${names}`,
     euAverage: "średnia UE",
     indexTitle: "Poradniki: ceny paliw i koszt przejazdu | Tankful",
@@ -169,6 +170,7 @@ const TEXT = {
     weekPrice: (date) => `Price (${date})`,
     weekChange: "Change in a week",
     chartCaption: (date) => `National average prices from the European Commission's Weekly Oil Bulletin, in euro. Latest week: ${date}.`,
+    plAdjusted: "Poland: current average price including the VAT cut and changes in Orlen wholesale prices – the same price the calculator uses.",
     chartAria: (names) => `Price chart: ${names}`,
     euAverage: "EU average",
     indexTitle: "Guides: fuel prices and trip costs | Tankful",
@@ -259,6 +261,7 @@ const TEXT = {
     weekPrice: (date) => `Preis (${date})`,
     weekChange: "Veränderung zur Vorwoche",
     chartCaption: (date) => `Landesdurchschnitte aus dem wöchentlichen Oil Bulletin der Europäischen Kommission, in Euro. Letzte Woche: ${date}.`,
+    plAdjusted: "Polen: aktueller Durchschnittspreis inklusive Steuersenkung und Änderungen der Orlen-Großhandelspreise – derselbe Preis wie im Rechner.",
     chartAria: (names) => `Preisdiagramm: ${names}`,
     euAverage: "EU-Durchschnitt",
     indexTitle: "Ratgeber: Spritpreise und Fahrtkosten in Europa | Tankful",
@@ -334,6 +337,24 @@ const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/"/g, "&quot;").repl
 
 function pricesDate(data) {
   return [data.fuelPrices?.date, data.fuelPrices?.orlen?.date, data.euPrices?.date, data.ukPrices?.date, data.usPrices?.date].filter(Boolean).sort().at(-1);
+}
+
+function adjustHistory(history, data) {
+  const pl = history.prices.PL;
+  const fresh = data.fuelPrices?.prices;
+  if (!pl || !fresh) return history;
+  const adjusted = { ...pl };
+  let changed = false;
+  for (const [fuel, values] of Object.entries(pl)) {
+    let last = values.length - 1;
+    while (last >= 0 && values[last] == null) last--;
+    if (last < 0 || fresh[fuel] == null || history.dates[last] !== data.fuelPrices.date) continue;
+    const eur = fresh[fuel] / history.plnPerEur[last];
+    if (Math.abs(eur - values[last]) < 0.0005) continue;
+    adjusted[fuel] = values.map((v, i) => (i === last ? eur : v));
+    changed = true;
+  }
+  return changed ? { ...history, prices: { ...history.prices, PL: adjusted }, adjustedPL: true } : history;
 }
 
 function prices(data) {
@@ -683,11 +704,13 @@ function context(lang, data, history) {
       const pct = (diff / x.prev) * 100;
       const pctSign = Math.round(pct * 10) > 0 ? "+" : Math.round(pct * 10) < 0 ? "−" : "";
       const change = `${signed(diff)} (${pctSign}${num(Math.abs(pct), 1)}%)`;
-      const name = eu ? `<strong>${esc(histName(x.cc))}</strong>` : esc(histName(x.cc));
+      const mark = x.cc === "PL" && history.adjustedPL ? "*" : "";
+      const name = eu ? `<strong>${esc(histName(x.cc))}</strong>` : `${esc(histName(x.cc))}${mark}`;
       return [eu ? "–" : String(place), name, histPrice(x.now), change];
     });
     const last = history.dates[lastIndex(history.prices.EU[fuel])];
-    return table([t.weekRank, t.country, t.weekPrice(date(last)), t.weekChange], body, [0, 2, 3]);
+    const note = history.adjustedPL ? `\n<p class="table-note">* ${esc(t.plAdjusted)}</p>` : "";
+    return `${table([t.weekRank, t.country, t.weekPrice(date(last)), t.weekChange], body, [0, 2, 3])}${note}`;
   };
 
   blocks.chart = (countries, fuels = "pb", range = "3y") => {
@@ -707,7 +730,7 @@ function context(lang, data, history) {
 <div class="chart-ranges" role="group" aria-label="${t.chartRangeLabel}">${buttons}</div>
 <div class="chart-canvas"><canvas role="img" aria-label="${esc(t.chartAria(series.map(label).join(", ")))}"></canvas></div>
 ${table([t.chartSeries, t.chartNow, t.chartYear, t.chartFive], rows, [1, 2, 3])}
-<figcaption>${esc(t.chartCaption(date(history.dates[lastIndex(history.prices.PL.pb)])))}</figcaption>
+<figcaption>${esc(t.chartCaption(date(history.dates[lastIndex(history.prices.PL.pb)])))}${history.adjustedPL && ccs.includes("PL") ? ` ${esc(t.plAdjusted)}` : ""}</figcaption>
 </figure>`;
   };
 
@@ -905,7 +928,8 @@ ${main}
 `;
 }
 
-function buildGuides({ site, siteUrl, siteUrls, langSite, siteId, data, history, alternates }) {
+function buildGuides({ site, siteUrl, siteUrls, langSite, siteId, data, history: published, alternates }) {
+  const history = adjustHistory(published, data);
   const guides = loadGuides();
   const css = stylesheet(site);
   fs.copyFileSync(path.join(GUIDES, "guides.css"), path.join(site, "guides.css"));

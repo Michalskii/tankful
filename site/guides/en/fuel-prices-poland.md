@@ -18,7 +18,7 @@ The average fuel price in Poland today is **{{price PL pb}}** for petrol 95, **{
 
 ## How prices have changed
 
-According to the latest European Commission bulletin (from {{histdate}}), petrol changed by {{weekdelta PL pb}} over the week and diesel by {{weekdelta PL on}}. Over the year petrol changed by {{change PL pb 52}} and diesel by {{change PL on 52}}.
+Compared with the previous week, petrol changed by {{weekdelta PL pb}} and diesel by {{weekdelta PL on}}. Over the year petrol changed by {{change PL pb 52}} and diesel by {{change PL on 52}}.
 
 The peak was in {{peakdate PL pb}}, when a litre of petrol cost {{peak PL pb}} on average, and diesel {{peak PL on}} (in {{peakdate PL on}}).
 

@@ -18,7 +18,7 @@ published: 2026-10-02
 
 ## Jak zmieniły się ceny
 
-Według ostatniego biuletynu Komisji Europejskiej (z {{histdate}}) benzyna zmieniła się w ciągu tygodnia o {{weekdelta PL pb}}, a diesel o {{weekdelta PL on}}. W ciągu roku benzyna zmieniła się o {{change PL pb 52}}, a olej napędowy o {{change PL on 52}}.
+W porównaniu z poprzednim tygodniem benzyna zmieniła się o {{weekdelta PL pb}}, a diesel o {{weekdelta PL on}}. W ciągu roku benzyna zmieniła się o {{change PL pb 52}}, a olej napędowy o {{change PL on 52}}.
 
 Rekordowe średnie ceny: benzyna {{peak PL pb}} ({{peakdate PL pb}}), diesel {{peak PL on}} ({{peakdate PL on}}).
 

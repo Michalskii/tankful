@@ -381,6 +381,12 @@ body {
   white-space: nowrap;
 }
 
+.table-note {
+  margin: -0.5rem 0 1rem;
+  font-size: 0.75rem;
+  color: var(--muted-foreground);
+}
+
 .cta {
   position: relative;
   overflow: hidden;
