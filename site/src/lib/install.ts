@@ -42,8 +42,14 @@ function subscribe(listener: () => void) {
   return () => listeners.delete(listener)
 }
 
+const never = () => () => {}
+
+export function useHydrated() {
+  return useSyncExternalStore(never, () => true, () => false)
+}
+
 export function useInstallPrompt() {
-  return useSyncExternalStore(subscribe, () => deferred)
+  return useSyncExternalStore(subscribe, () => deferred, () => null)
 }
 
 export async function promptInstall() {

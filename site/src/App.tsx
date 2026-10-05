@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react"
+import { lazy, Suspense, useEffect, useMemo, useRef, useState } from "react"
 import { ChevronDownIcon, CopyIcon, Loader2Icon, RouteIcon, TriangleAlertIcon } from "lucide-react"
 import { toast } from "sonner"
 
@@ -6,7 +6,6 @@ import { AboutDialog, HowItWorks } from "@/components/AboutDialog"
 import { InstallCard } from "@/components/InstallCard"
 import { StopList } from "@/components/StopList"
 import { ThemeMenu } from "@/components/ThemeMenu"
-import { RouteMap } from "@/components/RouteMap"
 import { PopularRoutes, RouteCosts } from "@/components/RoutePages"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { Badge } from "@/components/ui/badge"
@@ -27,6 +26,8 @@ import { stopItem, type StopItem } from "@/lib/stops"
 import { T } from "@/lib/strings"
 import { cn } from "@/lib/utils"
 import { fetchRoutes, formatDuration, sparsePoints, tripCost, type Options, type Route, type Trip } from "@/lib/trip"
+
+const RouteMap = lazy(() => import("@/components/RouteMap").then((m) => ({ default: m.RouteMap })))
 
 const PREFS_KEY = "tankful-calculator"
 const SITE_CURRENCY = GERMAN_SITE ? "EUR" : MAPKA_CURRENCY
@@ -54,12 +55,12 @@ function readPrefs(): Partial<Options> {
   }
 }
 
-function initialOptions(): Options {
-  const prefs = params.has("from") ? {} : readPrefs()
+function initialOptions(saved = readPrefs()): Options {
+  const prefs = params.has("from") ? {} : saved
   const fuel = params.get("fuel") || prefs.fuelType || MAPKA_DEFAULTS.fuelType
   const fuelType = MAPKA_FUELS[fuel] ? fuel : MAPKA_DEFAULTS.fuelType
   const currency = params.get("cur") || prefs.currency || SITE_CURRENCY
-  const units = readPrefs().units || MAPKA_DEFAULTS.units
+  const units = saved.units || MAPKA_DEFAULTS.units
   return {
     units: units === "us" ? "us" : "metric",
     fuelType,
@@ -69,6 +70,11 @@ function initialOptions(): Options {
     ownPrice: null,
     roundTrip: params.get("rt") === "1",
   }
+}
+
+export function matchesPrerender() {
+  if (["from", "via", "to", "fuel", "c", "p", "cur", "rt", "alt"].some((k) => params.has(k))) return false
+  return JSON.stringify(initialOptions()) === JSON.stringify(initialOptions({}))
 }
 
 function langHref(lang: string) {
@@ -105,9 +111,13 @@ export default function App() {
   const [moreOpen, setMoreOpen] = useState(() => options.units === "us" || options.currency !== SITE_CURRENCY)
   const resultRef = useRef<HTMLDivElement>(null)
   const [resultBelow, setResultBelow] = useState(false)
-  const [data, setData] = useState<MapkaData>({ ...MAPKA_DATA_KEYS })
+  const [data, setData] = useState<MapkaData>(() => ({ ...MAPKA_DATA_KEYS, ...window.MAPKA_PRICES }))
   const [pricesError, setPricesError] = useState(false)
-  const [plan, setPlan] = useState<{ stops: Place[]; variants: { route: Route; shares: Record<string, number> | null }[] } | null>(null)
+  const [plan, setPlan] = useState<{ stops: Place[]; variants: { route: Route; shares: Record<string, number> | null }[] } | null>(() => {
+    if (!CURRENT_ROUTE || params.has("from")) return null
+    const { route, shares } = routeTrip(CURRENT_ROUTE)
+    return { stops: initialStops() as Place[], variants: [{ route, shares }] }
+  })
   const [selected, setSelected] = useState(() => parseInt(params.get("alt") || "0", 10) || 0)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -136,11 +146,7 @@ export default function App() {
   useEffect(() => {
     if (stops.some((s) => !s)) return
     const chosen = stops as Place[]
-    if (PRERENDER && CURRENT_ROUTE) {
-      const { route, shares } = routeTrip(CURRENT_ROUTE)
-      setPlan({ stops: chosen, variants: [{ route, shares }] })
-      return
-    }
+    if (PRERENDER && CURRENT_ROUTE) return
     let cancelled = false
     setLoading(true)
     setError(null)
@@ -626,7 +632,9 @@ export default function App() {
         </aside>
 
         <section className="isolate order-2 mx-4 h-80 overflow-hidden rounded-xl border sm:mx-6 lg:m-0 lg:h-auto lg:flex-1 lg:rounded-none lg:border-0">
-          <RouteMap routes={routes} selected={trips.indexOf(trip!)} onSelect={setSelected} stops={viaStops} units={options.units} />
+          <Suspense fallback={<div className="size-full min-h-80" />}>
+            <RouteMap routes={routes} selected={trips.indexOf(trip!)} onSelect={setSelected} stops={viaStops} units={options.units} />
+          </Suspense>
         </section>
       </main>
       {cost && trip && resultBelow && (

@@ -55,7 +55,7 @@ export function RouteMap({ routes, selected, onSelect, stops, units }: Props) {
 
   useEffect(() => {
     const m = map.current
-    if (!m || !routes.length) return
+    if (!m || !routes.some((r) => r.points.length)) return
     const bounds = L.latLngBounds(routes.flatMap((r) => r.points.map((p) => [p.lat, p.lng] as L.LatLngTuple)))
     m.fitBounds(bounds, { padding: [32, 32] })
   }, [routes])
@@ -65,7 +65,7 @@ export function RouteMap({ routes, selected, onSelect, stops, units }: Props) {
     if (!m) return
     layer.current?.remove()
     const active = routes[selected]
-    if (!active) return
+    if (!active?.points.length) return
     const line = (r: Route) => r.points.map((p) => [p.lat, p.lng] as L.LatLngTuple)
     const stop = (p: L.LatLngTuple, radius = 7) =>
       L.circleMarker(p, { radius, color: "#ffffff", weight: 3, fillColor: "#171717", fillOpacity: 1 })

@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { track } from "@/lib/analytics"
-import { IN_APP, IOS, MOBILE, promptInstall, STANDALONE, useInstallPrompt } from "@/lib/install"
+import { IN_APP, IOS, MOBILE, promptInstall, STANDALONE, useHydrated, useInstallPrompt } from "@/lib/install"
 import { PRERENDER } from "@/lib/prerender"
 import { T } from "@/lib/strings"
 
@@ -26,8 +26,9 @@ function Shell({ heading, text, children }: { heading: string; text: string; chi
 
 export function InstallCard() {
   const prompt = useInstallPrompt()
+  const hydrated = useHydrated()
 
-  if (PRERENDER || !MOBILE) {
+  if (PRERENDER || !MOBILE || !hydrated) {
     return (
       <Shell heading={T("ctaHeading")} text={T("ctaText")}>
         <Button asChild size="sm">

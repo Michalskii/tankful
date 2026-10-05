@@ -50,7 +50,7 @@ if (history) fs.copyFileSync(history, path.join(PUBLIC, "history.json"));
 fs.copyFileSync(path.join(ROOT, "site/node_modules/chart.js/dist/chart.umd.min.js"), path.join(PUBLIC, "chart.umd.min.js"));
 
 const messages = {};
-for (const lang of fs.readdirSync(path.join(ROOT, "_locales"))) {
+for (const lang of Object.keys(LANGS)) {
   messages[lang] = JSON.parse(fs.readFileSync(path.join(ROOT, "_locales", lang, "messages.json"), "utf8"));
 }
 fs.writeFileSync(path.join(PUBLIC, "messages.js"), `const MAPKA_MESSAGES = ${JSON.stringify(messages)};\n`);
@@ -148,13 +148,14 @@ function headTags(page, s) {
     .join("\n");
 }
 
-function pageHtml(template, page, strings) {
+function pageHtml(template, page, strings, prices) {
   const s = pageStrings(page, strings);
+  const pricesTag = `    <script>window.MAPKA_PRICES = ${JSON.stringify(prices).replace(/</g, "\\u003c")}</script>`;
   let html = template
     .replace(/<html lang="[^"]*">/, `<html lang="${page.lang}" data-lang="${page.lang}">`)
     .replace(/<title>[^<]*<\/title>/, `<title>${esc(s.title)}</title>`)
     .replace(/<meta name="description" content="[^"]*" \/>/, `<meta name="description" content="${esc(s.description)}" />`)
-    .replace("</head>", `${headTags(page, s)}\n  </head>`);
+    .replace("</head>", `${headTags(page, s)}\n${pricesTag}\n  </head>`);
   if (page.route) html = html.replace('<meta charset="UTF-8" />', '<meta charset="UTF-8" />\n    <base href="../" />');
   if (!html.includes(`<title>${esc(s.title)}</title>`) || !html.includes(esc(s.description))) {
     throw new Error(`${page.file}: could not replace the title or description in index.html`);
@@ -231,8 +232,8 @@ async function main() {
   const strings = siteStrings();
   const template = fs.readFileSync(path.join(SITE, "index.html"), "utf8");
   for (const dir of SITE_ID === "pl" ? ["trasa", "route"] : ["strecke"]) fs.mkdirSync(path.join(SITE, dir), { recursive: true });
-  for (const page of PAGES) fs.writeFileSync(path.join(SITE, page.file), pageHtml(template, page, strings));
   const data = JSON.parse(fs.readFileSync(path.join(PUBLIC, "prices.json"), "utf8"));
+  for (const page of PAGES) fs.writeFileSync(path.join(SITE, page.file), pageHtml(template, page, strings, data));
   const historyData = JSON.parse(fs.readFileSync(path.join(PUBLIC, "history.json"), "utf8"));
   const guides = buildGuides({ site: SITE, siteUrl: SITE_URL, siteUrls: SITE_URLS, langSite: LANG_SITE, siteId: SITE_ID, data, history: historyData, alternates });
   fs.writeFileSync(path.join(SITE, "sitemap.xml"), sitemap(guides));

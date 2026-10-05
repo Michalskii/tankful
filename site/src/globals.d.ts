@@ -1,6 +1,9 @@
 export {}
 
 declare global {
+  interface Window {
+    MAPKA_PRICES?: MapkaData
+  }
   type MapkaSettings = Record<string, any>
   type MapkaData = Record<string, any>
   type MapkaPlace = { cc?: string | null; region?: string | null; regionName?: string | null }
