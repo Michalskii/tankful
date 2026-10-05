@@ -6,6 +6,8 @@ const { screenshot, flattenPng } = require("./chrome");
 const ROOT = path.join(__dirname, "..");
 const LOGO = `<svg width="120" height="120" viewBox="0 0 128 128" aria-hidden="true"><rect x="4" y="4" width="120" height="120" rx="28" fill="#26313F"/><path d="M31.1 91 A38 38 0 1 1 96.9 91" fill="none" stroke="#F2A516" stroke-width="13" stroke-linecap="round"/><line x1="64" y1="74" x2="87" y2="51" stroke="#FAF7F0" stroke-width="9" stroke-linecap="round"/><circle cx="64" cy="74" r="10" fill="#FAF7F0"/></svg>`;
 
+const FONTS = `<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@900&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">`;
+
 const TEXTS = {
   pl: {
     heading: "Ile kosztuje paliwo na tę trasę?",
@@ -38,7 +40,7 @@ function page(t) {
 <html>
 <head>
 <meta charset="utf-8">
-<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@900&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+${FONTS}
 <style>
   html, body { margin: 0; background: #1B2430; }
   .card {
@@ -77,13 +79,19 @@ function page(t) {
 </html>`;
 }
 
-const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "tankful-og-"));
-for (const [lang, texts] of Object.entries(TEXTS)) {
-  const html = path.join(tmp, `og-${lang}.html`);
-  fs.writeFileSync(html, page(texts));
-  const out = path.join(ROOT, "site/public", `og-${lang}.png`);
-  screenshot(html, 1200, 630, out, { waitMs: 5000 });
-  flattenPng(out, [0x1b, 0x24, 0x30]);
-  console.log(path.relative(ROOT, out));
+function main() {
+  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "tankful-og-"));
+  for (const [lang, texts] of Object.entries(TEXTS)) {
+    const html = path.join(tmp, `og-${lang}.html`);
+    fs.writeFileSync(html, page(texts));
+    const out = path.join(ROOT, "site/public", `og-${lang}.png`);
+    screenshot(html, 1200, 630, out, { waitMs: 5000 });
+    flattenPng(out, [0x1b, 0x24, 0x30]);
+    console.log(path.relative(ROOT, out));
+  }
+  fs.rmSync(tmp, { recursive: true, force: true });
 }
-fs.rmSync(tmp, { recursive: true, force: true });
+
+if (require.main === module) main();
+
+module.exports = { LOGO, FONTS };

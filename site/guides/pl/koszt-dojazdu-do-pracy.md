@@ -3,9 +3,9 @@ id: commute
 photo: how-to-calculate
 order: 22
 slug: koszt-dojazdu-do-pracy
-title: Ile kosztuje dojazd do pracy samochodem? Koszt miesięczny i roczny | Tankful
+title: Koszt dojazdu do pracy samochodem – miesięcznie i rocznie
 heading: Ile kosztuje dojazd do pracy samochodem – miesięcznie i rocznie
-description: Koszt paliwa na dojazd do pracy samochodem przy 20, 40 i 60 km w jedną stronę – miesięcznie i rocznie, na benzynę, diesla, LPG i elektrykiem, oraz ile oszczędza wspólny dojazd.
+description: Koszt paliwa na dojazd do pracy przy 20, 40 i 60 km w jedną stronę – miesięcznie i rocznie, na benzynę, diesel, LPG i prąd – oraz ile daje wspólny dojazd.
 published: 2026-10-02
 ---
 Przy 20 km do pracy w jedną stronę przejeżdżasz w miesiącu około 840 km (21 dni roboczych, tam i z powrotem). Autem palącym 7 l/100 km benzyna kosztuje wtedy dziś około **{{cost PL pb 7 840}} miesięcznie**, a w roku (11 miesięcy pracy) około **{{cost PL pb 7 9240}}**. Przy 40 km w jedną stronę to już {{cost PL pb 7 1680}} miesięcznie.

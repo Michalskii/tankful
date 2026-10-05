@@ -3,9 +3,9 @@ id: lux-fuel
 photo: europe-prices
 order: 12
 slug: tanken-in-luxemburg
-title: Tanken in Luxemburg – aktuelle Spritpreise und wie viel du sparst | Tankful
+title: Tanken in Luxemburg – Spritpreise und Ersparnis | Tankful
 heading: Tanken in Luxemburg – lohnt sich die Fahrt über die Grenze?
-description: Aktuelle Preise für Super und Diesel in Luxemburg im Vergleich zu Deutschland, Ersparnis pro Tankfüllung und für wen sich die Fahrt aus Trier, dem Saarland oder der Eifel lohnt.
+description: Aktuelle Preise für Super und Diesel in Luxemburg im Vergleich zu Deutschland, Ersparnis pro Tankfüllung und für wen sich die Fahrt lohnt.
 published: 2026-10-02
 ---
 Luxemburg ist für viele Autofahrer aus Trier, dem Saarland und der Eifel seit Jahren die erste Adresse zum Tanken. Der Grund: Das Großherzogtum besteuert Kraftstoff niedriger als Deutschland. Ein Liter Super kostet dort im Schnitt **{{price LU pb}}**, in Deutschland **{{price DE pb}}**. Diesel liegt bei {{price LU on}} gegenüber {{price DE on}}. {{verdict DE LU pb}} {{verdict DE LU on}}

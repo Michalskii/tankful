@@ -3,9 +3,9 @@ id: commute
 photo: how-to-calculate
 order: 22
 slug: commuting-cost
-title: How much does commuting by car cost? Monthly and yearly fuel cost | Tankful
+title: Cost of commuting by car – monthly and yearly fuel cost
 heading: How much commuting by car costs – per month and per year
-description: The fuel cost of driving to work at 20, 40 and 60 km each way – per month and per year, for petrol, diesel, LPG and electric cars – and how much sharing the ride saves.
+description: The fuel cost of driving to work at 20, 40 and 60 km each way – per month and year, for petrol, diesel, LPG and EVs – and how much ride sharing saves.
 published: 2026-10-02
 ---
 With a 20 km commute each way you drive about 840 km a month (21 working days, there and back). In a car that uses 7 l/100 km, petrol at Poland's average price comes to about **{{cost PL pb 7 840}} a month** today, and about **{{cost PL pb 7 9240}} a year** (11 working months). At German prices the same month costs about {{cost DE pb 7 840}}. With 40 km each way it is {{cost PL pb 7 1680}} a month at Polish prices.

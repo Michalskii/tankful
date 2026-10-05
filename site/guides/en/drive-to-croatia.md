@@ -2,9 +2,9 @@
 id: croatia
 order: 6
 slug: drive-to-croatia
-title: Driving from Poland to Croatia – fuel cost, where to fill up, vignettes | Tankful
+title: Driving from Poland to Croatia – fuel cost and vignettes
 heading: Driving from Poland to Croatia – fuel cost, where to fill up and which vignettes
-description: How much fuel costs on the drive from Poland to Croatia (Kraków and Warsaw to Split), which country on the way is cheapest to fill up in and where you need a vignette.
+description: Fuel cost of the drive from Poland to Croatia (Kraków and Warsaw to Split), the cheapest country to fill up in on the way and where you need a vignette.
 published: 2026-09-30
 ---
 Fuel for the drive from Kraków to Split ({{km krakow-split}} km) currently costs about **{{trip krakow-split pb 7}}** in a petrol car (7 l/100 km) and **{{trip krakow-split on 6}}** in a diesel (6 l/100 km), one way. From Warsaw ({{km warszawa-split}} km) it's **{{trip warszawa-split pb 7}}** and **{{trip warszawa-split on 6}}**. Split four ways, petrol from Kraków comes to {{trip krakow-split pb 7 4}} per person.

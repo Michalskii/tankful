@@ -3,9 +3,9 @@ id: poland-fuel
 photo: lpg
 order: 1
 slug: tanken-in-polen
-title: Tanken in Polen – aktuelle Benzinpreise und wie viel du sparst | Tankful
+title: Tanken in Polen – aktuelle Benzinpreise und Ersparnis
 heading: Tanken in Polen – lohnt es sich und wie viel sparst du?
-description: Aktuelle Benzinpreise in Polen für Super, Diesel und Autogas im Vergleich zu Deutschland, Ersparnis pro Tankfüllung und Tipps zum Tanken hinter der Grenze.
+description: Aktuelle Preise für Super, Diesel und Autogas in Polen im Vergleich zu Deutschland, Ersparnis pro Tankfüllung und Tipps zum Tanken hinter der Grenze.
 published: 2026-10-01
 ---
 Ein Liter Super 95 kostet in Polen heute im Schnitt **{{price PL pb}}**, Diesel **{{price PL on}}** und Autogas **{{price PL lpg}}**. In Deutschland sind es {{price DE pb}}, {{price DE on}} und {{price DE lpg}}. {{verdict DE PL pb}} {{verdict DE PL on}}

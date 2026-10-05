@@ -2,9 +2,9 @@
 id: mileage
 order: 17
 slug: polish-mileage-allowance
-title: Polish mileage allowance (kilometrówka) – rates per km | Tankful
+title: Polish mileage allowance (kilometrówka) – rates per km
 heading: Polish mileage allowance (kilometrówka) – rates per kilometre and how they compare with fuel costs
-description: The Polish mileage allowance rates for using a private car for work (PLN 0.89 and 1.15 per km), worked examples for popular routes and a comparison with the real cost of fuel.
+description: Polish mileage allowance rates for using a private car for work (PLN 0.89 and 1.15 per km), examples for popular routes and a comparison with fuel cost.
 published: 2026-10-01
 ---
 In Poland, kilometrówka is the reimbursement for using a private car for work. The maximum rates are **PLN 1.15 per kilometre** for cars with an engine over 900 cm³ and **PLN 0.89 per kilometre** for cars up to 900 cm³. A business trip from Warsaw to Kraków ({{km warszawa-krakow}} km) gives **{{allowance warszawa-krakow 1.15}}** one way – while the fuel itself costs about {{trip warszawa-krakow pb 7}}. Amounts on this page are converted to euro.

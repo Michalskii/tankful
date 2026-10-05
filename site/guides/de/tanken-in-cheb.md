@@ -3,7 +3,7 @@ id: cheb-fuel
 photo: czechia
 order: 11
 slug: tanken-in-cheb
-title: Tanken in Cheb (Eger) – günstiger Sprit hinter der bayerischen Grenze | Tankful
+title: Tanken in Cheb (Eger) – günstiger Sprit hinter der Grenze
 heading: Tanken in Cheb – lohnt sich der Abstecher aus Bayern nach Tschechien?
 description: Spritpreise in Tschechien und Deutschland im Vergleich, Ersparnis pro Tankfüllung und Tipps zum Tanken in Cheb (Eger) nahe Waldsassen und Schirnding.
 published: 2026-10-02

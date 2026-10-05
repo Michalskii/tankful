@@ -2,7 +2,7 @@
 id: how-to-calculate
 order: 4
 slug: how-to-calculate-fuel-cost
-title: How to calculate the fuel cost of a trip – formula and examples | Tankful
+title: How to calculate trip fuel cost – formula and examples
 heading: How to calculate the fuel cost of a trip – formula and examples
 description: A simple formula for the fuel cost of a trip, examples with current prices, return trips, driving through several countries and the most common mistakes.
 published: 2026-09-30

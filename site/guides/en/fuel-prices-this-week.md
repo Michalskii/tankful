@@ -3,7 +3,7 @@ id: weekly
 photo: price-history
 order: 0.5
 slug: fuel-prices-this-week
-title: Fuel prices this week – EU country ranking and changes | Tankful
+title: Fuel prices this week – EU country ranking and changes
 heading: Fuel prices this week – where fuel is cheapest in the EU and what changed
 description: A weekly ranking of petrol, diesel and LPG prices in every EU country from the European Commission's Oil Bulletin, with the change since the previous week.
 published: 2026-10-02

@@ -3,9 +3,9 @@ id: france-fuel
 photo: west
 order: 15
 slug: spritpreise-frankreich
-title: Spritpreise Frankreich – aktuelle Benzinpreise und Tipps fürs Tanken | Tankful
+title: Spritpreise Frankreich – aktuelle Preise und Tipps | Tankful
 heading: Spritpreise in Frankreich – was Sprit kostet und wo du günstig tankst
-description: Aktuelle Benzin- und Dieselpreise in Frankreich im Vergleich zu Deutschland, warum Supermarkt-Tankstellen oft günstiger sind und was du zu Autobahnmaut und Umweltzonen wissen musst.
+description: Benzin- und Dieselpreise in Frankreich im Vergleich zu Deutschland, günstige Supermarkt-Tankstellen sowie Infos zu Autobahnmaut und Umweltzonen.
 published: 2026-10-02
 ---
 Ob Urlaub in der Provence, an der Atlantikküste oder ein Wochenende in Paris: Wer mit dem Auto nach Frankreich fährt, will wissen, was der Sprit dort kostet. Ein Liter Super kostet in Frankreich im Schnitt **{{price FR pb}}**, Diesel **{{price FR on}}**. In Deutschland sind es {{price DE pb}} und {{price DE on}}. {{verdict DE FR pb}} {{verdict DE FR on}}

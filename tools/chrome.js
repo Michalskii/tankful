@@ -12,25 +12,43 @@ const CHROME = [
   "/usr/bin/google-chrome",
 ].find((p) => p && fs.existsSync(p));
 
-function screenshot(htmlFile, width, height, out, { transparent = false, waitMs = 0 } = {}) {
+function screenshotArgs(htmlFile, width, height, out, profile, { transparent = false, waitMs = 0 } = {}) {
+  return [
+    "--headless=new",
+    "--disable-gpu",
+    ...(process.platform === "linux" ? ["--no-sandbox"] : []),
+    "--hide-scrollbars",
+    "--force-device-scale-factor=1",
+    ...(transparent ? ["--default-background-color=00000000"] : []),
+    ...(waitMs ? [`--virtual-time-budget=${waitMs}`] : []),
+    `--user-data-dir=${profile}`,
+    `--window-size=${width},${height}`,
+    `--screenshot=${path.resolve(out)}`,
+    `file:///${path.resolve(htmlFile).replace(/\\/g, "/")}`,
+  ];
+}
+
+function screenshot(htmlFile, width, height, out, options) {
   if (!CHROME) throw new Error("Chrome not found – set the CHROME environment variable");
   const profile = fs.mkdtempSync(path.join(os.tmpdir(), "tankful-chrome-"));
   try {
-    execFileSync(CHROME, [
-      "--headless=new",
-      "--disable-gpu",
-      "--hide-scrollbars",
-      "--force-device-scale-factor=1",
-      ...(transparent ? ["--default-background-color=00000000"] : []),
-      ...(waitMs ? [`--virtual-time-budget=${waitMs}`] : []),
-      `--user-data-dir=${profile}`,
-      `--window-size=${width},${height}`,
-      `--screenshot=${out}`,
-      `file:///${path.resolve(htmlFile).replace(/\\/g, "/")}`,
-    ], { stdio: "ignore" });
+    execFileSync(CHROME, screenshotArgs(htmlFile, width, height, out, profile, options), { stdio: "ignore" });
   } finally {
     fs.rmSync(profile, { recursive: true, force: true });
   }
+}
+
+function screenshotAsync(htmlFile, width, height, out, options) {
+  if (!CHROME) return Promise.reject(new Error("Chrome not found – set the CHROME environment variable"));
+  const profile = fs.mkdtempSync(path.join(os.tmpdir(), "tankful-chrome-"));
+  return new Promise((resolve, reject) => {
+    execFile(CHROME, screenshotArgs(htmlFile, width, height, out, profile, options), (err) => {
+      fs.rmSync(profile, { recursive: true, force: true });
+      if (err) reject(err);
+      else if (!fs.existsSync(out)) reject(new Error(`${out}: Chrome wrote no screenshot`));
+      else resolve();
+    });
+  });
 }
 
 function dumpDom(url, { waitMs = 5000, timeZone } = {}) {
@@ -141,4 +159,4 @@ function flattenPng(file, background = [255, 255, 255]) {
   ]));
 }
 
-module.exports = { screenshot, dumpDom, flattenPng, crc32 };
+module.exports = { screenshot, screenshotAsync, dumpDom, flattenPng, crc32 };

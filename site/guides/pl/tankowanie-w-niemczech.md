@@ -4,7 +4,7 @@ order: 7
 slug: tankowanie-w-niemczech
 title: Ceny paliw w Niemczech i tankowanie – czy warto? | Tankful
 heading: Ceny paliw w Niemczech – gdzie i kiedy tankować, jadąc przez Niemcy
-description: Aktualne ceny benzyny, diesla i LPG w Niemczech w porównaniu z Polską, koszt paliwa do Berlina i Monachium oraz kiedy w ciągu dnia tankować w Niemczech najtaniej.
+description: Aktualne ceny benzyny, diesla i LPG w Niemczech na tle Polski, koszt paliwa do Berlina i Monachium oraz kiedy w ciągu dnia tankować najtaniej.
 published: 2026-10-01
 ---
 Litr benzyny 95 kosztuje dziś w Niemczech średnio **{{price DE pb}}** ({{price DE pb EUR}}), a diesla **{{price DE on}}**. W Polsce to odpowiednio {{price PL pb}} i {{price PL on}}. {{verdict PL DE pb}} Niemcy są {{rank DE pb}}. krajem na {{count pb}} pod względem ceny benzyny, licząc od najtańszego.

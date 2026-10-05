@@ -3,9 +3,9 @@ id: ev-trip
 photo: ev-trip
 order: 20
 slug: e-auto-reisekosten
-title: Was kostet eine Fahrt mit dem E-Auto? Vergleich mit Benzin | Tankful
+title: Was kostet eine Fahrt mit dem E-Auto? Vergleich mit Benzin
 heading: Was kostet eine Fahrt mit dem E-Auto – Vergleich mit Super und Diesel
-description: Die Kosten einer Fahrt mit dem Elektroauto beim Laden zu Hause und am Schnelllader im Vergleich zu Super und Diesel – pro 100 km und auf Strecken von Deutschland nach Polen, Tschechien und Österreich.
+description: Kosten einer Fahrt mit dem E-Auto beim Laden zu Hause und am Schnelllader im Vergleich zu Super und Diesel – pro 100 km und auf Strecken ins Ausland.
 published: 2026-10-02
 ---
 Ein Elektroauto mit 17 kWh Verbrauch auf 100 km fährt 100 km für etwa **{{ev100 17 home}}**, wenn du zu Hause lädst, und für **{{ev100 17 fast}}** am Schnelllader. Ein Benziner mit 7 l/100 km braucht in Deutschland für dieselbe Strecke **{{cost100 DE pb 7}}**, ein Diesel mit 6 l/100 km **{{cost100 DE on 6}}**. Das E-Auto gewinnt deutlich, wenn du zu Hause lädst – am Schnelllader schrumpft der Vorteil.

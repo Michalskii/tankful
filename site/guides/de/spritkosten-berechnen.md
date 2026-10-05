@@ -3,9 +3,9 @@ id: how-to-calculate
 photo: how-to-calculate
 order: 6
 slug: spritkosten-berechnen
-title: Spritkosten berechnen – Formel und Beispiele für deine Fahrt | Tankful
+title: Spritkosten berechnen – Formel und Beispiele für deine Fahrt
 heading: Spritkosten berechnen – Formel, Beispiele und typische Fehler
-description: So berechnest du Spritkosten und Fahrtkosten für eine Strecke: einfache Formel, Beispiele mit aktuellen Preisen, Hin- und Rückfahrt, Fahrten durch mehrere Länder und Kosten pro Person.
+description: So berechnest du die Spritkosten einer Strecke: einfache Formel, Beispiele mit aktuellen Preisen, Hin- und Rückfahrt, mehrere Länder und pro Person.
 published: 2026-10-01
 ---
 Für die Spritkosten einer Fahrt brauchst du drei Zahlen: die Entfernung, den Verbrauch deines Autos und den Literpreis. Bei den heutigen Durchschnittspreisen in Deutschland ({{price DE pb}} für Super, {{price DE on}} für Diesel) kosten 100 km mit einem Benziner, der 7 l/100 km braucht, etwa **{{cost100 DE pb 7}}**, mit einem Diesel bei 6 l/100 km etwa **{{cost100 DE on 6}}**.

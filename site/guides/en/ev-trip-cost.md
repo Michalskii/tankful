@@ -2,9 +2,9 @@
 id: ev-trip
 order: 16
 slug: ev-trip-cost
-title: How much does a trip cost in an electric car? vs petrol | Tankful
+title: How much does a trip cost in an electric car? | Tankful
 heading: How much a trip costs in an electric car – compared with petrol and diesel
-description: The cost of driving an electric car when charging at home and at fast chargers, compared with petrol and diesel – per 100 km and on popular routes in Poland and Europe.
+description: The cost of driving an electric car when charging at home and at fast chargers, compared with petrol and diesel – per 100 km and on popular routes.
 published: 2026-10-01
 ---
 An electric car using 17 kWh per 100 km covers 100 km for about **{{ev100 17 home}}** when charged at home and **{{ev100 17 fast}}** at a fast charger. A petrol car (7 l/100 km) spends **{{cost100 PL pb 7}}** on the same distance at Polish prices, and a diesel (6 l/100 km) **{{cost100 PL on 6}}**. The EV wins clearly when you charge at home – at fast chargers the gap narrows.

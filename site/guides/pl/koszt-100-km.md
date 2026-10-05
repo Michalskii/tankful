@@ -2,7 +2,7 @@
 id: per-100-km
 order: 3
 slug: koszt-100-km
-title: Ile kosztuje przejechanie 100 km? Benzyna, diesel, LPG i elektryk | Tankful
+title: Ile kosztuje przejechanie 100 km? Benzyna, diesel, LPG, EV
 heading: Ile kosztuje przejechanie 100 km – benzyna, diesel, LPG czy elektryk
 description: Aktualny koszt przejechania 100 km autem na benzynę, diesla, LPG i elektrykiem w Polsce, Niemczech i Czechach. Wzór, typowe spalanie i przykłady.
 published: 2026-09-30

@@ -2,9 +2,9 @@
 id: ev-trip
 order: 16
 slug: koszt-trasy-elektrykiem
-title: Ile kosztuje trasa elektrykiem? Porównanie z benzyną | Tankful
+title: Ile kosztuje trasa elektrykiem? Porównanie z benzyną
 heading: Ile kosztuje trasa samochodem elektrycznym – porównanie z benzyną i dieslem
-description: Koszt przejazdu autem elektrycznym przy ładowaniu w domu i na szybkich ładowarkach w porównaniu z benzyną i dieslem – na 100 km i na popularnych trasach w Polsce i Europie.
+description: Koszt jazdy autem elektrycznym przy ładowaniu w domu i na szybkich ładowarkach na tle benzyny i diesla – na 100 km i na popularnych trasach.
 published: 2026-10-01
 ---
 Auto elektryczne zużywające 17 kWh na 100 km przejedzie 100 km za około **{{ev100 17 home}}** przy ładowaniu w domu i **{{ev100 17 fast}}** na szybkiej ładowarce. Auto na benzynę (7 l/100 km) wyda na ten sam dystans **{{cost100 PL pb 7}}**, a diesel (6 l/100 km) **{{cost100 PL on 6}}**. Elektryk wygrywa wyraźnie, gdy ładujesz w domu – na szybkich ładowarkach różnica się zaciera.

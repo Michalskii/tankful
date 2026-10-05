@@ -3,9 +3,9 @@ id: per-100-km
 photo: per-100-km
 order: 23
 slug: kosten-pro-100-km
-title: Was kosten 100 km? Benzin, Diesel, Autogas und E-Auto | Tankful
+title: Was kosten 100 km? Benzin, Diesel, Autogas und E-Auto
 heading: Was kosten 100 km – Benzin, Diesel, Autogas oder E-Auto
-description: Die aktuellen Kosten für 100 km mit Benziner, Diesel, Autogas und Elektroauto in Deutschland, Polen und Österreich. Mit Formel, typischem Verbrauch und Beispielen.
+description: Aktuelle Kosten für 100 km mit Benziner, Diesel, Autogas und E-Auto in Deutschland, Polen und Österreich – mit Formel, Verbrauch und Beispielen.
 published: 2026-10-02
 ---
 Bei den aktuellen Preisen in Deutschland kosten 100 km etwa **{{cost100 DE pb 7}}** mit einem Benziner (7 l/100 km), **{{cost100 DE on 6}}** mit einem Diesel (6 l/100 km) und **{{cost100 DE lpg 9}}** mit Autogas (9 l/100 km). Ein E-Auto mit 17 kWh auf 100 km kostet von **{{ev100 17 home}}** beim Laden zu Hause bis **{{ev100 17 fast}}** am Schnelllader.

@@ -3,9 +3,9 @@ id: fuel-saving
 photo: fuel-saving
 order: 22
 slug: sprit-sparen
-title: Sprit sparen – 9 Tipps und wie viel sie in Euro bringen | Tankful
+title: Sprit sparen – 9 Tipps und was sie in Euro bringen | Tankful
 heading: Sprit sparen – 9 Tipps und wie viel du wirklich sparst
-description: Bewährte Wege zu weniger Verbrauch auf der Autobahn und in der Stadt – Tempo, Reifendruck, Dachbox, Klimaanlage – und was jeder Liter weniger bei heutigen Spritpreisen in Deutschland bringt.
+description: Weniger Verbrauch auf Autobahn und in der Stadt: Tempo, Reifendruck, Dachbox, Klimaanlage – und was jeder gesparte Liter bei heutigen Preisen bringt.
 published: 2026-10-02
 ---
 Jeder Liter weniger auf 100 km bringt bei heutigem Superpreis ({{price DE pb}}) **{{save DE pb 1 0 100}}** auf jeden 100 km und **{{save DE pb 1 0 15000}}** im Jahr bei 15.000 km. Von 7,5 auf 6,5 l Verbrauch zu kommen, ist mit einem Benziner ohne neues Auto realistisch – es reichen ein paar andere Gewohnheiten.

@@ -3,9 +3,9 @@ id: italy-fuel
 photo: seaside
 order: 13
 slug: spritpreise-italien
-title: Spritpreise Italien – aktuelle Benzinpreise und wo du vor der Grenze tankst | Tankful
+title: Spritpreise Italien – Benzinpreise und wo du tankst
 heading: Spritpreise in Italien – was Benzin kostet und wo du günstiger tankst
-description: Aktuelle Benzin- und Dieselpreise in Italien im Vergleich zu Deutschland und Österreich, Tipps zum Tanken auf der Fahrt über den Brenner und Spritkosten für den Italien-Urlaub.
+description: Aktuelle Benzin- und Dieselpreise in Italien im Vergleich zu Deutschland und Österreich, Tanktipps für die Brenner-Route und Spritkosten für den Urlaub.
 published: 2026-10-02
 ---
 Wer mit dem Auto nach Italien fährt, merkt es spätestens an der ersten Autobahntankstelle: Sprit kann dort teuer sein. Ein Liter Super kostet in Italien im Schnitt **{{price IT pb}}**, Diesel **{{price IT on}}**. In Deutschland sind es {{price DE pb}} und {{price DE on}}, in Österreich {{price AT pb}} und {{price AT on}}.

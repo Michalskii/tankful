@@ -2,9 +2,9 @@
 id: seaside
 order: 10
 slug: drive-to-polish-seaside
-title: Driving to the Polish seaside – fuel cost to Gdańsk | Tankful
+title: Driving to the Polish seaside – fuel cost to Gdańsk
 heading: Driving to the Polish seaside – fuel cost to Gdańsk from Poland's biggest cities
-description: Current fuel cost of driving to the Baltic coast from Warsaw, Kraków, Katowice, Wrocław, Poznań, Łódź and Szczecin – petrol, diesel and LPG, one way and per person.
+description: Current fuel cost of driving to the Baltic coast from Warsaw, Kraków, Katowice, Wrocław, Poznań, Łódź and Szczecin – one way and per person.
 published: 2026-10-01
 ---
 Driving from Warsaw to Gdańsk ({{km warszawa-gdansk}} km) currently costs about **{{trip warszawa-gdansk pb 7}}** in petrol, one way. From Kraków ({{km krakow-gdansk}} km) it's **{{trip krakow-gdansk pb 7}}**, and from Katowice ({{km katowice-gdansk}} km) **{{trip katowice-gdansk pb 7}}**. Split four ways, the drive from Kraków comes to {{trip krakow-gdansk pb 7 4}} per person.

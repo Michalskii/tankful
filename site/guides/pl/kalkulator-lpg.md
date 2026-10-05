@@ -3,9 +3,9 @@ id: lpg-calc
 photo: price-history
 order: 9.5
 slug: kalkulator-lpg
-title: Kalkulator LPG – opłacalność instalacji gazowej i czas zwrotu | Tankful
+title: Kalkulator LPG – opłacalność instalacji i czas zwrotu
 heading: Kalkulator LPG – po jakim czasie zwróci się instalacja gazowa
-description: Kalkulator opłacalności LPG: wpisz spalanie, roczny przebieg i koszt instalacji, a policzymy oszczędność na gazie i po ilu miesiącach i kilometrach zwróci się montaż – po aktualnych cenach paliw.
+description: Kalkulator opłacalności LPG: wpisz spalanie, roczny przebieg i koszt instalacji, a policzymy oszczędność i po ilu miesiącach zwróci się montaż.
 published: 2026-10-03
 ---
 Wpisz spalanie swojego auta, ile kilometrów przejeżdżasz w roku i ile kosztuje montaż instalacji gazowej. Kalkulator policzy, ile zaoszczędzisz na LPG w porównaniu z benzyną i po jakim czasie instalacja się zwróci. Ceny paliw są już wpisane – to średnie w Polsce z {{date}}: benzyna 95 **{{price PL pb}}**, LPG **{{price PL lpg}}**.

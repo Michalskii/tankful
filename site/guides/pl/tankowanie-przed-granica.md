@@ -2,9 +2,9 @@
 id: border
 order: 2
 slug: tankowanie-przed-granica
-title: Gdzie zatankować przed granicą? Ceny paliw w Polsce i u sąsiadów | Tankful
+title: Gdzie zatankować przed granicą? Ceny paliw u sąsiadów
 heading: Gdzie zatankować przed granicą – Polska, Niemcy, Czechy, Słowacja, Litwa
-description: Porównanie aktualnych cen benzyny, diesla i LPG w Polsce i w Niemczech, Czechach, na Słowacji i Litwie. Po której stronie granicy tankować i ile oszczędzasz na baku.
+description: Porównanie cen benzyny, diesla i LPG w Polsce oraz w Niemczech, Czechach, na Słowacji i Litwie. Po której stronie granicy tankować i ile oszczędzasz.
 published: 2026-09-30
 ---
 Jadąc za granicę, najprościej zaoszczędzić, tankując do pełna po tańszej stronie granicy. Poniżej aktualne średnie ceny w Polsce i u sąsiadów z Unii Europejskiej, z różnicą na litrze i na typowym tankowaniu 50 litrów.

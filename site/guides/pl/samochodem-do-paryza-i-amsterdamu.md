@@ -4,7 +4,7 @@ order: 15
 slug: samochodem-do-paryza-i-amsterdamu
 title: Samochodem do Paryża i Amsterdamu – koszt paliwa | Tankful
 heading: Samochodem do Paryża i Amsterdamu – koszt paliwa, tankowanie i opłaty
-description: Ile kosztuje paliwo na trasie z Warszawy do Paryża i Amsterdamu, w którym kraju po drodze tankować najtaniej, ile wynoszą opłaty za autostrady we Francji i na co uważać w miastach.
+description: Ile kosztuje paliwo z Warszawy do Paryża i Amsterdamu, w którym kraju po drodze tankować najtaniej, ile kosztują autostrady we Francji i na co uważać.
 published: 2026-10-01
 ---
 Paliwo na przejazd z Warszawy do Paryża ({{km warszawa-paryz}} km) kosztuje dziś około **{{trip warszawa-paryz pb 7}}** autem na benzynę i **{{trip warszawa-paryz on 6}}** dieslem, w jedną stronę. Do Amsterdamu ({{km warszawa-amsterdam}} km) to **{{trip warszawa-amsterdam pb 7}}** i **{{trip warszawa-amsterdam on 6}}**. W cztery osoby benzyna do Paryża wychodzi {{trip warszawa-paryz pb 7 4}} na osobę.

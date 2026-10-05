@@ -2,9 +2,9 @@
 id: hungary
 order: 14
 slug: driving-to-hungary
-title: Driving from Poland to Budapest – fuel cost and vignettes | Tankful
+title: Driving from Poland to Budapest – fuel cost and vignettes
 heading: Driving from Poland to Hungary and Budapest – fuel cost, filling up and vignettes
-description: How much fuel costs on the drive from Kraków and Warsaw to Budapest, where to fill up on the way – Poland, Slovakia or Hungary – and which vignettes you need.
+description: Fuel cost of the drive from Kraków and Warsaw to Budapest, where to fill up on the way – Poland, Slovakia or Hungary – and which vignettes you need.
 published: 2026-10-01
 ---
 Fuel for the drive from Kraków to Budapest ({{km krakow-budapeszt}} km) currently costs about **{{trip krakow-budapeszt pb 7}}** in a petrol car and **{{trip krakow-budapeszt on 6}}** in a diesel, one way. From Warsaw ({{km warszawa-budapeszt}} km) it's **{{trip warszawa-budapeszt pb 7}}** and **{{trip warszawa-budapeszt on 6}}**. A litre of petrol averages {{price HU pb}} in Hungary and {{price SK pb}} in Slovakia.

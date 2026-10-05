@@ -2,9 +2,9 @@
 id: croatia
 order: 6
 slug: samochodem-do-chorwacji
-title: Ceny paliw w Chorwacji i dojazd samochodem – gdzie tankować | Tankful
+title: Ceny paliw w Chorwacji i dojazd samochodem – gdzie tankować
 heading: Samochodem do Chorwacji – koszt paliwa, gdzie tankować i jakie winiety
-description: Ile kosztuje paliwo na trasie z Polski do Chorwacji (Kraków i Warszawa – Split), w którym kraju po drodze tankować najtaniej i gdzie potrzebne są winiety.
+description: Ile kosztuje paliwo z Polski do Chorwacji (Kraków i Warszawa – Split), w którym kraju po drodze tankować najtaniej i gdzie potrzebne są winiety.
 published: 2026-09-30
 ---
 Paliwo na przejazd z Krakowa do Splitu ({{km krakow-split}} km) kosztuje dziś około **{{trip krakow-split pb 7}}** autem na benzynę (7 l/100 km) i **{{trip krakow-split on 6}}** dieslem (6 l/100 km), w jedną stronę. Z Warszawy ({{km warszawa-split}} km) to odpowiednio **{{trip warszawa-split pb 7}}** i **{{trip warszawa-split on 6}}**. W cztery osoby benzyna z Krakowa wychodzi {{trip krakow-split pb 7 4}} na osobę.

@@ -3,9 +3,9 @@ id: consumption
 photo: per-100-km
 order: 5
 slug: spritverbrauch-berechnen
-title: Spritverbrauch berechnen – Verbrauchsrechner für l/100 km und Kosten | Tankful
+title: Spritverbrauch berechnen – Rechner für l/100 km | Tankful
 heading: Spritverbrauch berechnen – wie viel verbraucht dein Auto wirklich?
-description: Verbrauchsrechner: Gib getankte Liter und gefahrene Kilometer ein und erhalte den Durchschnittsverbrauch in l/100 km sowie die Kosten für 100 km zum aktuellen Spritpreis.
+description: Verbrauchsrechner: getankte Liter und gefahrene Kilometer eingeben und den Durchschnittsverbrauch in l/100 km sowie die Kosten für 100 km sehen.
 published: 2026-10-01
 ---
 Gib ein, wie viele Liter du getankt hast und wie viele Kilometer du seit dem letzten Tanken gefahren bist. Der Rechner zeigt deinen Durchschnittsverbrauch in Litern pro 100 km und was dich 100 km kosten. Der Literpreis ist schon eingetragen – der Durchschnitt in Deutschland vom {{date}} –, du kannst ihn aber durch den Preis an deiner Tankstelle ersetzen.

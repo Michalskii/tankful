@@ -2,9 +2,9 @@
 id: per-100-km
 order: 3
 slug: cost-per-100-km
-title: How much does it cost to drive 100 km? Petrol, diesel, LPG and EV | Tankful
+title: Cost to drive 100 km: petrol, diesel, LPG and EV | Tankful
 heading: How much does it cost to drive 100 km – petrol, diesel, LPG or electric
-description: The current cost of driving 100 km in a petrol, diesel, LPG and electric car in Germany, France, Poland and the UK. The formula, typical consumption and examples.
+description: The current cost of driving 100 km in a petrol, diesel, LPG and electric car in Germany, France, Poland and the UK, with the formula and examples.
 published: 2026-09-30
 ---
 At today's prices in Germany, driving 100 km costs about **{{cost100 DE pb 7}}** in a petrol car (7 l/100 km), **{{cost100 DE on 6}}** in a diesel (6 l/100 km) and **{{cost100 DE lpg 9}}** on LPG (9 l/100 km). An electric car using 17 kWh per 100 km costs from **{{ev100 17 home}}** when charged at home to **{{ev100 17 fast}}** at a fast charger.

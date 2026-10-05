@@ -2,9 +2,9 @@
 id: split
 order: 5
 slug: jak-podzielic-koszt-paliwa
-title: Jak podzielić koszt paliwa między pasażerów – sprawiedliwie | Tankful
+title: Jak podzielić koszt paliwa między pasażerów – sprawiedliwie
 heading: Jak sprawiedliwie podzielić koszt paliwa między pasażerów
-description: Trzy uczciwe sposoby na podział kosztów wspólnego przejazdu: po równo, bez kierowcy i za przejechane kilometry. Przykłady z aktualnymi cenami i co jeszcze doliczyć.
+description: Trzy uczciwe sposoby na podział kosztów wspólnego przejazdu: po równo, bez kierowcy i za kilometry. Przykłady z aktualnymi cenami i co jeszcze doliczyć.
 published: 2026-09-30
 ---
 Najprostsza zasada: **policz koszt paliwa za całą trasę i podziel go przez liczbę osób w aucie, razem z kierowcą.** Na trasie [Wrocław – Berlin](trasa/wroclaw-berlin) ({{km wroclaw-berlin}} km) auto na benzynę palące 7 l/100 km zużyje paliwo za około {{trip wroclaw-berlin pb 7}}. W cztery osoby to **{{trip wroclaw-berlin pb 7 4}}** na głowę w jedną stronę.

@@ -2,9 +2,9 @@
 id: austria
 order: 13
 slug: samochodem-do-austrii
-title: Ceny paliw w Austrii i dojazd do Wiednia – koszt paliwa, winieta | Tankful
+title: Dojazd do Wiednia – ceny paliw w Austrii i winieta | Tankful
 heading: Samochodem do Austrii i Wiednia – koszt paliwa, gdzie tankować i winieta
-description: Ile kosztuje paliwo na trasie do Wiednia z Krakowa, Katowic i Warszawy, czy tankować w Polsce, Czechach czy w Austrii, oraz jak kupić austriacką winietę i uniknąć dopłat.
+description: Ile kosztuje paliwo do Wiednia z Krakowa, Katowic i Warszawy, czy tankować w Polsce, Czechach czy w Austrii i jak kupić austriacką winietę bez dopłat.
 published: 2026-10-01
 ---
 Paliwo na przejazd z Krakowa do Wiednia ({{km krakow-wieden}} km) kosztuje dziś około **{{trip krakow-wieden pb 7}}** autem na benzynę i **{{trip krakow-wieden on 6}}** dieslem, w jedną stronę. Z Katowic ({{km katowice-wieden}} km) to **{{trip katowice-wieden pb 7}}**, a z Warszawy ({{km warszawa-wieden}} km) **{{trip warszawa-wieden pb 7}}**. Litr benzyny w Austrii kosztuje średnio {{price AT pb}}.

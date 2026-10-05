@@ -3,9 +3,9 @@ id: alps
 photo: austria
 order: 21
 slug: drive-to-the-alps
-title: Driving to the Alps for skiing – fuel cost for a winter trip | Tankful
+title: Driving to the Alps for skiing – winter trip fuel cost
 heading: Driving to the Alps for skiing – what the fuel costs for a winter trip
-description: How much fuel costs for a drive from Poland to the Alps – Austria and Italy – how much it comes to per person, how much more a car uses in winter and where to fill up on the way.
+description: Fuel cost of driving from Poland to the Alps in Austria and Italy, the cost per person, how much more a car uses in winter and where to fill up.
 published: 2026-10-02
 ---
 A ski trip from Poland to the Alps is usually about 900–1,300 km each way – Tyrol and Salzburg are closer, the Dolomites further. For 1,000 km in a car that uses 7 l/100 km, petrol costs about **{{cost PL pb 7 1000}}** at Polish prices today, and about **{{cost PL pb 7 2000}}** there and back. With four people that is about {{cost PL pb 1.75 2000}} each for the whole trip. A diesel at 6 l/100 km uses about {{cost PL on 6 2000}} worth of fuel for the round trip.

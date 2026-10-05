@@ -3,9 +3,9 @@ id: dk-fuel
 photo: seaside
 order: 17
 slug: spritpreise-daenemark
-title: Spritpreise Dänemark – lohnt sich Tanken vor der Grenze? | Tankful
+title: Spritpreise Dänemark – vor der Grenze tanken? | Tankful
 heading: Spritpreise in Dänemark – vor dem Urlaub in Deutschland tanken?
-description: Aktuelle Benzin- und Dieselpreise in Dänemark im Vergleich zu Deutschland, wo du vor dem Dänemark-Urlaub tankst und was die Fahrt an die dänische Küste kostet.
+description: Aktuelle Benzin- und Dieselpreise in Dänemark im Vergleich zu Deutschland, wo du vor dem Urlaub tankst und was die Fahrt an die dänische Küste kostet.
 published: 2026-10-02
 ---
 Dänemark ist für viele Familien aus Norddeutschland das klassische Ferienziel – Ferienhaus an der Nordsee, Strand an der Ostsee. Beim Sprit lohnt sich der Vergleich: Ein Liter Super kostet in Dänemark im Schnitt **{{price DK pb}}**, Diesel **{{price DK on}}**. In Deutschland sind es {{price DE pb}} und {{price DE on}}.

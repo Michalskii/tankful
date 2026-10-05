@@ -2,9 +2,9 @@
 id: lpg
 order: 9
 slug: is-lpg-worth-it
-title: Is LPG worth it? When an autogas conversion pays off | Tankful
+title: Is LPG worth it? When an autogas conversion pays off
 heading: Is LPG worth it – after how many kilometres an autogas conversion pays off
-description: How much you save on LPG compared with petrol at today's prices in Poland and Germany, after how many kilometres a conversion pays for itself, and who it makes sense for.
+description: How much you save on LPG compared with petrol at today's prices in Poland and Germany, when a conversion pays for itself and who it makes sense for.
 published: 2026-10-01
 ---
 At today's prices in Poland a litre of LPG costs **{{price PL lpg}}** and a litre of 95 petrol **{{price PL pb}}**. A car that uses 7 l of petrol per 100 km burns about 8.5 l on LPG. Driving 100 km then costs **{{cost100 PL pb 7}}** on petrol and **{{cost100 PL lpg 8.5}}** on LPG – a saving of {{lpgsave PL 7 8.5 100}} every 100 km.

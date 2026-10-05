@@ -2,9 +2,9 @@
 id: hungary
 order: 14
 slug: samochodem-na-wegry
-title: Ceny paliw na Węgrzech i dojazd do Budapesztu – koszt paliwa | Tankful
+title: Ceny paliw na Węgrzech i dojazd do Budapesztu | Tankful
 heading: Samochodem na Węgry i do Budapesztu – koszt paliwa, tankowanie i winiety
-description: Ile kosztuje paliwo na trasie z Krakowa i Warszawy do Budapesztu, gdzie po drodze tankować najtaniej – w Polsce, na Słowacji czy na Węgrzech – i jakie winiety kupić.
+description: Ile kosztuje paliwo z Krakowa i Warszawy do Budapesztu, gdzie po drodze tankować najtaniej – w Polsce, na Słowacji czy na Węgrzech – i jakie winiety kupić.
 published: 2026-10-01
 ---
 Paliwo na przejazd z Krakowa do Budapesztu ({{km krakow-budapeszt}} km) kosztuje dziś około **{{trip krakow-budapeszt pb 7}}** autem na benzynę i **{{trip krakow-budapeszt on 6}}** dieslem, w jedną stronę. Z Warszawy ({{km warszawa-budapeszt}} km) to **{{trip warszawa-budapeszt pb 7}}** i **{{trip warszawa-budapeszt on 6}}**. Litr benzyny na Węgrzech kosztuje średnio {{price HU pb}}, a na Słowacji {{price SK pb}}.

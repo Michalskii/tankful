@@ -3,9 +3,9 @@ id: consumption
 photo: europe-prices
 order: 3.5
 slug: fuel-consumption-calculator
-title: Fuel consumption calculator – average l/100 km and cost per 100 km | Tankful
+title: Fuel consumption calculator – l/100 km and cost | Tankful
 heading: Fuel consumption calculator – how much fuel your car really uses
-description: Fuel consumption calculator: enter the litres you filled up and the kilometres driven to get your average consumption in l/100 km and the cost of 100 km at current fuel prices.
+description: Enter the litres you filled up and the kilometres driven to get your average consumption in l/100 km and the cost of 100 km at current fuel prices.
 published: 2026-10-01
 ---
 Enter how many litres you filled up and how many kilometres you drove since the previous fill-up. The calculator works out your average consumption in litres per 100 km and the cost of driving 100 km. The price per litre is filled in for you – the EU average from {{date}} – but you can change it to the price at your station.

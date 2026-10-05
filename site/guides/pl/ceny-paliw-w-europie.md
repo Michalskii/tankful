@@ -2,9 +2,9 @@
 id: europe-prices
 order: 1
 slug: ceny-paliw-w-europie
-title: Ceny paliw w Europie – aktualna tabela benzyny, diesla i LPG | Tankful
+title: Ceny paliw w Europie – tabela benzyny, diesla i LPG
 heading: Ceny paliw w Europie – aktualna tabela
-description: Aktualne średnie ceny benzyny 95, diesla i LPG we wszystkich krajach UE i w Wielkiej Brytanii, w euro i złotych. Gdzie paliwo jest najtańsze, a gdzie najdroższe.
+description: Aktualne średnie ceny benzyny 95, diesla i LPG we wszystkich krajach UE i w Wielkiej Brytanii, w euro i złotych – gdzie paliwo jest najtańsze.
 published: 2026-09-30
 ---
 Najtańsza benzyna w Unii Europejskiej jest dziś **{{cheapest pb}}**, najdroższa **{{priciest pb}}**. Najtańszy diesel tankujesz **{{cheapest on}}**, najdroższy **{{priciest on}}**. Polska zajmuje {{rank PL pb}}. miejsce na {{count pb}} krajów pod względem ceny benzyny (od najtańszej) i {{rank PL on}}. pod względem ceny diesla.

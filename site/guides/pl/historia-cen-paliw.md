@@ -4,7 +4,7 @@ order: 12
 slug: historia-cen-paliw
 title: Historia cen paliw w Polsce – wykres od 2005 roku | Tankful
 heading: Historia cen paliw w Polsce – jak zmieniały się ceny benzyny, diesla i LPG
-description: Wykres cen benzyny 95, diesla i LPG w Polsce od 2005 roku, odświeżany co tydzień. Ile paliwo kosztowało rok i pięć lat temu, kiedy było najdroższe i jak Polska wypada na tle Niemiec, Czech i średniej UE.
+description: Wykres cen benzyny 95, diesla i LPG w Polsce od 2005 roku, odświeżany co tydzień: ile paliwo kosztowało rok i pięć lat temu i kiedy było najdroższe.
 published: 2026-10-01
 ---
 W ostatnim tygodniu ({{histdate}}) litr benzyny 95 kosztował w Polsce średnio **{{now PL pb}}**, diesla **{{now PL on}}**, a LPG **{{now PL lpg}}**. Rok temu benzyna kosztowała {{ago PL pb 52}}, czyli zmiana o **{{change PL pb 52}}**. Pięć lat temu było to {{ago PL pb 260}}.

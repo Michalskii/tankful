@@ -3,9 +3,9 @@ id: poland-prices
 photo: price-history
 order: 0.4
 slug: ceny-paliw-w-polsce
-title: Średnie ceny paliw w Polsce dziś – benzyna 95, diesel, LPG | Tankful
+title: Średnie ceny paliw w Polsce dziś – benzyna 95, diesel, LPG
 heading: Średnie ceny paliw w Polsce – benzyna 95, diesel i LPG
-description: Aktualna średnia cena benzyny 95, oleju napędowego i LPG w Polsce, zmiana w ciągu tygodnia i roku, koszt pełnego baku i 100 km oraz wykres cen od 2005 roku.
+description: Aktualna średnia cena benzyny 95, oleju napędowego i LPG w Polsce, zmiana w tygodniu i roku, koszt pełnego baku i 100 km oraz wykres cen od 2005 r.
 published: 2026-10-02
 ---
 Średnia cena paliwa w Polsce wynosi dziś **{{price PL pb}}** za benzynę 95, **{{price PL on}}** za olej napędowy i **{{price PL lpg}}** za LPG. To ceny, z których liczy nasz [kalkulator paliwa](./) – odświeżane kilka razy dziennie.

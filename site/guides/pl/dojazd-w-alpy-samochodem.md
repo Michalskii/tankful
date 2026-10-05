@@ -3,9 +3,9 @@ id: alps
 photo: austria
 order: 21
 slug: dojazd-w-alpy-samochodem
-title: Dojazd w Alpy samochodem na narty – koszt paliwa na ferie | Tankful
+title: Dojazd w Alpy samochodem na narty – koszt paliwa na ferie
 heading: Dojazd w Alpy samochodem na narty – ile kosztuje paliwo na ferie
-description: Ile kosztuje paliwo na dojazd w Alpy z Warszawy, Krakowa i Wrocławia – do Austrii i do Włoch, ile wychodzi na osobę, o ile rośnie spalanie zimą i gdzie tankować po drodze.
+description: Ile kosztuje paliwo na dojazd w Alpy z Warszawy, Krakowa i Wrocławia – do Austrii i Włoch, ile wychodzi na osobę i o ile rośnie spalanie zimą.
 published: 2026-10-02
 ---
 Na narty w Alpy jedzie się z Polski zwykle około 900–1300 km w jedną stronę – do Tyrolu czy Salzburga bliżej, w Dolomity dalej. Na 1000 km autem palącym 7 l/100 km benzyna kosztuje dziś około **{{cost PL pb 7 1000}}**, a tam i z powrotem około **{{cost PL pb 7 2000}}**. W cztery osoby to około {{cost PL pb 1.75 2000}} na osobę za całą drogę. Dieslem przy 6 l/100 km cała podróż to około {{cost PL on 6 2000}}.

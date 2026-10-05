@@ -3,9 +3,9 @@ id: czechia
 photo: czechia
 order: 2
 slug: tanken-in-tschechien
-title: Tanken in Tschechien – Spritpreise im Vergleich zu Deutschland | Tankful
+title: Tanken in Tschechien – Spritpreise im Vergleich | Tankful
 heading: Tanken in Tschechien – ist es günstiger als in Deutschland?
-description: Aktuelle Preise für Super, Diesel und Autogas in Tschechien im Vergleich zu Deutschland, Ersparnis pro Tankfüllung, Spritnamen an der Tankstelle und die Vignette.
+description: Aktuelle Preise für Super, Diesel und Autogas in Tschechien im Vergleich zu Deutschland, Ersparnis pro Tankfüllung, Spritnamen und Vignette.
 published: 2026-10-01
 ---
 Ein Liter Super 95 kostet in Tschechien heute im Schnitt **{{price CZ pb}}**, Diesel **{{price CZ on}}** und Autogas **{{price CZ lpg}}**. In Deutschland sind es {{price DE pb}}, {{price DE on}} und {{price DE lpg}}. {{verdict DE CZ pb}} {{verdict DE CZ on}}

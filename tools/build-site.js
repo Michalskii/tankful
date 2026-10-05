@@ -4,7 +4,8 @@ const http = require("http");
 const path = require("path");
 const vm = require("vm");
 const { dumpDom } = require("./chrome");
-const { buildGuides } = require("./guides");
+const { buildGuides, pricesDate } = require("./guides");
+const { renderRouteImages, imagePath } = require("./route-og");
 
 const ROOT = path.join(__dirname, "..");
 const PUBLIC = path.join(ROOT, "site/public");
@@ -110,12 +111,11 @@ function alternates(group, tag = "link") {
 }
 
 function headTags(page, s) {
-  const image = `${SITE_URL}og-${page.lang}.png`;
-  const schema = {
+  const image = page.route ? `${SITE_URL}${imagePath(page)}` : `${SITE_URL}og-${page.lang}.png`;
+  const app = {
     "@context": "https://schema.org",
     "@type": "WebApplication",
     name: "Tankful",
-    alternateName: s.title,
     url: page.url,
     description: s.description,
     inLanguage: page.lang,
@@ -126,6 +126,20 @@ function headTags(page, s) {
     image,
     offers: { "@type": "Offer", price: "0", priceCurrency: "EUR" },
   };
+  const home = GROUPS[0].find((p) => p.lang === page.lang);
+  const schema = page.route
+    ? [
+        app,
+        {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Tankful", item: home.url },
+            { "@type": "ListItem", position: 2, name: s.heading, item: page.url },
+          ],
+        },
+      ]
+    : app;
   return [
     `<link rel="manifest" href="manifest-${page.lang}.webmanifest" />`,
     `<link rel="canonical" href="${page.url}" />`,
@@ -216,11 +230,10 @@ async function prerender(pages, strings) {
   }
 }
 
-function sitemap(extra = []) {
-  const date = new Date().toISOString().slice(0, 10);
+function sitemap(extra, date) {
   const urls = [...PAGES, ...extra.flatMap((group) => group.filter((p) => p.local).map((p) => ({ ...p, group })))].map((p) => {
     const links = alternates(p.group, "xhtml:link").map((line) => `    ${line}`).join("\n");
-    return `  <url>\n    <loc>${p.url}</loc>\n    <lastmod>${date}</lastmod>\n${links}\n  </url>`;
+    return `  <url>\n    <loc>${p.url}</loc>\n    <lastmod>${p.lastmod || date}</lastmod>\n${links}\n  </url>`;
   }).join("\n");
   return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n${urls}\n</urlset>\n`;
 }
@@ -236,7 +249,7 @@ async function main() {
   for (const page of PAGES) fs.writeFileSync(path.join(SITE, page.file), pageHtml(template, page, strings, data));
   const historyData = JSON.parse(fs.readFileSync(path.join(PUBLIC, "history.json"), "utf8"));
   const guides = buildGuides({ site: SITE, siteUrl: SITE_URL, siteUrls: SITE_URLS, langSite: LANG_SITE, siteId: SITE_ID, data, history: historyData, alternates });
-  fs.writeFileSync(path.join(SITE, "sitemap.xml"), sitemap(guides));
+  fs.writeFileSync(path.join(SITE, "sitemap.xml"), sitemap(guides, pricesDate(data)));
   fs.writeFileSync(path.join(SITE, "robots.txt"), `User-agent: *\nAllow: /\n\nSitemap: ${SITE_URL}sitemap.xml\n`);
   for (const lang of SITE_LANGS) {
     fs.writeFileSync(path.join(SITE, `manifest-${lang}.webmanifest`), JSON.stringify(manifest(lang, strings), null, 2) + "\n");
@@ -250,6 +263,13 @@ async function main() {
     } catch (e) {
       if (process.env.CI) throw e;
       console.warn(`Prerendering skipped: ${e.message}`);
+    }
+    try {
+      await renderRouteImages(PAGES.filter((p) => p.route), data, historyData, SITE);
+      console.log(`Route images: ${PAGES.filter((p) => p.route).length} rendered`);
+    } catch (e) {
+      if (process.env.CI) throw e;
+      console.warn(`Route images skipped: ${e.message}`);
     }
   }
   console.log(`_site/: ${PAGES.length + guides.flat().length} pages`);

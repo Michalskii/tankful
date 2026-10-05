@@ -3,7 +3,7 @@ id: swinoujscie-fuel
 photo: lpg
 order: 8
 slug: tanken-in-swinemuende
-title: Tanken in Swinemünde – günstiger Sprit im Usedom-Urlaub | Tankful
+title: Tanken in Swinemünde – günstiger Sprit im Usedom-Urlaub
 heading: Tanken in Swinemünde – günstiger tanken im Urlaub auf Usedom
 description: Aktuelle Spritpreise in Polen und Deutschland, wie viel du in Świnoujście (Swinemünde) beim Tanken sparst und was du im Usedom-Urlaub beachten solltest.
 published: 2026-10-02

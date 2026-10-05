@@ -3,9 +3,9 @@ id: weekly
 photo: price-history
 order: 0.5
 slug: spritpreise-diese-woche
-title: Spritpreise diese Woche – Ranking der EU-Länder und Veränderungen | Tankful
+title: Spritpreise diese Woche – Ranking der EU-Länder | Tankful
 heading: Spritpreise diese Woche – wo Tanken in der EU am günstigsten ist
-description: Wöchentliches Ranking der Preise für Super, Diesel und Autogas in allen EU-Ländern nach dem Oil Bulletin der EU-Kommission, mit der Veränderung zur Vorwoche und dem Platz Deutschlands.
+description: Wöchentliches Ranking der Preise für Super, Diesel und Autogas in allen EU-Ländern laut Oil Bulletin, mit Veränderung zur Vorwoche und Platz Deutschlands.
 published: 2026-10-02
 ---
 Das neueste Bulletin der Europäischen Kommission nennt Preise vom **{{histdate}}**. Ein Liter Super kostet in Deutschland im Schnitt **{{now DE pb}}** ({{weekdelta DE pb}} zur Vorwoche) – das ist **Platz {{weekrank DE pb}} von {{weekcount pb}}** EU-Ländern, gezählt vom günstigsten. Der EU-Durchschnitt liegt bei {{now EU pb}} ({{weekdelta EU pb}}).

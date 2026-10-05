@@ -3,7 +3,7 @@ id: slubice-fuel
 photo: border
 order: 7
 slug: tanken-in-slubice
-title: Tanken in Słubice – günstiger Sprit gegenüber Frankfurt (Oder) | Tankful
+title: Tanken in Słubice – günstiger Sprit bei Frankfurt (Oder)
 heading: Tanken in Słubice – lohnt sich der Weg über die Oder?
 description: Spritpreise in Polen und Deutschland im Vergleich, Ersparnis pro Tankfüllung und Tipps zum Tanken in Słubice direkt gegenüber von Frankfurt (Oder).
 published: 2026-10-02

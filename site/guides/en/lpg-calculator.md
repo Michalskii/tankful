@@ -5,7 +5,7 @@ order: 9.5
 slug: lpg-calculator
 title: LPG calculator – autogas conversion payback | Tankful
 heading: LPG calculator – how soon an autogas conversion pays for itself
-description: LPG payback calculator: enter your fuel consumption, yearly mileage and the cost of the conversion to see how much you save on autogas and after how many months and kilometres it pays off.
+description: LPG payback calculator: enter consumption, yearly mileage and conversion cost to see how much you save on autogas and when the conversion pays off.
 published: 2026-10-03
 ---
 Enter your car's fuel consumption, how far you drive in a year and what the LPG conversion costs. The calculator works out how much you save on autogas compared with petrol and how soon the system pays for itself. Fuel prices are filled in with Polish averages from {{date}}, converted to euro: petrol **{{price PL pb}}**, LPG **{{price PL lpg}}**.

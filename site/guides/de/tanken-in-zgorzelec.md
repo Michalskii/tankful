@@ -3,7 +3,7 @@ id: zgorzelec-fuel
 photo: europe-prices
 order: 9
 slug: tanken-in-zgorzelec
-title: Tanken in Zgorzelec – günstiger Sprit gegenüber Görlitz | Tankful
+title: Tanken in Zgorzelec – günstiger Sprit gegenüber Görlitz
 heading: Tanken in Zgorzelec – günstiger tanken in der Europastadt Görlitz/Zgorzelec
 description: Spritpreise in Polen und Deutschland im Vergleich, Ersparnis pro Tankfüllung und Tipps zum Tanken in Zgorzelec auf der polnischen Seite von Görlitz.
 published: 2026-10-02

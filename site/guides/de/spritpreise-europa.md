@@ -3,9 +3,9 @@ id: europe-prices
 photo: europe-prices
 order: 4
 slug: spritpreise-europa
-title: Spritpreise Europa – aktuelle Tabelle für Benzin, Diesel und LPG | Tankful
+title: Spritpreise Europa – Benzin, Diesel und LPG im Vergleich
 heading: Spritpreise in Europa – aktuelle Tabelle
-description: Aktuelle durchschnittliche Benzinpreise, Dieselpreise und LPG-Preise in allen EU-Ländern und Großbritannien in Euro. Wo Sprit in Europa am günstigsten und am teuersten ist.
+description: Aktuelle Durchschnittspreise für Benzin, Diesel und LPG in allen EU-Ländern und Großbritannien in Euro – wo Sprit in Europa am günstigsten ist.
 published: 2026-10-01
 ---
 Super 95 ist heute {{cheapest pb}} am günstigsten und {{priciest pb}} am teuersten. Deutschland liegt beim Benzinpreis auf Platz {{rank DE pb}} von {{count pb}}, gezählt vom günstigsten Land. Diesel ist {{cheapest on}} am günstigsten und {{priciest on}} am teuersten.

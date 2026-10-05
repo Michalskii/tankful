@@ -3,9 +3,9 @@ id: lpg
 photo: lpg
 order: 18
 slug: autogas-lohnt-sich
-title: Lohnt sich Autogas? Wann sich eine LPG-Anlage rechnet | Tankful
+title: Lohnt sich Autogas? Wann sich eine LPG-Anlage rechnet
 heading: Lohnt sich Autogas – nach wie vielen Kilometern sich die LPG-Anlage bezahlt macht
-description: Wie viel du mit Autogas (LPG) gegenüber Super bei aktuellen Preisen in Deutschland sparst, nach wie vielen Kilometern sich eine Umrüstung rechnet und für wen sie sinnvoll ist.
+description: Wie viel du mit Autogas (LPG) gegenüber Super in Deutschland sparst, ab wie vielen Kilometern sich die Umrüstung rechnet und für wen sie sinnvoll ist.
 published: 2026-10-02
 ---
 Ein Liter Autogas kostet in Deutschland aktuell im Schnitt **{{price DE lpg}}**, ein Liter Super **{{price DE pb}}**. Ein Auto, das 7 l Super auf 100 km braucht, verbraucht mit Gas etwa 8,5 l. Damit kosten 100 km **{{cost100 DE pb 7}}** mit Super und **{{cost100 DE lpg 8.5}}** mit Autogas – du sparst {{lpgsave DE 7 8.5 100}} auf jeden 100 km.

@@ -78,6 +78,11 @@ const TEXT = {
     indexTitle: "Poradniki: ceny paliw i koszt przejazdu | Tankful",
     indexHeading: "Poradniki",
     indexDescription: "Aktualne ceny paliw w Europie, tankowanie przed granicą, koszt 100 km i podział kosztów przejazdu – poradniki z danymi odświeżanymi kilka razy dziennie.",
+    notFoundTitle: "Nie ma takiej strony | Tankful",
+    notFoundHeading: "Nie ma takiej strony",
+    notFoundLead: "Ten adres nie istnieje albo się zmienił. Policz koszt swojej trasy w kalkulatorze albo wybierz jedną z popularnych tras.",
+    popularRoutes: "Popularne trasy",
+
     indexLead: "Konkretne liczby zamiast ogólników. Ceny w poradnikach odświeżają się same, razem z kalkulatorem.",
     updated: (d) => `Ceny z ${d}`,
     published: (d) => `Opublikowano ${d}`,
@@ -164,6 +169,10 @@ const TEXT = {
     indexTitle: "Guides: fuel prices and trip costs | Tankful",
     indexHeading: "Guides",
     indexDescription: "Current fuel prices across Europe, filling up before a border, the cost of 100 km and splitting trip costs – guides with data refreshed several times a day.",
+    notFoundTitle: "Page not found | Tankful",
+    notFoundHeading: "Page not found",
+    notFoundLead: "This address doesn't exist or has moved. Work out your trip in the calculator or pick one of the popular routes.",
+    popularRoutes: "Popular routes",
     indexLead: "Numbers, not generalities. Prices in these guides update themselves, together with the calculator.",
     updated: (d) => `Prices from ${d}`,
     published: (d) => `Published ${d}`,
@@ -249,7 +258,11 @@ const TEXT = {
     euAverage: "EU-Durchschnitt",
     indexTitle: "Ratgeber: Spritpreise und Fahrtkosten in Europa | Tankful",
     indexHeading: "Ratgeber",
-    indexDescription: "Tanken in Polen und Tschechien, Spritpreise in Österreich und ganz Europa, Spritkosten und Verbrauch berechnen – Ratgeber mit Preisen, die sich mehrmals täglich aktualisieren.",
+    indexDescription: "Tanken in Polen und Tschechien, Spritpreise in Österreich und Europa, Spritkosten und Verbrauch berechnen – Ratgeber mit stets aktuellen Preisen.",
+    notFoundTitle: "Seite nicht gefunden | Tankful",
+    notFoundHeading: "Seite nicht gefunden",
+    notFoundLead: "Diese Adresse gibt es nicht oder sie hat sich geändert. Berechne deine Strecke im Rechner oder wähle eine der beliebten Strecken.",
+    popularRoutes: "Beliebte Strecken",
     indexLead: "Konkrete Zahlen statt Allgemeinplätze. Die Preise in den Ratgebern aktualisieren sich von selbst, zusammen mit dem Rechner.",
     updated: (d) => `Preise vom ${d}`,
     published: (d) => `Veröffentlicht am ${d}`,
@@ -313,6 +326,10 @@ const TEXT = {
 
 const cap = (s) => s.charAt(0).toUpperCase() + s.slice(1);
 const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+
+function pricesDate(data) {
+  return [data.fuelPrices?.date, data.fuelPrices?.orlen?.date, data.euPrices?.date, data.ukPrices?.date, data.usPrices?.date].filter(Boolean).sort().at(-1);
+}
 
 function prices(data) {
   const eur = data.nbpRates.rates.EUR;
@@ -678,7 +695,12 @@ ${table([t.chartSeries, t.chartNow, t.chartYear, t.chartFive], rows, [1, 2, 3])}
 </figure>`;
   };
 
-  return { inline, blocks };
+  const routeCost = (slug, fuel, consumption) => {
+    const r = routeBySlug(slug);
+    const price = routePricePln(r, fuel);
+    return price ? money((toCur(price) * r.km * consumption) / 100, currency, 0) : null;
+  };
+  return { inline, blocks, routeCost };
 }
 
 function inlineMd(text, ctx) {
@@ -800,7 +822,7 @@ const CALC_SCRIPTS = {
   lpg: `    <script src="guides-lpg.js" defer></script>\n`,
 };
 
-function layout({ lang, title, description, url, alternates, css, schema, hero, main, other }) {
+function layout({ lang, title, description, url, alternates, css, schema, hero, main, other, base = "../" }) {
   const charts = main.includes('class="chart"');
   const calc = Object.keys(CALC_SCRIPTS).filter((kind) => main.includes(`data-kind="${kind}"`));
   const t = TEXT[lang];
@@ -809,7 +831,7 @@ function layout({ lang, title, description, url, alternates, css, schema, hero, 
 <html lang="${lang}">
   <head>
     <meta charset="UTF-8" />
-    <base href="../" />
+    <base href="${base}" />
 ${THEME_SCRIPT}    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>${esc(title)}</title>
     <meta name="description" content="${esc(description)}" />
@@ -819,14 +841,13 @@ ${THEME_SCRIPT}    <meta name="viewport" content="width=device-width, initial-sc
     <link rel="stylesheet" href="${css}" />
     <link rel="stylesheet" href="guides.css" />
     <script src="guides-analytics.js" defer></script>
-${charts ? CHART_SCRIPTS : ""}${calc.map((kind) => CALC_SCRIPTS[kind]).join("")}    <link rel="canonical" href="${url}" />
+${charts ? CHART_SCRIPTS : ""}${calc.map((kind) => CALC_SCRIPTS[kind]).join("")}${url ? `    <link rel="canonical" href="${url}" />` : `    <meta name="robots" content="noindex" />`}
 ${alternates.map((l) => `    ${l}`).join("\n")}
     <meta property="og:type" content="article" />
     <meta property="og:site_name" content="Tankful" />
     <meta property="og:title" content="${esc(title)}" />
     <meta property="og:description" content="${esc(description)}" />
-    <meta property="og:url" content="${url}" />
-    <meta property="og:image" content="${schema.image}" />
+${url ? `    <meta property="og:url" content="${url}" />\n` : ""}    <meta property="og:image" content="${schema.image}" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:locale" content="${OG_LOCALE[lang]}" />
@@ -842,7 +863,7 @@ ${alternates.map((l) => `    ${l}`).join("\n")}
 ${NAV[lang]
       .map(([label, slug]) => {
         const href = slug ? `${DIRS[lang]}/${slug}` : home;
-        const current = slug && url.endsWith(`/${href}`) ? ' aria-current="page"' : "";
+        const current = slug && url?.endsWith(`/${href}`) ? ' aria-current="page"' : "";
         return `          <a href="${href}"${current}>${label}</a>\n`;
       })
       .join("")}          <a href="${DIRS[lang]}/">${t.guides}</a>
@@ -887,13 +908,15 @@ function buildGuides({ site, siteUrl, siteUrls, langSite, siteId, data, history,
   const photoUrl = (id) => `${siteUrl}img/guides/${id}.jpg`;
   const url = (lang, slug) => `${siteUrls[langSite[lang]]}${DIRS[lang]}/${slug ?? ""}`;
   const href = (lang, slug) => (langSite[lang] === siteId ? `${DIRS[lang]}/${slug ?? ""}` : url(lang, slug));
-  const entry = (lang, slug) => ({ lang, url: url(lang, slug), local: langSite[lang] === siteId });
+  const entry = (lang, slug, lastmod) => ({ lang, url: url(lang, slug), local: langSite[lang] === siteId, lastmod });
   const groups = [];
   const updated = data.euPrices.date;
+  const priced = pricesDate(data);
+  const modified = (g) => [g.published, priced].sort().at(-1);
 
   for (const lang of langs) fs.mkdirSync(path.join(site, DIRS[lang]), { recursive: true });
 
-  const indexGroup = Object.keys(DIRS).filter((lang) => guides[lang].length).map((lang) => entry(lang));
+  const indexGroup = Object.keys(DIRS).filter((lang) => guides[lang].length).map((lang) => entry(lang, undefined, [priced, ...guides[lang].map((g) => g.published)].sort().at(-1)));
   groups.push(indexGroup);
   for (const lang of langs) {
     const t = TEXT[lang];
@@ -948,7 +971,7 @@ ${items.map((g) => card(g, compact)).join("\n")}
   for (const id of [...new Set(Object.values(guides).flat().map((g) => g.id))]) {
     const pair = Object.keys(DIRS).map((lang) => guides[lang].find((g) => g.id === id)).filter(Boolean);
     if (!pair.some((g) => langSite[g.lang] === siteId)) continue;
-    const group = pair.map((g) => entry(g.lang, g.slug));
+    const group = pair.map((g) => entry(g.lang, g.slug, modified(g)));
     groups.push(group);
     for (const g of pair.filter((x) => langSite[x.lang] === siteId)) {
       const t = TEXT[g.lang];
@@ -997,7 +1020,7 @@ ${more}
           url: url(g.lang, g.slug),
           inLanguage: g.lang,
           datePublished: g.published,
-          dateModified: updated,
+          dateModified: modified(g),
           image: photoUrl(g.photo),
           author: { "@type": "Person", name: "Michał Goryński" },
           publisher: { "@type": "Organization", name: "Tankful", url: siteUrl, logo: `${siteUrl}app-512.png` },
@@ -1030,8 +1053,57 @@ ${more}
       );
     }
   }
+  const lang = siteId === "de" ? "de" : "pl";
+  const t = TEXT[lang];
+  const routeDir = { pl: "trasa", en: "route", de: "strecke" }[lang];
+  const routeLinks = ROUTES.filter((r) => r[lang] && (lang === "de" || !r.deOnly))
+    .slice(0, 12)
+    .map((r) => {
+      const [from, to] = lang === "de" && r.deFlip ? [r.to, r.from] : [r.from, r.to];
+      const name = (key) => CITIES[key][lang] ?? CITIES[key].en;
+      return `          <li><a href="${routeDir}/${r[lang]}">${icon("per-100-km", "tile")}<span>${esc(name(from))} – ${esc(name(to))}</span></a></li>`;
+    })
+    .join("\n");
+  const guideLinks = guides[lang]
+    .slice(0, 6)
+    .map((g) => `          <li><a href="${href(lang, g.slug)}">${icon(g.id, "tile")}<span>${esc(g.heading)}</span></a></li>`)
+    .join("\n");
+  fs.writeFileSync(
+    path.join(site, "404.html"),
+    layout({
+      lang,
+      title: t.notFoundTitle,
+      description: t.notFoundLead,
+      alternates: [],
+      css,
+      schema: { image: `${siteUrl}og-${lang}.png`, data: { "@context": "https://schema.org", "@type": "WebPage", name: t.notFoundHeading } },
+      hero: `        <h1>${t.notFoundHeading}</h1>
+        <p class="lead">${esc(t.notFoundLead)}</p>`,
+      main: `      <section class="cta">
+        <h2>${t.cta}</h2>
+        <p>${esc(t.ctaText)}</p>
+        <a class="button" href="${HOME[lang]}">${t.ctaButton}</a>
+        ${GAUGE.replace("hero-gauge", "cta-gauge")}
+      </section>
+      <section class="more">
+        <h2>${t.popularRoutes}</h2>
+        <ul class="related">
+${routeLinks}
+        </ul>
+      </section>
+      <section class="more">
+        <h2>${t.guides}</h2>
+        <ul class="related">
+${guideLinks}
+        </ul>
+        <a class="all-guides" href="${href(lang)}">${t.allGuides}</a>
+      </section>`,
+      other: lang === "de" ? { lang: "pl", href: siteUrls.pl } : { lang: "en", href: "en" },
+      base: "/",
+    })
+  );
   console.log(`Guides: ${langs.map((lang) => `${guides[lang].length} ${lang}`).join(", ")}`);
   return groups;
 }
 
-module.exports = { buildGuides, loadGuides, context, markdown };
+module.exports = { buildGuides, loadGuides, context, markdown, pricesDate, FUELS };

@@ -3,9 +3,9 @@ id: kostrzyn-fuel
 photo: border
 order: 10
 slug: tanken-in-kostrzyn
-title: Tanken in Kostrzyn (Küstrin) – günstiger Sprit an der B1 | Tankful
+title: Tanken in Kostrzyn (Küstrin) – günstiger Sprit an der B1
 heading: Tanken in Küstrin – günstiger tanken an der B1 hinter der Oder
-description: Spritpreise in Polen und Deutschland im Vergleich, wie viel du in Kostrzyn nad Odrą (Küstrin) sparst und ob sich die Fahrt aus Berlin oder dem Oderbruch lohnt.
+description: Spritpreise in Polen und Deutschland im Vergleich, wie viel du in Kostrzyn (Küstrin) sparst und ob sich die Fahrt aus Berlin oder dem Oderbruch lohnt.
 published: 2026-10-02
 ---
 Kostrzyn nad Odrą – auf Deutsch Küstrin – liegt gegenüber von Küstrin-Kietz, am Ende der Bundesstraße 1, die von Berlin bis an die Oder führt. Für viele aus dem östlichen Berliner Umland und dem Oderbruch ist das die nächste Möglichkeit, in Polen zu tanken. Ein Liter Super 95 kostet in Polen im Schnitt **{{price PL pb}}**, in Deutschland **{{price DE pb}}**. {{verdict DE PL pb}} {{verdict DE PL on}}

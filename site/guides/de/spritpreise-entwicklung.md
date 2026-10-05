@@ -3,9 +3,9 @@ id: price-history
 photo: price-history
 order: 19
 slug: spritpreise-entwicklung
-title: Spritpreise Entwicklung in Deutschland – Diagramm seit 2005 | Tankful
+title: Spritpreise Entwicklung in Deutschland – Diagramm seit 2005
 heading: Spritpreise in Deutschland – wie sich Super, Diesel und Autogas entwickelt haben
-description: Diagramm der Preise für Super, Diesel und Autogas in Deutschland seit 2005, jede Woche aktualisiert. Was Sprit vor einem und vor fünf Jahren kostete, wann er am teuersten war und wie Deutschland im Vergleich zu Polen, Tschechien und dem EU-Schnitt dasteht.
+description: Diagramm der Preise für Super, Diesel und Autogas in Deutschland seit 2005: was Sprit vor einem und fünf Jahren kostete und wann er am teuersten war.
 published: 2026-10-02
 ---
 In der letzten Woche ({{histdate}}) kostete ein Liter Super in Deutschland im Schnitt **{{now DE pb}}**, Diesel **{{now DE on}}** und Autogas **{{now DE lpg}}**. Vor einem Jahr lag Super bei {{ago DE pb 52}}, das ist eine Veränderung von **{{change DE pb 52}}**. Vor fünf Jahren waren es {{ago DE pb 260}}.

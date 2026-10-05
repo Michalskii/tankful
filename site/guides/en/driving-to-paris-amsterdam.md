@@ -2,9 +2,9 @@
 id: west
 order: 15
 slug: driving-to-paris-amsterdam
-title: Driving from Poland to Paris and Amsterdam – fuel cost | Tankful
+title: Driving from Poland to Paris and Amsterdam – fuel cost
 heading: Driving from Poland to Paris and Amsterdam – fuel cost, filling up and tolls
-description: How much fuel costs on the drive from Warsaw to Paris and Amsterdam, which country on the way is cheapest to fill up in, French motorway tolls and what to watch for in cities.
+description: Fuel cost of the drive from Warsaw to Paris and Amsterdam, the cheapest country to fill up in on the way, French motorway tolls and city rules.
 published: 2026-10-01
 ---
 Fuel for the drive from Warsaw to Paris ({{km warszawa-paryz}} km) currently costs about **{{trip warszawa-paryz pb 7}}** in a petrol car and **{{trip warszawa-paryz on 6}}** in a diesel, one way. To Amsterdam ({{km warszawa-amsterdam}} km) it's **{{trip warszawa-amsterdam pb 7}}** and **{{trip warszawa-amsterdam on 6}}**. Split four ways, petrol to Paris comes to {{trip warszawa-paryz pb 7 4}} per person.

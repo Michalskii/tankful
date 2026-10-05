@@ -3,9 +3,9 @@ id: weekly
 photo: price-history
 order: 0.5
 slug: ceny-paliw-w-tym-tygodniu
-title: Ceny paliw w tym tygodniu – ranking krajów UE i zmiany | Tankful
+title: Ceny paliw w tym tygodniu – ranking krajów UE i zmiany
 heading: Ceny paliw w tym tygodniu – gdzie w UE najtaniej i co się zmieniło
-description: Cotygodniowy ranking cen benzyny, diesla i LPG we wszystkich krajach UE według biuletynu Komisji Europejskiej, ze zmianą względem poprzedniego tygodnia i miejscem Polski.
+description: Cotygodniowy ranking cen benzyny, diesla i LPG w krajach UE według biuletynu Komisji Europejskiej, ze zmianą względem poprzedniego tygodnia.
 published: 2026-10-02
 ---
 Najnowszy biuletyn Komisji Europejskiej podaje ceny z **{{histdate}}**. Litr benzyny 95 kosztuje w Polsce średnio **{{now PL pb}}** ({{weekdelta PL pb}} w tydzień), co daje Polsce **{{weekrank PL pb}}. miejsce na {{weekcount pb}}** krajów UE od najtańszego. Średnia UE to {{now EU pb}} ({{weekdelta EU pb}}).

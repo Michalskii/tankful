@@ -2,9 +2,9 @@
 id: fuel-saving
 order: 11
 slug: jak-zmniejszyc-spalanie
-title: Jak zmniejszyć spalanie? 9 sposobów i ile to daje w złotówkach | Tankful
+title: Jak zmniejszyć spalanie? 9 sposobów i ile to daje | Tankful
 heading: Jak zmniejszyć spalanie – 9 sposobów i ile realnie oszczędzasz
-description: Sprawdzone sposoby na mniejsze spalanie w trasie i w mieście – prędkość, ciśnienie w oponach, bagażnik dachowy, klimatyzacja – i ile każdy litr mniej daje przy dzisiejszych cenach paliw.
+description: Sprawdzone sposoby na mniejsze spalanie w trasie i w mieście – prędkość, opony, bagażnik dachowy, klimatyzacja – i ile daje każdy litr mniej.
 published: 2026-10-01
 ---
 Każdy litr mniej na 100 km to przy dzisiejszej cenie benzyny ({{price PL pb}}) oszczędność **{{save PL pb 1 0 100}}** na każdych 100 km i **{{save PL pb 1 0 15000}}** rocznie przy 15 000 km. Zejście ze spalania 7,5 l do 6,5 l w aucie na benzynę jest realne bez zmiany samochodu – wystarczy zmienić kilka nawyków.

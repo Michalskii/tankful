@@ -3,9 +3,9 @@ id: split
 photo: split
 order: 21
 slug: spritkosten-teilen
-title: Spritkosten teilen – so rechnest du mit Mitfahrern fair ab | Tankful
+title: Spritkosten teilen – fair mit Mitfahrern abrechnen | Tankful
 heading: Spritkosten teilen – so rechnest du mit Mitfahrern fair ab
-description: Drei faire Arten, die Spritkosten einer gemeinsamen Fahrt aufzuteilen: gleich mit oder ohne Fahrer und nach gefahrenen Kilometern. Mit Beispielen zu aktuellen Preisen und was du noch mit einrechnen kannst.
+description: Drei faire Arten, die Spritkosten einer gemeinsamen Fahrt aufzuteilen: gleich, ohne Fahrer oder nach Kilometern – mit Beispielen zu aktuellen Preisen.
 published: 2026-10-02
 ---
 Die einfachste Regel: **Berechne die Spritkosten für die ganze Strecke und teile sie durch alle Personen im Auto, Fahrer eingeschlossen.** Auf der Strecke [Berlin – Breslau](strecke/berlin-breslau) ({{km wroclaw-berlin}} km) verbraucht ein Benziner mit 7 l/100 km Sprit für etwa {{trip wroclaw-berlin pb 7}}. Zu viert sind das **{{trip wroclaw-berlin pb 7 4}}** pro Person für eine Richtung.

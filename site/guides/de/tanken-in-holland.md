@@ -3,9 +3,9 @@ id: nl-fuel
 photo: west
 order: 16
 slug: tanken-in-holland
-title: Tanken in Holland – Spritpreise in den Niederlanden im Vergleich | Tankful
+title: Tanken in Holland – Spritpreise im Vergleich | Tankful
 heading: Tanken in Holland – vor oder hinter der Grenze?
-description: Aktuelle Benzin- und Dieselpreise in den Niederlanden im Vergleich zu Deutschland und ob du vor dem Urlaub an der Nordsee besser in Deutschland oder in Holland tankst.
+description: Aktuelle Benzin- und Dieselpreise in den Niederlanden im Vergleich zu Deutschland und ob du vor dem Nordsee-Urlaub besser hier oder in Holland tankst.
 published: 2026-10-02
 ---
 Die Niederlande sind für viele ein Ziel für Kurzurlaub an der Nordsee, einen Städtetrip nach Amsterdam oder eine Einkaufsfahrt. Beim Tanken lohnt sich ein Blick auf die Preise: Ein Liter Super kostet in den Niederlanden im Schnitt **{{price NL pb}}**, Diesel **{{price NL on}}**. In Deutschland sind es {{price DE pb}} und {{price DE on}}.

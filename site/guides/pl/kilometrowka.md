@@ -2,9 +2,9 @@
 id: mileage
 order: 17
 slug: kilometrowka
-title: Kilometrówka 2026 – stawki za km i kalkulator kilometrówki | Tankful
+title: Kilometrówka 2026 – stawki za km i kalkulator kilometrówki
 heading: Kilometrówka – stawki za kilometr i ile to daje w porównaniu z kosztem paliwa
-description: Stawki kilometrówki za używanie prywatnego auta do celów służbowych (0,89 i 1,15 zł za km), przykłady wyliczeń dla popularnych tras i porównanie z realnym kosztem paliwa.
+description: Stawki kilometrówki za prywatne auto w celach służbowych (0,89 i 1,15 zł za km), przykłady wyliczeń dla popularnych tras i porównanie z kosztem paliwa.
 published: 2026-10-01
 ---
 Kilometrówka to zwrot kosztów za używanie prywatnego samochodu do celów służbowych. Maksymalne stawki to **1,15 zł za kilometr** dla aut z silnikiem o pojemności powyżej 900 cm³ i **0,89 zł za kilometr** dla aut do 900 cm³. Za służbowy wyjazd z Warszawy do Krakowa ({{km warszawa-krakow}} km) to **{{allowance warszawa-krakow 1.15}}** w jedną stronę – a samo paliwo kosztuje dziś około {{trip warszawa-krakow pb 7}}.

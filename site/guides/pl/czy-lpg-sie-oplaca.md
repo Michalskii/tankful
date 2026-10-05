@@ -2,9 +2,9 @@
 id: lpg
 order: 9
 slug: czy-lpg-sie-oplaca
-title: Czy LPG się opłaca? Kiedy zwraca się instalacja gazowa | Tankful
+title: Czy LPG się opłaca? Kiedy zwraca się instalacja gazowa
 heading: Czy LPG się opłaca – po ilu kilometrach zwraca się instalacja gazowa
-description: Ile oszczędzasz na LPG w porównaniu z benzyną przy dzisiejszych cenach, po ilu kilometrach zwraca się instalacja gazowa i dla kogo gaz ma sens, a dla kogo nie.
+description: Ile oszczędzasz na LPG w porównaniu z benzyną przy dzisiejszych cenach, po ilu kilometrach zwraca się instalacja gazowa i dla kogo gaz ma sens.
 published: 2026-10-01
 ---
 Przy dzisiejszych cenach w Polsce litr LPG kosztuje **{{price PL lpg}}**, a benzyny 95 **{{price PL pb}}**. Auto, które pali 7 l benzyny na 100 km, na gazie zużyje około 8,5 l. Przejechanie 100 km kosztuje wtedy **{{cost100 PL pb 7}}** na benzynie i **{{cost100 PL lpg 8.5}}** na LPG – oszczędzasz {{lpgsave PL 7 8.5 100}} na każdych 100 km.

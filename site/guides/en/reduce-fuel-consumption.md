@@ -2,9 +2,9 @@
 id: fuel-saving
 order: 11
 slug: reduce-fuel-consumption
-title: How to reduce fuel consumption – 9 tips and what they save | Tankful
+title: How to reduce fuel consumption – 9 tips and savings
 heading: How to reduce fuel consumption – 9 tips and how much you really save
-description: Proven ways to use less fuel on the motorway and in town – speed, tyre pressure, roof boxes, air conditioning – and what every litre saved is worth at today's fuel prices.
+description: Proven ways to use less fuel on the motorway and in town – speed, tyre pressure, roof boxes, air con – and what every litre saved is worth today.
 published: 2026-10-01
 ---
 Every litre less per 100 km saves **{{save DE pb 1 0 100}}** per 100 km at today's average petrol price in Germany ({{price DE pb}}), and **{{save DE pb 1 0 15000}}** a year at 15,000 km. Going from 7.5 l to 6.5 l in a petrol car is realistic without changing cars – it just takes a few new habits.

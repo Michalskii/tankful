@@ -3,9 +3,9 @@ id: croatia
 photo: croatia
 order: 14
 slug: mit-dem-auto-nach-kroatien
-title: Mit dem Auto nach Kroatien – Spritkosten, wo tanken, Vignetten | Tankful
+title: Mit dem Auto nach Kroatien – Spritkosten und Vignetten
 heading: Mit dem Auto nach Kroatien – Spritkosten und wo du unterwegs tankst
-description: Was der Sprit für die Urlaubsfahrt nach Kroatien kostet, in welchem Land auf der Strecke über Österreich und Slowenien du am günstigsten tankst und welche Vignetten du brauchst.
+description: Was der Sprit für die Fahrt nach Kroatien kostet, wo du über Österreich und Slowenien am günstigsten tankst und welche Vignetten du brauchst.
 published: 2026-10-02
 ---
 Kroatien ist eines der beliebtesten Ziele für den Urlaub mit dem Auto. Von München bis Split sind es rund {{km muenchen-split}} km – mit einem Benziner, der 7 l/100 km braucht, kostet der Sprit dafür mit den Preisen in jedem Land auf der Strecke **etwa {{trip muenchen-split pb 7}}** pro Strecke, mit einem Diesel bei 6 l/100 km etwa {{trip muenchen-split on 6}} ([Strecke München – Split](strecke/muenchen-split)). Wer unterwegs geschickt tankt, zahlt weniger.

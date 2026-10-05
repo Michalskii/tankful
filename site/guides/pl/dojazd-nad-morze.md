@@ -2,9 +2,9 @@
 id: seaside
 order: 10
 slug: dojazd-nad-morze
-title: Ile kosztuje dojazd nad morze samochodem? Koszt paliwa | Tankful
+title: Ile kosztuje dojazd nad morze samochodem? Koszt paliwa
 heading: Ile kosztuje dojazd nad morze samochodem – koszt paliwa z największych miast
-description: Aktualny koszt paliwa na dojazd nad Bałtyk z Warszawy, Krakowa, Katowic, Wrocławia, Poznania, Łodzi i Szczecina – benzyna, diesel i LPG, w jedną stronę i na osobę.
+description: Aktualny koszt paliwa na dojazd nad Bałtyk z Warszawy, Krakowa, Katowic, Wrocławia, Poznania, Łodzi i Szczecina – w jedną stronę i na osobę.
 published: 2026-10-01
 ---
 Dojazd nad morze samochodem z Warszawy do Gdańska ({{km warszawa-gdansk}} km) kosztuje dziś około **{{trip warszawa-gdansk pb 7}}** za benzynę, w jedną stronę. Z Krakowa ({{km krakow-gdansk}} km) to **{{trip krakow-gdansk pb 7}}**, a z Katowic ({{km katowice-gdansk}} km) **{{trip katowice-gdansk pb 7}}**. W cztery osoby z Krakowa wychodzi {{trip krakow-gdansk pb 7 4}} na osobę.

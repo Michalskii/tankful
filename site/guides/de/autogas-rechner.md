@@ -5,7 +5,7 @@ order: 18.5
 slug: autogas-rechner
 title: Autogas-Rechner – lohnt sich die LPG-Umrüstung? | Tankful
 heading: Autogas-Rechner – wann sich die LPG-Anlage bezahlt macht
-description: Autogas-Rechner: Gib Verbrauch, jährliche Fahrleistung und die Kosten der Umrüstung ein und sieh, wie viel du mit LPG sparst und nach wie vielen Monaten und Kilometern sich die Anlage rechnet.
+description: Autogas-Rechner: Verbrauch, Fahrleistung und Umrüstkosten eingeben und sehen, wie viel du mit LPG sparst und wann sich die Anlage rechnet.
 published: 2026-10-03
 ---
 Gib den Verbrauch deines Autos, deine jährliche Fahrleistung und den Preis der Umrüstung ein. Der Rechner zeigt, wie viel du mit Autogas gegenüber Super sparst und wann sich die Anlage bezahlt macht. Die Spritpreise sind schon eingetragen – Durchschnittspreise in Deutschland vom {{date}}: Super **{{price DE pb}}**, Autogas **{{price DE lpg}}**.

@@ -3,9 +3,9 @@ id: austria
 photo: austria
 order: 3
 slug: spritpreise-oesterreich
-title: Spritpreise Österreich – aktuell im Vergleich zu Deutschland | Tankful
+title: Spritpreise Österreich – im Vergleich zu Deutschland
 heading: Spritpreise in Österreich – wo tankst du günstiger?
-description: Aktuelle Spritpreise in Österreich für Super und Diesel im Vergleich zu Deutschland und den Nachbarländern, Ersparnis pro Tankfüllung und Hinweise zur Vignette.
+description: Aktuelle Preise für Super und Diesel in Österreich im Vergleich zu Deutschland und den Nachbarländern, Ersparnis pro Tankfüllung und Infos zur Vignette.
 published: 2026-10-01
 ---
 Ein Liter Super 95 kostet in Österreich heute im Schnitt **{{price AT pb}}** und Diesel **{{price AT on}}**. In Deutschland sind es {{price DE pb}} und {{price DE on}}. {{verdict DE AT pb}} {{verdict DE AT on}}

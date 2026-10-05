@@ -2,9 +2,9 @@
 id: czechia
 order: 8
 slug: ceny-paliw-w-czechach
-title: Ceny paliw w Czechach – tankować w Polsce czy w Czechach? | Tankful
+title: Ceny paliw w Czechach – tankować w Polsce czy w Czechach?
 heading: Ceny paliw w Czechach – tankować w Polsce czy w Czechach
-description: Aktualne ceny benzyny, diesla i LPG w Czechach w porównaniu z Polską, koszt paliwa do Pragi z Wrocławia, Krakowa i Warszawy oraz winieta na czeskie autostrady.
+description: Aktualne ceny benzyny, diesla i LPG w Czechach na tle Polski, koszt paliwa do Pragi z Wrocławia, Krakowa i Warszawy oraz winieta na czeskie autostrady.
 published: 2026-10-01
 ---
 Litr benzyny 95 kosztuje dziś w Czechach średnio **{{price CZ pb}}**, diesla **{{price CZ on}}**, a LPG **{{price CZ lpg}}**. W Polsce to {{price PL pb}}, {{price PL on}} i {{price PL lpg}}. {{verdict PL CZ pb}} {{verdict PL CZ on}}
