@@ -1,15 +1,20 @@
 const fs = require("fs");
 const path = require("path");
+const vm = require("vm");
 
 const ROOT = path.join(__dirname, "..");
 const GUIDES = path.join(ROOT, "site/guides");
 const PHOTOS = JSON.parse(fs.readFileSync(path.join(GUIDES, "photos.json"), "utf8"));
 const { cities: CITIES, routes: ROUTES } = JSON.parse(fs.readFileSync(path.join(ROOT, "site/src/lib/routes.json"), "utf8"));
 
+const BACKGROUND = fs.readFileSync(path.join(ROOT, "background.js"), "utf8");
+const FUEL_VAT = Number(BACKGROUND.match(/const FUEL_VAT = ([\d.]+);/)[1]);
+const REDUCED_FUEL_VAT = vm.runInNewContext(BACKGROUND.match(/const REDUCED_FUEL_VAT = (\[[^\n]*\]);/)[1]);
+
 const DIRS = { pl: "poradniki", en: "guides", de: "ratgeber" };
 const HOME = { pl: "./", en: "en", de: "./" };
 const GROUP_IDS = {
-  prices: ["poland-prices", "weekly", "europe-prices", "price-history", "italy-fuel", "france-fuel", "nl-fuel", "dk-fuel"],
+  prices: ["fuel-vat", "poland-prices", "weekly", "europe-prices", "price-history", "italy-fuel", "france-fuel", "nl-fuel", "dk-fuel"],
   border: ["border", "germany", "czechia", "poland-fuel", "slubice-fuel", "swinoujscie-fuel", "zgorzelec-fuel", "kostrzyn-fuel", "cheb-fuel", "lux-fuel"],
   tools: ["consumption", "lpg-calc", "mileage", "per-100-km", "how-to-calculate", "commute", "split"],
   trips: ["croatia", "seaside", "austria", "hungary", "west", "italy", "alps"],
@@ -384,6 +389,10 @@ function context(lang, data, history) {
     return weight ? sum / weight : null;
   };
 
+  const today = new Date().toISOString().slice(0, 10);
+  const reduced = (fuel) => REDUCED_FUEL_VAT.find((p) => p.fuels.includes(fuel) && today >= p.from && today <= p.to);
+  const vatRaise = (fuel) => (reduced(fuel) ? FUEL_VAT / reduced(fuel).rate : 1);
+
   const lpgSaving = (cc, pbCons, lpgCons) => toCur(pln(cc, "pb") * Number(pbCons) - pln(cc, "lpg") * Number(lpgCons)) / 100;
 
   const inline = {
@@ -414,6 +423,13 @@ function context(lang, data, history) {
     },
     evtrip: (slug, consumption, key) => money((ev(key) * routeBySlug(slug).km * Number(consumption)) / 100),
     allowance: (slug, rate) => money(toCur(routeBySlug(slug).km * Number(rate))),
+    vatold: (fuel) => unitPrice(pln("PL", fuel) * vatRaise(fuel)),
+    vatsave: (fuel, litres) => money(toCur(pln("PL", fuel) * (vatRaise(fuel) - 1)) * Number(litres)),
+    vattrip: (slug, fuel, consumption) => {
+      const r = routeBySlug(slug);
+      const share = r.shares ? r.shares.PL || 0 : CITIES[r.from].cc === "pl" ? 1 : 0;
+      return money((toCur(pln("PL", fuel) * (vatRaise(fuel) - 1)) * r.km * share * Number(consumption)) / 100);
+    },
     roundtrip: (slug, fuel, consumption) => {
       const r = routeBySlug(slug);
       return money((toCur(routePricePln(r, fuel)) * r.km * 2 * Number(consumption)) / 100);

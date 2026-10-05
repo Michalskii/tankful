@@ -6,6 +6,7 @@ const vm = require("vm");
 const { dumpDom } = require("./chrome");
 const { buildGuides, pricesDate } = require("./guides");
 const { renderRouteImages, imagePath } = require("./route-og");
+const { prepareIndexNow } = require("./indexnow");
 
 const ROOT = path.join(__dirname, "..");
 const PUBLIC = path.join(ROOT, "site/public");
@@ -250,6 +251,7 @@ async function main() {
   const historyData = JSON.parse(fs.readFileSync(path.join(PUBLIC, "history.json"), "utf8"));
   const guides = buildGuides({ site: SITE, siteUrl: SITE_URL, siteUrls: SITE_URLS, langSite: LANG_SITE, siteId: SITE_ID, data, history: historyData, alternates });
   fs.writeFileSync(path.join(SITE, "sitemap.xml"), sitemap(guides, pricesDate(data)));
+  console.log(`IndexNow: ${await prepareIndexNow(SITE, SITE_URL)} changed URLs`);
   fs.writeFileSync(path.join(SITE, "robots.txt"), `User-agent: *\nAllow: /\n\nSitemap: ${SITE_URL}sitemap.xml\n`);
   for (const lang of SITE_LANGS) {
     fs.writeFileSync(path.join(SITE, `manifest-${lang}.webmanifest`), JSON.stringify(manifest(lang, strings), null, 2) + "\n");

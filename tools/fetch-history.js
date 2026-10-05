@@ -20,13 +20,13 @@ async function previous() {
   try {
     history = await fetchHistory();
   } catch (e) {
-    console.warn(`warning: ${e.message}`);
     history = await previous();
     if (!history) {
-      console.error("missing data: EU price history");
+      console.error(`missing data: EU price history (${e.message})`);
       process.exit(1);
     }
-    console.warn("using the previously published history");
+    const message = `${e.message} – using the previously published history`;
+    console.warn(process.env.GITHUB_ACTIONS ? `::warning title=History::${message}` : `warning: ${message}`);
   }
   history.updatedAt = new Date().toISOString();
   fs.mkdirSync(path.dirname(path.resolve(out)), { recursive: true });

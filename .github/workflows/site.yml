@@ -45,3 +45,11 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v5
+      - name: IndexNow
+        continue-on-error: true
+        run: |
+          curl -fsS "https://koszt-paliwa.pl/indexnow.json?t=$(date +%s)" -o indexnow.json
+          if grep -q '"urlList":\[\]' indexnow.json; then echo "IndexNow: nothing changed"; exit 0; fi
+          code=$(curl -sS -o response.txt -w "%{http_code}" -X POST https://api.indexnow.org/indexnow -H "Content-Type: application/json; charset=utf-8" --data @indexnow.json)
+          echo "IndexNow: HTTP $code"
+          if [ "$code" != 200 ] && [ "$code" != 202 ]; then echo "::warning title=IndexNow::HTTP $code $(cat response.txt)"; fi

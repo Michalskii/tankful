@@ -1,9 +1,16 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { cityName, CURRENT_ROUTE, PAGE_ROUTES, routeHref, routeName, routeTrip, type RoutePage } from "@/lib/routes"
 import { T } from "@/lib/strings"
-import { formatDuration, formatRange, tripAmount } from "@/lib/trip"
+import { formatDuration, formatRange, settingsFor, tripAmount, type Options } from "@/lib/trip"
 
 const TABLE_FUELS: [string, number][] = [["pb", 7], ["on", 6], ["lpg", 9], ["ev", 17]]
+const VIGNETTE_COUNTRIES = new Set(["AT", "CZ", "SK", "HU", "SI", "CH", "RO", "BG"])
+const TOLL_COUNTRIES = new Set(["FR", "IT", "HR", "ES", "PT", "GR"])
+const TANK = 50
+
+function petrol(currency: string): Options {
+  return { units: "metric", fuelType: "pb", consumption: 7, passengers: 1, currency, ownPrice: null, roundTrip: false }
+}
 
 export function RouteCosts({ route, data, currency }: { route: RoutePage; data: MapkaData; currency: string }) {
   if (!data.updatedAt) return null
@@ -63,6 +70,64 @@ export function RouteCosts({ route, data, currency }: { route: RoutePage; data: 
         </div>
       </CardContent>
     </Card>
+  )
+}
+
+export function RouteDetails({ route, data, currency }: { route: RoutePage; data: MapkaData; currency: string }) {
+  if (!data.updatedAt) return null
+  const trip = routeTrip(route)
+  const from = cityName(route.from)
+  const to = cityName(route.to)
+  const litres = (route.km * 7) / 100
+  const shares = Object.entries(route.shares || {}).sort((a, b) => b[1] - a[1])
+  const countries = shares.map(([cc]) => cc)
+  const s = settingsFor(petrol(currency))
+  const prices = countries
+    .map((cc) => {
+      const pln = mapkaLocalPricePln(s, data, { cc })?.price
+      const price = pln == null ? null : mapkaFromPln(pln, currency, data)
+      return price == null ? null : { cc, price }
+    })
+    .filter((p): p is { cc: string; price: number } => p !== null)
+    .sort((a, b) => a.price - b.price)
+  const cheapest = prices[0]
+  const priciest = prices[prices.length - 1]
+  const names = (list: string[]) => list.map((cc) => mapkaCountryName(cc)).join(", ")
+  const vignettes = countries.filter((cc) => VIGNETTE_COUNTRIES.has(cc))
+  const tolls = countries.filter((cc) => TOLL_COUNTRIES.has(cc))
+  const one = tripAmount(trip, petrol(currency), data)
+  const lpg = tripAmount(trip, { ...petrol(currency), fuelType: "lpg", consumption: 9 }, data)
+  const lpgSaving = (one.low + one.high - lpg.low - lpg.high) / 2
+  const facts = [
+    `${T("routeFuelNeed", mapkaFormatNumber(route.km, 0), mapkaFormatNumber(litres, 0))} ${T(litres <= TANK ? "routeOneTank" : "routeRefuel")}`,
+    shares.length > 1 &&
+      T("routeLegs", shares.map(([cc, share]) => `${mapkaCountryName(cc)} ~${mapkaFormatNumber(route.km * share, 0)} km`).join(", ")),
+    cheapest && priciest && priciest.price - cheapest.price >= 0.02 &&
+      T(
+        "routeCheapest",
+        mapkaCountryName(cheapest.cc),
+        mapkaFormatUnitPrice(cheapest.price, currency),
+        mapkaCountryName(priciest.cc),
+        mapkaFormatUnitPrice(priciest.price, currency),
+        mapkaFormatMoney((priciest.price - cheapest.price) * TANK, currency)
+      ),
+    vignettes.length > 0 && T("routeVignettes", names(vignettes)),
+    tolls.length > 0 && T("routeTolls", names(tolls)),
+    T("routeShared", formatRange(one.low / 2, one.high / 2, currency), formatRange(one.low / 3, one.high / 3, currency)),
+    lpgSaving > 1 && T("routeLpg", mapkaFormatMoney(lpgSaving, currency)),
+  ].filter((f): f is string => Boolean(f))
+
+  return (
+    <section aria-labelledby="route-more-heading" className="flex flex-col gap-2">
+      <h2 id="route-more-heading" className="text-base font-semibold">
+        {T("routeMoreHeading", from, to)}
+      </h2>
+      <ul className="flex list-disc flex-col gap-1.5 pl-5 text-sm text-muted-foreground">
+        {facts.map((f) => (
+          <li key={f}>{f}</li>
+        ))}
+      </ul>
+    </section>
   )
 }
 

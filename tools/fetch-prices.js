@@ -27,6 +27,8 @@ const run = (file) => vm.runInContext(fs.readFileSync(path.join(ROOT, file), "ut
 context.importScripts = run;
 run("background.js");
 
+const warn = (message) => console.warn(process.env.GITHUB_ACTIONS ? `::warning title=Prices::${message}` : `warning: ${message}`);
+
 async function previous() {
   if (!previousUrl) return {};
   try {
@@ -46,7 +48,7 @@ async function previous() {
   if (fresh && !fresh.orlen && kept && old.fuelPrices.date === fresh.date && store.euPrices) {
     fresh.prices = context.polandPrices(store.euPrices, fresh.eurRate, kept);
     fresh.orlen = kept;
-    console.warn(`warning: Orlen unavailable, reusing the correction from ${kept.date}`);
+    warn(`Orlen unavailable, reusing the correction from ${kept.date}`);
   }
   const result = { updatedAt: new Date().toISOString() };
   for (const key of ["fuelPrices", "euPrices", "nbpRates", "ukPrices", "usPrices"]) result[key] = store[key] || old[key] || null;
@@ -54,7 +56,7 @@ async function previous() {
   const missing = ["fuelPrices", "euPrices", "nbpRates"].filter((k) => !result[k]);
   fs.mkdirSync(path.dirname(path.resolve(out)), { recursive: true });
   fs.writeFileSync(out, JSON.stringify(result));
-  for (const e of errors) console.warn(`warning: ${e}`);
+  for (const e of errors) warn(String(e));
   const pl = result.fuelPrices;
   console.log(`${out}: Poland ${JSON.stringify(pl?.prices)} (bulletin ${pl?.date}, Orlen shift ${JSON.stringify(pl?.orlen)}), EU countries: ${Object.keys(result.euPrices?.prices || {}).length}, UK ${JSON.stringify(result.ukPrices?.prices)} (${result.ukPrices?.date}), US ${JSON.stringify(result.usPrices?.prices)} (${result.usPrices?.date})`);
   if (missing.length) {

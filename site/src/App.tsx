@@ -6,7 +6,7 @@ import { AboutDialog, HowItWorks } from "@/components/AboutDialog"
 import { InstallCard } from "@/components/InstallCard"
 import { StopList } from "@/components/StopList"
 import { ThemeMenu } from "@/components/ThemeMenu"
-import { PopularRoutes, RouteCosts } from "@/components/RoutePages"
+import { PopularRoutes, RouteCosts, RouteDetails } from "@/components/RoutePages"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -45,7 +45,9 @@ const HEADER_BUTTON = "text-cream/70 hover:bg-cream/10 hover:text-cream dark:hov
 const COUNTRY_COLORS =["bg-country-1", "bg-country-2", "bg-country-3", "bg-country-4", "bg-country-5"]
 
 const params = new URLSearchParams(location.search)
-let fromLink = params.has("from")
+const SHARED_REF = "udostepnij"
+let openedAs: string | null =
+  params.get("ref") === SHARED_REF ? "link-otwarty" : params.has("from") ? "link-powrot" : CURRENT_ROUTE ? "trasa-strona" : null
 
 function readPrefs(): Partial<Options> {
   try {
@@ -156,8 +158,8 @@ export default function App() {
         const variants = routes.map((route) => ({ route, shares: mapkaRouteShares(sparsePoints(route.points)) }))
         setPlan({ stops: chosen, variants })
         setSelected((i) => (i < variants.length ? i : 0))
-        track(fromLink ? "link-otwarty" : "trasa-policzona")
-        fromLink = false
+        track(openedAs ?? "trasa-policzona")
+        openedAs = null
       })
       .catch((e) => !cancelled && setError(e.message))
       .finally(() => !cancelled && setLoading(false))
@@ -239,7 +241,9 @@ export default function App() {
 
   async function copyLink() {
     try {
-      await navigator.clipboard.writeText(location.href)
+      const url = new URL(location.href)
+      url.searchParams.set("ref", SHARED_REF)
+      await navigator.clipboard.writeText(url.href)
       toast.success(T("copied"))
       track("link-skopiowany")
     } catch {
@@ -568,6 +572,7 @@ export default function App() {
 
           <div className="order-3 flex flex-col gap-6 p-4 sm:p-6 lg:mt-auto lg:pt-0">
             {CURRENT_ROUTE && <RouteCosts route={CURRENT_ROUTE} data={data} currency={options.currency} />}
+            {CURRENT_ROUTE && <RouteDetails route={CURRENT_ROUTE} data={data} currency={options.currency} />}
 
             {!CURRENT_ROUTE && <HowItWorks />}
 
