@@ -10,7 +10,7 @@ const messages = JSON.parse(fs.readFileSync(path.join(ROOT, "_locales/pl/message
 const store = {};
 const listener = { addListener() {} };
 const context = vm.createContext({
-  console, TextDecoder, URL, Blob, Response, DecompressionStream, setTimeout, fetch,
+  console, TextDecoder, URL, Blob, Response, DecompressionStream, setTimeout, fetch, AbortSignal,
   chrome: {
     i18n: { getUILanguage: () => "pl", getMessage: (key) => messages[key]?.message || "" },
     runtime: { onInstalled: listener, onStartup: listener, onMessage: listener },
@@ -41,6 +41,13 @@ async function previous() {
   const { errors } = await context.refreshSources(true, { orlen: true, uk: true, us: true });
 
   const old = await previous();
+  const fresh = store.fuelPrices;
+  const kept = old.fuelPrices?.orlen;
+  if (fresh && !fresh.orlen && kept && old.fuelPrices.date === fresh.date && store.euPrices) {
+    fresh.prices = context.polandPrices(store.euPrices, fresh.eurRate, kept);
+    fresh.orlen = kept;
+    console.warn(`warning: Orlen unavailable, reusing the correction from ${kept.date}`);
+  }
   const result = { updatedAt: new Date().toISOString() };
   for (const key of ["fuelPrices", "euPrices", "nbpRates", "ukPrices", "usPrices"]) result[key] = store[key] || old[key] || null;
 

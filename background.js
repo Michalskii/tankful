@@ -40,12 +40,19 @@ async function fetchEurRate(date) {
   return rates[rates.length - 1].mid;
 }
 
-async function fetchOrlen(productId, from, to) {
-  const res = await fetch(`${ORLEN_URL}?productId=${productId}&from=${from}&to=${to}`, { cache: "no-store" });
-  if (!res.ok) throw new Error(`Orlen: HTTP ${res.status}`);
-  return (await res.json())
-    .map((r) => ({ date: r.effectiveDate.slice(0, 10), value: r.value }))
-    .sort((a, b) => a.date.localeCompare(b.date));
+async function fetchOrlen(productId, from, to, attempts = 3) {
+  for (let attempt = 1; ; attempt++) {
+    try {
+      const res = await fetch(`${ORLEN_URL}?productId=${productId}&from=${from}&to=${to}`, { cache: "no-store", signal: AbortSignal.timeout(15000) });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      return (await res.json())
+        .map((r) => ({ date: r.effectiveDate.slice(0, 10), value: r.value }))
+        .sort((a, b) => a.date.localeCompare(b.date));
+    } catch (e) {
+      if (attempt >= attempts) throw new Error(`Orlen: ${e.message || e}`);
+      await new Promise((resolve) => setTimeout(resolve, 2000 * attempt));
+    }
+  }
 }
 
 function fuelVat(fuel, date) {
