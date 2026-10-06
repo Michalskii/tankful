@@ -48,6 +48,22 @@ function mapkaCountryCurrency(country) {
   return MAPKA_COUNTRY_CURRENCY[country] || "EUR";
 }
 
+const MAPKA_SAMPLE_ROUTES = {
+  PL: ["Warszawa", "Kraków"], DE: ["Berlin", "München"], FR: ["Paris", "Lyon"], ES: ["Madrid", "Barcelona"],
+  IT: ["Milano", "Roma"], NL: ["Amsterdam", "Maastricht"], BE: ["Bruxelles", "Luxembourg"], LU: ["Luxembourg", "Bruxelles"],
+  AT: ["Wien", "Salzburg"], CH: ["Zürich", "Genève"], CZ: ["Praha", "Brno"], SK: ["Bratislava", "Košice"],
+  HU: ["Budapest", "Debrecen"], RO: ["București", "Cluj-Napoca"], BG: ["София", "Варна"], GR: ["Αθήνα", "Θεσσαλονίκη"],
+  PT: ["Lisboa", "Porto"], IE: ["Dublin", "Cork"], GB: ["London", "Manchester"], DK: ["København", "Aarhus"],
+  SE: ["Stockholm", "Göteborg"], NO: ["Oslo", "Bergen"], FI: ["Helsinki", "Tampere"], EE: ["Tallinn", "Tartu"],
+  LV: ["Rīga", "Daugavpils"], LT: ["Vilnius", "Klaipėda"], SI: ["Ljubljana", "Maribor"], HR: ["Zagreb", "Split"],
+  CY: ["Nicosia", "Limassol"], MT: ["Valletta", "Mellieħa"], IS: ["Reykjavík", "Akureyri"], US: ["New York", "Washington, DC"],
+};
+
+function mapkaSampleRouteUrl(country) {
+  const [from, to] = MAPKA_SAMPLE_ROUTES[country] || MAPKA_SAMPLE_ROUTES.DE;
+  return `https://www.google.com/maps/dir/${encodeURIComponent(from)}/${encodeURIComponent(to)}/data=!4m2!4m1!3e0`;
+}
+
 const MAPKA_COUNTRY = mapkaUserCountry();
 const MAPKA_CURRENCY = mapkaCountryCurrency(MAPKA_COUNTRY);
 

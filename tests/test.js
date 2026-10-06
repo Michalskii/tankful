@@ -852,6 +852,20 @@ test("guides: {{month}} in titles becomes the current month and titles stay shor
   assert.ok(withMonth >= 15, `only ${withMonth} titles show the month`);
 });
 
+test("welcome: after saving, every supported country gets a domestic sample driving route", () => {
+  const routes = vm.runInContext("MAPKA_SAMPLE_ROUTES", ext);
+  const countries = [...new Set([...Object.values(vm.runInContext("MAPKA_TIMEZONES", ext)), "US"])];
+  same(countries.filter((c) => !routes[c]), []);
+  const matches = JSON.parse(source("manifest.json")).content_scripts[0].matches.map((p) => new RegExp("^" + p.replace(/[.?]/g, "\\$&").replace(/\*/g, ".*")));
+  for (const c of [...countries, "JP"]) {
+    const url = vm.runInContext(`mapkaSampleRouteUrl(${JSON.stringify(c)})`, ext);
+    assert.match(url, /^https:\/\/www\.google\.com\/maps\/dir\/[^/]+\/[^/]+\/data=!4m2!4m1!3e0$/, `${c}: ${url}`);
+    assert.ok(matches.some((m) => m.test(url)), `${c}: the content script does not run on ${url}`);
+  }
+  assert.strictEqual(vm.runInContext(`mapkaSampleRouteUrl("PL")`, ext), "https://www.google.com/maps/dir/Warszawa/Krak%C3%B3w/data=!4m2!4m1!3e0");
+  assert.match(source("welcome.js"), /location\.href = mapkaSampleRouteUrl\(MAPKA_COUNTRY\)/);
+});
+
 test("manifest: every Google Maps pattern is also a host permission, so open tabs get the script on install", () => {
   const m = JSON.parse(source("manifest.json"));
   same(m.content_scripts[0].matches.filter((p) => !m.host_permissions.includes(p)), []);

@@ -59,7 +59,7 @@ form.addEventListener("submit", (e) => {
       consumption: readConsumption(),
       configured: true,
     },
-    () => (location.href = "https://www.google.com/maps")
+    () => (location.href = mapkaSampleRouteUrl(MAPKA_COUNTRY))
   );
 });
 
