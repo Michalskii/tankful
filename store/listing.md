@@ -58,9 +58,14 @@ Saves the user's settings (fuel type, consumption, prices, currency, number of p
 Refreshes the cached fuel prices and exchange rates once an hour in the background, so the costs shown in Google Maps stay current without a network request on every page load.
 ```
 
+**scripting**
+```text
+Used once, right after installation: the extension starts its own content script in Google Maps tabs that were already open, so the fuel cost appears without the user having to reload Google Maps. It injects only the extension's packaged files, only into Google Maps pages, and does nothing else.
+```
+
 **Host permissions**
 ```text
-Google Maps (www.google.<country>/maps*, maps.google.<country>/*, for EU countries, the UK, the US, Switzerland, Norway and Iceland): the content script reads the distance and travel time of each driving route and shows the fuel cost next to it. It runs only on Google Maps pages.
+Google Maps (www.google.<country>/maps*, maps.google.<country>/*, for EU countries, the UK, the US, Switzerland, Norway and Iceland): the content script reads the distance and travel time of each driving route and shows the fuel cost next to it. It runs only on Google Maps pages. The same Google Maps patterns are listed as host permissions so that, right after installation, the extension can start in Google Maps tabs that are already open.
 
 Fuel prices and exchange rates normally come from one public file on the extension's own website (koszt-paliwa.pl/prices.json, readable without a host permission), which is built every few hours from the sources below (plus Orlen's public wholesale price list, the UK government's weekly road fuel prices and the U.S. EIA's weekly gasoline and diesel prices, used only by the website's build server). The extension contacts these sources directly only when that file is unavailable or out of date:
 energy.ec.europa.eu: the European Commission's Weekly Oil Bulletin with national fuel prices in EU countries.

@@ -1,4 +1,6 @@
 (() => {
+  if (globalThis.mapkaStarted) return;
+  globalThis.mapkaStarted = true;
   const COST_CLASS = "mapka-cost";
   const FLOAT_CLASS = "mapka-float";
   const OVERRIDES_KEY = "mapka-route-overrides";

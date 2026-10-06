@@ -341,7 +341,22 @@ function geocode(lat, lng) {
   return task;
 }
 
+async function injectIntoOpenMaps() {
+  if (!chrome.scripting || /Firefox\//.test(navigator.userAgent)) return 0;
+  const { matches, js, css } = chrome.runtime.getManifest().content_scripts[0];
+  const tabs = await chrome.tabs.query({ url: matches });
+  await Promise.all(
+    tabs.map(async ({ id }) => {
+      const target = { tabId: id };
+      await chrome.scripting.insertCSS({ target, files: css }).catch(() => {});
+      await chrome.scripting.executeScript({ target, files: js }).catch(() => {});
+    })
+  );
+  return tabs.length;
+}
+
 chrome.runtime.onInstalled.addListener(({ reason }) => {
+  if (reason === "install") injectIntoOpenMaps();
   chrome.alarms.create("refreshPrices", { periodInMinutes: 60 });
   chrome.storage.local.remove("regionalPrices");
   refreshAll(true);

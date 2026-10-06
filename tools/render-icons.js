@@ -15,6 +15,7 @@ const ICONS = [
   { name: "app-maskable-512.png", size: 512, viewBox: "-8 -8 144 144", fullBleed: true },
   { name: "apple-touch-icon.png", size: 180, viewBox: "-4 -4 136 136", fullBleed: true },
   { name: "icon-64.png", size: 64, viewBox: "0 0 128 128", dir: "store/opera" },
+  { name: "logo-300.png", size: 300, viewBox: "-16 -16 160 160", dir: "store/edge" },
 ];
 
 for (const { name, size, viewBox, fullBleed, dir = "icons" } of ICONS) {

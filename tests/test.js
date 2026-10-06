@@ -836,6 +836,14 @@ test("package: Firefox manifest loads the background as scripts and keeps everyt
   same({ ...rest, background: m.background }, m);
 });
 
+test("manifest: every Google Maps pattern is also a host permission, so open tabs get the script on install", () => {
+  const m = JSON.parse(source("manifest.json"));
+  same(m.content_scripts[0].matches.filter((p) => !m.host_permissions.includes(p)), []);
+  assert.ok(m.permissions.includes("scripting"));
+  assert.match(source("background.js"), /reason === "install"\) injectIntoOpenMaps\(\)/);
+  assert.match(source("content.js"), /if \(globalThis\.mapkaStarted\) return;/);
+});
+
 test("review link: each browser goes to the store it installs from", () => {
   const url = (userAgent) => {
     ext.navigator = { userAgent };
@@ -851,11 +859,13 @@ test("privacy policy: names every permitted domain and uses the UI labels", () =
   const policy = source("docs/privacy.html");
   const m = JSON.parse(source("manifest.json"));
   same(policy.match(/\[[A-ZĄĆĘŁŃÓŚŹŻ][A-ZĄĆĘŁŃÓŚŹŻ -]+\]/g) || [], []);
-  for (const host of m.host_permissions.map((h) => new URL(h.replace("*", "")).host)) {
+  const maps = m.content_scripts[0].matches;
+  for (const host of m.host_permissions.filter((h) => !maps.includes(h)).map((h) => new URL(h.replace("*", "")).host)) {
     const name = host.replace(/^www\./, "").replace(/^nominatim\./, "");
     assert.ok(policy.includes(name), `the policy does not mention ${host}`);
   }
-  assert.deepStrictEqual(m.permissions.slice().sort(), ["alarms", "storage"], "new permission – update the privacy policy");
+  assert.ok(policy.includes("already open"), "the policy does not explain starting in Google Maps tabs that are already open");
+  assert.deepStrictEqual(m.permissions.slice().sort(), ["alarms", "scripting", "storage"], "new permission – update the privacy policy");
   for (const [lang, keys] of [["en", ["popup_local_prices", "float_copy", "float_save", "history_export"]], ["pl", ["popup_local_prices", "float_copy", "float_save", "history_export"]]]) {
     const msgs = catalog(lang);
     for (const key of keys) {
