@@ -67,6 +67,7 @@ Plain JavaScript, Manifest V3, no build step for the extension. Node.js 22 for t
 ```sh
 node tests/test.js                       # tests
 node tools/pack.js                       # extension package → dist/tankful-<version>.zip
+node tools/pack.js --target=firefox      # Firefox package → dist/tankful-<version>-firefox.zip
 node tools/fetch-prices.js prices.json   # download current prices from the sources
 node tools/fetch-history.js history.json # download weekly EU price history since 2005
 node tools/build-site.js prices.json --history=history.json   # website and guides → _site/ (needs Chrome for prerendering)

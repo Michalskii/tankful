@@ -5,6 +5,7 @@ const { screenshot, flattenPng } = require("./chrome");
 
 const ROOT = path.join(__dirname, "..");
 const SHOT = { width: 1280, height: 800 };
+const OPERA_SHOT = { width: 800, height: 500 };
 
 const GRAPHICS = [
   { src: "store/promo-tile.html", out: "store/promo-tile-440x280.png", width: 440, height: 280 },
@@ -17,8 +18,11 @@ for (const lang of fs.readdirSync(path.join(ROOT, "store/raw"))) {
     const page = path.join(tmp, `${lang}-${file}.html`);
     const img = `file:///${path.join(dir, file).replace(/\\/g, "/")}`;
     fs.writeFileSync(page, `<!doctype html><html><head><style>html,body{margin:0;overflow:hidden}img{display:block}</style></head><body><img src="${img}"></body></html>`);
-    fs.mkdirSync(path.join(ROOT, "store", lang), { recursive: true });
+    fs.mkdirSync(path.join(ROOT, "store", lang, "opera"), { recursive: true });
     GRAPHICS.push({ page, out: `store/${lang}/screenshot-${file.replace(/\.\w+$/, "")}.png`, ...SHOT });
+    const small = path.join(tmp, `${lang}-${file}-opera.html`);
+    fs.writeFileSync(small, `<!doctype html><html><head><style>html,body{margin:0;overflow:hidden}img{display:block;width:${OPERA_SHOT.width}px;height:${OPERA_SHOT.height}px}</style></head><body><img src="${img}"></body></html>`);
+    GRAPHICS.push({ page: small, out: `store/${lang}/opera/screenshot-${file.replace(/\.\w+$/, "")}.png`, ...OPERA_SHOT });
   }
 }
 

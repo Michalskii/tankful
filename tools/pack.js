@@ -22,13 +22,36 @@ function dosTime(date) {
   };
 }
 
-function zip(files) {
+function firefoxManifest(manifest) {
+  const { service_worker, ...background } = manifest.background;
+  return {
+    ...manifest,
+    background: { ...background, scripts: ["settings.js", service_worker] },
+    browser_specific_settings: {
+      gecko: {
+        id: "tankful@koszt-paliwa.pl",
+        strict_min_version: "140.0",
+        data_collection_permissions: { required: ["locationInfo"] },
+      },
+      gecko_android: { strict_min_version: "142.0" },
+    },
+  };
+}
+
+function packageEntries(target = "chrome") {
+  return packageFiles().map((name) => {
+    let data = fs.readFileSync(path.join(ROOT, name));
+    if (name === "manifest.json" && target === "firefox") data = Buffer.from(JSON.stringify(firefoxManifest(JSON.parse(data)), null, 2) + "\n");
+    return { name, data };
+  });
+}
+
+function zip(entries) {
   const parts = [];
   const central = [];
   let offset = 0;
   const { time, date } = dosTime(new Date());
-  for (const name of files) {
-    const data = fs.readFileSync(path.join(ROOT, name));
+  for (const { name, data } of entries) {
     const packed = zlib.deflateRawSync(data, { level: 9 });
     const nameBuf = Buffer.from(name, "utf8");
     const crc = crc32(data);
@@ -66,8 +89,8 @@ function zip(files) {
   const dir = Buffer.concat(central);
   const end = Buffer.alloc(22);
   end.writeUInt32LE(0x06054b50, 0);
-  end.writeUInt16LE(files.length, 8);
-  end.writeUInt16LE(files.length, 10);
+  end.writeUInt16LE(entries.length, 8);
+  end.writeUInt16LE(entries.length, 10);
   end.writeUInt32LE(dir.length, 12);
   end.writeUInt32LE(offset, 16);
   return Buffer.concat([...parts, dir, end]);
@@ -75,12 +98,13 @@ function zip(files) {
 
 if (require.main === module) {
   const { version } = JSON.parse(fs.readFileSync(path.join(ROOT, "manifest.json"), "utf8"));
-  const files = packageFiles();
-  const out = path.join(ROOT, "dist", `tankful-${version}.zip`);
+  const target = process.argv.includes("--target=firefox") ? "firefox" : "chrome";
+  const entries = packageEntries(target);
+  const out = path.join(ROOT, "dist", `tankful-${version}${target === "chrome" ? "" : `-${target}`}.zip`);
   fs.mkdirSync(path.dirname(out), { recursive: true });
-  fs.writeFileSync(out, zip(files));
-  console.log(`${path.relative(ROOT, out)} – ${files.length} files, ${Math.round(fs.statSync(out).size / 1024)} KB`);
-  for (const f of files) console.log("  " + f);
+  fs.writeFileSync(out, zip(entries));
+  console.log(`${path.relative(ROOT, out)} – ${entries.length} files, ${Math.round(fs.statSync(out).size / 1024)} KB`);
+  for (const { name } of entries) console.log("  " + name);
 }
 
-module.exports = { packageFiles };
+module.exports = { packageFiles, firefoxManifest };

@@ -24,3 +24,5 @@ store/raw/
 site/public/app-*.png
 site/public/apple-touch-icon.png
 store/facebook/posts/
+
+progress/

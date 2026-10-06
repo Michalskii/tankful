@@ -1,4 +1,4 @@
-importScripts("settings.js");
+if (typeof importScripts === "function") importScripts("settings.js");
 
 const EU_BULLETIN_URL = "https://energy.ec.europa.eu/document/download/264c2d0f-f161-4ea3-a777-78faae59bea0_en";
 const NBP_URL = "https://api.nbp.pl/api/exchangerates/tables/a/?format=json";

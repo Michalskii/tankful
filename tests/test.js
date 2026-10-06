@@ -826,6 +826,27 @@ test("package: contains every file the extension references and nothing else", (
   same([...files].filter((f) => /^(tests|tools|store|dist|\.idea)\//.test(f) || f.endsWith(".svg")), []);
 });
 
+test("package: Firefox manifest loads the background as scripts and keeps everything else", () => {
+  const m = JSON.parse(source("manifest.json"));
+  const ff = require("../tools/pack").firefoxManifest(m);
+  same(ff.background, { scripts: ["settings.js", m.background.service_worker] });
+  assert.match(ff.browser_specific_settings.gecko.id, /^[\w.-]+@[\w.-]+$/);
+  same(ff.browser_specific_settings.gecko.data_collection_permissions.required, ["locationInfo"]);
+  const { background, browser_specific_settings, ...rest } = ff;
+  same({ ...rest, background: m.background }, m);
+});
+
+test("review link: each browser goes to the store it installs from", () => {
+  const url = (userAgent) => {
+    ext.navigator = { userAgent };
+    return vm.runInContext("mapkaReviewUrl()", ext);
+  };
+  assert.match(url("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"), /^https:\/\/chromewebstore\.google\.com\/detail\/fiogjemolijaleckapbcngibelfbpfgp\/reviews/);
+  assert.match(url("Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:143.0) Gecko/20100101 Firefox/143.0"), /^https:\/\/addons\.mozilla\.org\/firefox\/addon\/tankful\/reviews\/$/);
+  assert.match(url("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36 OPR/124.0.0.0"), /^https:\/\/addons\.opera\.com\/extensions\/details\/tankful-fuel-cost-for-every-route\/$/);
+  delete ext.navigator;
+});
+
 test("privacy policy: names every permitted domain and uses the UI labels", () => {
   const policy = source("docs/privacy.html");
   const m = JSON.parse(source("manifest.json"));

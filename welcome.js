@@ -14,8 +14,9 @@ mapkaLocalizePage();
 for (const [key, name] of Object.entries(MAPKA_FUELS)) {
   const label = document.createElement("label");
   label.className = "fuel";
-  label.innerHTML = `<input type="radio" name="fuelType" value="${key}"><span></span>`;
-  label.querySelector("span").textContent = name;
+  const input = Object.assign(document.createElement("input"), { type: "radio", name: "fuelType", value: key });
+  const span = Object.assign(document.createElement("span"), { textContent: name });
+  label.append(input, span);
   fuels.append(label);
 }
 
