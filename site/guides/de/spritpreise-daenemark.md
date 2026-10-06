@@ -13,6 +13,8 @@ Dänemark ist für viele Familien aus Norddeutschland das klassische Ferienziel 
 - **Super:** {{verdict DE DK pb}}
 - **Diesel:** {{verdict DE DK on}}
 
+{{savebox DE DK}}
+
 ## Dänemark und Deutschland im Vergleich
 
 {{border DE DK}}

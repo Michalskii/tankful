@@ -10,6 +10,8 @@ published: 2026-10-02
 ---
 Görlitz und Zgorzelec waren bis 1945 eine Stadt, heute nennen sie sich gemeinsam Europastadt. Nur die Neiße liegt dazwischen. Wer in Görlitz wohnt oder die Altstadt besucht, ist schnell auf der polnischen Seite – und kann dort günstiger tanken. Ein Liter Super 95 kostet in Polen im Schnitt **{{price PL pb}}**, in Deutschland **{{price DE pb}}**, Diesel {{price PL on}} gegenüber {{price DE on}}. {{verdict DE PL pb}}
 
+{{savebox DE PL}}
+
 ## Lohnt sich der Weg über die Neiße?
 
 Bei 50 Litern Super sparst du {{tank DE PL pb 50}}. Aus Görlitz ist die Fahrt so kurz, dass der Umweg kaum ins Gewicht fällt: Selbst 20 km hin und zurück kosten ein Auto mit 7 l/100 km nur rund {{cost DE pb 7 20}}. Kommst du aus Bautzen oder Löbau, rechne die längere Anfahrt ein – für 60 km hin und zurück sind es etwa {{cost DE pb 7 60}}. Dann lohnt es sich vor allem mit fast leerem Tank.

@@ -10,6 +10,8 @@ published: 2026-10-01
 ---
 Ein Liter Super 95 kostet in Polen heute im Schnitt **{{price PL pb}}**, Diesel **{{price PL on}}** und Autogas **{{price PL lpg}}**. In Deutschland sind es {{price DE pb}}, {{price DE on}} und {{price DE lpg}}. {{verdict DE PL pb}} {{verdict DE PL on}}
 
+{{savebox DE PL}}
+
 ## Benzinpreise Polen und Deutschland im Vergleich
 
 {{border DE PL}}

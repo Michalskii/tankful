@@ -9,6 +9,8 @@ published: 2026-10-01
 ---
 A litre of petrol (95) currently costs **{{price CZ pb}}** on average in Czechia, diesel **{{price CZ on}}** and LPG **{{price CZ lpg}}**. In Poland it's {{price PL pb}}, {{price PL on}} and {{price PL lpg}}. {{verdict PL CZ pb}} {{verdict PL CZ on}}
 
+{{savebox PL CZ}}
+
 ## Poland vs Czechia – prices compared
 
 {{border PL CZ}}

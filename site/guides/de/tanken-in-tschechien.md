@@ -10,6 +10,8 @@ published: 2026-10-01
 ---
 Ein Liter Super 95 kostet in Tschechien heute im Schnitt **{{price CZ pb}}**, Diesel **{{price CZ on}}** und Autogas **{{price CZ lpg}}**. In Deutschland sind es {{price DE pb}}, {{price DE on}} und {{price DE lpg}}. {{verdict DE CZ pb}} {{verdict DE CZ on}}
 
+{{savebox DE CZ}}
+
 ## Spritpreise Tschechien und Deutschland im Vergleich
 
 {{border DE CZ}}

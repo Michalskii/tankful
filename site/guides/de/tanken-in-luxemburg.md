@@ -10,6 +10,8 @@ published: 2026-10-02
 ---
 Luxemburg ist für viele Autofahrer aus Trier, dem Saarland und der Eifel seit Jahren die erste Adresse zum Tanken. Der Grund: Das Großherzogtum besteuert Kraftstoff niedriger als Deutschland. Ein Liter Super kostet dort im Schnitt **{{price LU pb}}**, in Deutschland **{{price DE pb}}**. Diesel liegt bei {{price LU on}} gegenüber {{price DE on}}. {{verdict DE LU pb}} {{verdict DE LU on}}
 
+{{savebox DE LU}}
+
 ## Was eine Tankfüllung in Luxemburg spart
 
 Bei 50 Litern Super macht der Unterschied {{tank DE LU pb 50}} aus, bei Diesel {{tank DE LU on 50}}. Im europäischen Vergleich liegt Luxemburg bei Super diese Woche auf Platz {{weekrank LU pb}} von {{weekcount pb}} EU-Ländern (gezählt vom günstigsten), Deutschland auf Platz {{weekrank DE pb}}.

@@ -10,6 +10,8 @@ published: 2026-10-02
 ---
 Ob Urlaub in der Provence, an der Atlantikküste oder ein Wochenende in Paris: Wer mit dem Auto nach Frankreich fährt, will wissen, was der Sprit dort kostet. Ein Liter Super kostet in Frankreich im Schnitt **{{price FR pb}}**, Diesel **{{price FR on}}**. In Deutschland sind es {{price DE pb}} und {{price DE on}}. {{verdict DE FR pb}} {{verdict DE FR on}}
 
+{{savebox DE FR}}
+
 ## Frankreich und Deutschland im Vergleich
 
 {{border DE FR}}

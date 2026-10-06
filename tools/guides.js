@@ -117,6 +117,9 @@ const TEXT = {
     noData: "brak danych",
     verdictSame: (fuel) => `Litr ${fuel} kosztuje praktycznie tyle samo po obu stronach granicy.`,
     verdict: (fuel, where, diff, litres, tank) => `Litr ${fuel} jest tańszy ${where} o ${diff} – na ${litres} litrach oszczędzasz ${tank}.`,
+    saveTitle: (litres) => `Ile oszczędzasz na pełnym baku (${litres} l)`,
+    saveCheaper: (where) => `taniej ${where}`,
+    saveSame: "tyle samo po obu stronach",
     calcLitres: "Zatankowane litry",
     calcKm: "Przejechane km",
     calcFuel: "Paliwo",
@@ -208,6 +211,9 @@ const TEXT = {
     noData: "no data",
     verdictSame: (fuel) => `A litre of ${fuel} costs practically the same on both sides of the border.`,
     verdict: (fuel, where, diff, litres, tank) => `A litre of ${fuel} is cheaper ${where} by ${diff} – ${tank} saved on a ${litres}-litre fill-up.`,
+    saveTitle: (litres) => `How much you save on a full tank (${litres} l)`,
+    saveCheaper: (where) => `cheaper ${where}`,
+    saveSame: "about the same on both sides",
     calcLitres: "Litres filled",
     calcKm: "Kilometres driven",
     calcFuel: "Fuel",
@@ -299,6 +305,9 @@ const TEXT = {
     noData: "keine Daten",
     verdictSame: (fuel) => `Ein Liter ${fuel} kostet auf beiden Seiten der Grenze praktisch gleich viel.`,
     verdict: (fuel, where, diff, litres, tank) => `Ein Liter ${fuel} ist ${where} um ${diff} günstiger – bei ${litres} Litern sparst du ${tank}.`,
+    saveTitle: (litres) => `So viel sparst du pro Tankfüllung (${litres} l)`,
+    saveCheaper: (where) => `günstiger ${where}`,
+    saveSame: "auf beiden Seiten etwa gleich",
     calcLitres: "Getankte Liter",
     calcKm: "Gefahrene km",
     calcFuel: "Kraftstoff",
@@ -513,6 +522,18 @@ function context(lang, data, history) {
         }
       }
       return table([`${t.country} – ${t.fuelWord}`, esc(name(home)), t.neighbour, t.diff, t.cheaper, t.tank(50)], rows, [1, 2, 3, 5]);
+    },
+    savebox: (home, other, litres = "50") => {
+      const tiles = ["pb", "on", "lpg"]
+        .map((fuel) => ({ fuel, a: pln(home, fuel), b: pln(other, fuel) }))
+        .filter((x) => x.a && x.b)
+        .map(({ fuel, a, b }) => {
+          const same = Math.abs(a - b) < 0.01 * Math.min(a, b);
+          const value = same ? "≈ 0" : money(Math.abs(toCur(a - b)) * Number(litres), currency, 0);
+          const sub = same ? t.saveSame : t.saveCheaper(inCountry(a < b ? home : other));
+          return `<div class="save-tile"><span class="save-fuel">${esc(cap(fuelName(fuel)))}</span><strong>${value}</strong><span class="save-where${same ? " same" : ""}">${esc(sub)}</span></div>`;
+        });
+      return `<section class="save-box" aria-label="${esc(t.saveTitle(litres))}"><p class="save-title">${esc(t.saveTitle(litres))}</p><div class="save-tiles">${tiles.join("")}</div></section>`;
     },
     per100: (...ccs) => {
       const rows = [
@@ -1151,4 +1172,64 @@ ${guideLinks}
   return groups;
 }
 
-module.exports = { buildGuides, loadGuides, monthLabel, context, markdown, pricesDate, FUELS };
+const STORES = {
+  chrome: "https://chromewebstore.google.com/detail/fiogjemolijaleckapbcngibelfbpfgp",
+  firefox: "https://addons.mozilla.org/firefox/addon/tankful/",
+  opera: "https://addons.opera.com/extensions/details/tankful-fuel-cost-for-every-route/",
+};
+
+function llmsTxt({ siteId, siteUrls, langSite, data, date = new Date() }) {
+  const siteUrl = siteUrls[siteId];
+  const langs = Object.keys(DIRS).filter((l) => langSite[l] === siteId);
+  const guides = loadGuides(date);
+  const { pln, eur } = prices(data);
+  const en = (cc) => new Intl.DisplayNames("en", { type: "region" }).of(cc);
+  const fmt = (v, cur) => (v == null ? "n/a" : `${(cur === "PLN" ? v : v / eur).toFixed(2)} ${cur}/l`);
+  const row = (cc, cur) => `- ${en(cc)}: petrol 95 ${fmt(pln(cc, "pb"), cur)}, diesel ${fmt(pln(cc, "on"), cur)}, LPG ${fmt(pln(cc, "lpg"), cur)}`;
+  const countries = [...EU, "GB"].filter((cc) => pln(cc, "pb")).sort((a, b) => pln(a, "pb") - pln(b, "pb"));
+  const home = siteId === "de" ? "de" : "pl";
+  const routeDir = { pl: "trasa", de: "strecke" }[home];
+  const routes = ROUTES.filter((r) => r[home] && (home === "de" || !r.deOnly)).slice(0, 15).map((r) => {
+    const [from, to] = home === "de" && r.deFlip ? [r.to, r.from] : [r.from, r.to];
+    const city = (key) => CITIES[key][home] ?? CITIES[key].en;
+    return `- [${city(from)} – ${city(to)}](${siteUrl}${routeDir}/${r[home]}): ${r.km} km`;
+  });
+  const guideList = (lang) =>
+    guides[lang].map((g) => `- [${g.title.replace(/ \| Tankful$/, "")}](${siteUrl}${DIRS[lang]}/${g.slug}): ${g.description}`);
+  const langName = { pl: "Polish", en: "English", de: "German" };
+  return [
+    `# Tankful – ${siteId === "de" ? "Spritkostenrechner (spritkosten-europa.de)" : "kalkulator kosztu paliwa (koszt-paliwa.pl)"}`,
+    "",
+    "> Free fuel cost calculator for driving routes in Europe and the US, with current average fuel prices by country, guides on fuel prices and filling up near borders, and a browser extension that shows the fuel cost of every route directly in Google Maps.",
+    "",
+    `Prices are national averages: EU countries from the European Commission's Weekly Oil Bulletin (Poland adjusted to Orlen wholesale prices and fuel tax changes), the UK from the UK government's weekly road fuel prices, converted at National Bank of Poland exchange rates. The site is rebuilt every few hours. Current data: ${pricesDate(data)}.`,
+    "",
+    `## Current average fuel prices (${data.euPrices.date}, cheapest petrol first)`,
+    "",
+    ...(home === "pl" ? [row("PL", "PLN"), ""] : []),
+    ...countries.map((cc) => row(cc, "EUR")),
+    "",
+    "## Tools",
+    "",
+    `- [Fuel cost calculator](${siteUrl}): cost of a trip from distance, consumption and current prices, also across several countries, for electric cars and per person`,
+    ...(home === "pl" ? [`- [Fuel cost calculator in English](${siteUrl}en)`] : []),
+    `- [Tankful for Chrome](${STORES.chrome}): browser extension that adds the fuel cost next to every driving route in Google Maps`,
+    `- [Tankful for Firefox](${STORES.firefox})`,
+    `- [Tankful for Opera](${STORES.opera})`,
+    "",
+    ...langs.flatMap((lang) => [`## Guides (${langName[lang]})`, "", ...guideList(lang), ""]),
+    "## Popular routes",
+    "",
+    ...routes,
+    "",
+    "## Data and project",
+    "",
+    `- [prices.json](${siteUrl}prices.json): current prices used by the calculator and the extension (JSON)`,
+    `- [history.json](${siteUrl}history.json): weekly fuel prices in EU countries since 2005 (JSON)`,
+    `- [Privacy policy](${siteUrl}privacy.html)`,
+    "- [Source code](https://github.com/Michalskii/tankful): open source (MIT)",
+    "",
+  ].join("\n");
+}
+
+module.exports = { buildGuides, loadGuides, monthLabel, llmsTxt, context, markdown, pricesDate, FUELS };

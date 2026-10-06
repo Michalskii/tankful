@@ -852,6 +852,47 @@ test("guides: {{month}} in titles becomes the current month and titles stay shor
   assert.ok(withMonth >= 15, `only ${withMonth} titles show the month`);
 });
 
+test("llms.txt: prices for every country, every guide of the site and links to the stores", () => {
+  const { llmsTxt, loadGuides } = require("../tools/guides");
+  const euPrices = { date: "2026-10-05", prices: { DE: { pb: 1.9, on: 1.8, lpg: 1.0 }, CZ: { pb: 1.7, on: 1.6, lpg: 0.8 }, PL: { pb: 1.5, on: 1.6, lpg: 0.7 } } };
+  const data = { euPrices, fuelPrices: { date: "2026-10-06", prices: { pb: 6.2, on: 6.5, lpg: 3.0 } }, ukPrices: { prices: {} }, nbpRates: { rates: { EUR: 4.25, GBP: 5.0 } } };
+  const opts = { siteUrls: { pl: "https://koszt-paliwa.pl/", de: "https://spritkosten-europa.de/" }, langSite: { pl: "pl", en: "pl", de: "de" }, data };
+  const guides = loadGuides();
+  for (const [siteId, langs] of [["pl", ["pl", "en"]], ["de", ["de"]]]) {
+    const txt = llmsTxt({ ...opts, siteId });
+    assert.ok(txt.startsWith("# Tankful"), siteId);
+    assert.ok(!/undefined|NaN|\{\{/.test(txt), `${siteId}: broken value in llms.txt`);
+    assert.match(txt, /- Czechia: petrol 95 1\.70 EUR\/l, diesel 1\.60 EUR\/l, LPG 0\.80 EUR\/l/);
+    assert.ok(txt.indexOf("- Czechia") < txt.indexOf("- Germany"), "cheapest first");
+    assert.ok(txt.includes("chromewebstore.google.com/detail/fiogjemolijaleckapbcngibelfbpfgp"));
+    for (const lang of langs) for (const g of guides[lang]) assert.ok(txt.includes(`${opts.siteUrls[siteId]}${{ pl: "poradniki", en: "guides", de: "ratgeber" }[lang]}/${g.slug})`), `${siteId}: missing ${g.slug}`);
+  }
+  assert.match(llmsTxt({ ...opts, siteId: "pl" }), /- Poland: petrol 95 6\.20 PLN\/l/);
+  assert.match(source("tools/build-site.js"), /"llms\.txt"\), llmsTxt\(/);
+});
+
+test("guides: the full-tank savings box shows 50 l per fuel and where it is cheaper", () => {
+  const { context, markdown, loadGuides } = require("../tools/guides");
+  const data = {
+    euPrices: { date: "2026-10-05", prices: { DE: { pb: 1.9, on: 1.8, lpg: 1.0 }, PL: { pb: 1.5, on: 1.79, lpg: 0.7 } } },
+    fuelPrices: { date: "2026-10-06", prices: { pb: 6.0, on: 7.65, lpg: 3.0 } },
+    ukPrices: { prices: {} },
+    nbpRates: { rates: { EUR: 4.25, GBP: 5.0 } },
+  };
+  const de = context("de", data, { dates: [], prices: {}, plnPerEur: [] });
+  const html = de.blocks.savebox("DE", "PL");
+  assert.match(html, /So viel sparst du pro Tankfüllung \(50 l\)/);
+  assert.match(html, /Super 95<\/span><strong>24\s?€<\/strong><span class="save-where">günstiger in Polen/);
+  assert.match(html, /<span class="save-where same">auf beiden Seiten etwa gleich/);
+  for (const lang of ["pl", "en", "de"]) {
+    for (const g of loadGuides()[lang].filter((x) => /\{\{savebox /.test(x.body))) {
+      const [, a, b] = g.body.match(/\{\{savebox (\w\w) (\w\w)\}\}/);
+      assert.ok(g.body.includes(`{{border ${a} ${b}`), `${lang}/${g.slug}: savebox ${a} ${b} without a matching border table`);
+    }
+  }
+  assert.ok(loadGuides().de.filter((g) => g.body.includes("{{savebox")).length >= 12);
+});
+
 test("welcome: after saving, every supported country gets a domestic sample driving route", () => {
   const routes = vm.runInContext("MAPKA_SAMPLE_ROUTES", ext);
   const countries = [...new Set([...Object.values(vm.runInContext("MAPKA_TIMEZONES", ext)), "US"])];

@@ -10,6 +10,8 @@ published: 2026-10-02
 ---
 Cheb – auf Deutsch Eger – ist die erste größere tschechische Stadt hinter dem Grenzübergang bei Schirnding und liegt nicht weit von Waldsassen. Für viele aus der Oberpfalz und Oberfranken ist das der nächste Weg zu tschechischen Tankstellen. Ein Liter Super 95 kostet in Tschechien im Schnitt **{{price CZ pb}}**, in Deutschland **{{price DE pb}}**, Diesel {{price CZ on}} gegenüber {{price DE on}}. {{verdict DE CZ pb}} {{verdict DE CZ on}}
 
+{{savebox DE CZ}}
+
 ## Was du in Cheb sparst
 
 Bei 50 Litern Super macht der Unterschied {{tank DE CZ pb 50}} aus, bei Diesel {{tank DE CZ on 50}}. Wohnst du in Grenznähe, sind es oft 20–40 km hin und zurück – Sprit für etwa {{cost DE pb 7 40}} bei 7 l/100 km. Aus Marktredwitz oder Weiden ist die Anfahrt länger, dann rechnet es sich vor allem mit fast leerem Tank.

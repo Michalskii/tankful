@@ -9,6 +9,8 @@ published: 2026-10-01
 ---
 A litre of petrol (95) currently costs **{{price DE pb}}** on average in Germany, and diesel **{{price DE on}}**. In Poland it's {{price PL pb}} and {{price PL on}}. {{verdict PL DE pb}} Germany ranks {{rank DE pb}} of {{count pb}} countries on petrol price, counting from the cheapest.
 
+{{savebox PL DE}}
+
 ## Poland vs Germany – prices compared
 
 {{border PL DE}}

@@ -9,6 +9,8 @@ published: 2026-10-01
 ---
 Litr benzyny 95 kosztuje dziś w Czechach średnio **{{price CZ pb}}**, diesla **{{price CZ on}}**, a LPG **{{price CZ lpg}}**. W Polsce to {{price PL pb}}, {{price PL on}} i {{price PL lpg}}. {{verdict PL CZ pb}} {{verdict PL CZ on}}
 
+{{savebox PL CZ}}
+
 ## Polska a Czechy – porównanie cen
 
 {{border PL CZ}}

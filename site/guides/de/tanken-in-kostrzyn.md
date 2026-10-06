@@ -10,6 +10,8 @@ published: 2026-10-02
 ---
 Kostrzyn nad Odrą – auf Deutsch Küstrin – liegt gegenüber von Küstrin-Kietz, am Ende der Bundesstraße 1, die von Berlin bis an die Oder führt. Für viele aus dem östlichen Berliner Umland und dem Oderbruch ist das die nächste Möglichkeit, in Polen zu tanken. Ein Liter Super 95 kostet in Polen im Schnitt **{{price PL pb}}**, in Deutschland **{{price DE pb}}**. {{verdict DE PL pb}} {{verdict DE PL on}}
 
+{{savebox DE PL}}
+
 ## Rechnet sich die Fahrt aus Berlin?
 
 Bei 50 Litern Super sparst du {{tank DE PL pb 50}}. Ob sich die Fahrt lohnt, hängt vom Weg ab:

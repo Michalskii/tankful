@@ -10,6 +10,8 @@ published: 2026-10-01
 ---
 Ein Liter Super 95 kostet in Österreich heute im Schnitt **{{price AT pb}}** und Diesel **{{price AT on}}**. In Deutschland sind es {{price DE pb}} und {{price DE on}}. {{verdict DE AT pb}} {{verdict DE AT on}}
 
+{{savebox DE AT}}
+
 ## Spritpreise Österreich und Deutschland im Vergleich
 
 {{border DE AT}}

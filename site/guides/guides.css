@@ -310,6 +310,58 @@ body {
   font-size: 0.9375rem;
 }
 
+.save-box {
+  margin: 1.5rem 0;
+}
+
+.save-title {
+  margin: 0 0 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.save-tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr));
+  gap: 0.625rem;
+}
+
+.save-tile {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+  padding: 0.875rem 1rem;
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.save-fuel {
+  font-size: 0.8125rem;
+  color: var(--muted-foreground);
+}
+
+.save-tile strong {
+  font-size: 1.75rem;
+  font-weight: 650;
+  line-height: 1.2;
+}
+
+.save-where {
+  align-self: flex-start;
+  margin-top: 0.25rem;
+  padding: 0.0625rem 0.5rem;
+  border-radius: 999px;
+  background: var(--pill-bg);
+  color: var(--pill-fg);
+  font-size: 0.8125rem;
+  font-weight: 500;
+}
+
+.save-where.same {
+  background: var(--row-alt);
+  color: var(--muted-foreground);
+}
+
 .table-wrap {
   margin: 1rem 0;
   overflow-x: auto;

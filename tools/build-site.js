@@ -4,7 +4,7 @@ const http = require("http");
 const path = require("path");
 const vm = require("vm");
 const { dumpDom } = require("./chrome");
-const { buildGuides, pricesDate } = require("./guides");
+const { buildGuides, llmsTxt, pricesDate } = require("./guides");
 const { renderRouteImages, imagePath } = require("./route-og");
 const { prepareIndexNow } = require("./indexnow");
 
@@ -253,6 +253,7 @@ async function main() {
   fs.writeFileSync(path.join(SITE, "sitemap.xml"), sitemap(guides, pricesDate(data)));
   console.log(`IndexNow: ${await prepareIndexNow(SITE, SITE_URL)} changed URLs`);
   fs.writeFileSync(path.join(SITE, "robots.txt"), `User-agent: *\nAllow: /\n\nSitemap: ${SITE_URL}sitemap.xml\n`);
+  fs.writeFileSync(path.join(SITE, "llms.txt"), llmsTxt({ siteId: SITE_ID, siteUrls: SITE_URLS, langSite: LANG_SITE, data }));
   for (const lang of SITE_LANGS) {
     fs.writeFileSync(path.join(SITE, `manifest-${lang}.webmanifest`), JSON.stringify(manifest(lang, strings), null, 2) + "\n");
   }

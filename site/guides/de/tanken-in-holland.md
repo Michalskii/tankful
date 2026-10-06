@@ -13,6 +13,8 @@ Die Niederlande sind für viele ein Ziel für Kurzurlaub an der Nordsee, einen S
 - **Super:** {{verdict DE NL pb}}
 - **Diesel:** {{verdict DE NL on}}
 
+{{savebox DE NL}}
+
 ## Niederlande und Deutschland im Vergleich
 
 {{border DE NL}}

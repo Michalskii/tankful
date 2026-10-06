@@ -10,6 +10,8 @@ published: 2026-10-02
 ---
 Słubice liegt direkt gegenüber von Frankfurt (Oder), nur die Oder trennt die beiden Städte. Über die Stadtbrücke bist du in wenigen Minuten in Polen – viele Frankfurter, Pendler und Studierende der Europa-Universität Viadrina kennen den Weg. Ein Liter Super 95 kostet in Polen im Schnitt **{{price PL pb}}**, in Deutschland **{{price DE pb}}**. {{verdict DE PL pb}} {{verdict DE PL on}}
 
+{{savebox DE PL}}
+
 ## Was eine Tankfüllung in Słubice spart
 
 Bei 50 Litern Super macht der Unterschied {{tank DE PL pb 50}} aus, bei Diesel {{tank DE PL on 50}}. Wer in Frankfurt wohnt, fährt oft nur wenige Kilometer bis zur Tankstelle auf der anderen Seite. Selbst wenn du für den Weg hin und zurück 20 km rechnest, kostet das ein Auto mit 7 l/100 km nur rund {{cost DE pb 7 20}} – die Ersparnis bleibt also fast vollständig.
