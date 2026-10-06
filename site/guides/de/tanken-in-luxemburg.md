@@ -3,7 +3,7 @@ id: lux-fuel
 photo: europe-prices
 order: 12
 slug: tanken-in-luxemburg
-title: Tanken in Luxemburg – Spritpreise und Ersparnis | Tankful
+title: Tanken in Luxemburg – Spritpreise {{month}} und Ersparnis
 heading: Tanken in Luxemburg – lohnt sich die Fahrt über die Grenze?
 description: Aktuelle Preise für Super und Diesel in Luxemburg im Vergleich zu Deutschland, Ersparnis pro Tankfüllung und für wen sich die Fahrt lohnt.
 published: 2026-10-02

@@ -3,7 +3,7 @@ id: poland-fuel
 photo: lpg
 order: 1
 slug: tanken-in-polen
-title: Tanken in Polen – aktuelle Benzinpreise und Ersparnis
+title: Tanken in Polen – Benzinpreise {{month}} und Ersparnis
 heading: Tanken in Polen – lohnt es sich und wie viel sparst du?
 description: Aktuelle Preise für Super, Diesel und Autogas in Polen im Vergleich zu Deutschland, Ersparnis pro Tankfüllung und Tipps zum Tanken hinter der Grenze.
 published: 2026-10-01

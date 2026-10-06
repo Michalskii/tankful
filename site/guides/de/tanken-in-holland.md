@@ -3,7 +3,7 @@ id: nl-fuel
 photo: west
 order: 16
 slug: tanken-in-holland
-title: Tanken in Holland – Spritpreise im Vergleich | Tankful
+title: Tanken in Holland – Spritpreise {{month}} im Vergleich
 heading: Tanken in Holland – vor oder hinter der Grenze?
 description: Aktuelle Benzin- und Dieselpreise in den Niederlanden im Vergleich zu Deutschland und ob du vor dem Nordsee-Urlaub besser hier oder in Holland tankst.
 published: 2026-10-02

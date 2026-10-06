@@ -836,6 +836,22 @@ test("package: Firefox manifest loads the background as scripts and keeps everyt
   same({ ...rest, background: m.background }, m);
 });
 
+test("guides: {{month}} in titles becomes the current month and titles stay short in the longest month", () => {
+  const { loadGuides, monthLabel } = require("../tools/guides");
+  assert.strictEqual(monthLabel("pl", new Date("2026-10-15T12:00:00Z")), "październik 2026");
+  assert.strictEqual(monthLabel("de", new Date("2026-03-15T12:00:00Z")), "März 2026");
+  const longest = { pl: "2026-10-15T12:00:00Z", en: "2026-09-15T12:00:00Z", de: "2026-09-15T12:00:00Z" };
+  let withMonth = 0;
+  for (const [lang, date] of Object.entries(longest)) {
+    for (const g of loadGuides(new Date(date))[lang]) {
+      assert.ok(!g.title.includes("{{"), `${lang}/${g.slug}: placeholder left in the title`);
+      if (g.title.includes(monthLabel(lang, new Date(date)))) withMonth++;
+      assert.ok(g.title.length <= 65, `${lang}/${g.slug}: title has ${g.title.length} characters`);
+    }
+  }
+  assert.ok(withMonth >= 15, `only ${withMonth} titles show the month`);
+});
+
 test("manifest: every Google Maps pattern is also a host permission, so open tabs get the script on install", () => {
   const m = JSON.parse(source("manifest.json"));
   same(m.content_scripts[0].matches.filter((p) => !m.host_permissions.includes(p)), []);

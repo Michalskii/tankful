@@ -2,7 +2,7 @@
 id: europe-prices
 order: 1
 slug: fuel-prices-europe
-title: Fuel prices in Europe – petrol, diesel and LPG table
+title: Fuel prices in Europe ({{month}}) – petrol, diesel, LPG
 heading: Fuel prices in Europe – current table
 description: Current average prices of petrol, diesel and LPG in every EU country and the UK, in euros. Where fuel is cheapest and where it is most expensive.
 published: 2026-09-30

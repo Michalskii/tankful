@@ -3,7 +3,7 @@ id: france-fuel
 photo: west
 order: 15
 slug: spritpreise-frankreich
-title: Spritpreise Frankreich – aktuelle Preise und Tipps | Tankful
+title: Spritpreise Frankreich {{month}} – Preise und Tipps
 heading: Spritpreise in Frankreich – was Sprit kostet und wo du günstig tankst
 description: Benzin- und Dieselpreise in Frankreich im Vergleich zu Deutschland, günstige Supermarkt-Tankstellen sowie Infos zu Autobahnmaut und Umweltzonen.
 published: 2026-10-02

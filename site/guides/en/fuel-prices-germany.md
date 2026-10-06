@@ -2,7 +2,7 @@
 id: germany
 order: 7
 slug: fuel-prices-germany
-title: Fuel prices in Germany – where and when to fill up | Tankful
+title: Fuel prices in Germany ({{month}}) – where to fill up
 heading: Fuel prices in Germany – where and when to fill up when driving through
 description: Current petrol, diesel and LPG prices in Germany compared with Poland, the fuel cost of driving to Berlin and Munich, and the cheapest time to fill up.
 published: 2026-10-01

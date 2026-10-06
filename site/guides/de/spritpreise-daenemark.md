@@ -3,7 +3,7 @@ id: dk-fuel
 photo: seaside
 order: 17
 slug: spritpreise-daenemark
-title: Spritpreise Dänemark – vor der Grenze tanken? | Tankful
+title: Spritpreise Dänemark {{month}} – vor der Grenze tanken?
 heading: Spritpreise in Dänemark – vor dem Urlaub in Deutschland tanken?
 description: Aktuelle Benzin- und Dieselpreise in Dänemark im Vergleich zu Deutschland, wo du vor dem Urlaub tankst und was die Fahrt an die dänische Küste kostet.
 published: 2026-10-02

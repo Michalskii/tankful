@@ -3,7 +3,7 @@ id: austria
 photo: austria
 order: 3
 slug: spritpreise-oesterreich
-title: Spritpreise Österreich – im Vergleich zu Deutschland
+title: Spritpreise Österreich {{month}} – aktuell im Vergleich
 heading: Spritpreise in Österreich – wo tankst du günstiger?
 description: Aktuelle Preise für Super und Diesel in Österreich im Vergleich zu Deutschland und den Nachbarländern, Ersparnis pro Tankfüllung und Infos zur Vignette.
 published: 2026-10-01

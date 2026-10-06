@@ -3,7 +3,7 @@ id: czechia
 photo: czechia
 order: 2
 slug: tanken-in-tschechien
-title: Tanken in Tschechien – Spritpreise im Vergleich | Tankful
+title: Tanken in Tschechien – Spritpreise {{month}} im Vergleich
 heading: Tanken in Tschechien – ist es günstiger als in Deutschland?
 description: Aktuelle Preise für Super, Diesel und Autogas in Tschechien im Vergleich zu Deutschland, Ersparnis pro Tankfüllung, Spritnamen und Vignette.
 published: 2026-10-01

@@ -2,7 +2,7 @@
 id: germany
 order: 7
 slug: tankowanie-w-niemczech
-title: Ceny paliw w Niemczech i tankowanie – czy warto? | Tankful
+title: Ceny paliw w Niemczech ({{month}}) – warto tankować?
 heading: Ceny paliw w Niemczech – gdzie i kiedy tankować, jadąc przez Niemcy
 description: Aktualne ceny benzyny, diesla i LPG w Niemczech na tle Polski, koszt paliwa do Berlina i Monachium oraz kiedy w ciągu dnia tankować najtaniej.
 published: 2026-10-01

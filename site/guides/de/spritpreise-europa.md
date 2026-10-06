@@ -3,7 +3,7 @@ id: europe-prices
 photo: europe-prices
 order: 4
 slug: spritpreise-europa
-title: Spritpreise Europa – Benzin, Diesel und LPG im Vergleich
+title: Spritpreise Europa {{month}} – Benzin, Diesel und LPG
 heading: Spritpreise in Europa – aktuelle Tabelle
 description: Aktuelle Durchschnittspreise für Benzin, Diesel und LPG in allen EU-Ländern und Großbritannien in Euro – wo Sprit in Europa am günstigsten ist.
 published: 2026-10-01

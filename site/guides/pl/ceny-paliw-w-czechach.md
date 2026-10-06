@@ -2,7 +2,7 @@
 id: czechia
 order: 8
 slug: ceny-paliw-w-czechach
-title: Ceny paliw w Czechach – tankować w Polsce czy w Czechach?
+title: Ceny paliw w Czechach ({{month}}) – Polska czy Czechy?
 heading: Ceny paliw w Czechach – tankować w Polsce czy w Czechach
 description: Aktualne ceny benzyny, diesla i LPG w Czechach na tle Polski, koszt paliwa do Pragi z Wrocławia, Krakowa i Warszawy oraz winieta na czeskie autostrady.
 published: 2026-10-01

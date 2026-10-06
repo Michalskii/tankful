@@ -3,7 +3,7 @@ id: poland-prices
 photo: price-history
 order: 0.4
 slug: fuel-prices-poland
-title: Fuel prices in Poland today – petrol, diesel and LPG
+title: Fuel prices in Poland today ({{month}}) – petrol, diesel
 heading: Average fuel prices in Poland – petrol 95, diesel and LPG
 description: The current average price of petrol 95, diesel and LPG in Poland, the weekly and yearly change, the cost of a full tank and 100 km, and a price chart.
 published: 2026-10-02

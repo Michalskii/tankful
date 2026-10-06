@@ -2,7 +2,7 @@
 id: border
 order: 2
 slug: refuel-before-border
-title: Where to fill up near the Polish border – prices compared
+title: Filling up near the Polish border – prices ({{month}})
 heading: Where to fill up near the Polish border – Poland, Germany, Czechia, Slovakia, Lithuania
 description: Petrol, diesel and LPG prices in Poland compared with Germany, Czechia, Slovakia and Lithuania – which side of the border to fill up on and what you save.
 published: 2026-09-30

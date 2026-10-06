@@ -806,14 +806,19 @@ function parse(file) {
   return { ...meta, photo: meta.photo || meta.id, order: Number(meta.order), body: m[2] };
 }
 
-function loadGuides() {
+function monthLabel(lang, date = new Date()) {
+  return new Intl.DateTimeFormat(INTL[lang], { month: "long", year: "numeric", timeZone: "Europe/Warsaw" }).format(date);
+}
+
+function loadGuides(date = new Date()) {
   const guides = {};
   for (const lang of Object.keys(DIRS)) {
     const dir = path.join(GUIDES, lang);
     guides[lang] = fs
       .readdirSync(dir)
       .filter((f) => f.endsWith(".md"))
-      .map((f) => ({ ...parse(path.join(dir, f)), lang }))
+      .map((f) => parse(path.join(dir, f)))
+      .map((g) => ({ ...g, title: g.title.replace("{{month}}", monthLabel(lang, date)), lang }))
       .sort((a, b) => a.order - b.order);
   }
   const ids = (lang) => guides[lang].map((g) => g.id).sort().join(",");
@@ -1146,4 +1151,4 @@ ${guideLinks}
   return groups;
 }
 
-module.exports = { buildGuides, loadGuides, context, markdown, pricesDate, FUELS };
+module.exports = { buildGuides, loadGuides, monthLabel, context, markdown, pricesDate, FUELS };

@@ -2,7 +2,7 @@
 id: europe-prices
 order: 1
 slug: ceny-paliw-w-europie
-title: Ceny paliw w Europie – tabela benzyny, diesla i LPG
+title: Ceny paliw w Europie ({{month}}) – benzyna, diesel, LPG
 heading: Ceny paliw w Europie – aktualna tabela
 description: Aktualne średnie ceny benzyny 95, diesla i LPG we wszystkich krajach UE i w Wielkiej Brytanii, w euro i złotych – gdzie paliwo jest najtańsze.
 published: 2026-09-30

@@ -3,7 +3,7 @@ id: italy-fuel
 photo: seaside
 order: 13
 slug: spritpreise-italien
-title: Spritpreise Italien – Benzinpreise und wo du tankst
+title: Spritpreise Italien {{month}} – wo du günstig tankst
 heading: Spritpreise in Italien – was Benzin kostet und wo du günstiger tankst
 description: Aktuelle Benzin- und Dieselpreise in Italien im Vergleich zu Deutschland und Österreich, Tanktipps für die Brenner-Route und Spritkosten für den Urlaub.
 published: 2026-10-02
