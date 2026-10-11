@@ -128,7 +128,7 @@ export default function App() {
 
   useEffect(() => {
     document.documentElement.lang = MAPKA_LOCALE
-    document.title = routeNames ? T("routeTitle", ...routeNames) : T("title")
+    document.title = routeNames ? T("routeTitle", ...routeNames, mapkaFormatNumber(CURRENT_ROUTE!.km, 0)) : T("title")
     const description = routeNames ? T("routeDescription", ...routeNames, mapkaFormatNumber(CURRENT_ROUTE!.km, 0)) : T("description")
     document.querySelector('meta[name="description"]')?.setAttribute("content", description)
     fetch("prices.json", { cache: "no-cache" })

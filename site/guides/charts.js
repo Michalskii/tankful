@@ -6,7 +6,7 @@
   const MUTED = DARK ? "#9ca3af" : "#6b7280";
   const GRID = DARK ? "rgba(255, 255, 255, 0.08)" : "rgba(27, 36, 48, 0.08)";
   const TOOLTIP = "#1b2430";
-  const RANGES = { "1y": 52, "3y": 156, "5y": 260, all: Infinity };
+  const RANGES = { "1y": 52, "3y": 156, "5y": 260, "10y": 521, all: Infinity };
   const cache = {};
 
   const load = (cc) => (cache[cc] ||= fetch(`data/history/${cc}.json`).then((r) => {

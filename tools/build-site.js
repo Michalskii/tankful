@@ -95,7 +95,7 @@ function pageStrings(page, strings) {
   const names = [CITIES[page.route.from][page.lang], CITIES[page.route.to][page.lang]];
   const km = new Intl.NumberFormat(page.lang, { maximumFractionDigits: 0 }).format(page.route.km);
   return {
-    title: fill(s.routeTitle, ...names),
+    title: fill(s.routeTitle, ...names, km),
     description: fill(s.routeDescription, ...names, km),
     heading: fill(s.routeHeading, ...names),
   };

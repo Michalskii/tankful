@@ -19,11 +19,36 @@ Kraje od najtańszej do najdroższej benzyny. Ceny w euro za litr, w ostatniej k
 
 > Tabela odświeża się kilka razy dziennie, razem z kalkulatorem Tankful. Ceny w krajach UE pochodzą z cotygodniowego biuletynu naftowego Komisji Europejskiej (ostatni: {{date}}), w Wielkiej Brytanii z danych rządu brytyjskiego.
 
+## Ceny paliw u sąsiadów Polski
+
+{{border PL DE CZ SK LT}}
+
+Szczegóły dla poszczególnych krajów znajdziesz w poradnikach: [Niemcy](poradniki/tankowanie-w-niemczech), [Czechy](poradniki/ceny-paliw-w-czechach), [Słowacja](poradniki/ceny-paliw-na-slowacji) i [Litwa](poradniki/ceny-paliw-na-litwie).
+
+## Gdzie najtańsze LPG w Europie
+
+Najtańsze LPG w Unii jest dziś **{{cheapest lpg}}**, najdroższe **{{priciest lpg}}**. Polska jest {{rank PL lpg}}. na {{count lpg}} krajów, w których biuletyn podaje cenę LPG. W części krajów, np. w Danii czy Finlandii, stacji z LPG jest bardzo mało – jeśli jeździsz na gazie, tankuj przed wjazdem.
+
+## Ceny paliw w krajach wakacyjnych
+
+- **Chorwacja i Słowenia** – w drodze nad Adriatyk porównaj Austrię, Słowenię i Chorwację: [ceny paliw w Słowenii](poradniki/ceny-paliw-w-slowenii), [samochodem do Chorwacji](poradniki/samochodem-do-chorwacji).
+- **Węgry** – [ceny paliw na Węgrzech i dojazd do Budapesztu](poradniki/samochodem-na-wegry).
+- **Włochy i Austria** – [samochodem do Włoch](poradniki/samochodem-do-wloch), [samochodem do Austrii](poradniki/samochodem-do-austrii).
+- **Dania** – [ceny paliw w Danii](poradniki/ceny-paliw-w-danii).
+
 ## Jak zmieniały się ceny
 
 {{chart PL,DE,CZ,EU pb 3y}}
 
 Rok temu litr benzyny kosztował w Polsce {{ago PL pb 52}}, a średnio w UE {{ago EU pb 52}}. Pełną historię od {{histstart}} roku znajdziesz w poradniku [historia cen paliw](poradniki/historia-cen-paliw).
+
+## Archiwalne ceny paliw w Europie
+
+Średnia cena w Unii Europejskiej w poszczególnych latach, przeliczona na złote po kursie z danego tygodnia:
+
+{{yearly EU pb,on}}
+
+Najdroższym pełnym rokiem dla benzyny w UE był {{yearmax EU pb}}, a najtańszym {{yearmin EU pb}}.
 
 ## Skąd takie różnice między krajami
 
@@ -36,6 +61,17 @@ Cena na stacji to w ponad połowie podatki: akcyza, VAT i w części krajów dod
 - **Na dłuższej trasie licz cenę dla każdego kraju osobno.** Przejazd Warszawa – Paryż wypada w większości w Niemczech, więc średnia polska cena mocno zaniża koszt.
 
 Szczegółowe porównanie z sąsiadami znajdziesz w poradniku [Gdzie zatankować przed granicą](poradniki/tankowanie-przed-granica).
+
+## Najczęstsze pytania
+
+### Gdzie w Europie jest najtańsze paliwo?
+Benzyna jest dziś najtańsza **{{cheapest pb}}**, a diesel **{{cheapest on}}**. Pełna kolejność jest w tabeli na górze strony.
+
+### Gdzie w Europie paliwo jest najdroższe?
+Najdrożej za benzynę płaci się **{{priciest pb}}**, za diesel **{{priciest on}}** – zwykle przez wysokie podatki.
+
+### Czy w Polsce paliwo jest tanie na tle Europy?
+Polska jest {{rank PL pb}}. na {{count pb}} krajów pod względem ceny benzyny i {{rank PL on}}. pod względem diesla, licząc od najtańszego.
 
 ## Jak czytać te ceny
 

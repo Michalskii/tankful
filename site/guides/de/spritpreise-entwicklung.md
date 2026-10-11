@@ -3,18 +3,34 @@ id: price-history
 photo: price-history
 order: 19
 slug: spritpreise-entwicklung
-title: Spritpreise Entwicklung in Deutschland – Diagramm seit 2005
+title: Spritpreise Entwicklung – Diagramm seit 2005 und Preise pro Jahr
 heading: Spritpreise in Deutschland – wie sich Super, Diesel und Autogas entwickelt haben
-description: Diagramm der Preise für Super, Diesel und Autogas in Deutschland seit 2005: was Sprit vor einem und fünf Jahren kostete und wann er am teuersten war.
+description: Spritpreise in Deutschland seit 2005: Diagramm für 5, 10 und 20 Jahre, Durchschnittspreis für Super, Diesel und Autogas in jedem Jahr und die teuersten Jahre.
 published: 2026-10-02
 ---
-In der letzten Woche ({{histdate}}) kostete ein Liter Super in Deutschland im Schnitt **{{now DE pb}}**, Diesel **{{now DE on}}** und Autogas **{{now DE lpg}}**. Vor einem Jahr lag Super bei {{ago DE pb 52}}, das ist eine Veränderung von **{{change DE pb 52}}**. Vor fünf Jahren waren es {{ago DE pb 260}}.
+In der letzten Woche ({{histdate}}) kostete ein Liter Super in Deutschland im Schnitt **{{now DE pb}}**, Diesel **{{now DE on}}** und Autogas **{{now DE lpg}}**. Vor einem Jahr lag Super bei {{ago DE pb 52}}, das ist eine Veränderung von **{{change DE pb 52}}**. Vor fünf Jahren waren es {{ago DE pb 260}}, im Jahr {{histstart}} im Schnitt {{yearavg DE pb 2005}}.
 
 ## Spritpreise in Deutschland – Diagramm
 
-{{chart DE pb,on,lpg 5y}}
+{{chart DE pb,on,lpg all}}
 
-Im Diagramm kannst du den Zeitraum ändern – vom letzten Jahr bis zur ganzen Reihe seit {{histstart}}. Fährst du mit der Maus über die Linie, siehst du den Preis einer bestimmten Woche.
+Im Diagramm kannst du den Zeitraum ändern – **1, 3, 5 oder 10 Jahre** oder die ganze Reihe seit {{histstart}}. Fährst du mit der Maus über die Linie, siehst du den Preis einer bestimmten Woche.
+
+## Spritpreise pro Jahr
+
+Durchschnittlicher Literpreis in jedem Jahr, berechnet aus allen Wochenwerten:
+
+{{yearly DE}}
+
+## Die teuersten und günstigsten Jahre
+
+Das teuerste volle Jahr war für Super **{{yearmax DE pb}}** (im Schnitt {{yearmaxprice DE pb}}) und für Diesel **{{yearmax DE on}}** ({{yearmaxprice DE on}}). Am günstigsten war Super {{yearmin DE pb}}, Diesel {{yearmin DE on}}. Der Durchschnitt 2025 lag bei {{yearavg DE pb 2025}} – {{yearchange DE pb 2005 2025}} gegenüber 2005.
+
+- **2008** – Brent-Öl stieg im Sommer über 140 Dollar je Barrel, danach fielen die Preise in der Finanzkrise stark.
+- **2011–2013** – Öl über 100 Dollar je Barrel hielt Sprit drei Jahre lang teuer.
+- **2015–2016** – der Einbruch des Ölpreises brachte die Preise zurück auf das Niveau von 2005–2010.
+- **2021** – seit Januar gilt der CO₂-Preis auf Kraftstoffe, der seitdem schrittweise angehoben wird.
+- **2022** – der Krieg in der Ukraine trieb die Preise auf Rekordhöhe; der Tankrabatt (Juni bis August) dämpfte sie nur kurz. Diesel war monatelang teurer als Super.
 
 ## Die wichtigsten Zahlen
 

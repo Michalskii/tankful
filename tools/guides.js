@@ -14,8 +14,8 @@ const REDUCED_FUEL_VAT = vm.runInNewContext(BACKGROUND.match(/const REDUCED_FUEL
 const DIRS = { pl: "poradniki", en: "guides", de: "ratgeber" };
 const HOME = { pl: "./", en: "en", de: "./" };
 const GROUP_IDS = {
-  prices: ["fuel-vat", "poland-prices", "weekly", "europe-prices", "price-history", "italy-fuel", "france-fuel", "nl-fuel", "dk-fuel"],
-  border: ["border", "germany", "czechia", "poland-fuel", "slubice-fuel", "swinoujscie-fuel", "zgorzelec-fuel", "kostrzyn-fuel", "cheb-fuel", "lux-fuel"],
+  prices: ["fuel-vat", "poland-prices", "weekly", "europe-prices", "price-history", "italy-fuel", "france-fuel", "nl-fuel", "dk-fuel", "slovenia-fuel"],
+  border: ["border", "germany", "czechia", "poland-fuel", "slubice-fuel", "swinoujscie-fuel", "zgorzelec-fuel", "kostrzyn-fuel", "cheb-fuel", "lux-fuel", "slovakia-fuel", "lithuania-fuel"],
   tools: ["consumption", "lpg-calc", "mileage", "per-100-km", "how-to-calculate", "commute", "split"],
   trips: ["croatia", "seaside", "austria", "hungary", "west", "italy", "alps"],
   tips: ["lpg", "fuel-saving", "ev-trip"],
@@ -68,12 +68,14 @@ const TEXT = {
   pl: {
     home: "Kalkulator",
     guides: "Poradniki",
-    chartRanges: { "1y": "1 rok", "3y": "3 lata", "5y": "5 lat", all: "Od 2005" },
+    chartRanges: { "1y": "1 rok", "3y": "3 lata", "5y": "5 lat", "10y": "10 lat", all: "Od 2005" },
     chartRangeLabel: "Zakres wykresu",
     chartNow: "Ostatni tydzień",
     chartYear: "Rok temu",
     chartFive: "5 lat temu",
     chartSeries: "Seria",
+    yearCol: "Rok",
+    yearSoFar: (date) => `* rok niepełny – średnia do ${date}.`,
     weekRank: "Miejsce",
     weekPrice: (date) => `Cena (${date})`,
     weekChange: "Zmiana w tydzień",
@@ -163,12 +165,14 @@ const TEXT = {
   en: {
     home: "Calculator",
     guides: "Guides",
-    chartRanges: { "1y": "1 year", "3y": "3 years", "5y": "5 years", all: "Since 2005" },
+    chartRanges: { "1y": "1 year", "3y": "3 years", "5y": "5 years", "10y": "10 years", all: "Since 2005" },
     chartRangeLabel: "Chart range",
     chartNow: "Latest week",
     chartYear: "A year ago",
     chartFive: "5 years ago",
     chartSeries: "Series",
+    yearCol: "Year",
+    yearSoFar: (date) => `* year to date – average up to ${date}.`,
     weekRank: "Rank",
     weekPrice: (date) => `Price (${date})`,
     weekChange: "Change in a week",
@@ -257,12 +261,14 @@ const TEXT = {
   de: {
     home: "Rechner",
     guides: "Ratgeber",
-    chartRanges: { "1y": "1 Jahr", "3y": "3 Jahre", "5y": "5 Jahre", all: "Seit 2005" },
+    chartRanges: { "1y": "1 Jahr", "3y": "3 Jahre", "5y": "5 Jahre", "10y": "10 Jahre", all: "Seit 2005" },
     chartRangeLabel: "Zeitraum",
     chartNow: "Letzte Woche",
     chartYear: "Vor einem Jahr",
     chartFive: "Vor 5 Jahren",
     chartSeries: "Reihe",
+    yearCol: "Jahr",
+    yearSoFar: (date) => `* laufendes Jahr – Durchschnitt bis ${date}.`,
     weekRank: "Platz",
     weekPrice: (date) => `Preis (${date})`,
     weekChange: "Veränderung zur Vorwoche",
@@ -755,6 +761,46 @@ ${table([t.chartSeries, t.chartNow, t.chartYear, t.chartFive], rows, [1, 2, 3])}
 </figure>`;
   };
 
+  const yearly = (cc, fuel) => {
+    const values = histSeries(cc, fuel);
+    const sums = {};
+    values.forEach((v, i) => {
+      if (v == null) return;
+      const y = history.dates[i].slice(0, 4);
+      const x = (sums[y] ??= { sum: 0, n: 0 });
+      x.sum += v;
+      x.n++;
+    });
+    return Object.fromEntries(Object.entries(sums).map(([y, x]) => [y, x.sum / x.n]));
+  };
+  const lastYear = () => history.dates[lastIndex(history.prices.PL.pb)].slice(0, 4);
+  const fullYears = (cc, fuel) => Object.entries(yearly(cc, fuel)).filter(([y]) => y !== lastYear());
+
+  Object.assign(inline, {
+    yearavg: (cc, fuel, year) => histPrice(yearly(cc, fuel)[year]),
+    yearmax: (cc, fuel) => fullYears(cc, fuel).sort((a, b) => b[1] - a[1])[0][0],
+    yearmin: (cc, fuel) => fullYears(cc, fuel).sort((a, b) => a[1] - b[1])[0][0],
+    yearmaxprice: (cc, fuel) => histPrice(fullYears(cc, fuel).sort((a, b) => b[1] - a[1])[0][1]),
+    yearchange: (cc, fuel, from, to) => {
+      const y = yearly(cc, fuel);
+      const diff = y[to] - y[from];
+      const sign = diff > 0 ? "+" : diff < 0 ? "−" : "";
+      return `${sign}${num(Math.abs((diff / y[from]) * 100), 0)}%`;
+    },
+  });
+
+  blocks.yearly = (cc, fuels = "pb,on,lpg") => {
+    const fs_ = fuels.split(",");
+    const columns = fs_.map((fuel) => yearly(cc, fuel));
+    const current = lastYear();
+    const rows = Object.keys(columns[0])
+      .sort((a, b) => b.localeCompare(a))
+      .map((y) => [y === current ? `${y}*` : y, ...columns.map((c) => histPrice(c[y]))]);
+    const note = `
+<p class="table-note">${esc(t.yearSoFar(date(history.dates[lastIndex(history.prices.PL.pb)])))}</p>`;
+    return `${table([t.yearCol, ...fs_.map((fuel) => cap(fuelName(fuel)))], rows, fs_.map((_, i) => i + 1))}${note}`;
+  };
+
   const routeCost = (slug, fuel, consumption) => {
     const r = routeBySlug(slug);
     const price = routePricePln(r, fuel);
@@ -874,6 +920,9 @@ const ICONS = {
   mileage: '<path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><rect width="20" height="14" x="2" y="6" rx="2"/>',
   croatia: '<circle cx="12" cy="8" r="3.5"/><path d="M12 1.5v1M5.6 4.1l.7.7M18.4 4.1l-.7.7M3 9h1M20 9h1M2 16c2 0 3-1.5 5-1.5s3 1.5 5 1.5 3-1.5 5-1.5 3 1.5 5 1.5M2 21c2 0 3-1.5 5-1.5s3 1.5 5 1.5 3-1.5 5-1.5 3 1.5 5 1.5"/>',
 };
+ICONS["slovakia-fuel"] = ICONS.hungary;
+ICONS["slovenia-fuel"] = ICONS.austria;
+ICONS["lithuania-fuel"] = ICONS.border;
 const icon = (id, cls = "icon") => `<svg class="${cls}" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">${ICONS[id] || ICONS["per-100-km"]}</svg>`;
 const GAUGE = `<svg class="hero-gauge" viewBox="0 0 128 128" aria-hidden="true"><path d="M31.1 91 A38 38 0 1 1 96.9 91" fill="none" stroke="#F2A516" stroke-width="9" stroke-linecap="round"/><path d="M31.1 91 A38 38 0 1 1 96.9 91" fill="none" stroke="#FAF7F0" stroke-width="1" stroke-dasharray="1 7.95" transform="translate(64 64) scale(1.32) translate(-64 -64)"/><line x1="64" y1="74" x2="87" y2="51" stroke="#FAF7F0" stroke-width="6" stroke-linecap="round"/><circle cx="64" cy="74" r="7" fill="#FAF7F0"/></svg>`;
 
@@ -1234,4 +1283,4 @@ function llmsTxt({ siteId, siteUrls, langSite, data, date = new Date() }) {
   ].join("\n");
 }
 
-module.exports = { buildGuides, loadGuides, monthLabel, llmsTxt, context, markdown, pricesDate, FUELS };
+module.exports = { buildGuides, loadGuides, monthLabel, llmsTxt, context, prices, markdown, pricesDate, FUELS };

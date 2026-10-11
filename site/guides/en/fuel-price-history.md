@@ -2,18 +2,40 @@
 id: price-history
 order: 12
 slug: fuel-price-history
-title: Fuel price history in Europe – chart since 2005 | Tankful
+title: Fuel price history – petrol and diesel prices by year since 2005
 heading: Fuel price history – how petrol, diesel and LPG prices have changed
-description: Weekly chart of petrol, diesel and LPG prices in Poland, Germany, Czechia and the EU since 2005: what fuel cost a year and five years ago.
+description: Petrol, diesel and LPG price history in the EU, Poland, Germany and Czechia since 2005: weekly chart, average price in every year and the most expensive years.
 published: 2026-10-01
 ---
-In the latest week ({{histdate}}) a litre of 95 petrol cost **{{now EU pb}}** on average across the EU, diesel **{{now EU on}}** and LPG **{{now EU lpg}}**. A year ago petrol was {{ago EU pb 52}} – a change of **{{change EU pb 52}}**. Five years ago it was {{ago EU pb 260}}.
+In the latest week ({{histdate}}) a litre of 95 petrol cost **{{now EU pb}}** on average across the EU, diesel **{{now EU on}}** and LPG **{{now EU lpg}}**. A year ago petrol was {{ago EU pb 52}} – a change of **{{change EU pb 52}}**. Five years ago it was {{ago EU pb 260}}, and in {{histstart}} petrol averaged {{yearavg EU pb 2005}}.
 
 ## EU average fuel prices – chart
 
-{{chart EU pb,on,lpg 5y}}
+{{chart EU pb,on,lpg all}}
 
-Switch the range on the chart – from the last year to the full history since {{histstart}}. Hover over a line to see the price for a given week.
+The chart covers more than 20 years of weekly prices. Switch the range – **1, 3, 5 or 10 years** or the full history since {{histstart}}. Hover over a line to see the price for a given week.
+
+## Fuel prices by year (EU average)
+
+The average price of a litre in each year, from every weekly reading:
+
+{{yearly EU}}
+
+## Petrol prices in 2005 and today
+
+In {{histstart}} a litre of 95 petrol cost {{yearavg EU pb 2005}} on average across the EU and diesel {{yearavg EU on 2005}}. The 2025 average was {{yearavg EU pb 2025}}, {{yearchange EU pb 2005 2025}} compared with 2005. The most expensive full year so far was **{{yearmax EU pb}}** for petrol ({{yearmaxprice EU pb}}) and **{{yearmax EU on}}** for diesel ({{yearmaxprice EU on}}); the cheapest was {{yearmin EU pb}} for petrol.
+
+- **2008** – Brent crude passed 140 dollars a barrel in the summer before falling sharply in the financial crisis.
+- **2011–2013** – oil above 100 dollars a barrel kept fuel expensive for three years in a row.
+- **2015–2016** – the oil price collapse brought pump prices back to 2005–2010 levels.
+- **2020** – the pandemic cut demand and prices for a few months.
+- **2022** – the war in Ukraine pushed prices to records; diesel was dearer than petrol for months.
+
+## Fuel prices in Poland by year
+
+Average prices in Poland, converted to euro at each week's exchange rate:
+
+{{yearly PL}}
 
 ## Key figures
 
