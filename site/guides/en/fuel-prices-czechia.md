@@ -2,10 +2,11 @@
 id: czechia
 order: 8
 slug: fuel-prices-czechia
-title: Fuel prices in Czechia ({{month}}) – fill up in PL or CZ?
-heading: Fuel prices in Czechia – fill up in Poland or in Czechia
+title: Fuel prices in Czechia ({{month}}) – petrol, diesel, LPG
+heading: Fuel prices in Czechia today – cheaper in Czechia or in Poland?
 description: Current petrol, diesel and LPG prices in Czechia compared with Poland, the fuel cost of driving to Prague from Polish cities, and the Czech vignette.
 published: 2026-10-01
+related: border,austria-fuel,slovakia-fuel,germany
 ---
 A litre of petrol (95) currently costs **{{price CZ pb}}** on average in Czechia, diesel **{{price CZ on}}** and LPG **{{price CZ lpg}}**. In Poland it's {{price PL pb}}, {{price PL on}} and {{price PL lpg}}. {{verdict PL CZ pb}} {{verdict PL CZ on}}
 

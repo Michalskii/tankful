@@ -6,6 +6,7 @@ title: Fuel price history – petrol and diesel prices by year since 2005
 heading: Fuel price history – how petrol, diesel and LPG prices have changed
 description: Petrol, diesel and LPG price history in the EU, Poland, Germany and Czechia since 2005: weekly chart, average price in every year and the most expensive years.
 published: 2026-10-01
+related: poland-prices,europe-prices,germany,czechia
 ---
 In the latest week ({{histdate}}) a litre of 95 petrol cost **{{now EU pb}}** on average across the EU, diesel **{{now EU on}}** and LPG **{{now EU lpg}}**. A year ago petrol was {{ago EU pb 52}} – a change of **{{change EU pb 52}}**. Five years ago it was {{ago EU pb 260}}, and in {{histstart}} petrol averaged {{yearavg EU pb 2005}}.
 

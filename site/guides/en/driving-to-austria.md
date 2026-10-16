@@ -2,12 +2,13 @@
 id: austria
 order: 13
 slug: driving-to-austria
-title: Driving from Poland to Vienna – fuel cost and vignette
+title: Driving from Poland to Austria and Vienna – fuel cost
 heading: Driving from Poland to Austria and Vienna – fuel cost, where to fill up and the vignette
 description: Fuel cost of driving to Vienna from Kraków, Katowice and Warsaw, whether to fill up in Poland, Czechia or Austria, and how to buy the Austrian vignette.
 published: 2026-10-01
+related: austria-fuel,czechia,croatia,alps
 ---
-Fuel for the drive from Kraków to Vienna ({{km krakow-wieden}} km) currently costs about **{{trip krakow-wieden pb 7}}** in a petrol car and **{{trip krakow-wieden on 6}}** in a diesel, one way. From Katowice ({{km katowice-wieden}} km) it's **{{trip katowice-wieden pb 7}}**, and from Warsaw ({{km warszawa-wieden}} km) **{{trip warszawa-wieden pb 7}}**. A litre of petrol in Austria averages {{price AT pb}}.
+Fuel for the drive from Kraków to Vienna ({{km krakow-wieden}} km) currently costs about **{{trip krakow-wieden pb 7}}** in a petrol car and **{{trip krakow-wieden on 6}}** in a diesel, one way. From Katowice ({{km katowice-wieden}} km) it's **{{trip katowice-wieden pb 7}}**, and from Warsaw ({{km warszawa-wieden}} km) **{{trip warszawa-wieden pb 7}}**. A litre of petrol in Austria averages {{price AT pb}} – petrol, diesel and LPG prices are compared in [fuel prices in Austria](guides/fuel-prices-austria).
 
 ## Fuel cost to Vienna
 

@@ -6,6 +6,7 @@ title: Fuel prices in Europe ({{month}}) – petrol, diesel, LPG
 heading: Fuel prices in Europe – current table
 description: Current average prices of petrol, diesel and LPG in every EU country and the UK, in euros. Where fuel is cheapest and where it is most expensive.
 published: 2026-09-30
+related: border,germany,austria-fuel,italy-fuel
 ---
 The cheapest petrol in the European Union is currently **{{cheapest pb}}** and the most expensive **{{priciest pb}}**. Diesel is cheapest **{{cheapest on}}** and most expensive **{{priciest on}}**.
 
@@ -35,7 +36,7 @@ More than half of the pump price is tax: excise duty, VAT and, in some countries
 - **Avoid motorway service stations**, especially in Germany, France and Italy. The prices here are national averages – motorway stations are often noticeably dearer.
 - **On long trips, cost each country separately.** Most of a Warsaw – Paris drive runs through Germany, so a Polish average would badly understate the cost.
 
-For a detailed comparison across Poland's borders, see [Where to fill up near the Polish border](guides/refuel-before-border).
+For a detailed comparison across Poland's borders, see [Where to fill up near the Polish border](guides/refuel-before-border). Country guides: [Germany](guides/fuel-prices-germany), [Czechia](guides/fuel-prices-czechia), [Austria](guides/fuel-prices-austria), [Italy](guides/fuel-prices-italy), [Slovenia](guides/fuel-prices-slovenia), [Slovakia](guides/fuel-prices-slovakia), [Lithuania](guides/fuel-prices-lithuania) and [Denmark](guides/fuel-prices-denmark).
 
 ## How to read these prices
 

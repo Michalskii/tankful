@@ -17,6 +17,12 @@ Koszt w jedną stronę do Gdańska, przy typowym spalaniu: 7 l benzyny, 6 l dies
 
 Ceny paliw to średnie krajowe z {{date}} – litr benzyny kosztuje dziś {{price PL pb}}, diesla {{price PL on}}, a LPG {{price PL lpg}}. Do innych miejscowości na wybrzeżu dolicz różnicę w kilometrach – dokładny koszt do konkretnego kurortu poda kalkulator.
 
+## Dojazd do Kołobrzegu i nad zachodnie wybrzeże
+
+Nad zachodnią część wybrzeża jedzie się innymi drogami – z Poznania i Wrocławia przez S5 i S11, z Warszawy najczęściej przez Bydgoszcz albo przez Poznań i Szczecin.
+
+{{trips warszawa-kolobrzeg poznan-kolobrzeg wroclaw-kolobrzeg}}
+
 ## Tam i z powrotem
 
 Jadąc na tydzień nad morze, pokonujesz trasę dwa razy, więc koszt paliwa trzeba podwoić. Z Krakowa autem na benzynę to około **{{roundtrip krakow-gdansk pb 7}}** za całą podróż, z Warszawy **{{roundtrip warszawa-gdansk pb 7}}**. Dolicz też kilkadziesiąt kilometrów na wycieczki na miejscu.

@@ -17,6 +17,12 @@ One-way cost to Gdańsk at typical consumption: 7 l of petrol, 6 l of diesel or 
 
 Fuel prices are Polish national averages from {{date}} – a litre of petrol currently costs {{price PL pb}}, diesel {{price PL on}} and LPG {{price PL lpg}}. For other resorts on the coast, adjust for the difference in distance – the calculator gives the exact cost to any town.
 
+## Kołobrzeg and the western coast
+
+The western part of the coast is reached by different roads – from Poznań and Wrocław via the S5 and S11, from Warsaw usually via Bydgoszcz or via Poznań and Szczecin.
+
+{{trips warszawa-kolobrzeg poznan-kolobrzeg wroclaw-kolobrzeg}}
+
 ## There and back
 
 A week by the sea means driving both ways, so double the fuel cost. From Kraków in a petrol car that's about **{{roundtrip krakow-gdansk pb 7}}** for the whole trip, from Warsaw **{{roundtrip warszawa-gdansk pb 7}}**. Add a few dozen kilometres for day trips while you're there.

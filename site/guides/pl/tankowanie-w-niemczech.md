@@ -2,12 +2,13 @@
 id: germany
 order: 7
 slug: tankowanie-w-niemczech
-title: Ceny paliw w Niemczech ({{month}}) – benzyna i diesel
-heading: Ceny paliw w Niemczech – gdzie i kiedy tankować, jadąc przez Niemcy
-description: Aktualne ceny benzyny, diesla i LPG w Niemczech na tle Polski, koszt paliwa do Berlina i Monachium oraz kiedy w ciągu dnia tankować najtaniej.
+title: Ceny paliw w Niemczech ({{month}}) – benzyna, diesel, LPG
+heading: Ceny paliw w Niemczech dziś – benzyna 95, diesel i LPG, gdzie i kiedy tankować
+description: Ile kosztuje litr benzyny 95, diesla i LPG w Niemczech – aktualne ceny w euro i złotych na tle Polski, koszt paliwa do Berlina i Monachium oraz kiedy tankować najtaniej.
 published: 2026-10-01
+related: border,czechia,austria-fuel,europe-prices
 ---
-Litr benzyny 95 kosztuje dziś w Niemczech średnio **{{price DE pb}}** ({{price DE pb EUR}}), a diesla **{{price DE on}}**. W Polsce to odpowiednio {{price PL pb}} i {{price PL on}}. {{verdict PL DE pb}} Niemcy są {{rank DE pb}}. krajem na {{count pb}} pod względem ceny benzyny, licząc od najtańszego.
+Litr benzyny 95 kosztuje dziś w Niemczech średnio **{{price DE pb}}** ({{price DE pb EUR}}), diesla **{{price DE on}}** ({{price DE on EUR}}), a LPG **{{price DE lpg}}** ({{price DE lpg EUR}}). W Polsce to odpowiednio {{price PL pb}} i {{price PL on}}. {{verdict PL DE pb}} Niemcy są {{rank DE pb}}. krajem na {{count pb}} pod względem ceny benzyny, licząc od najtańszego.
 
 {{savebox PL DE}}
 
@@ -57,10 +58,16 @@ Za przejazd niemieckimi autostradami autem osobowym nie płaci się – nie ma w
 ### Ile kosztuje litr benzyny w Niemczech?
 Średnio {{price DE pb EUR}}, czyli {{price DE pb}}. Litr diesla to {{price DE on EUR}} ({{price DE on}}). To średnie krajowe – przy autostradzie zapłacisz więcej.
 
+### Ile kosztuje diesel w Niemczech?
+Litr diesla kosztuje w Niemczech średnio {{price DE on EUR}}, czyli {{price DE on}}. {{verdict PL DE on}} W Niemczech diesel jest zwykle tańszy od benzyny, bo ma niższy podatek energetyczny.
+
+### Ile kosztuje LPG w Niemczech?
+Litr LPG (Autogas) kosztuje średnio {{price DE lpg EUR}}, czyli {{price DE lpg}}. {{verdict PL DE lpg}} Stacji z gazem jest w Niemczech mniej niż w Polsce – najłatwiej znaleźć je przy Autohofach.
+
 ### Czy w Niemczech zapłacę kartą?
 Tak, kartą płaci się praktycznie na każdej stacji. Złotówek stacje nie przyjmują. Gdy terminal proponuje przeliczenie na złote, lepiej wybrać płatność w euro – przewalutowanie przez bank wychodzi zwykle taniej.
 
 ### Opłaca się jechać do Niemiec po paliwo?
 Zwykle nie – {{verdict PL DE pb}} Wyjątkiem bywają okresy, gdy złoty mocno słabnie albo w Polsce rosną podatki na paliwa. Aktualną różnicę zawsze pokazuje tabela na początku poradnika.
 
-Swoją trasę do Niemiec, z przystankami albo innym celem, policzysz w [kalkulatorze Tankful](./). Porównanie z pozostałymi sąsiadami Polski znajdziesz w poradniku [Gdzie zatankować przed granicą](poradniki/tankowanie-przed-granica).
+Swoją trasę do Niemiec, z przystankami albo innym celem, policzysz w [kalkulatorze Tankful](./). Porównanie z pozostałymi sąsiadami Polski znajdziesz w poradniku [Gdzie zatankować przed granicą](poradniki/tankowanie-przed-granica), a jeśli jedziesz dalej na południe – w poradnikach [ceny paliw w Austrii](poradniki/ceny-paliw-w-austrii) i [ceny paliw w Czechach](poradniki/ceny-paliw-w-czechach).

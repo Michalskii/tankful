@@ -2,10 +2,11 @@
 id: germany
 order: 7
 slug: fuel-prices-germany
-title: Fuel prices in Germany ({{month}}) – where to fill up
-heading: Fuel prices in Germany – where and when to fill up when driving through
+title: Fuel prices in Germany ({{month}}) – petrol, diesel, LPG
+heading: Fuel prices in Germany today – petrol, diesel, LPG and when to fill up
 description: Current petrol, diesel and LPG prices in Germany compared with Poland, the fuel cost of driving to Berlin and Munich, and the cheapest time to fill up.
 published: 2026-10-01
+related: border,czechia,austria-fuel,europe-prices
 ---
 A litre of petrol (95) currently costs **{{price DE pb}}** on average in Germany, and diesel **{{price DE on}}**. In Poland it's {{price PL pb}} and {{price PL on}}. {{verdict PL DE pb}} Germany ranks {{rank DE pb}} of {{count pb}} countries on petrol price, counting from the cheapest.
 

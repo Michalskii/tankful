@@ -6,6 +6,7 @@ title: Historia cen paliw w Polsce – wykres 20 lat i ceny rok po roku
 heading: Historia cen paliw w Polsce – jak zmieniały się ceny benzyny, diesla i LPG
 description: Archiwalne ceny benzyny 95, diesla i LPG w Polsce od 2005 roku: wykres 5, 10 i 20 lat, średnia cena w każdym roku i najdroższe lata. Odświeżane co tydzień.
 published: 2026-10-01
+related: poland-prices,europe-prices,germany,czechia
 ---
 Litr benzyny 95 kosztuje dziś w Polsce średnio **{{now PL pb}}**, diesla **{{now PL on}}**, a LPG **{{now PL lpg}}**. Rok temu benzyna kosztowała {{ago PL pb 52}}, czyli zmiana o **{{change PL pb 52}}**. Pięć lat temu było to {{ago PL pb 260}}, a w {{histstart}} roku średnio {{yearavg PL pb 2005}}.
 

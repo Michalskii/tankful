@@ -6,6 +6,7 @@ title: Ceny paliw w Chorwacji i dojazd samochodem – gdzie tankować
 heading: Samochodem do Chorwacji – koszt paliwa, gdzie tankować i jakie winiety
 description: Ile kosztuje paliwo z Polski do Chorwacji (Kraków i Warszawa – Split), w którym kraju po drodze tankować najtaniej i gdzie potrzebne są winiety.
 published: 2026-09-30
+related: austria-fuel,slovenia-fuel,hungary,italy-fuel
 ---
 Paliwo na przejazd z Krakowa do Splitu ({{km krakow-split}} km) kosztuje dziś około **{{trip krakow-split pb 7}}** autem na benzynę (7 l/100 km) i **{{trip krakow-split on 6}}** dieslem (6 l/100 km), w jedną stronę. Z Warszawy ({{km warszawa-split}} km) to odpowiednio **{{trip warszawa-split pb 7}}** i **{{trip warszawa-split on 6}}**. W cztery osoby benzyna z Krakowa wychodzi {{trip krakow-split pb 7 4}} na osobę.
 
@@ -24,7 +25,7 @@ Ceny to średnie krajowe z {{date}}. Pełne wyliczenie, także dla LPG i elektry
 - **Austria a Słowenia:** {{verdict AT SI pb}}
 - **Słowenia a Chorwacja:** {{verdict SI HR pb}}
 
-Na trasie przez Austrię omijaj stacje przy autostradzie – zjazd do miejscowości obok zwykle daje niższą cenę. W Austrii stacje mogą podnosić ceny tylko raz dziennie, w południe, a obniżać w dowolnej chwili, więc rano bywa najtaniej.
+Na trasie przez Austrię omijaj stacje przy autostradzie – zjazd do miejscowości obok zwykle daje niższą cenę. W Austrii stacje mogą podnosić ceny tylko raz dziennie, w południe, a obniżać w dowolnej chwili, więc rano bywa najtaniej. Szczegóły w poradnikach [ceny paliw w Austrii](poradniki/ceny-paliw-w-austrii) i [ceny paliw w Słowenii](poradniki/ceny-paliw-w-slowenii).
 
 ## Winiety i opłaty drogowe
 

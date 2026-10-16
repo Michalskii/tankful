@@ -7,6 +7,7 @@ title: Samochodem do Włoch – koszt paliwa i gdzie tankować
 heading: Samochodem do Włoch – koszt paliwa, ceny we Włoszech i gdzie tankować po drodze
 description: Ile kosztuje paliwo z Polski do Włoch, jakie są ceny benzyny i diesla we Włoszech, w Austrii i w Czechach oraz gdzie po drodze zatankować najtaniej.
 published: 2026-10-02
+related: italy-fuel,austria-fuel,croatia,alps
 ---
 Z Krakowa czy Wrocławia nad Gardę albo do Wenecji jest około 1100–1300 km, z Warszawy jeszcze więcej. Na 1300 km autem palącym 7 l/100 km benzyna kosztuje dziś około **{{cost PL pb 7 1300}}** po polskich cenach i około **{{cost IT pb 7 1300}}** po włoskich – w jedną stronę. Dieslem przy 6 l/100 km to około {{cost PL on 6 1300}} po cenach z Polski. Jadąc w cztery osoby, benzyna wychodzi około {{cost PL pb 1.75 1300}} na osobę.
 
@@ -16,7 +17,7 @@ Najczęściej jedzie się przez Czechy i Austrię (przełęcz Brenner) albo prze
 
 {{border PL CZ AT IT}}
 
-Ceny to średnie krajowe z {{date}}. Na stacjach przy autostradach bywa wyraźnie drożej niż w tabeli – szczególnie we Włoszech.
+Ceny to średnie krajowe z {{date}}. Na stacjach przy autostradach bywa wyraźnie drożej niż w tabeli – szczególnie we Włoszech. Jak tankować na miejscu taniej, opisujemy w poradniku [ceny paliw we Włoszech](poradniki/ceny-paliw-we-wloszech).
 
 ## Gdzie zatankować po drodze
 

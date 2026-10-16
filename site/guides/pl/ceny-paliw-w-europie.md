@@ -3,9 +3,10 @@ id: europe-prices
 order: 1
 slug: ceny-paliw-w-europie
 title: Ceny paliw w Europie ({{month}}) – benzyna, diesel, LPG
-heading: Ceny paliw w Europie – aktualna tabela
+heading: Średnie ceny paliw w Europie – aktualna tabela benzyny, diesla i LPG
 description: Aktualne średnie ceny benzyny 95, diesla i LPG we wszystkich krajach UE i w Wielkiej Brytanii, w euro i złotych – gdzie paliwo jest najtańsze.
 published: 2026-09-30
+related: border,germany,czechia,austria-fuel
 ---
 Najtańsza benzyna w Unii Europejskiej jest dziś **{{cheapest pb}}**, najdroższa **{{priciest pb}}**. Najtańszy diesel tankujesz **{{cheapest on}}**, najdroższy **{{priciest on}}**. Polska zajmuje {{rank PL pb}}. miejsce na {{count pb}} krajów pod względem ceny benzyny (od najtańszej) i {{rank PL on}}. pod względem ceny diesla.
 
@@ -23,7 +24,7 @@ Kraje od najtańszej do najdroższej benzyny. Ceny w euro za litr, w ostatniej k
 
 {{border PL DE CZ SK LT}}
 
-Szczegóły dla poszczególnych krajów znajdziesz w poradnikach: [Niemcy](poradniki/tankowanie-w-niemczech), [Czechy](poradniki/ceny-paliw-w-czechach), [Słowacja](poradniki/ceny-paliw-na-slowacji) i [Litwa](poradniki/ceny-paliw-na-litwie).
+Szczegóły dla poszczególnych krajów znajdziesz w poradnikach: [ceny paliw w Niemczech](poradniki/tankowanie-w-niemczech), [w Czechach](poradniki/ceny-paliw-w-czechach), [na Słowacji](poradniki/ceny-paliw-na-slowacji) i [na Litwie](poradniki/ceny-paliw-na-litwie).
 
 ## Gdzie najtańsze LPG w Europie
 
@@ -33,7 +34,8 @@ Najtańsze LPG w Unii jest dziś **{{cheapest lpg}}**, najdroższe **{{priciest 
 
 - **Chorwacja i Słowenia** – w drodze nad Adriatyk porównaj Austrię, Słowenię i Chorwację: [ceny paliw w Słowenii](poradniki/ceny-paliw-w-slowenii), [samochodem do Chorwacji](poradniki/samochodem-do-chorwacji).
 - **Węgry** – [ceny paliw na Węgrzech i dojazd do Budapesztu](poradniki/samochodem-na-wegry).
-- **Włochy i Austria** – [samochodem do Włoch](poradniki/samochodem-do-wloch), [samochodem do Austrii](poradniki/samochodem-do-austrii).
+- **Austria** – [ceny paliw w Austrii](poradniki/ceny-paliw-w-austrii), [samochodem do Austrii i Wiednia](poradniki/samochodem-do-austrii).
+- **Włochy** – [ceny paliw we Włoszech](poradniki/ceny-paliw-we-wloszech), [samochodem do Włoch](poradniki/samochodem-do-wloch).
 - **Dania** – [ceny paliw w Danii](poradniki/ceny-paliw-w-danii).
 
 ## Jak zmieniały się ceny

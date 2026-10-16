@@ -14,16 +14,15 @@ const REDUCED_FUEL_VAT = vm.runInNewContext(BACKGROUND.match(/const REDUCED_FUEL
 const DIRS = { pl: "poradniki", en: "guides", de: "ratgeber" };
 const HOME = { pl: "./", en: "en", de: "./" };
 const GROUP_IDS = {
-  prices: ["fuel-vat", "poland-prices", "weekly", "europe-prices", "price-history", "italy-fuel", "france-fuel", "nl-fuel", "dk-fuel", "slovenia-fuel"],
+  prices: ["fuel-vat", "poland-prices", "weekly", "europe-prices", "price-history", "austria-fuel", "italy-fuel", "france-fuel", "nl-fuel", "dk-fuel", "slovenia-fuel"],
   border: ["border", "germany", "czechia", "poland-fuel", "slubice-fuel", "swinoujscie-fuel", "zgorzelec-fuel", "kostrzyn-fuel", "cheb-fuel", "lux-fuel", "slovakia-fuel", "lithuania-fuel"],
   tools: ["consumption", "lpg-calc", "mileage", "per-100-km", "how-to-calculate", "commute", "split"],
-  trips: ["croatia", "seaside", "austria", "hungary", "west", "italy", "alps"],
+  trips: ["croatia", "seaside", "mountains", "austria", "hungary", "west", "italy", "alps"],
   tips: ["lpg", "fuel-saving", "ev-trip"],
 };
-const GROUP_OVERRIDES = { de: { austria: "prices" } };
 const COMPACT_GROUPS = new Set(["prices", "tools"]);
 const groupOf = (g) => {
-  const group = GROUP_OVERRIDES[g.lang]?.[g.id] ?? Object.keys(GROUP_IDS).find((k) => GROUP_IDS[k].includes(g.id));
+  const group = Object.keys(GROUP_IDS).find((k) => GROUP_IDS[k].includes(g.id));
   if (!group) throw new Error(`No group for guide "${g.id}"`);
   return group;
 };
@@ -1094,7 +1093,12 @@ ${items.map((g) => card(g, compact)).join("\n")}
       const other = pair.find((p) => p.lang === (g.lang === "en" ? "pl" : "en"));
       const date = (iso) => new Intl.DateTimeFormat(INTL[g.lang], { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }).format(new Date(iso));
       const others = guides[g.lang].filter((x) => x.id !== id);
-      const related = [...others.filter((x) => groupOf(x) === groupOf(g)), ...others.filter((x) => groupOf(x) !== groupOf(g))].slice(0, 4);
+      const picked = (g.related || "").split(",").map((r) => r.trim()).filter(Boolean).map((r) => {
+        const x = others.find((o) => o.id === r);
+        if (!x) throw new Error(`${g.lang}/${g.slug}: unknown related guide "${r}"`);
+        return x;
+      });
+      const related = [...new Set([...picked, ...others.filter((x) => groupOf(x) === groupOf(g)), ...others.filter((x) => groupOf(x) !== groupOf(g))])].slice(0, Math.max(4, picked.length));
       const more = related
         .map((x) => `          <li><a href="${href(g.lang, x.slug)}">${icon(x.id, "tile")}<span>${esc(x.heading)}</span></a></li>`)
         .join("\n");

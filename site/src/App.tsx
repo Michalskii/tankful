@@ -6,7 +6,7 @@ import { AboutDialog, HowItWorks } from "@/components/AboutDialog"
 import { InstallCard } from "@/components/InstallCard"
 import { StopList } from "@/components/StopList"
 import { ThemeMenu } from "@/components/ThemeMenu"
-import { PopularRoutes, RouteCosts, RouteDetails } from "@/components/RoutePages"
+import { CountryPrices, PopularRoutes, RouteCosts, RouteDetails } from "@/components/RoutePages"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -594,6 +594,8 @@ export default function App() {
                 ))}
               </div>
             </section>
+
+            <CountryPrices />
 
             <PopularRoutes />
 

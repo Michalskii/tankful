@@ -259,6 +259,68 @@
       "lat": 45.4408,
       "lng": 12.3155,
       "cc": "it"
+    },
+    "kolobrzeg": {
+      "pl": "Kołobrzeg",
+      "en": "Kołobrzeg",
+      "de": "Kolberg",
+      "lat": 54.1757,
+      "lng": 15.5832,
+      "cc": "pl",
+      "region": "ZP"
+    },
+    "olsztyn": {
+      "pl": "Olsztyn",
+      "en": "Olsztyn",
+      "de": "Allenstein",
+      "lat": 53.7784,
+      "lng": 20.4801,
+      "cc": "pl",
+      "region": "WN"
+    },
+    "torun": {
+      "pl": "Toruń",
+      "en": "Toruń",
+      "de": "Thorn",
+      "lat": 53.0138,
+      "lng": 18.5984,
+      "cc": "pl",
+      "region": "KP"
+    },
+    "bydgoszcz": {
+      "pl": "Bydgoszcz",
+      "en": "Bydgoszcz",
+      "de": "Bromberg",
+      "lat": 53.1235,
+      "lng": 18.0084,
+      "cc": "pl",
+      "region": "KP"
+    },
+    "kielce": {
+      "pl": "Kielce",
+      "en": "Kielce",
+      "de": "Kielce",
+      "lat": 50.8661,
+      "lng": 20.6286,
+      "cc": "pl",
+      "region": "SK"
+    },
+    "karpacz": {
+      "pl": "Karpacz",
+      "en": "Karpacz",
+      "de": "Krummhübel",
+      "lat": 50.7787,
+      "lng": 15.7558,
+      "cc": "pl",
+      "region": "DS"
+    },
+    "bratyslawa": {
+      "pl": "Bratysława",
+      "en": "Bratislava",
+      "de": "Bratislava",
+      "lat": 48.1486,
+      "lng": 17.1077,
+      "cc": "sk"
     }
   },
   "routes": [
@@ -711,6 +773,353 @@
         "CZ": 0.597,
         "AT": 0.208,
         "PL": 0.195
+      }
+    },
+    {
+      "pl": "warszawa-olsztyn",
+      "en": "warsaw-olsztyn",
+      "from": "warszawa",
+      "to": "olsztyn",
+      "km": 219.9,
+      "minutes": 160,
+      "shares": null
+    },
+    {
+      "pl": "warszawa-torun",
+      "en": "warsaw-torun",
+      "from": "warszawa",
+      "to": "torun",
+      "km": 258.5,
+      "minutes": 163,
+      "shares": null
+    },
+    {
+      "pl": "warszawa-bydgoszcz",
+      "en": "warsaw-bydgoszcz",
+      "from": "warszawa",
+      "to": "bydgoszcz",
+      "km": 302.5,
+      "minutes": 197,
+      "shares": null
+    },
+    {
+      "pl": "warszawa-kielce",
+      "en": "warsaw-kielce",
+      "from": "warszawa",
+      "to": "kielce",
+      "km": 176.4,
+      "minutes": 127,
+      "shares": null
+    },
+    {
+      "pl": "warszawa-kolobrzeg",
+      "en": "warsaw-kolobrzeg",
+      "from": "warszawa",
+      "to": "kolobrzeg",
+      "km": 581.7,
+      "minutes": 384,
+      "shares": null
+    },
+    {
+      "pl": "krakow-lodz",
+      "en": "krakow-lodz",
+      "from": "krakow",
+      "to": "lodz",
+      "km": 282.9,
+      "minutes": 177,
+      "shares": null
+    },
+    {
+      "pl": "krakow-rzeszow",
+      "en": "krakow-rzeszow",
+      "from": "krakow",
+      "to": "rzeszow",
+      "km": 166.7,
+      "minutes": 104,
+      "shares": null
+    },
+    {
+      "pl": "krakow-lublin",
+      "en": "krakow-lublin",
+      "from": "krakow",
+      "to": "lublin",
+      "km": 328.1,
+      "minutes": 220,
+      "shares": null
+    },
+    {
+      "pl": "krakow-kielce",
+      "en": "krakow-kielce",
+      "from": "krakow",
+      "to": "kielce",
+      "km": 119.8,
+      "minutes": 92,
+      "shares": null
+    },
+    {
+      "pl": "wroclaw-katowice",
+      "en": "wroclaw-katowice",
+      "from": "wroclaw",
+      "to": "katowice",
+      "km": 196.7,
+      "minutes": 123,
+      "shares": null
+    },
+    {
+      "pl": "wroclaw-lodz",
+      "en": "wroclaw-lodz",
+      "from": "wroclaw",
+      "to": "lodz",
+      "km": 222.5,
+      "minutes": 158,
+      "shares": null
+    },
+    {
+      "pl": "wroclaw-karpacz",
+      "en": "wroclaw-karpacz",
+      "from": "wroclaw",
+      "to": "karpacz",
+      "km": 126.1,
+      "minutes": 122,
+      "shares": null
+    },
+    {
+      "pl": "wroclaw-zakopane",
+      "en": "wroclaw-zakopane",
+      "from": "wroclaw",
+      "to": "zakopane",
+      "km": 370.9,
+      "minutes": 250,
+      "shares": null
+    },
+    {
+      "pl": "wroclaw-kolobrzeg",
+      "en": "wroclaw-kolobrzeg",
+      "from": "wroclaw",
+      "to": "kolobrzeg",
+      "km": 508.4,
+      "minutes": 343,
+      "shares": null
+    },
+    {
+      "pl": "poznan-lodz",
+      "en": "poznan-lodz",
+      "from": "poznan",
+      "to": "lodz",
+      "km": 211.3,
+      "minutes": 140,
+      "shares": null
+    },
+    {
+      "pl": "poznan-kolobrzeg",
+      "en": "poznan-kolobrzeg",
+      "from": "poznan",
+      "to": "kolobrzeg",
+      "km": 377.4,
+      "minutes": 249,
+      "shares": null
+    },
+    {
+      "pl": "poznan-szczecin",
+      "en": "poznan-szczecin",
+      "from": "poznan",
+      "to": "szczecin",
+      "km": 264.5,
+      "minutes": 180,
+      "shares": null
+    },
+    {
+      "pl": "poznan-zakopane",
+      "en": "poznan-zakopane",
+      "from": "poznan",
+      "to": "zakopane",
+      "km": 555.9,
+      "minutes": 369,
+      "shares": null
+    },
+    {
+      "pl": "lodz-zakopane",
+      "en": "lodz-zakopane",
+      "from": "lodz",
+      "to": "zakopane",
+      "km": 377.3,
+      "minutes": 255,
+      "shares": null
+    },
+    {
+      "pl": "katowice-zakopane",
+      "en": "katowice-zakopane",
+      "from": "katowice",
+      "to": "zakopane",
+      "km": 177.7,
+      "minutes": 136,
+      "shares": null
+    },
+    {
+      "pl": "katowice-lodz",
+      "en": "katowice-lodz",
+      "from": "katowice",
+      "to": "lodz",
+      "km": 213.1,
+      "minutes": 132,
+      "shares": null
+    },
+    {
+      "pl": "gdansk-olsztyn",
+      "en": "gdansk-olsztyn",
+      "from": "gdansk",
+      "to": "olsztyn",
+      "km": 167.6,
+      "minutes": 126,
+      "shares": null
+    },
+    {
+      "pl": "gdansk-bydgoszcz",
+      "en": "gdansk-bydgoszcz",
+      "from": "gdansk",
+      "to": "bydgoszcz",
+      "km": 167.2,
+      "minutes": 118,
+      "shares": null
+    },
+    {
+      "pl": "gdansk-zakopane",
+      "en": "gdansk-zakopane",
+      "from": "gdansk",
+      "to": "zakopane",
+      "km": 695.2,
+      "minutes": 428,
+      "shares": null
+    },
+    {
+      "pl": "lublin-rzeszow",
+      "en": "lublin-rzeszow",
+      "from": "lublin",
+      "to": "rzeszow",
+      "km": 170,
+      "minutes": 125,
+      "shares": null
+    },
+    {
+      "pl": "bialystok-gdansk",
+      "en": "bialystok-gdansk",
+      "from": "bialystok",
+      "to": "gdansk",
+      "km": 427.6,
+      "minutes": 328,
+      "shares": null
+    },
+    {
+      "pl": "warszawa-karpacz",
+      "en": "warsaw-karpacz",
+      "from": "warszawa",
+      "to": "karpacz",
+      "km": 477.1,
+      "minutes": 332,
+      "shares": null
+    },
+    {
+      "pl": "poznan-karpacz",
+      "en": "poznan-karpacz",
+      "from": "poznan",
+      "to": "karpacz",
+      "km": 270.5,
+      "minutes": 221,
+      "shares": null
+    },
+    {
+      "pl": "warszawa-monachium",
+      "en": "warsaw-munich",
+      "de": "muenchen-warschau",
+      "deFlip": true,
+      "from": "warszawa",
+      "to": "monachium",
+      "km": 1123.4,
+      "minutes": 646,
+      "shares": {
+        "DE": 0.576,
+        "PL": 0.424
+      }
+    },
+    {
+      "pl": "szczecin-hamburg",
+      "en": "szczecin-hamburg",
+      "de": "hamburg-stettin",
+      "deFlip": true,
+      "from": "szczecin",
+      "to": "hamburg",
+      "km": 410.3,
+      "minutes": 247,
+      "shares": {
+        "DE": 0.958,
+        "PL": 0.042
+      }
+    },
+    {
+      "pl": "wroclaw-wieden",
+      "en": "wroclaw-vienna",
+      "de": "wien-breslau",
+      "deFlip": true,
+      "from": "wroclaw",
+      "to": "wieden",
+      "km": 534.4,
+      "minutes": 341,
+      "shares": {
+        "CZ": 0.433,
+        "PL": 0.417,
+        "AT": 0.15
+      }
+    },
+    {
+      "pl": "krakow-bratyslawa",
+      "en": "krakow-bratislava",
+      "from": "krakow",
+      "to": "bratyslawa",
+      "km": 400.2,
+      "minutes": 287,
+      "shares": {
+        "SK": 0.598,
+        "PL": 0.402
+      }
+    },
+    {
+      "pl": "warszawa-wenecja",
+      "en": "warsaw-venice",
+      "from": "warszawa",
+      "to": "wenecja",
+      "km": 1269.7,
+      "minutes": 808,
+      "shares": {
+        "AT": 0.334,
+        "PL": 0.305,
+        "CZ": 0.182,
+        "IT": 0.179
+      }
+    },
+    {
+      "pl": "krakow-wenecja",
+      "en": "krakow-venice",
+      "from": "krakow",
+      "to": "wenecja",
+      "km": 1041.1,
+      "minutes": 685,
+      "shares": {
+        "AT": 0.41,
+        "CZ": 0.223,
+        "IT": 0.219,
+        "PL": 0.149
+      }
+    },
+    {
+      "pl": "bialystok-wilno",
+      "en": "bialystok-vilnius",
+      "from": "bialystok",
+      "to": "wilno",
+      "km": 287.4,
+      "minutes": 254,
+      "shares": {
+        "PL": 0.551,
+        "LT": 0.449
       }
     },
     {

@@ -1,5 +1,5 @@
 ---
-id: austria
+id: austria-fuel
 photo: austria
 order: 3
 slug: spritpreise-oesterreich

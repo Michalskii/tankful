@@ -38,6 +38,13 @@ const CITIES = {
   mediolan: { pl: "Mediolan", en: "Milan", de: "Mailand", lat: 45.4642, lng: 9.19, cc: "it" },
   werona: { pl: "Werona", en: "Verona", de: "Verona", lat: 45.4384, lng: 10.9916, cc: "it" },
   wenecja: { pl: "Wenecja", en: "Venice", de: "Venedig", lat: 45.4408, lng: 12.3155, cc: "it" },
+  kolobrzeg: { pl: "Kołobrzeg", en: "Kołobrzeg", de: "Kolberg", lat: 54.1757, lng: 15.5832, cc: "pl", region: "ZP" },
+  olsztyn: { pl: "Olsztyn", en: "Olsztyn", de: "Allenstein", lat: 53.7784, lng: 20.4801, cc: "pl", region: "WN" },
+  torun: { pl: "Toruń", en: "Toruń", de: "Thorn", lat: 53.0138, lng: 18.5984, cc: "pl", region: "KP" },
+  bydgoszcz: { pl: "Bydgoszcz", en: "Bydgoszcz", de: "Bromberg", lat: 53.1235, lng: 18.0084, cc: "pl", region: "KP" },
+  kielce: { pl: "Kielce", en: "Kielce", de: "Kielce", lat: 50.8661, lng: 20.6286, cc: "pl", region: "SK" },
+  karpacz: { pl: "Karpacz", en: "Karpacz", de: "Krummhübel", lat: 50.7787, lng: 15.7558, cc: "pl", region: "DS" },
+  bratyslawa: { pl: "Bratysława", en: "Bratislava", de: "Bratislava", lat: 48.1486, lng: 17.1077, cc: "sk" },
 };
 
 const PAIRS = [
@@ -52,6 +59,14 @@ const PAIRS = [
   ["krakow", "wieden"], ["krakow", "budapeszt"], ["krakow", "praga"], ["krakow", "split"],
   ["wroclaw", "berlin"], ["wroclaw", "praga"], ["wroclaw", "monachium"], ["poznan", "berlin"],
   ["szczecin", "berlin"], ["katowice", "wieden"],
+  ["warszawa", "olsztyn"], ["warszawa", "torun"], ["warszawa", "bydgoszcz"], ["warszawa", "kielce"], ["warszawa", "kolobrzeg"],
+  ["krakow", "lodz"], ["krakow", "rzeszow"], ["krakow", "lublin"], ["krakow", "kielce"], ["wroclaw", "katowice"],
+  ["wroclaw", "lodz"], ["wroclaw", "karpacz"], ["wroclaw", "zakopane"], ["wroclaw", "kolobrzeg"], ["poznan", "lodz"],
+  ["poznan", "kolobrzeg"], ["poznan", "szczecin"], ["poznan", "zakopane"], ["lodz", "zakopane"], ["katowice", "zakopane"],
+  ["katowice", "lodz"], ["gdansk", "olsztyn"], ["gdansk", "bydgoszcz"], ["gdansk", "zakopane"], ["lublin", "rzeszow"],
+  ["bialystok", "gdansk"], ["warszawa", "karpacz"], ["poznan", "karpacz"],
+  ["warszawa", "monachium"], ["szczecin", "hamburg"], ["wroclaw", "wieden"], ["krakow", "bratyslawa"],
+  ["warszawa", "wenecja"], ["krakow", "wenecja"], ["bialystok", "wilno"],
 ];
 
 const DE_PAIRS = [

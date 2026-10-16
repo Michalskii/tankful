@@ -1,5 +1,6 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { cityName, CURRENT_ROUTE, PAGE_ROUTES, routeHref, routeName, routeTrip, type RoutePage } from "@/lib/routes"
+import { countryLinks } from "@/lib/sites"
 import { T } from "@/lib/strings"
 import { formatDuration, formatRange, settingsFor, tripAmount, type Options } from "@/lib/trip"
 
@@ -132,19 +133,46 @@ export function RouteDetails({ route, data, currency }: { route: RoutePage; data
 }
 
 export function PopularRoutes() {
+  const near = (r: RoutePage) => (CURRENT_ROUTE && [r.from, r.to].some((c) => c === CURRENT_ROUTE?.from || c === CURRENT_ROUTE?.to) ? 0 : 1)
+  const routes = PAGE_ROUTES.filter((r) => r !== CURRENT_ROUTE).sort((a, b) => near(a) - near(b))
   return (
     <section aria-labelledby="routes-heading" className="flex flex-col gap-3">
       <h2 id="routes-heading" className="text-base font-semibold">
         {T("popularRoutes")}
       </h2>
       <ul className="flex flex-wrap gap-1.5 text-sm">
-        {PAGE_ROUTES.filter((r) => r !== CURRENT_ROUTE).map((r) => (
+        {routes.map((r) => (
           <li key={routeName(r)}>
             <a
               className="block rounded-full border px-3 py-1 text-muted-foreground transition-colors hover:border-amber hover:text-foreground"
               href={routeHref(r)}
             >
               {routeName(r)}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )
+}
+
+export function CountryPrices() {
+  const onRoute = CURRENT_ROUTE?.shares ? Object.entries(CURRENT_ROUTE.shares).sort((a, b) => b[1] - a[1]).map(([cc]) => cc) : null
+  const links = countryLinks(onRoute?.length ? onRoute : undefined)
+  if (!links.length) return null
+  return (
+    <section aria-labelledby="country-prices-heading" className="flex flex-col gap-3">
+      <h2 id="country-prices-heading" className="text-base font-semibold">
+        {T(onRoute?.length ? "routeCountryPrices" : "countryPrices")}
+      </h2>
+      <ul className="flex flex-wrap gap-1.5 text-sm">
+        {links.map(({ cc, href }) => (
+          <li key={cc}>
+            <a
+              className="block rounded-full border px-3 py-1 text-muted-foreground transition-colors hover:border-amber hover:text-foreground"
+              href={href}
+            >
+              {mapkaCountryName(cc)}
             </a>
           </li>
         ))}

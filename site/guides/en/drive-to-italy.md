@@ -7,6 +7,7 @@ title: Driving to Italy – fuel cost and where to fill up | Tankful
 heading: Driving to Italy – fuel cost, prices in Italy and where to fill up on the way
 description: Fuel cost of driving from Poland or Central Europe to Italy, petrol and diesel prices in Italy, Austria and Czechia, and where to fill up most cheaply.
 published: 2026-10-02
+related: italy-fuel,austria-fuel,croatia,alps
 ---
 From Kraków or Wrocław to Lake Garda or Venice it is roughly 1,100–1,300 km, from Warsaw even more. For 1,300 km in a car that uses 7 l/100 km, petrol costs about **{{cost PL pb 7 1300}}** at Polish prices and about **{{cost IT pb 7 1300}}** at Italian prices – one way. A diesel at 6 l/100 km uses about {{cost PL on 6 1300}} worth of fuel at Polish prices. With four people in the car, petrol comes to about {{cost PL pb 1.75 1300}} each.
 
@@ -16,7 +17,7 @@ Most drivers go through Czechia and Austria (over the Brenner Pass) or through A
 
 {{border PL CZ AT IT}}
 
-Prices are national averages from {{date}}. Motorway stations are often noticeably more expensive than the table – especially in Italy.
+Prices are national averages from {{date}}. Motorway stations are often noticeably more expensive than the table – especially in Italy. How to pay less at Italian pumps is covered in [fuel prices in Italy](guides/fuel-prices-italy).
 
 ## Where to fill up on the way
 
