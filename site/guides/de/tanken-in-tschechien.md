@@ -3,7 +3,7 @@ id: czechia
 photo: czechia
 order: 2
 slug: tanken-in-tschechien
-title: Tanken in Tschechien – Spritpreise {{month}} für Super und Diesel
+title: Tanken in Tschechien – Spritpreise {{month}}: Super & Diesel
 heading: Tanken in Tschechien – ist es günstiger als in Deutschland?
 description: Was kosten Super 95, Diesel und Autogas in Tschechien heute? Spritpreise im Vergleich zu Deutschland, Ersparnis pro Tankfüllung, Grenztankstellen, Reservekanister und Vignette.
 published: 2026-10-01
