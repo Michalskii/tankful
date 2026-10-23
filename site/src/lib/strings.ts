@@ -1,7 +1,7 @@
 export const SITE_STRINGS = {
   pl: {
-    title: "Kalkulator paliwa i kosztów przejazdu – koszt trasy | Tankful",
-    description: "Wpisz, skąd i dokąd jedziesz – policzymy koszt paliwa i przejazdu po dzisiejszych cenach benzyny, diesla, LPG i prądu. Za darmo, bez rejestracji, też za granicę i na osobę.",
+    title: "Koszt paliwa na trasie – kalkulator kosztów przejazdu | Tankful",
+    description: "Oblicz koszt paliwa i przejazdu: wpisz, skąd i dokąd jedziesz. Dzisiejsze ceny benzyny, diesla, LPG i prądu, koszt na osobę, też za granicę. Za darmo.",
     heading: "Kalkulator paliwa – ile kosztuje paliwo na tę trasę?",
     lead: "Wpisz, skąd i dokąd jedziesz. Policzymy koszt paliwa po aktualnych cenach w Polsce, UE, Wielkiej Brytanii i USA, także na osobę.",
     from: "Skąd",
