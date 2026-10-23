@@ -264,8 +264,8 @@ export const SITE_STRINGS = {
     ferry: "ferry or train $1, no fuel",
   },
   de: {
-    title: "Spritkostenrechner – Fahrtkosten und Spritkosten berechnen | Tankful",
-    description: "Start und Ziel eingeben – wir berechnen Spritkosten und Fahrtkosten mit den heutigen Preisen für Benzin, Diesel, LPG und Strom. Kostenlos, ohne Anmeldung, auch ins Ausland und pro Person.",
+    title: "Spritkosten berechnen – Spritkostenrechner | Tankful",
+    description: "Spritkosten berechnen: Start und Ziel eingeben – wir rechnen mit heutigen Preisen für Benzin, Diesel, LPG und Strom, auch ins Ausland und pro Person.",
     heading: "Spritkostenrechner – was kostet der Sprit für diese Strecke?",
     lead: "Gib Start und Ziel ein. Wir rechnen mit aktuellen Durchschnittspreisen in Deutschland, Polen, der EU, Großbritannien und den USA – auch auf Strecken durch mehrere Länder.",
     from: "Von",
