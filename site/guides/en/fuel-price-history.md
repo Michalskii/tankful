@@ -22,6 +22,22 @@ The average price of a litre in each year, from every weekly reading:
 
 {{yearly EU}}
 
+## Fuel prices month by month (EU average)
+
+Average EU prices over the last 24 months – handy when you need the price in a particular month, for example to cost an old trip:
+
+{{monthly EU pb,on,lpg 24}}
+
+## Fuel prices 10 years ago
+
+Ten years ago a litre of 95 petrol cost **{{ago EU pb 520}}** on average across the EU, diesel **{{ago EU on 520}}** and LPG **{{ago EU lpg 520}}**. Today it is {{now EU pb}}, {{now EU on}} and {{now EU lpg}} – petrol has changed by {{change EU pb 520}}. Fifteen years ago petrol cost {{ago EU pb 780}}, three years ago {{ago EU pb 156}}.
+
+## Fuel prices by country since 2015
+
+Average petrol price in every EU country in selected years, in euro, from the cheapest today:
+
+{{countryyears pb 2015,2020,2022,2025}}
+
 ## Petrol prices in 2005 and today
 
 In {{histstart}} a litre of 95 petrol cost {{yearavg EU pb 2005}} on average across the EU and diesel {{yearavg EU on 2005}}. The 2025 average was {{yearavg EU pb 2025}}, {{yearchange EU pb 2005 2025}} compared with 2005. The most expensive full year so far was **{{yearmax EU pb}}** for petrol ({{yearmaxprice EU pb}}) and **{{yearmax EU on}}** for diesel ({{yearmaxprice EU on}}); the cheapest was {{yearmin EU pb}} for petrol.

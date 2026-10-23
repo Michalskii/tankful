@@ -1,5 +1,5 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { cityName, CURRENT_ROUTE, PAGE_ROUTES, routeHref, routeName, routeTrip, type RoutePage } from "@/lib/routes"
+import { cityName, cityPlace, CURRENT_ROUTE, PAGE_ROUTES, routeHref, routeName, routeTrip, type RoutePage } from "@/lib/routes"
 import { countryLinks } from "@/lib/sites"
 import { T } from "@/lib/strings"
 import { formatDuration, formatRange, settingsFor, tripAmount, type Options } from "@/lib/trip"
@@ -11,6 +11,21 @@ const TANK = 50
 
 function petrol(currency: string): Options {
   return { units: "metric", fuelType: "pb", consumption: 7, passengers: 1, currency, ownPrice: null, roundTrip: false }
+}
+
+function yearAgoCost(route: RoutePage, data: MapkaData, currency: string) {
+  const prices = window.MAPKA_YEAR_AGO
+  if (!prices) return null
+  const shares = route.shares || { [cityPlace(route.from).cc.toUpperCase()]: 1 }
+  let sum = 0
+  let weight = 0
+  for (const [cc, share] of Object.entries(shares)) {
+    if (!prices[cc]) continue
+    sum += prices[cc] * share
+    weight += share
+  }
+  if (weight < 0.8) return null
+  return mapkaFromPln(((sum / weight) * route.km * 7) / 100, currency, data)
 }
 
 export function RouteCosts({ route, data, currency }: { route: RoutePage; data: MapkaData; currency: string }) {
@@ -99,6 +114,9 @@ export function RouteDetails({ route, data, currency }: { route: RoutePage; data
   const one = tripAmount(trip, petrol(currency), data)
   const lpg = tripAmount(trip, { ...petrol(currency), fuelType: "lpg", consumption: 9 }, data)
   const lpgSaving = (one.low + one.high - lpg.low - lpg.high) / 2
+  const now = (one.low + one.high) / 2
+  const then = yearAgoCost(route, data, currency)
+  const change = then ? Math.round((now / then - 1) * 100) : 0
   const facts = [
     `${T("routeFuelNeed", mapkaFormatNumber(route.km, 0), mapkaFormatNumber(litres, 0))} ${T(litres <= TANK ? "routeOneTank" : "routeRefuel")}`,
     shares.length > 1 &&
@@ -116,6 +134,8 @@ export function RouteDetails({ route, data, currency }: { route: RoutePage; data
     tolls.length > 0 && T("routeTolls", names(tolls)),
     T("routeShared", formatRange(one.low / 2, one.high / 2, currency), formatRange(one.low / 3, one.high / 3, currency)),
     lpgSaving > 1 && T("routeLpg", mapkaFormatMoney(lpgSaving, currency)),
+    then != null &&
+      T("routeYearAgo", mapkaFormatMoney(then, currency), mapkaFormatMoney(now, currency), `${change > 0 ? "+" : change < 0 ? "−" : "±"}${Math.abs(change)}%`),
   ].filter((f): f is string => Boolean(f))
 
   return (

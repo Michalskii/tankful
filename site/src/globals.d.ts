@@ -3,6 +3,7 @@ export {}
 declare global {
   interface Window {
     MAPKA_PRICES?: MapkaData
+    MAPKA_YEAR_AGO?: Record<string, number>
   }
   type MapkaSettings = Record<string, any>
   type MapkaData = Record<string, any>

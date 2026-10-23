@@ -62,6 +62,10 @@ const DE_DER = new Set(["SK", "CH", "TR"]);
 const DE_DEN = new Set(["NL"]);
 const EV_PLN = { home: 1.1, fast: 2.8 };
 const EV_EUR_DE = { home: 0.38, fast: 0.65 };
+const PL_WAGES = {
+  2005: 2380.29, 2006: 2477.23, 2007: 2691.03, 2008: 2943.88, 2009: 3102.96, 2010: 3224.98, 2011: 3399.52, 2012: 3521.67, 2013: 3650.06, 2014: 3783.46,
+  2015: 3899.78, 2016: 4047.21, 2017: 4271.51, 2018: 4585.03, 2019: 4918.17, 2020: 5167.47, 2021: 5662.53, 2022: 6346.15, 2023: 7155.48, 2024: 8181.72,
+};
 
 const TEXT = {
   pl: {
@@ -74,6 +78,11 @@ const TEXT = {
     chartFive: "5 lat temu",
     chartSeries: "Seria",
     yearCol: "Rok",
+    monthCol: "Miesiąc",
+    monthSoFar: (date) => `* miesiąc niepełny – średnia do ${date}.`,
+    wageCol: "Przeciętne wynagrodzenie (brutto)",
+    wagePrice: (fuel) => `Średnia cena – ${fuel}`,
+    wageLitres: "Litrów za pensję",
     yearSoFar: (date) => `* rok niepełny – średnia do ${date}.`,
     weekRank: "Miejsce",
     weekPrice: (date) => `Cena (${date})`,
@@ -171,6 +180,8 @@ const TEXT = {
     chartFive: "5 years ago",
     chartSeries: "Series",
     yearCol: "Year",
+    monthCol: "Month",
+    monthSoFar: (date) => `* month to date – average up to ${date}.`,
     yearSoFar: (date) => `* year to date – average up to ${date}.`,
     weekRank: "Rank",
     weekPrice: (date) => `Price (${date})`,
@@ -267,6 +278,8 @@ const TEXT = {
     chartFive: "Vor 5 Jahren",
     chartSeries: "Reihe",
     yearCol: "Jahr",
+    monthCol: "Monat",
+    monthSoFar: (date) => `* laufender Monat – Durchschnitt bis ${date}.`,
     yearSoFar: (date) => `* laufendes Jahr – Durchschnitt bis ${date}.`,
     weekRank: "Platz",
     weekPrice: (date) => `Preis (${date})`,
@@ -798,6 +811,53 @@ ${table([t.chartSeries, t.chartNow, t.chartYear, t.chartFive], rows, [1, 2, 3])}
     const note = `
 <p class="table-note">${esc(t.yearSoFar(date(history.dates[lastIndex(history.prices.PL.pb)])))}</p>`;
     return `${table([t.yearCol, ...fs_.map((fuel) => cap(fuelName(fuel)))], rows, fs_.map((_, i) => i + 1))}${note}`;
+  };
+
+  const monthly = (cc, fuel) => {
+    const values = histSeries(cc, fuel);
+    const sums = {};
+    values.forEach((v, i) => {
+      if (v == null) return;
+      const x = (sums[history.dates[i].slice(0, 7)] ??= { sum: 0, n: 0 });
+      x.sum += v;
+      x.n++;
+    });
+    return Object.fromEntries(Object.entries(sums).map(([m, x]) => [m, x.sum / x.n]));
+  };
+
+  blocks.monthly = (cc, fuels = "pb,on,lpg", months = "12") => {
+    const fs_ = fuels.split(",");
+    const columns = fs_.map((fuel) => monthly(cc, fuel));
+    const current = history.dates[lastIndex(history.prices.PL.pb)].slice(0, 7);
+    const rows = Object.keys(columns[0])
+      .sort((a, b) => b.localeCompare(a))
+      .slice(0, Number(months))
+      .map((m) => [`${cap(monthYear(`${m}-01`))}${m === current ? "*" : ""}`, ...columns.map((c) => histPrice(c[m]))]);
+    const note = `
+<p class="table-note">${esc(t.monthSoFar(date(history.dates[lastIndex(history.prices.PL.pb)])))}</p>`;
+    return `${table([t.monthCol, ...fs_.map((fuel) => cap(fuelName(fuel)))], rows, fs_.map((_, i) => i + 1))}${note}`;
+  };
+
+  blocks.countryyears = (fuel, years) => {
+    const ys = years.split(",");
+    const rows = EU.filter((cc) => history.prices[cc]?.[fuel])
+      .map((cc) => {
+        const values = histSeries(cc, fuel);
+        return { cc, now: values[lastIndex(values)], years: yearly(cc, fuel) };
+      })
+      .sort((a, b) => a.now - b.now)
+      .map((x) => [esc(name(x.cc)), ...ys.map((y) => (x.years[y] == null ? "–" : histPrice(x.years[y]))), histPrice(x.now)]);
+    return table([t.country, ...ys, t.chartNow], rows, ys.map((_, i) => i + 1).concat(ys.length + 1));
+  };
+
+  const wageLitres = (year, fuel = "pb") => PL_WAGES[year] / yearly("PL", fuel)[year];
+  inline.wagelitres = (year, fuel) => num(wageLitres(year, fuel));
+  blocks.wages = (fuel = "pb") => {
+    const rows = Object.keys(PL_WAGES)
+      .filter((y) => yearly("PL", fuel)[y] != null)
+      .sort((a, b) => b.localeCompare(a))
+      .map((y) => [y, money(PL_WAGES[y], "PLN", 0), histPrice(yearly("PL", fuel)[y]), `${num(wageLitres(y, fuel))} l`]);
+    return table([t.yearCol, t.wageCol, t.wagePrice(fuelName(fuel)), t.wageLitres], rows, [1, 2, 3]);
   };
 
   const routeCost = (slug, fuel, consumption) => {

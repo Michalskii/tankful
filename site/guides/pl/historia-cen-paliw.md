@@ -3,8 +3,8 @@ id: price-history
 order: 12
 slug: historia-cen-paliw
 title: Historia cen paliw w Polsce – wykres 20 lat i ceny rok po roku
-heading: Historia cen paliw w Polsce – jak zmieniały się ceny benzyny, diesla i LPG
-description: Archiwalne ceny benzyny 95, diesla i LPG w Polsce od 2005 roku: wykres 5, 10 i 20 lat, średnia cena w każdym roku i najdroższe lata. Odświeżane co tydzień.
+heading: Historia cen paliw w Polsce – archiwalne ceny benzyny, diesla i LPG od 2005 roku
+description: Archiwalne ceny benzyny, diesla i LPG w Polsce od 2005 roku: wykres 20 lat, ceny w każdym roku i miesiącu, ceny sprzed 10 lat i paliwo a pensja.
 published: 2026-10-01
 related: poland-prices,europe-prices,germany,czechia
 ---
@@ -26,11 +26,21 @@ Wykres pokazuje ponad 20 lat cotygodniowych cen. Przyciskami zmienisz zakres: **
 
 Ceny historyczne są przeliczone na złote po kursie euro z danego tygodnia, więc pokazują, ile faktycznie płaciło się wtedy na stacji – bez uwzględniania inflacji.
 
-## Ceny paliw rok po roku
+## Archiwalne ceny paliw rok po roku
 
 Średnia cena litra w każdym roku, liczona ze wszystkich tygodniowych notowań:
 
 {{yearly PL}}
+
+## Ceny paliw miesiąc po miesiącu
+
+Średnie ceny w Polsce w ostatnich 24 miesiącach – przydatne, gdy chcesz sprawdzić, ile kosztowało paliwo w konkretnym miesiącu, np. przy rozliczaniu dawnej podróży:
+
+{{monthly PL pb,on,lpg 24}}
+
+## Ceny paliw 10 lat temu
+
+Dziesięć lat temu litr benzyny 95 kosztował w Polsce średnio **{{ago PL pb 520}}**, diesla **{{ago PL on 520}}**, a LPG **{{ago PL lpg 520}}**. Dziś to {{now PL pb}}, {{now PL on}} i {{now PL lpg}}, czyli benzyna zmieniła się o {{change PL pb 520}}. Piętnaście lat temu benzyna kosztowała {{ago PL pb 780}}, a trzy lata temu {{ago PL pb 156}}.
 
 ## Ile kosztowało paliwo w 2005 roku
 
@@ -54,6 +64,14 @@ Najdroższym pełnym rokiem dla benzyny był **{{yearmax PL pb}}** (średnio {{y
 
 Biuletyn naftowy Komisji Europejskiej, z którego pochodzą dane, publikuje porównywalne ceny dla wszystkich krajów UE od {{histstart}} roku, dlatego wykres zaczyna się w tym miejscu.
 
+## Ile litrów benzyny za przeciętną pensję
+
+Same ceny na stacji nie mówią wszystkiego, bo przez 20 lat mocno wzrosły też zarobki. W {{histstart}} roku za przeciętne miesięczne wynagrodzenie brutto można było kupić ok. **{{wagelitres 2005}} litrów** benzyny 95, w 2022 roku – mimo rekordowych cen – ok. {{wagelitres 2022}} l, a w 2024 roku już ok. **{{wagelitres 2024}} litrów**.
+
+{{wages pb}}
+
+Przeciętne wynagrodzenie w gospodarce narodowej według GUS, średnia cena benzyny z cotygodniowych notowań w danym roku. Mimo że litr kosztuje dziś dużo więcej niż w 2005 roku, za średnią pensję kupisz go więcej niż wtedy.
+
 ## Polska na tle sąsiadów i Unii
 
 {{chart PL,DE,CZ,EU pb 5y}}
@@ -66,6 +84,23 @@ Polska od lat należy do tańszych krajów Unii pod względem cen paliw – dzi�
 - **Kurs złotego do dolara i euro** – ropa jest wyceniana w dolarach, więc słabszy złoty podnosi ceny na stacjach, nawet gdy ropa tanieje.
 - **Podatki** – akcyza, opłata paliwowa i VAT to w Polsce zwykle około połowy ceny litra. Przykładem jest 2022 rok, kiedy obniżka VAT na paliwa z 23% do 8% w ramach tarczy antyinflacyjnej (od lutego do końca roku) wyraźnie złagodziła skok cen.
 - **Marże hurtowe i detaliczne** – w Polsce ceny hurtowe ustala głównie Orlen, a stacje doliczają własną marżę.
+
+## Najczęstsze pytania
+
+### Ile kosztowało paliwo w 2005 roku?
+Średnio {{yearavg PL pb 2005}} za litr benzyny 95, {{yearavg PL on 2005}} za diesel i {{yearavg PL lpg 2005}} za LPG.
+
+### Ile kosztowało paliwo 10 lat temu?
+Benzyna 95 kosztowała wtedy ok. {{ago PL pb 520}}, diesel {{ago PL on 520}}, a LPG {{ago PL lpg 520}}.
+
+### Kiedy paliwo w Polsce było najdroższe?
+Najwyższa tygodniowa średnia benzyny to {{peak PL pb}} ({{peakdate PL pb}}), a diesla {{peak PL on}} ({{peakdate PL on}}). Najdroższym pełnym rokiem dla benzyny był {{yearmax PL pb}}.
+
+### Ile kosztowało paliwo w 2021 i 2023 roku?
+W 2021 roku benzyna kosztowała średnio {{yearavg PL pb 2021}}, a diesel {{yearavg PL on 2021}}. W 2023 roku – {{yearavg PL pb 2023}} i {{yearavg PL on 2023}}. Ceny z pozostałych lat są w tabeli [archiwalne ceny paliw rok po roku](poradniki/historia-cen-paliw#archiwalne-ceny-paliw-rok-po-roku).
+
+### Czy paliwo jest dziś droższe niż 20 lat temu?
+Na stacji tak, ale względem zarobków – nie. W 2005 roku przeciętna pensja wystarczała na ok. {{wagelitres 2005}} l benzyny, w 2024 roku na ok. {{wagelitres 2024}} l.
 
 > Dane pochodzą z cotygodniowego biuletynu naftowego Komisji Europejskiej i obejmują wszystkie kraje UE od {{histstart}} roku. To średnie krajowe – na konkretnej stacji, zwłaszcza przy autostradzie, cena może być wyższa. Bieżące ceny w kalkulatorze dla Polski są dodatkowo korygowane o zmiany cen hurtowych Orlenu, więc mogą się nieznacznie różnić od ostatniego punktu na wykresie.
 

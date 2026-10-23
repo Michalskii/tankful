@@ -2,9 +2,9 @@
 id: europe-prices
 order: 1
 slug: ceny-paliw-w-europie
-title: Ceny paliw w Europie ({{month}}) – benzyna, diesel, LPG
+title: Średnie ceny paliw w Europie ({{month}}) – tabela UE
 heading: Średnie ceny paliw w Europie – aktualna tabela benzyny, diesla i LPG
-description: Aktualne średnie ceny benzyny 95, diesla i LPG we wszystkich krajach UE i w Wielkiej Brytanii, w euro i złotych – gdzie paliwo jest najtańsze.
+description: Średnie ceny benzyny 95, diesla i LPG w 27 krajach UE i w Wielkiej Brytanii, w euro i złotych, oraz archiwalne ceny paliw w Europie od 2015 roku.
 published: 2026-09-30
 related: border,germany,czechia,austria-fuel
 ---
@@ -52,6 +52,16 @@ Rok temu litr benzyny kosztował w Polsce {{ago PL pb 52}}, a średnio w UE {{ag
 
 Najdroższym pełnym rokiem dla benzyny w UE był {{yearmax EU pb}}, a najtańszym {{yearmin EU pb}}.
 
+### Archiwalne ceny benzyny w krajach UE
+
+Średnia cena litra benzyny 95 w każdym kraju w wybranych latach, w złotych po kursie z danego tygodnia, od najtańszego dziś:
+
+{{countryyears pb 2015,2020,2022,2025}}
+
+### Archiwalne ceny diesla w krajach UE
+
+{{countryyears on 2015,2020,2022,2025}}
+
 ## Skąd takie różnice między krajami
 
 Cena na stacji to w ponad połowie podatki: akcyza, VAT i w części krajów dodatkowe opłaty emisyjne. Dlatego sąsiednie kraje potrafią się różnić o kilkadziesiąt groszy na litrze, mimo że paliwo kupują na tym samym rynku. Najwięcej płaci się zwykle w krajach z wysoką akcyzą i podatkiem od CO₂ (Holandia, Dania, Finlandia, Niemcy), najmniej tam, gdzie podatki są niskie albo państwo reguluje ceny.
@@ -71,6 +81,15 @@ Benzyna jest dziś najtańsza **{{cheapest pb}}**, a diesel **{{cheapest on}}**.
 
 ### Gdzie w Europie paliwo jest najdroższe?
 Najdrożej za benzynę płaci się **{{priciest pb}}**, za diesel **{{priciest on}}** – zwykle przez wysokie podatki.
+
+### Gdzie w Europie jest najtańsze LPG?
+Najtańsze LPG jest dziś **{{cheapest lpg}}**, najdroższe **{{priciest lpg}}**. Polska jest {{rank PL lpg}}. na {{count lpg}} krajów.
+
+### Ile kosztuje paliwo w Niemczech i w Czechach?
+W Niemczech litr benzyny 95 kosztuje średnio {{price DE pb}}, a diesla {{price DE on}}. W Czechach – {{price CZ pb}} i {{price CZ on}}. Dla porównania w Polsce {{price PL pb}} i {{price PL on}}.
+
+### Ile kosztowało paliwo w Europie rok temu?
+Średnio w UE litr benzyny kosztował rok temu {{ago EU pb 52}}, a dziś {{now EU pb}} ({{change EU pb 52}}).
 
 ### Czy w Polsce paliwo jest tanie na tle Europy?
 Polska jest {{rank PL pb}}. na {{count pb}} krajów pod względem ceny benzyny i {{rank PL on}}. pod względem diesla, licząc od najtańszego.

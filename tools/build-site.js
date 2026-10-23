@@ -4,7 +4,7 @@ const http = require("http");
 const path = require("path");
 const vm = require("vm");
 const { dumpDom } = require("./chrome");
-const { buildGuides, llmsTxt, pricesDate } = require("./guides");
+const { buildGuides, context, llmsTxt, pricesDate } = require("./guides");
 const { renderRouteImages, imagePath } = require("./route-og");
 const { prepareIndexNow } = require("./indexnow");
 
@@ -89,14 +89,15 @@ function manifest(lang, strings) {
   };
 }
 
-function pageStrings(page, strings) {
+function pageStrings(page, strings, data) {
   const s = strings[page.lang];
   if (!page.route) return s;
   const names = [CITIES[page.route.from][page.lang], CITIES[page.route.to][page.lang]];
   const km = new Intl.NumberFormat(page.lang, { maximumFractionDigits: 0 }).format(page.route.km);
+  const cost = data ? context(page.lang, data, null).routeCost(page.route[page.lang], "pb", 7) : "";
   return {
-    title: fill(s.routeTitle, ...names, km),
-    description: fill(s.routeDescription, ...names, km),
+    title: fill(s.routeTitle, ...names, km, cost),
+    description: fill(s.routeDescription, ...names, km, cost),
     heading: fill(s.routeHeading, ...names),
   };
 }
@@ -163,9 +164,26 @@ function headTags(page, s) {
     .join("\n");
 }
 
-function pageHtml(template, page, strings, prices) {
-  const s = pageStrings(page, strings);
-  const pricesTag = `    <script>window.MAPKA_PRICES = ${JSON.stringify(prices).replace(/</g, "\\u003c")}</script>`;
+function yearAgoPrices(history) {
+  const last = history.dates.length - 1;
+  const target = Date.parse(history.dates[last]) - 52 * 7 * 86400000;
+  const out = {};
+  for (const [cc, fuels] of Object.entries(history.prices)) {
+    const values = fuels.pb || [];
+    for (let i = last; i >= 0; i--) {
+      if (values[i] != null && Date.parse(history.dates[i]) <= target) {
+        out[cc] = Math.round(values[i] * history.plnPerEur[i] * 1000) / 1000;
+        break;
+      }
+    }
+  }
+  return out;
+}
+
+function pageHtml(template, page, strings, prices, yearAgo) {
+  const s = pageStrings(page, strings, prices);
+  const yearAgoTag = page.route ? `\n    <script>window.MAPKA_YEAR_AGO = ${JSON.stringify(yearAgo)}</script>` : "";
+  const pricesTag = `    <script>window.MAPKA_PRICES = ${JSON.stringify(prices).replace(/</g, "\\u003c")}</script>${yearAgoTag}`;
   let html = template
     .replace(/<html lang="[^"]*">/, `<html lang="${page.lang}" data-lang="${page.lang}">`)
     .replace(/<title>[^<]*<\/title>/, `<title>${esc(s.title)}</title>`)
@@ -247,8 +265,9 @@ async function main() {
   const template = fs.readFileSync(path.join(SITE, "index.html"), "utf8");
   for (const dir of SITE_ID === "pl" ? ["trasa", "route"] : ["strecke"]) fs.mkdirSync(path.join(SITE, dir), { recursive: true });
   const data = JSON.parse(fs.readFileSync(path.join(PUBLIC, "prices.json"), "utf8"));
-  for (const page of PAGES) fs.writeFileSync(path.join(SITE, page.file), pageHtml(template, page, strings, data));
   const historyData = JSON.parse(fs.readFileSync(path.join(PUBLIC, "history.json"), "utf8"));
+  const yearAgo = yearAgoPrices(historyData);
+  for (const page of PAGES) fs.writeFileSync(path.join(SITE, page.file), pageHtml(template, page, strings, data, yearAgo));
   const guides = buildGuides({ site: SITE, siteUrl: SITE_URL, siteUrls: SITE_URLS, langSite: LANG_SITE, siteId: SITE_ID, data, history: historyData, alternates });
   fs.writeFileSync(path.join(SITE, "sitemap.xml"), sitemap(guides, pricesDate(data)));
   console.log(`IndexNow: ${await prepareIndexNow(SITE, SITE_URL)} changed URLs`);

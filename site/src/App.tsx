@@ -30,7 +30,7 @@ import { fetchRoutes, formatDuration, sparsePoints, tripCost, type Options, type
 const RouteMap = lazy(() => import("@/components/RouteMap").then((m) => ({ default: m.RouteMap })))
 
 const PREFS_KEY = "tankful-calculator"
-const SITE_CURRENCY = GERMAN_SITE ? "EUR" : MAPKA_CURRENCY
+const SITE_CURRENCY = PRERENDER ? (MAPKA_LOCALE === "pl" ? "PLN" : "EUR") : GERMAN_SITE ? "EUR" : MAPKA_CURRENCY
 const TYPICAL_CONSUMPTION: Record<string, number> = { pb: 7.0, pbp: 7.0, on: 6.0, onp: 6.0, lpg: 9.0, ev: 17.0 }
 const FAQ = [
   ["faqTripQ", "faqTripA"],
@@ -128,9 +128,10 @@ export default function App() {
 
   useEffect(() => {
     document.documentElement.lang = MAPKA_LOCALE
-    document.title = routeNames ? T("routeTitle", ...routeNames, mapkaFormatNumber(CURRENT_ROUTE!.km, 0)) : T("title")
-    const description = routeNames ? T("routeDescription", ...routeNames, mapkaFormatNumber(CURRENT_ROUTE!.km, 0)) : T("description")
-    document.querySelector('meta[name="description"]')?.setAttribute("content", description)
+    if (!routeNames) {
+      document.title = T("title")
+      document.querySelector('meta[name="description"]')?.setAttribute("content", T("description"))
+    }
     fetch("prices.json", { cache: "no-cache" })
       .then((res) => (res.ok ? res.json() : Promise.reject()))
       .then((prices) => setData((d) => ({ ...d, ...prices })))

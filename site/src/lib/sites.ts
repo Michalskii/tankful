@@ -23,9 +23,9 @@ export function guidesHref(lang = MAPKA_LOCALE) {
 }
 
 const NAV_SLUGS: Record<string, [Key, string][]> = {
-  pl: [["navPrices", "ceny-paliw-w-polsce"], ["navConsumption", "kalkulator-spalania"], ["navLpg", "kalkulator-lpg"], ["navMileage", "kilometrowka"]],
-  en: [["navPrices", "fuel-prices-europe"], ["navConsumption", "fuel-consumption-calculator"], ["navLpg", "lpg-calculator"]],
-  de: [["navPrices", "spritpreise-europa"], ["navConsumption", "spritverbrauch-berechnen"], ["navLpg", "autogas-rechner"]],
+  pl: [["navPrices", "ceny-paliw-w-polsce"], ["navConsumption", "kalkulator-spalania"], ["navLpg", "kalkulator-lpg"], ["navHistory", "historia-cen-paliw"], ["navMileage", "kilometrowka"]],
+  en: [["navPrices", "fuel-prices-europe"], ["navConsumption", "fuel-consumption-calculator"], ["navLpg", "lpg-calculator"], ["navHistory", "fuel-price-history"]],
+  de: [["navPrices", "spritpreise-europa"], ["navConsumption", "spritverbrauch-berechnen"], ["navLpg", "autogas-rechner"], ["navHistory", "spritpreise-entwicklung"]],
 }
 
 export function navLinks(lang = MAPKA_LOCALE) {
