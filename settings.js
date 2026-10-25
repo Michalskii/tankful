@@ -86,7 +86,7 @@ const MAPKA_STORE_URL = "https://chromewebstore.google.com/detail/fiogjemolijale
 const MAPKA_FIREFOX_URL = "https://addons.mozilla.org/firefox/addon/tankful/";
 const MAPKA_OPERA_URL = "https://addons.opera.com/extensions/details/tankful-fuel-cost-for-every-route/";
 const MAPKA_ISSUES_URL = "https://github.com/Michalskii/tankful/issues/new";
-const MAPKA_REVIEW = { routes: 20, trips: 3, days: 7, snoozeDays: 30 };
+const MAPKA_REVIEW = { routes: 2, trips: 3, days: 3, snoozeDays: 30 };
 
 function mapkaReviewDue(review, trips = 0, now = Date.now()) {
   if (!review?.installedAt || review.done) return false;

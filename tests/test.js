@@ -158,14 +158,14 @@ test("mapkaLocalPricePln: without a route the user's own country, Poland only as
   assert.strictEqual(ext.mapkaLocalPricePln(s, data, { cc: "ch" }, "FR"), null);
 });
 
-test("mapkaReviewDue: ask after a week of real use, never after rating, not while snoozed", () => {
+test("mapkaReviewDue: ask after 3 days and 2 routes, never after rating, not while snoozed", () => {
   const day = 86400000;
   const now = Date.parse("2026-10-20T12:00:00Z");
-  const used = { installedAt: now - 10 * day, routes: 20 };
+  const used = { installedAt: now - 4 * day, routes: 2 };
   assert.strictEqual(ext.mapkaReviewDue(used, 0, now), true);
-  assert.strictEqual(ext.mapkaReviewDue({ ...used, routes: 19 }, 0, now), false);
+  assert.strictEqual(ext.mapkaReviewDue({ ...used, routes: 1 }, 0, now), false);
   assert.strictEqual(ext.mapkaReviewDue({ ...used, routes: 0 }, 3, now), true);
-  assert.strictEqual(ext.mapkaReviewDue({ ...used, installedAt: now - 6 * day }, 0, now), false);
+  assert.strictEqual(ext.mapkaReviewDue({ ...used, installedAt: now - 2 * day }, 0, now), false);
   assert.strictEqual(ext.mapkaReviewDue({ ...used, done: true }, 0, now), false);
   assert.strictEqual(ext.mapkaReviewDue({ ...used, snoozeUntil: now + day }, 0, now), false);
   assert.strictEqual(ext.mapkaReviewDue({ ...used, snoozeUntil: now - day }, 0, now), true);
