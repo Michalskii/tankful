@@ -3,7 +3,7 @@ id: austria-fuel
 photo: austria
 order: 8.5
 slug: ceny-paliw-w-austrii
-title: Ceny paliw w Austrii ({{month}}) – benzyna i diesel
+title: Ceny paliw w Austrii dziś ({{month}}) – benzyna i diesel
 heading: Ceny paliw w Austrii dziś – benzyna 95 i diesel na tle Polski
 description: Aktualne ceny benzyny 95 i diesla w Austrii w euro i złotych, porównanie z Polską, Czechami i Słowacją oraz kiedy i gdzie tankować w Austrii najtaniej.
 published: 2026-10-16
@@ -22,6 +22,15 @@ Ceny to średnie krajowe z {{date}}, przeliczone po kursie NBP. Austria jest {{r
 {{chart PL,AT pb,on 5y}}
 
 Rok temu benzyna kosztowała w Austrii {{ago AT pb 52}}, a w Polsce {{ago PL pb 52}}.
+
+## Jak zmieniają się ceny paliw w Austrii
+
+| Paliwo | Dziś | Zmiana w tydzień | Rok temu | Zmiana w rok | Rekord |
+|---|---|---|---|---|---|
+| Benzyna 95 | {{now AT pb}} | {{weekdelta AT pb}} | {{ago AT pb 52}} | {{change AT pb 52}} | {{peak AT pb}} ({{peakdate AT pb}}) |
+| Diesel | {{now AT on}} | {{weekdelta AT on}} | {{ago AT on 52}} | {{change AT on 52}} | {{peak AT on}} ({{peakdate AT on}}) |
+
+Ceny w złotych według cotygodniowego biuletynu Komisji Europejskiej z {{histdate}}. W Polsce benzyna zmieniła się w tym czasie o {{change PL pb 52}}, a diesel o {{change PL on 52}}. Austria płaci w euro, więc na różnicę wpływa też kurs złotego.
 
 ## Austria a Czechy i Słowacja
 

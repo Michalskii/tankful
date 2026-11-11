@@ -8,7 +8,7 @@ description: Ile kosztuje litr benzyny, diesla i LPG w Czechach – aktualne cen
 published: 2026-10-01
 related: border,austria-fuel,slovakia-fuel,germany
 ---
-Litr benzyny 95 kosztuje dziś w Czechach średnio **{{price CZ pb}}**, diesla **{{price CZ on}}**, a LPG **{{price CZ lpg}}**. W Polsce to {{price PL pb}}, {{price PL on}} i {{price PL lpg}}. {{verdict PL CZ pb}} {{verdict PL CZ on}}
+Litr benzyny 95 kosztuje dziś w Czechach średnio **{{price CZ pb CZK}}**, czyli **{{price CZ pb}}**. Diesel to **{{price CZ on CZK}}** ({{price CZ on}}), a LPG **{{price CZ lpg}}**. W Polsce to {{price PL pb}}, {{price PL on}} i {{price PL lpg}}. {{verdict PL CZ pb}} {{verdict PL CZ on}}
 
 {{savebox PL CZ}}
 
@@ -21,6 +21,15 @@ Ceny to średnie krajowe z {{date}}, przeliczone po kursie NBP. Czechy mają wł
 {{chart PL,CZ pb,on 5y}}
 
 Na wykresie widać, jak często zmienia się to, po której stronie granicy jest taniej. Rok temu benzyna kosztowała w Czechach {{ago CZ pb 52}}, a w Polsce {{ago PL pb 52}}.
+
+## Jak zmieniają się ceny paliw w Czechach
+
+| Paliwo | Dziś | Zmiana w tydzień | Rok temu | Zmiana w rok | Rekord |
+|---|---|---|---|---|---|
+| Benzyna 95 | {{now CZ pb}} | {{weekdelta CZ pb}} | {{ago CZ pb 52}} | {{change CZ pb 52}} | {{peak CZ pb}} ({{peakdate CZ pb}}) |
+| Diesel | {{now CZ on}} | {{weekdelta CZ on}} | {{ago CZ on 52}} | {{change CZ on 52}} | {{peak CZ on}} ({{peakdate CZ on}}) |
+
+Ceny w złotych według cotygodniowego biuletynu Komisji Europejskiej z {{histdate}}. Dla porównania w Polsce benzyna zmieniła się w ciągu roku o {{change PL pb 52}}, a diesel o {{change PL on 52}}. Na cenę w złotych wpływa też kurs korony.
 
 ## Ile kosztuje paliwo do Pragi
 
@@ -58,7 +67,7 @@ Litr diesla (nafty) kosztuje średnio {{price CZ on CZK}}, czyli {{price CZ on}}
 ### Gdzie tańsze paliwo – w Czechach czy w Polsce?
 {{verdict PL CZ pb}} {{verdict PL CZ on}} To zmienia się z tygodnia na tydzień razem z cenami i kursem korony, dlatego tabela na początku poradnika jest aktualizowana co tydzień.
 
-### Ile kosztuje LPG w Czechach?
-Litr LPG (autoplyn) kosztuje średnio {{price CZ lpg}}. {{verdict PL CZ lpg}}
+### Ile kosztuje gaz (LPG) w Czechach?
+Litr LPG (autoplyn) kosztuje średnio {{price CZ lpg CZK}}, czyli {{price CZ lpg}}. {{verdict PL CZ lpg}}
 
 Na odcinkach bez winiety (np. drogami krajowymi) jedziesz za darmo, ale zwykle dłużej. Swoją trasę do Czech i dalej policzysz w [kalkulatorze Tankful](./), a ceny we wszystkich krajach UE porównasz w tabeli [ceny paliw w Europie](poradniki/ceny-paliw-w-europie).
