@@ -4,7 +4,7 @@ order: 12
 slug: historia-cen-paliw
 title: Historia cen paliw w Polsce – wykres 20 lat i ceny rok po roku
 heading: Historia cen paliw w Polsce – archiwalne ceny benzyny, diesla i LPG od 2005 roku
-description: Archiwalne ceny benzyny, diesla i LPG w Polsce od 2005 roku: wykres 20 lat, ceny w każdym roku i miesiącu, ceny sprzed 10 lat i paliwo a pensja.
+description: Archiwalne ceny benzyny 95, diesla i LPG w Polsce od 2005 roku: wykres 5, 10 i 20 lat, ceny w każdym roku i miesiącu i paliwo a pensja. Odświeżane co tydzień.
 published: 2026-10-01
 related: poland-prices,europe-prices,germany,czechia
 ---
