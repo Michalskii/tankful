@@ -22,11 +22,17 @@ The average price of a litre in each year, from every weekly reading:
 
 {{yearly EU}}
 
-## Fuel prices month by month (EU average)
+## Fuel prices by month and year (EU average)
 
-Average EU prices over the last 24 months – handy when you need the price in a particular month, for example to cost an old trip:
+Average EU prices of 95 petrol, diesel and LPG in every month since {{histstart}} – handy when you need the price in a particular month, for example to cost an old trip. Click a year to open its table:
 
-{{monthly EU pb,on,lpg 24}}
+{{archive EU}}
+
+## Diesel prices over the last 10 years
+
+{{chart EU on 10y}}
+
+A litre of diesel costs {{now EU on}} on average across the EU today, against {{ago EU on 52}} a year ago and {{ago EU on 520}} ten years ago. In 2022 diesel was dearer than petrol for months.
 
 ## Fuel prices 10 years ago
 
@@ -77,6 +83,20 @@ Poland has long been one of the cheaper EU countries for fuel – today it ranks
 - **Exchange rates** – oil is priced in US dollars, so a weaker local currency raises pump prices even when oil gets cheaper.
 - **Taxes** – excise duty and VAT usually make up around half of the price of a litre in the EU. Governments sometimes cut them temporarily: in 2022, for example, Poland lowered VAT on fuel from 23% to 8% from February to the end of the year, which softened the price spike.
 - **Wholesale and retail margins** – refiners, importers and station operators each add their own margin.
+
+## Frequently asked questions
+
+### What was the price of diesel last year?
+A year ago diesel cost {{ago EU on 52}} on average across the EU, against {{now EU on}} today – a change of {{change EU on 52}}. In Poland it was {{ago PL on 52}}, in Germany {{ago DE on 52}}.
+
+### How much was petrol a year ago?
+A litre of 95 petrol cost {{ago EU pb 52}} on average across the EU a year ago and costs {{now EU pb}} today – a change of {{change EU pb 52}}.
+
+### What did petrol cost in 2005?
+The 2005 EU average was {{yearavg EU pb 2005}} for 95 petrol and {{yearavg EU on 2005}} for diesel. In Poland petrol averaged {{yearavg PL pb 2005}}, in Germany {{yearavg DE pb 2005}}.
+
+### How much was diesel 5 and 10 years ago?
+Five years ago diesel cost {{ago EU on 260}} on average across the EU, ten years ago {{ago EU on 520}}.
 
 > The data comes from the European Commission's Weekly Oil Bulletin and covers every EU country since {{histstart}}. These are national averages – a particular station, especially on a motorway, can be more expensive. The current Polish prices in the calculator are also adjusted for Orlen wholesale price moves, so they can differ slightly from the latest point on the chart.
 

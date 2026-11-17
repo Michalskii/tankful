@@ -80,6 +80,8 @@ const TEXT = {
     yearCol: "Rok",
     monthCol: "Miesiąc",
     monthSoFar: (date) => `* miesiąc niepełny – średnia do ${date}.`,
+    archiveYear: (year) => `Ceny paliw w ${year} roku`,
+    archiveAvg: "Średnia za rok",
     wageCol: "Przeciętne wynagrodzenie (brutto)",
     wagePrice: (fuel) => `Średnia cena – ${fuel}`,
     wageLitres: "Litrów za pensję",
@@ -182,6 +184,8 @@ const TEXT = {
     yearCol: "Year",
     monthCol: "Month",
     monthSoFar: (date) => `* month to date – average up to ${date}.`,
+    archiveYear: (year) => `Fuel prices in ${year}`,
+    archiveAvg: "Year average",
     yearSoFar: (date) => `* year to date – average up to ${date}.`,
     weekRank: "Rank",
     weekPrice: (date) => `Price (${date})`,
@@ -280,6 +284,8 @@ const TEXT = {
     yearCol: "Jahr",
     monthCol: "Monat",
     monthSoFar: (date) => `* laufender Monat – Durchschnitt bis ${date}.`,
+    archiveYear: (year) => `Spritpreise ${year}`,
+    archiveAvg: "Jahresdurchschnitt",
     yearSoFar: (date) => `* laufendes Jahr – Durchschnitt bis ${date}.`,
     weekRank: "Platz",
     weekPrice: (date) => `Preis (${date})`,
@@ -836,6 +842,30 @@ ${table([t.chartSeries, t.chartNow, t.chartYear, t.chartFive], rows, [1, 2, 3])}
     const note = `
 <p class="table-note">${esc(t.monthSoFar(date(history.dates[lastIndex(history.prices.PL.pb)])))}</p>`;
     return `${table([t.monthCol, ...fs_.map((fuel) => cap(fuelName(fuel)))], rows, fs_.map((_, i) => i + 1))}${note}`;
+  };
+
+  blocks.archive = (cc, fuels = "pb,on,lpg") => {
+    const fs_ = fuels.split(",");
+    const months = fs_.map((fuel) => monthly(cc, fuel));
+    const years = fs_.map((fuel) => yearly(cc, fuel));
+    const current = history.dates[lastIndex(history.prices.PL.pb)].slice(0, 7);
+    const monthName = (m) => cap(new Intl.DateTimeFormat(INTL[lang], { month: "long", timeZone: "UTC" }).format(new Date(`${m}-01`)));
+    const head = [t.monthCol, ...fs_.map((fuel) => cap(fuelName(fuel)))];
+    const numeric = fs_.map((_, i) => i + 1);
+    return Object.keys(years[0])
+      .sort((a, b) => b.localeCompare(a))
+      .map((y, i) => {
+        const rows = Object.keys(months[0])
+          .filter((m) => m.startsWith(`${y}-`))
+          .sort()
+          .map((m) => [`${monthName(m)}${m === current ? "*" : ""}`, ...months.map((c) => histPrice(c[m]))]);
+        rows.push([`<strong>${esc(t.archiveAvg)}</strong>`, ...years.map((c) => `<strong>${histPrice(c[y])}</strong>`)]);
+        return `<details class="archive"${i === 0 ? " open" : ""}>
+<summary>${esc(t.archiveYear(y))}</summary>
+${table(head, rows, numeric)}
+</details>`;
+      })
+      .join("\n");
   };
 
   blocks.countryyears = (fuel, years) => {
