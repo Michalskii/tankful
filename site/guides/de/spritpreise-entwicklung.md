@@ -22,6 +22,26 @@ Durchschnittlicher Literpreis in jedem Jahr, berechnet aus allen Wochenwerten:
 
 {{yearly DE}}
 
+## Spritpreise 2005 und heute
+
+Im Jahr {{histstart}} kostete ein Liter Super in Deutschland im Schnitt **{{yearavg DE pb 2005}}**, Diesel **{{yearavg DE on 2005}}** und Autogas **{{yearavg DE lpg 2005}}**. Heute sind es {{now DE pb}}, {{now DE on}} und {{now DE lpg}}. Zum Vergleich: 2010 lag Super im Schnitt bei {{yearavg DE pb 2010}}, 2015 bei {{yearavg DE pb 2015}} und 2020 bei {{yearavg DE pb 2020}}.
+
+## Spritpreise pro Monat seit 2005
+
+Durchschnittspreise für Super, Diesel und Autogas in Deutschland in jedem Monat seit {{histstart}} – praktisch, wenn du wissen willst, was Sprit in einem bestimmten Monat gekostet hat, etwa für die Abrechnung einer alten Fahrt. Klicke auf ein Jahr, um die Tabelle zu öffnen:
+
+{{archive DE}}
+
+## Spritpreise vor 5 und 10 Jahren
+
+Vor fünf Jahren kostete Super in Deutschland im Schnitt {{ago DE pb 260}} und Diesel {{ago DE on 260}}. Vor zehn Jahren waren es {{ago DE pb 520}} und {{ago DE on 520}} – Super hat sich seitdem um {{change DE pb 520}} verändert.
+
+## Dieselpreis – Entwicklung der letzten 10 Jahre
+
+{{chart DE on 10y}}
+
+Diesel kostet heute {{now DE on}}, vor einem Jahr waren es {{ago DE on 52}} und vor zehn Jahren {{ago DE on 520}}. 2022 war Diesel monatelang teurer als Super.
+
 ## Die teuersten und günstigsten Jahre
 
 Das teuerste volle Jahr war für Super **{{yearmax DE pb}}** (im Schnitt {{yearmaxprice DE pb}}) und für Diesel **{{yearmax DE on}}** ({{yearmaxprice DE on}}). Am günstigsten war Super {{yearmin DE pb}}, Diesel {{yearmin DE on}}. Der Durchschnitt 2025 lag bei {{yearavg DE pb 2025}} – {{yearchange DE pb 2005 2025}} gegenüber 2005.
@@ -54,6 +74,20 @@ Deutschland gehört bei den Spritpreisen zu den teureren Ländern der EU – akt
 - **Euro-Dollar-Kurs** – Rohöl wird in Dollar gehandelt, ein schwächerer Euro verteuert den Sprit auch bei gleichem Ölpreis.
 - **Steuern und Abgaben** – Energiesteuer, CO₂-Preis und Mehrwertsteuer machen einen großen Teil des Literpreises aus. Wie stark sie wirken, zeigte der Tankrabatt im Sommer 2022, als die Energiesteuer von Juni bis August vorübergehend gesenkt wurde.
 - **Raffinerie- und Tankstellenmargen** – je nach Region und Tageszeit unterschiedlich.
+
+## Häufige Fragen
+
+### Was hat Benzin 2005 gekostet?
+Ein Liter Super kostete 2005 in Deutschland im Schnitt {{yearavg DE pb 2005}}, Diesel {{yearavg DE on 2005}}.
+
+### Was kosteten Benzin und Diesel vor einem Jahr?
+Vor einem Jahr kostete Super im Schnitt {{ago DE pb 52}} und Diesel {{ago DE on 52}}. Seitdem hat sich Super um {{change DE pb 52}} und Diesel um {{change DE on 52}} verändert.
+
+### Wann war Sprit in Deutschland am teuersten?
+Der höchste Wochendurchschnitt für Super lag bei {{peak DE pb}} ({{peakdate DE pb}}), für Diesel bei {{peak DE on}} ({{peakdate DE on}}). Das teuerste volle Jahr war für Super {{yearmax DE pb}}.
+
+### Wo finde ich den Spritpreis für einen bestimmten Monat?
+In der Tabelle [Spritpreise pro Monat seit 2005](ratgeber/spritpreise-entwicklung#spritpreise-pro-monat-seit-2005) – dort stehen die Durchschnittspreise für Super, Diesel und Autogas in jedem Monat seit {{histstart}}.
 
 > Die Daten stammen aus dem wöchentlichen Oil Bulletin der Europäischen Kommission und umfassen alle EU-Länder seit {{histstart}}. Es sind Landesdurchschnitte – an einzelnen Tankstellen, besonders an der Autobahn, kann es teurer sein.
 
